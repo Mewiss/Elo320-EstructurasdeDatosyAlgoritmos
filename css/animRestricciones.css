@@ -1,0 +1,322 @@
+.cover {
+    animation: dissapear 60s 4s linear
+}
+
+@keyframes dissapear {
+    0% {
+        x: 0%;
+        width: 100%;
+    }
+
+    10% {
+        x: 100%;
+        width: 0%;
+    }
+
+    100% {
+        x: 100%;
+        width: 0%;
+    }
+}
+
+
+
+
+
+.ts {
+    opacity: 1;
+    animation: texthide 1s 3s linear;
+}
+
+@keyframes texthide {
+    to {
+        opacity: 0;
+    }
+}
+
+
+
+.ventanaApertura {
+
+    animation: appear 5s linear;
+    animation: move 2 15s 5s linear; 
+    /* transform: translate(-60px, 0); */
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+.clk {
+    
+    animation: reduce 15s 5s linear; 
+    
+
+}
+
+@keyframes reduce {
+    0% {
+        transform: scale(1.0, 1.0);
+    }
+
+    10% {
+        transform: scale(0.75, 1.0);
+    }
+
+    100% {
+        transform: scale(0.75, 1.0);
+    }
+}
+.vA{
+    animation: reducePos 15s 5s linear; 
+
+}
+
+@keyframes reducePos {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, 0);
+    }
+
+    100% {
+        transform: translate(-5%, 0);
+    }
+}
+.moveInit {
+
+    animation: move 15s 5s linear;
+
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-60px, 0);
+    }
+
+    100% {
+        transform: translate(-60px, 0);
+    }
+}
+
+.movecc {
+
+    animation: move2 15s 5s linear;
+
+}
+
+@keyframes move2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-140px, 0);
+    }
+
+    100% {
+        transform: translate(-140px, 0);
+    }
+}
+
+.estableq {
+    animation: scaleEstable 15s 5s linear;
+}
+
+@keyframes scaleEstable {
+    0% {
+        transform: scale(1.0, 1.0);
+    }
+
+    10% {
+        transform: scale(0.65, 1.0);
+
+    }
+
+    100% {
+        transform: scale(0.65, 1.0);
+    }
+}
+
+.moveestableq {
+    animation: mvEstQ 15s 5s linear;
+}
+
+@keyframes mvEstQ {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(120px, 0);
+    }
+
+    100% {
+        transform: translate(120px, 0);
+    }
+}
+
+.moveestableq3 {
+    /* animation: mvEstQ3 15s 5s linear; */
+    transform: translate(1200px, 0);
+}
+
+@keyframes mvEstQ3 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-260px, 0);
+    }
+
+    100% {
+        transform: translate(-260px, 0);
+    }
+}
+
+.moveestableq2 {
+
+    animation: mvEstQ2 15s 5s linear;
+}
+
+@keyframes mvEstQ2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(190px, 0);
+    }
+
+    100% {
+        transform: translate(190px, 0);
+    }
+}
+
+
+
+.ventanaApertura2 {
+    animation: va2 15s 5s linear;
+}
+
+@keyframes va2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-170px, 0);
+    }
+
+    100% {
+        transform: translate(-170px, 0);
+    }
+}
+
+.ventanaApertura3 {
+
+    animation: va3 15s 5s linear;
+}
+
+@keyframes va3 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-280px, 0);
+    }
+
+    100% {
+        transform: translate(-280px, 0);
+    }
+}
+
+.CCfixed2 {
+    
+    animation: ccfixedmove2 15s 5s linear;
+}
+
+@keyframes ccfixedmove2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-170px, 0);
+    }
+
+    100% {
+        transform: translate(-170px, 0);
+    }
+}
+
+.estableCC {
+    
+    animation: estableccscale 15s 5s linear;
+}
+
+@keyframes estableccscale {
+    0% {
+        transform: scale(1.0,1.0);
+    }
+
+    10% {
+        transform: scale(0.7, 1.0);
+    }
+
+    100% {
+        transform: scale(0.7, 1.0);
+    }
+}
+
+.moveEstCC {
+
+    animation: mvestcc 15s 5s linear;
+}
+
+@keyframes mvestcc {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(140px, 0);
+    }
+
+    100% {
+        transform: translate(140px, 0);
+    }
+}
+
+.moveEstCC2 {
+
+    animation: mvestcc2 15s 5s linear;
+}
+
+@keyframes mvestcc2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(180px, 0);
+    }
+
+    100% {
+        transform: translate(180px, 0);
+    }
+}

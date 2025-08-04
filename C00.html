@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/elo211.css">
+	<link rel="stylesheet" href="css/animRestricciones.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.fragment.bold {
+			font-weight: normal;
+		}
+
+		.fragment.bold.visible {
+			font-weight: bold;
+		}
+
+		.reveal td {
+			font-size: 60%;
+		}
+
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0
+		}
+
+		.tg td {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			font-weight: normal;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg .tg-0lax {
+			text-align: center;
+			vertical-align: center;
+			font-size: 3vw;
+			border-width: 2px
+		}
+
+		.tg .tg-small {
+			text-align: center;
+			vertical-align: center;
+			font-size: 2vw
+		}
+
+		.smalltab {
+			font-size: 2vw
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+				<h2>Introducción</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+			<section>
+				<div class="row central-content">
+					<div class="col">
+						<h1>¡Hola!</h1>
+					</div>
+					<div class="col">
+						<div class="row central-content">
+							<img src="images/Marie.png">
+						</div>
+						<div class="row r-fit-text">
+							<p>Soy Marie González. Estoy aquí porque me encanta enseñar sobre tecnología. Me pueden
+								contactar al mail marie.gonzalez@usm.cl*
+							</p>
+
+							<small>
+								Respondo en horario hábil
+								(L-V de 9 a 18 hrs)
+							</small>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+
+
+
+
+
+			<section>
+				<h3>Coordenadas</h3>
+				<ul>
+					<li class="fragment">Nombre de la asignatura: Estructuras de Datos y Algoritmos</li>
+					<li class="fragment">Sigla: ELO-320</li>
+					<li class="fragment">Requisito: ELO-106 o TEL-131</li>
+					<li class="fragment">Carrera: Ing. Civil Telemática</li>
+					<li class="fragment">Dedicación: 5 SCT 118 hrs </li>
+					<li class="fragment">Clases presenciales:</li>
+					<ul class="fragment">
+						<li>Jueves 9:35 a 12:05 Sala K-304 </li>
+					</ul>
+					<li class="fragment">Plataforma: AULA</li>
+					<li class="fragment">Horario de consultas: M 10.45 a 11.45 previa cita</li>
+					<li class="fragment">Ayudantía: horario por confimar</li>
+				</ul>
+			</section>
+
+			<section>
+				<h5>Equipo docente</h5>
+				<div class="row">
+					<div class="col fragment">
+						<img src="images/C01/Marie_div.jpeg">
+						<p>Marie González</p>
+					</div>
+					<div class="col fragment">
+						<img src="images/C01/Valeska.jpeg">
+						<p>Valeska Acuña</p>
+					</div>
+					<div class="col fragment">
+						<img src="images/C01/Anto.jpeg">
+						<p>Antonia Figueroa</p>
+					</div>
+				</div>
+			</section>
+
+
+
+			<section>
+				<h3>Resultados de aprendizaje</h3>
+				<small class="fragment">Al terminar el curso la/el estudiante será capaz de: </small>
+				<ul class="r-fit-text">
+					<li class="fragment">Analizar funciones lógicas e implementarlas usando técnicas del álgebra binaria
+					</li>
+
+
+
+					<li class="fragment">Implementar estrategias de optimización para el diseño de circuitos digitales
+						combinacionales, considerando la limitación en recursos y energía disponibles</li>
+					<li class="fragment">Diseñar y evaluar máquinas secuenciales optimizadas en contextos reales de
+						operación</li>
+					<li class="fragment">Analizar componentes digitales de microarquitectura de computadores</li>
+
+				</ul>
+			</section>
+			<section>
+				<h2>Evaluaciones</h2>
+				<div class="row central-content">
+
+					<div class="col fragment">
+						<img data-id="proyecto" style='width: 50%' src="images/icons/project.png">
+						<h5>Proyecto (P)</h5>
+					</div>
+
+					<div class="col fragment">
+						<img data-id="tareas" style='width: 50%; ' src="images/icons/report.png">
+						<h5>Análisis de Casos (C)</h5>
+					</div>
+					<div class="col fragment">
+						<img data-id="pruebas" style='width: 50%' src="images/icons/test.png">
+						<h5>Examen (E)</h5>
+					</div>
+
+
+				</div>
+
+				<div class="row central-content fragment">
+					<p>Nota Final
+						NF=P*0.4+C*0.4+E*0.2 </p>
+				</div>
+
+			</section>
+
+
+
+
+			<section>
+				<h2>Metodología</h2>
+				<ul>
+					<li class="fragment">Clases con metodologías activas</li>
+					<ul class="fragment">
+						<li>Ejercicios</li>
+						<li>Debates grupales</li>
+						<li>Estudios de casos</li>
+					</ul>
+					<li class="fragment">Se requiere participación activa</li>
+					<li class="fragment">Cátedras cortas</li>
+					<li class="fragment">Controles en horario de clases</li>
+				</ul>
+
+			</section>
+
+			<section>
+				<h4>Qué se espera de ustedes en este curso:</h4>
+				<ul>
+					<li class="fragment">Equivocarse</li>
+					<li class="fragment">Disciplina</li>
+					<li class="fragment">Colaboración</li>
+					<li class="fragment">Leer el apunte y libro guía</li>
+				</ul>
+
+			</section>
+
+			<!-- ...existing code... -->
+
+			<section>
+				<h2>¿Qué veremos en este curso?</h2>
+				<ul>
+					<li class="fragment">Estructuras de Datos para manejo eficiente de datos</li>
+					<li class="fragment">Algoritmos construidos sobre estas estructuras</li>
+					<ul class="fragment">
+						<li>Estructuras bases</li>
+						<li>Construir sus propias estructuras</li>
+						<li>Definir Tipos de Datos Abstractos</li>
+						<li>Programar de forma eficiente</li>
+						<li>Analizar y comparar algoritmos</li>
+					</ul>
+					<li class="fragment">Lenguaje base: C</li>
+					<li class="fragment">Prerrequisitos: IWI131 (DMat) - TEL102 (TEL)</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Evaluaciones</h2>
+				<ul>
+					<li class="fragment">2 Certámenes (promedio PC)</li>
+					<li class="fragment">2 Tareas (promedio PT)</li>
+					<li class="fragment">Certamen Recuperativo (CR) para ausencias justificadas</li>
+				</ul>
+				<div class="fragment">
+					<p><strong>Ponderación:</strong></p>
+					<p>Nota Final = 0.7 × PC + 0.3 × PT</p>
+					<p>Condición: PC ≥ 45 y PT ≥ 45</p>
+				</div>
+			</section>
+
+			<section>
+				<h2>Sobre las tareas</h2>
+				<ul>
+					<li class="fragment">Individuales (grupos de 1)</li>
+					<li class="fragment">Entrega junto con certamen</li>
+					<li class="fragment">Duración: 4 a 6 semanas</li>
+					<li class="fragment">Estudio práctico para certámenes</li>
+					<li class="fragment">Antelación y dedicación recomendadas</li>
+					<li class="fragment">Uso de <strong>moss</strong> para detección de copias</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Sobre las cátedras</h2>
+				<ul>
+					<li class="fragment">Asistencia obligatoria (mínimo 85%)</li>
+					<li class="fragment">Máximo 3 inasistencias permitidas</li>
+					<li class="fragment">Lista en todas las clases</li>
+					<li class="fragment">Metodología activa y expositiva</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Sistema Operativo</h2>
+				<ul>
+					<li class="fragment"><strong>Linux</strong> recomendado</li>
+					<li class="fragment">Windows/MacOS bajo responsabilidad del estudiante, sin soporte</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Bibliografía</h2>
+				<ul>
+					<li class="fragment"><strong>Libro Guía:</strong> Introduction to Algorithms (Cormen et al.)</li>
+					<li class="fragment"><strong>Libro Recomendado:</strong> Data Structures and Algorithm Analysis (Shaffer)</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>¿Qué es una Estructura de Datos?</h2>
+				<p class="fragment">Una estructura de datos es una <strong>abstracción</strong> para organizar <strong>datos</strong> de manera que puedan ser manejados, procesados y utilizados <strong>eficientemente</strong> a través de un <strong>programa</strong>.</p>
+				<p class="fragment">Permiten que los algoritmos trabajen de forma eficaz sobre la información.</p>
+			</section>
+
+			<section>
+				<h2>Ejemplos</h2>
+				<ul>
+					<li class="fragment">Palabras → Strings</li>
+					<li class="fragment">Python: Listas, Tuplas, Diccionarios</li>
+					<li class="fragment">C++: Vectores, Listas, Map</li>
+					<li class="fragment">Control+Z → Stack/Pilas</li>
+					<li class="fragment">Filas en bancos/supermercados → Queues/Colas</li>
+					<li class="fragment">Gramática de lenguajes → Trees/Árboles</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>EOF</h2>
+				<p>Para aprender todo esto debemos aprender C.<br>¿Qué es C? Lo veremos en la próxima clase.</p>
+			</section>
+
+			<!-- ...existing code... -->
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO211 Sistemas Digitales</p>
+				<h2>Introducción</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/countdown/countdown.js"></script>
+	<script src="plugin/animate/plugin.js"></script>
+	<script src="plugin/animate/svg.min.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: true,
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 0.8,
+			hash: true,
+			slideNumber: true,
+			dependencies: [
+
+				{ src: "plugin/countdown/countdown.js" },
+
+			],
+			animate: {
+				autoplay: true
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+			countdown: { defaultTime: 300, autostart: true },
+
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 10,
+			autoAnimateUnmatched: false
+
+		});
+
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
+</body>
+
+</html>

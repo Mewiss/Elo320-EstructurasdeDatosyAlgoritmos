@@ -1,0 +1,86 @@
+/**
+ * Sky theme for reveal.js.
+ *
+ * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+@import url(https://fonts.googleapis.com/css?family=Ysabeau:400italic,700italic,400,700);
+
+
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont: 'Ysabeau', sans-serif;
+$mainColor: #c3c4e7;
+$headingFont: 'Ysabeau';//Quicksand
+$headingColor: #c2f2f3;
+$headingLetterSpacing: -0.08em;
+$headingTextShadow: none;
+$backgroundColor: #03232c;
+$linkColor: #28485f;
+$linkColorHover: lighten( $linkColor, 20% );
+$selectionBackgroundColor: #134674;
+
+// Fix links so they are not cut off
+.reveal a {
+	line-height: 1.3em;
+}
+
+// Background generator
+//@mixin bodyBackground() {
+//	@include radial-gradient( #020923, #f7fbfc );
+//}
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+.columns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+  }
+
+  .left-content {
+	flex: 1;
+  }
+  
+  .right-content {
+	flex: 1;
+  }
+  
+  .central-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+  }
+  .row {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+  }
+  
+  .col {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+  }
+   
+

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/elo211.css">
+	<link rel="stylesheet" href="css/animRestricciones.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.fragment.bold {
+			font-weight: normal;
+		}
+
+		.fragment.bold.visible {
+			font-weight: bold;
+		}
+
+		.reveal td {
+			font-size: 60%;
+		}
+
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0
+		}
+
+		.tg td {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			font-weight: normal;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg .tg-0lax {
+			text-align: center;
+			vertical-align: center;
+			font-size: 3vw;
+			border-width: 2px
+		}
+
+		.tg .tg-small {
+			text-align: center;
+			vertical-align: center;
+			font-size: 2vw
+		}
+
+		.smalltab {
+			font-size: 2vw
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO211 Sistemas Digitales</p>
+				<h2>Conceptos básicos</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+			<section>
+				<h2>Sistemas Digitales</h2>
+
+				<div class="row">
+					<div class="col central-content">
+						<div class="row fragment">
+							<img width="100%" src="images/C01/PCyCelu.jpg">
+						</div>
+						<div class="row fragment r-stretch">
+							<img width="100%" src="images/C01/Auto.jpg">
+						</div>
+					</div>
+
+					<div class="col central-content">
+						<div class="row fragment r-stretch">
+							<img width="100%" src="images/C01/Tarjeta.jpg">
+						</div>
+						<div class="row fragment r-stretch">
+							<img width="100%" src="images/C01/electrodomesticos.png">
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<div class="row central-content">
+
+
+					<div class="col">
+						<div class="row r-fit-text fragment">
+							<h6>Sistema</h6>
+							<ul>
+								<li>Entradas</li>
+								<li>Salidas</li>
+								<li>Procesa/Modifica</li>
+							</ul>
+						</div>
+
+						<div class="row r-fit-text fragment">
+							<h6>Digital</h6>
+							<ul>
+								<li>Discreto</li>
+								<li>Rango definido</li>
+							</ul>
+						</div>
+
+					</div>
+
+					<div class="col">
+						<h2>Sistema Digital</h2>
+						<p class="fragment">Sistema cuyas entradas, salidas y procesos son digitales</p>
+					</div>
+				</div>
+			</section>
+
+
+
+			<section>
+				<h6>Actividad 1.1.1: Parte individual</h6>
+
+				<div class="col">
+
+					<div class="row">
+						<iframe height="450" width="800"
+							data-src="https://www.youtube.com/embed/WniaKJzCNRI?si=nPFAo0qD4WO7QYER" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen data-preload></iframe>
+
+					</div>
+
+					<div class="row">
+						<p class="r-stretch">Para el sistema del video, identifica y anota posibles Entradas, Salidas y
+							principales bloques funcionales.</p>
+					</div>
+
+
+				</div>
+			</section>
+
+
+			<section>
+				<h6>Actividad 1.1.2: Parte individual</h6>
+
+				<div class="col">
+
+					<div class="row">
+						<iframe height="450" width="800"
+							src="https://www.youtube.com/embed/T8G8oW9paq4?si=NkSoiRpP1MBuvJTT&amp;start=161"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen></iframe>
+					</div>
+
+					<div class="row">
+						<p class="r-stretch">Para el sistema del video, identifica y anota posibles Entradas, Salidas y
+							principales bloques funcionales.</p>
+					</div>
+
+
+				</div>
+			</section>
+
+			<section>
+				<h6>Actividad 1.2: En grupos de hasta 3 personas</h6>
+
+				<p>Comparen sus respuestas y determinen</p>
+				<ul>
+					<li>Entradas y sus tipos (discreto/continuo vs digital/analógico)</li>
+					<li>Salidas y sus tipos (discreto/continuo vs digital/analógico)</li>
+					<li>Bloques funcionales</li>
+				</ul>
+
+			</section>
+
+			<section>
+				<h3>Conceptos fundamentales</h3>
+
+				<div class="row ">
+					<div class="col fragment">
+						<p>Unidad mínima de información digital, que puede poseer sólo dos valores (0 ó 1)</p>
+						<h6>Bit</h6>
+					</div>
+
+					<div class="col fragment">
+						<p>Conjunto de 8 bits</p>
+						<h6>Byte</h6>
+					</div>
+
+					<div class="col fragment">
+						<p>Cuántos bits se definen para una variable digital </p>
+						<h6>Profundiad de bit</h6>
+					</div>
+				</div>
+			</section>
+
+
+			<section data-auto-animate>
+				<h3 data-id="title1">Profundidad de bit: 1</h3>
+				<div class="row">
+					<div class="col fragment">
+						<p>0</p>
+					</div>
+					<div class="col fragment">
+						<p>1</p>
+					</div>
+				</div>
+				<h3 data-id="title2">Combinaciones posibles: 2</h3>
+			</section>
+
+			<section data-auto-animate>
+				<h3 data-id="title1">Profundidad de bit: 2</h3>
+				<div class="row">
+					<div class="col fragment">
+						<p>00</p>
+						<p>01</p>
+					</div>
+					<div class="col fragment">
+						<p>10</p>
+						<p>11</p>
+					</div>
+				</div>
+				<h3 data-id="title2">Combinaciones posibles: 4</h3>
+			</section>
+
+			<section data-auto-animate>
+				<h3 data-id="title1">Profundidad de bit: 3</h3>
+				<div class="row">
+					<div class="col fragment">
+						<p>000</p>
+						<p>001</p>
+						<p>010</p>
+						<p>011</p>
+					</div>
+
+					<div class="col fragment">
+						<p>100</p>
+						<p>101</p>
+						<p>110</p>
+						<p>111</p>
+					</div>
+				</div>
+				<h3 data-id="title2">Combinaciones posibles: 8</h3>
+			</section>
+
+			<section data-auto-animate>
+				<h3 data-id="title1">Profundidad de bit: 4</h3>
+				<div class="row">
+					<div class="col">
+						<p>0000</p>
+						<p>0001</p>
+						<p>0010</p>
+						<p>0011</p>
+					</div>
+					<div class="col">
+						<p>0100</p>
+						<p>0101</p>
+						<p>0110</p>
+						<p>0111</p>
+					</div>
+					<div class="col">
+						<p>1000</p>
+						<p>1001</p>
+						<p>1010</p>
+						<p>1011</p>
+					</div>
+					<div class="col">
+						<p>1100</p>
+						<p>1101</p>
+						<p>1110</p>
+						<p>1111</p>
+					</div>
+				</div>
+				<h3 data-id="title2">Combinaciones posibles: 16</h3>
+			</section>
+
+			<section>
+				<img src="images/C01/ascci.jpg">
+			</section>
+
+			<section>
+				<p> Con una profundidad de bit n, podemos representar</p>
+
+				\[\begin{aligned}
+				2^n
+				\end{aligned} \]
+
+				<p>valores distintos</p>
+			</section>
+
+			<section>
+				<h6>Actividad 1.3: En grupos de hasta 6 personas</h6>
+
+				<p>Comparen sus respuestas y determinen</p>
+				<ul>
+					<li>Profundidad de bit mínima que se necesita para representar entradas y salidas de forma digital
+					</li>
+				</ul>
+			</section>
+
+
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO211 Sistemas Digitales</p>
+				<h2>Conceptos básicos</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/countdown/countdown.js"></script>
+	<script src="plugin/animate/plugin.js"></script>
+	<script src="plugin/animate/svg.min.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: true,
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 0.8,
+			hash: true,
+			slideNumber: true,
+			dependencies: [
+
+				{ src: "plugin/countdown/countdown.js" },
+
+			],
+			animate: {
+				autoplay: true
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+			countdown: { defaultTime: 300, autostart: true },
+
+
+			autoAnimateUnmatched: true
+
+		});
+
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
+</body>
+
+</html>

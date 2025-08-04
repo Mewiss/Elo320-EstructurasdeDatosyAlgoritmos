@@ -1,0 +1,95 @@
+/**
+ * Sky theme for reveal.js.
+ *
+ * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+@import url(https://fonts.googleapis.com/css?family=Ysabeau:400italic,700italic,400,700);
+
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #000;
+$headingColor: #000;
+
+$mainFontSize: 42px;
+//$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
+//$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$mainFont: 'Ysabeau', sans-serif;
+$headingFont: 'Ysabeau';//Quicksand
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #2a76dd;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+
+
+
+
+
+.columns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+  }
+
+  .left-content {
+	flex: 1;
+  }
+  
+  .right-content {
+	flex: 1;
+  }
+  
+  .central-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+  }
+  .row {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+  }
+  
+  .col {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	width: 90%
+  }
+   
+
