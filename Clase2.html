@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/elo320.css">
+	<link rel="stylesheet" href="css/animRestricciones.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.fragment.bold {
+			font-weight: normal;
+		}
+
+		.fragment.bold.visible {
+			font-weight: bold;
+		}
+
+		.reveal td {
+			font-size: 60%;
+		}
+
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0
+		}
+
+		.tg td {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			font-weight: normal;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg .tg-0lax {
+			text-align: center;
+			vertical-align: center;
+			font-size: 3vw;
+			border-width: 2px
+		}
+
+		.tg .tg-small {
+			text-align: center;
+			vertical-align: center;
+			font-size: 2vw
+		}
+
+		.smalltab {
+			font-size: 2vw
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="slides">
+
+			<!-- Title Slide -->
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+				<h2>Introducción a C</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+			<!-- ¿Por qué C? -->
+			<!-- <section>
+				<h2>¿Por qué C?</h2>
+				<div class="fragment">
+					<b>Programación Estructurada:</b>
+					<p>
+						Paradigma de programación basado en el <b>uso extensivo de subrutinas y estructuras de
+							control</b>, con el fin de mejorar la <b>claridad</b>, <b>calidad</b> y <b>tiempo de
+							desarrollo</b> del código de programas computacionales.
+					</p>
+					<ul>
+						<li><b>C, lanzado en 1973, es el mayor exponente de este tipo de lenguajes.</b></li>
+					</ul>
+					<img src="images/structured.png" style="width: 80%;">
+				</div>
+			</section> -->
+
+			<!-- ¿Por qué es C tan relevante? -->
+			<section>
+				<h2>¿Por qué es C tan relevante?</h2>
+				<ul>
+					<li class="fragment">Diseñado para desarrollar UNIX OS.</li>
+					<li class="fragment">Maneja actividades de bajo nivel (en la memoria), a pesar de ser un lenguaje de
+						alto nivel.</li>
+					<li class="fragment">Se relaciona eficientemente con instrucciones de máquina.</li>
+					<li class="fragment">Perdura su uso en el tiempo.</li>
+					<li class="fragment">La mayoría de software tiene una relación directa o indirecta con
+			</section>
+
+			<!--  Elementos Generales - Datos
+			<section>
+				<h2>Elementos Generales - Datos</h2>
+				<ul>
+					<li><b>Datos Primitivos:</b> enteros, reales, caracteres.</li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+int contador = 10;
+char nombre[10] = "Eduardo";
+float PI = 3.14159;
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+contador = 10
+nombre = "Eduardo"
+PI = 3.14159
+						</code></pre>
+					</div>
+				</div>
+				<ul>
+					<li><b>Estructurados:</b> agrupar/componer conjuntos de datos del mismo tipo en una unidad (e.g.
+						Arreglo).</li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+char semana[5][20] = {"Lu","Ma","Mi","Ju","Vi"};
+printf("%s\n", semana[1]);
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+semana = ["Lu","Ma","Mi","Ju","Vi"]
+print(semana[1])
+						</code></pre>
+					</div>
+				</div>
+			</section>-->
+			<!-- 
+			<section>
+				<h2>Elementos Generales - Estructuras de Control</h2>
+				<ul>
+					<li><b>Concurrencia:</b> computación paralela (e.g. procesos y hebras).</li>
+				</ul>
+			</section> -->
+
+			<!-- Métodos de Implantación -->
+			<section>
+				<h2>Métodos de Implantación</h2>
+				<ul>
+					<li class="fragment"><b>Compilación:</b> (e.g. C, C++)<br>
+						Traduce a lenguaje de máquina para posterior ejecución (interpretación directa por el
+						procesador).
+					</li>
+					<li class="fragment"><b>Interpretación:</b> (e.g. LISP, Python)<br>
+						Una máquina virtual interpreta directamente el código fuente durante la ejecución.
+					</li>
+					<li class="fragment"><b>Híbrido:</b> (e.g. Java, C#)<br>
+						Se compila a un lenguaje intermedio, que luego es interpretado.
+					</li>
+				</ul>
+			</section>
+
+			<!-- Uso de Código en C -->
+			<section>
+				<h2>Uso de Código en C</h2>
+				<ul>
+					<li class="fragment"><b>Modularización:</b> descomponer programas en unidades de desarrollo más
+						pequeñas (módulos).
+					</li>
+					<li class="fragment"><b>Compilación Separada o Independiente:</b> Módulos de un programa se pueden
+						compilar por
+						separado (bibliotecas).</li>
+					<li class="fragment"><b>Reutilización:</b> Módulos y clases se pueden reutilizar para diferentes
+						programas.</li>
+				</ul>
+			</section>
+
+			<!-- Popularidad de Lenguajes -->
+			<section>
+				<h4>Popularidad de Lenguajes (stackoverflow, redmonk)</h4>
+				<img src="images/01-popularity.png" style="width: 80%;">
+			</section>
+
+			<!-- Rendimiento de Lenguajes -->
+			<section>
+				<h4>Rendimiento de Lenguajes</h4>
+				<img src="images/01-benchmark.png" style="width: 70%;">
+				<p>
+					<a href="http://benchmarksgame.alioth.debian.org/u32/performance.php" target="_blank">
+						http://benchmarksgame.alioth.debian.org/u32/performance.php
+					</a>
+				</p>
+			</section>
+
+			<!-- Aprendamos C -->
+			<section>
+				<h2>Aprendamos C</h2>
+				<p>¡Comencemos a programar en C!</p>
+			</section>
+
+			<!-- C Estructura general -->
+			<section>
+				<h2>C Estructura general</h2>
+				<ul>
+					<li>Requiere un método de inicio de ejecución: <b>main</b></li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+#include<stdio.h>
+
+int main() {
+    printf("Hola Mundo\n");
+    return 0;
+}
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+if __name__ == "__main__":
+    print("Hola Mundo!")
+						</code></pre>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h4>Actividad 2.1: Hola Mundo</h4>
+				<p>Objetivo: Familiarizarse con la sintaxis básica de C.</p>
+
+				<p>En parejas, escriban un programa en C que imprima "Hola Mundo" en la consola.</p>
+				<p>Utiliza el código de la actividad en Github Classroom:
+					<a href="https://classroom.github.com/a/jF6QnLFI" target="_blank">
+						https://classroom.github.com/a/jF6QnLFI
+					</a>
+
+				</p>
+			</section>
+
+
+			<section>
+				<h4>Compilación: gcc</h4>
+				<div class="row r-fit-text">
+					<ul>
+						<li class="fragment">C es un lenguaje compilado, esto significa que:</li>
+						<li class="fragment">Su código es transformado, a través de un compilador, a lenguaje máquina.
+						</li>
+						<li class="fragment">El resultado de la compilación es un binario ejecutable.</li>
+						<li class="fragment">Binarios ejecutables: .bin, .exe, .appinstall, etc.</li>
+					</ul>
+				</div>
+				<div class="row fragment r-fit-text">
+					<img src="images/gcc.png" style="width:70%;">
+				</div>
+			</section>
+
+			<section>
+				<h4>Compilación: gcc</h4>
+				<div class="row r-fit-text">
+					<img src="images/gcc-win.png" style="width:70%;">
+				</div>
+			</section>
+
+			<section>
+				<h2>Compilación: gcc</h2>
+				<div class="fragment">
+					<p><b>Compilación directa</b></p>
+					<pre><code class="language-bash" data-trim>
+[user@pc dir]$ gcc -o ejecutable codigo1.c codigo2.c -Wall
+        </code></pre>
+					<ul>
+						<li class="fragment"><b>-o</b> (output): indica que lo siguiente es el nombre del ejecutable.
+						</li>
+						<li class="fragment"><b>codigoX.c</b>: es el archivo de nuestro código (puede ser más de uno).
+						</li>
+						<li class="fragment"><b>-Wall</b>: indica al compilador que de aviso de potenciales peligros
+							(warnings).</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Compilación por pasos 
+			<section>
+				<h2>Compilación: gcc</h2>
+				<div class="fragment">
+					<p><b>Compilación por pasos</b></p>
+					<pre><code class="language-bash" data-trim>
+[user@pc dir]$ gcc -c codigo1.c -Wall
+[user@pc dir]$ gcc -c codigo2.c -Wall
+[user@pc dir]$ gcc -o ejecutable codigo1.o codigo2.o 
+        </code></pre>
+					<ul>
+						<li class="fragment"><b>-c</b>: indica que un archivo.c será compilado independientemente a un
+							archivo objeto .o.</li>
+						<li class="fragment"><b>-o</b> (output): indica que lo siguiente es el nombre del ejecutable.
+						</li>
+						<li class="fragment"><b>-Wall</b>: indica al compilador que de aviso de potenciales peligros
+							(warnings).</li>
+						<li class="fragment">En la última instrucción se enlazan todos los archivos compilados, de forma
+							independiente, en un ejecutable.</li>
+					</ul>
+				</div>
+			</section> -->
+
+			<section>
+				<h4>Tipificación de Datos</h4>
+
+
+				<div class="row">
+
+					<div class="col">
+						<p class="fragment">Explícita (C):</p>
+						<ul>
+							<li class="fragment">Siempre detecta errores de tipo.</li>
+							<li class="fragment">Restricciones sobre operaciones y valores de diferentes tipos.</li>
+							<li class="fragment">No hay ejecución si tipos son erróneos o incompatibles.</li>
+							<li class="fragment">Tipificación estática y explícita.</li>
+						</ul>
+					</div>
+
+					<div class="col">
+						<p class="fragment">Implícita (Python):</p>
+						<ul>
+							<li class="fragment">Conversiones que permiten relajar restricciones.</li>
+							<li class="fragment">Flexibilidad y agilidad.</li>
+							<li class="fragment">Genera errores no detectados.</li>
+						</ul>
+
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Tipos de datos en C</h2>
+				<ul>
+					<li class="fragment">Define el tipo de dato de cada variable antes de usarlas (tipificación
+						explícita):</li>
+				</ul>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
+
+int main() {
+    int a;
+    float d;
+    int b = 5, c = 6;
+    printf("%d\n", b+c);
+    return 0;
+}
+        </code></pre>
+				</div>
+				<ul>
+					<li class="fragment">En Python, los tipos de datos se infieren de la asignación (tipificación
+						implícita).</li>
+				</ul>
+			</section>
+
+			<section>
+				<h4>Tipos de datos primitivos en C</h4>
+				<div class="row r-fit-text ">
+					<table style="width:94%; " border="1">
+						<tr>
+							<th>Descripción</th>
+							<th>C</th>
+							<th>Python</th>
+						</tr>
+						<tr>
+							<td>Booleano</td>
+							<td>bool</td>
+							<td>bool</td>
+						</tr>
+						<tr>
+							<td>Byte</td>
+							<td>char</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Caracter</td>
+							<td>char</td>
+							<td>str</td>
+						</tr>
+						<tr>
+							<td>Entero corto</td>
+							<td>short</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Entero</td>
+							<td>int</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Entero largo</td>
+							<td>long</td>
+							<td>long</td>
+						</tr>
+						<tr>
+							<td>Punto flotante</td>
+							<td>float</td>
+							<td>float</td>
+						</tr>
+						<tr>
+							<td>Pto. flotante largo</td>
+							<td>double</td>
+							<td>float</td>
+						</tr>
+						<tr>
+							<td>String</td>
+							<td>-</td>
+							<td>str</td>
+						</tr>
+						<tr>
+							<td>Complejos</td>
+							<td>-</td>
+							<td>complex</td>
+						</tr>
+					</table>
+				</div>
+			</section>
+
+			<section>
+				<h4>Tipos de datos primitivos en C</h4>
+				<div class="row r-fit-text">
+					<table style="width:94%; font-size:2.5vw;" border="1">
+						<tr>
+							<th>tipo</th>
+							<th>bytes</th>
+							<th>Rango</th>
+						</tr>
+						<tr>
+							<td>char</td>
+							<td>1</td>
+							<td>-127 to 127 or 0 to 255</td>
+						</tr>
+						<tr>
+							<td>unsigned char</td>
+							<td>1</td>
+							<td>0 to 255</td>
+						</tr>
+						<tr>
+							<td>signed char</td>
+							<td>1</td>
+							<td>-127 to 127</td>
+						</tr>
+						<tr>
+							<td>int</td>
+							<td>4</td>
+							<td>-2147483648 to 2147483647</td>
+						</tr>
+						<tr>
+							<td>unsigned int</td>
+							<td>4</td>
+							<td>0 to 4294967295</td>
+						</tr>
+						<tr>
+							<td>signed int</td>
+							<td>4</td>
+							<td>-2147483648 to 2147483647</td>
+						</tr>
+						<tr>
+							<td>short int</td>
+							<td>2</td>
+							<td>-32768 to 32767</td>
+						</tr>
+						<tr>
+							<td>unsigned short int</td>
+							<td>2</td>
+							<td>0 to 65,535</td>
+						</tr>
+						<tr>
+							<td>signed short int</td>
+							<td>2</td>
+							<td>-32768 to 32767</td>
+						</tr>
+						<tr>
+							<td>long int</td>
+							<td>4</td>
+							<td>-2,147,483,647 to 2,147,483,647</td>
+						</tr>
+						<tr>
+							<td>signed long int</td>
+							<td>4</td>
+							<td>same as long int</td>
+						</tr>
+						<tr>
+							<td>unsigned long int</td>
+							<td>4</td>
+							<td>0 to 4,294,967,295</td>
+						</tr>
+						<tr>
+							<td>float</td>
+							<td>4</td>
+							<td>+/- 3.4e +/- 38 (~7 digits)</td>
+						</tr>
+						<tr>
+							<td>double</td>
+							<td>8</td>
+							<td>+/- 1.7e +/- 308 (~15 digits)</td>
+						</tr>
+						<tr>
+							<td>long double</td>
+							<td>8</td>
+							<td>+/- 1.7e +/- 308 (~15 digits)</td>
+						</tr>
+					</table>
+				</div>
+			</section>
+			<!-- 
+			<section>
+				<h2>Tipos de Datos</h2>
+				<ul>
+					<li class="fragment"><b>Sistema de tipificación en C:</b>
+						<ul>
+							<li class="fragment"><b>Verificación de tipo:</b> Los operandos de una operación deben ser
+								de <em>tipo compatible</em>.</li>
+							<li class="fragment"><b>Tipo compatible:</b> es un tipo permitido, o que puede ser
+								convertido en uno permitido.</li>
+							<li class="fragment"><b>Conversión de tipos:</b> <em>Coerción</em> es conversión automática
+								y <em>casting</em> es la conversión definida por el programador.</li>
+						</ul>
+						<pre class="fragment"><code class="language-c" data-trim>
+int pi = 3.14;          //coerción
+double d = (double) pi; //casting       
+            </code></pre>
+						<ul>
+							<li class="fragment"><b>Error de tipo:</b> aplicación de un tipo inapropiado en una
+								instrucción.</li>
+						</ul>
+					</li>
+				</ul>
+			</section> -->
+			<section>
+				<h2>Entrada Estándar: scanf</h2>
+				<p class="fragment">Función de entrada estándar, compuesta de una sección de especificadores y otra
+					sección de variables, a la que se les asignará un valor obtenido desde pantalla.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+int a;
+char c;
+char nom[10];
+double prec;
+
+scanf("%d", &a); //lee un entero
+scanf("%c", &c); //lee un char
+scanf("%s", nom); //lee un string
+
+//lee un double, un string y un entero.
+scanf("%lf %s %d", &prec, nom, &a); 
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Salida Estándar: printf</h2>
+				<p class="fragment">Función de salida estándar, compuesta de una sección de especificadores y otra de
+					variables, cuyos valores se mostrarán por pantalla.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+printf("%d", a); //imprime un int
+printf("%c", c); //imprime un char
+printf("%s", nom); //imprime un string
+
+//imprime un double de 3 decimales, un string y un entero.
+printf("%.3lf %s %d", prec, nom, a); 
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Especificadores</h2>
+				<p class="fragment">Las funciones de I/O de C utilizan especificadores para identificar el tipo de dato
+					a leer o imprimir:</p>
+				<div class="row r-fit-text">
+					<table style="width:60%; font-size:2.5vw;" border="1">
+						<tr>
+							<th>Tipo</th>
+							<th>Especificador</th>
+						</tr>
+						<tr>
+							<td>char</td>
+							<td>%c</td>
+						</tr>
+						<tr>
+							<td>int</td>
+							<td>%d &nbsp; %i</td>
+						</tr>
+						<tr>
+							<td>unsigned int</td>
+							<td>%u</td>
+						</tr>
+						<tr>
+							<td>float</td>
+							<td>%f &nbsp; %.3f</td>
+						</tr>
+						<tr>
+							<td>string</td>
+							<td>%s</td>
+						</tr>
+						<tr>
+							<td>double</td>
+							<td>%lf</td>
+						</tr>
+						<tr>
+							<td>long int</td>
+							<td>%ld</td>
+						</tr>
+						<tr>
+							<td>long long unsigned int</td>
+							<td>%Lu</td>
+						</tr>
+					</table>
+				</div>
+			</section>
+
+
+			<!-- 
+			<section>
+				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
+int main(){
+    int a; //Define a la variable a como tipo entero
+    a = 3 + 2; //Evalúa 3+2 que es 5 y se asigna a 'a'. 
+    printf("%d\n", a);
+    return 0;
+}
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
+				<p class="fragment">C soporta el uso de ambos conceptos (definición y asignación) en conjunto, llamado
+					inicialización.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
+int main(){
+    int a = 3 + 2; 
+    printf("%d\n", a); // Inicializa con resultado 3+2
+    return 0;
+}
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Enumeración</h2>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+enum color {
+    rojo, 
+    amarillo, 
+    verde=20, 
+    azul};
+
+int col = rojo;
+
+if (col != azul){ 
+    printf("No es azul\n");}
+        </code></pre>
+				</div>
+				<div class="fragment">
+					<p><b>Python (clases)</b></p>
+					<pre><code class="language-python" data-trim>
+class Colors(Enum):
+    red = 1
+    yellow = 2
+    green = 3
+        </code></pre>
+				</div>
+			</section> -->
+
+
+			<section>
+				<h4>Actividad 2.2: Uso de tipos básicos</h4>
+				<p>Objetivo: Utilizar tipos básicos de C</p>
+				<p>En parejas, escriban un programa en C que pida datos en consola y los imprima.</p>
+				<p>Utiliza el código de la actividad en Github Classroom:
+					<a href="https://classroom.github.com/a/hBOlOpd5" target="_blank">
+						https://classroom.github.com/a/hBOlOpd5
+					</a>
+			</section>
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/countdown/countdown.js"></script>
+	<script src="plugin/animate/plugin.js"></script>
+	<script src="plugin/animate/svg.min.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: true,
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 0.8,
+			hash: true,
+			slideNumber: true,
+			dependencies: [
+
+				{ src: "plugin/countdown/countdown.js" },
+
+			],
+			animate: {
+				autoplay: true
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+			countdown: { defaultTime: 300, autostart: true },
+
+
+			autoAnimateUnmatched: true
+
+		});
+
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
+</body>
+
+</html>
