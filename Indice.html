@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/elo320.css">
+	<link rel="stylesheet" href="css/animRestricciones.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.fragment.bold {
+			font-weight: normal;
+		}
+
+		.fragment.bold.visible {
+			font-weight: bold;
+		}
+
+		.reveal td {
+			font-size: 60%;
+		}
+
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0
+		}
+
+		.tg td {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			font-weight: normal;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
+
+		.tg .tg-0lax {
+			text-align: center;
+			vertical-align: center;
+			font-size: 3vw;
+			border-width: 2px
+		}
+
+		.tg .tg-small {
+			text-align: center;
+			vertical-align: center;
+			font-size: 2vw
+		}
+
+		.smalltab {
+			font-size: 2vw
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="slides">
+
+
+
+			<!-- ...existing code... -->
+
+			<section>
+				<h2>Índice de Clases</h2>
+				<table class="tg" style="margin:auto;">
+					<tr>
+						<td class="tg-0lax"><a href="Clase1.html">Clase 1</a></td>
+						<td class="tg-0lax"><a href="Clase2.html">Clase 2</a></td>
+						<td class="tg-0lax"><a href="Clase3.html">Clase 3</a></td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"><a href="Clase4.html">Clase 4</a></td>
+						<td class="tg-0lax"><a href="Clase5.html">Clase 5</a></td>
+						<td class="tg-0lax"><a href="Clase6.html">Clase 6</a></td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"><a href="Clase7.html">Clase 7</a></td>
+						<td class="tg-0lax"><a href="Clase8.html">Clase 8</a></td>
+						<td class="tg-0lax"><a href="Clase9.html">Clase 9</a></td>
+					</tr>
+				</table>
+			</section>
+
+			<!-- ...existing code... -->
+
+
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/countdown/countdown.js"></script>
+	<script src="plugin/animate/plugin.js"></script>
+	<script src="plugin/animate/svg.min.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: true,
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 0.8,
+			hash: true,
+			slideNumber: true,
+			dependencies: [
+
+				{ src: "plugin/countdown/countdown.js" },
+
+			],
+			animate: {
+				autoplay: true
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+			countdown: { defaultTime: 300, autostart: true },
+
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 10,
+			autoAnimateUnmatched: false
+
+		});
+
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
+</body>
+
+</html>
