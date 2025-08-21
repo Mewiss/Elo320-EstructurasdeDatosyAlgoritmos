@@ -85,74 +85,47 @@
             <!-- Title Slide -->
             <section class="Title" data-include>
                 <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h2>Introducción a C</h2>
+                <h2>Arreglos en C</h2>
                 <p>Marie González-Inostroza</p>
 
             </section>
 
+            <section>
+                <h4>Diferencia entre %d y %i</h4>
+                <p>En C, <b>%d</b> y <b>%i</b> son especificadores de formato utilizados en funciones como
+                    <code>printf</code>
+                    y <code>scanf</code>.
+                </p>
+                <ul>
+                    <li><b>%d</b> se utiliza para imprimir o leer un número entero en formato decimal.</li>
+                    <li><b>%i</b> también se utiliza para imprimir o leer un número entero, pero puede aceptar
+                        números en diferentes bases (decimal, octal y hexadecimal) dependiendo del prefijo del número.
+                    </li>
+                </ul>
+            </section>
 
-            <!-- 
-			<section>
-				<h2>Tipos de Datos</h2>
-				<ul>
-					<li class="fragment"><b>Sistema de tipificación en C:</b>
-						<ul>
-							<li class="fragment"><b>Verificación de tipo:</b> Los operandos de una operación deben ser
-								de <em>tipo compatible</em>.</li>
-							<li class="fragment"><b>Tipo compatible:</b> es un tipo permitido, o que puede ser
-								convertido en uno permitido.</li>
-							<li class="fragment"><b>Conversión de tipos:</b> <em>Coerción</em> es conversión automática
-								y <em>casting</em> es la conversión definida por el programador.</li>
-						</ul>
-						<pre class="fragment"><code class="language-c" data-trim>
-int pi = 3.14;          //coerción
-double d = (double) pi; //casting       
-            </code></pre>
-						<ul>
-							<li class="fragment"><b>Error de tipo:</b> aplicación de un tipo inapropiado en una
-								instrucción.</li>
-						</ul>
-					</li>
-				</ul>
-			</section> -->
-
-
-            <!-- 
-			<section>
-				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
-				<div class="fragment">
-					<pre><code class="language-c" data-trim>
-#include<stdio.h>
-int main(){
-    int a; //Define a la variable a como tipo entero
-    a = 3 + 2; //Evalúa 3+2 que es 5 y se asigna a 'a'. 
-    printf("%d\n", a);
+            <section>
+                <h4>Diferencia entre %d y %i</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+#include <stdio.h>  
+int main() {
+    int num1 = 10, num2 = 010, num3 = 0x10; // 010 es octal, 0x10 es hexadecimal
+    printf("Decimal: %d\n", num1); // Imprime 10
+    printf("Octal: %i\n", num2); // Imprime 8
+    printf("Hexadecimal: %i\n", num3); // Imprime 16
     return 0;
-}
-        </code></pre>
-				</div>
-			</section>
+}    </code></pre>
+                </div>
+            </section>
 
-			<section>
-				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
-				<p class="fragment">C soporta el uso de ambos conceptos (definición y asignación) en conjunto, llamado
-					inicialización.</p>
-				<div class="fragment">
-					<pre><code class="language-c" data-trim>
-#include<stdio.h>
-int main(){
-    int a = 3 + 2; 
-    printf("%d\n", a); // Inicializa con resultado 3+2
-    return 0;
-}
-        </code></pre>
-				</div>
-			</section>
 
-			<section>
-				<h2>Enumeración</h2>
-				<div class="fragment">
-					<pre><code class="language-c" data-trim>
+
+
+            <!--  <section>
+                <h4>Enumeración</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
 enum color {
     rojo, 
     amarillo, 
@@ -164,1266 +137,144 @@ int col = rojo;
 if (col != azul){ 
     printf("No es azul\n");}
         </code></pre>
-				</div>
-				<div class="fragment">
-					<p><b>Python (clases)</b></p>
-					<pre><code class="language-python" data-trim>
+                </div>
+                <div class="fragment">
+                    <p><b>Python (clases)</b></p>
+                    <pre><code class="language-python" data-trim>
 class Colors(Enum):
     red = 1
     yellow = 2
     green = 3
         </code></pre>
-				</div>
-			</section> -->
-
-
-
-
-
-            <!-- Expresiones -->
-            <!--  <section>
-                <h2>Expresiones en Asignaciones</h2>
-                <ul>
-                    <li><b>Valor de una expresión</b> determinado por <b>reglas de orden de evaluación de operadores y operandos</b>:
-                        <ul>
-                            <li>Asociatividad.</li>
-                            <li>Precedencia.</li>
-                        </ul>
-                    </li>
-                    <li>Si <b>orden es ambiguo</b> puede conducir a <b>diferentes resultados</b>, <b>según la implementación</b> del traductor de lenguaje.</li>
-                    <li>Tip: Usar paréntesis ante la duda.</li>
-                </ul>
-            </section>
- 
-            <section>
-                <h2>Expresiones Aritméticas</h2>
-                <div class="block">
-                    Conjunto de <b>operadores</b>, <b>operandos</b> (argumentos), <b>paréntesis</b> y <b>llamadas a funciones</b>. El <b>orden de evaluación</b> (precedencia, asociatividad y paréntesis) determina su <b>valor</b>.
                 </div>
-                <ul>
-                    <li><b>Aridad de operadores:</b>
-                        <ul>
-                            <li><em>Unario (unitario):</em> Un sólo operando.</li>
-                            <li><em>Binario:</em> Dos operandos.</li>
-                            <li><em>Ternario:</em> Tres operandos.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
--->
-            <section>
-                <h2>Operadores Unarios</h2>
-                <table style="font-size:1em;">
-                    <tr>
-                        <th>Operador</th>
-                        <th>C</th>
-                        <th>Python</th>
-                    </tr>
-                    <tr>
-                        <td>Negación lógica</td>
-                        <td>!</td>
-                        <td>not</td>
-                    </tr>
-                    <tr>
-                        <td>Dirección</td>
-                        <td>&amp;</td>
-                        <td>No existe</td>
-                    </tr>
-                    <tr>
-                        <td>Derreferencia</td>
-                        <td>*</td>
-                        <td>No existe</td>
-                    </tr>
-                    <tr>
-                        <td>Incremento</td>
-                        <td>++</td>
-                        <td>No existe</td>
-                    </tr>
-                    <tr>
-                        <td>Decremento</td>
-                        <td>--</td>
-                        <td>No existe</td>
-                    </tr>
-                    <tr>
-                        <td>Signo más</td>
-                        <td>+</td>
-                        <td>+</td>
-                    </tr>
-                    <tr>
-                        <td>Negativo</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Casting</td>
-                        <td>(tipo)</td>
-                        <td>No existe</td>
-                    </tr>
-                </table>
-                <p>Los operadores unarios agrupan de derecha a izquierda.<br>
-                    Ejemplo: <span style="color:blue;">-+ x</span> equivale a <span style="color:blue;">-(+ x)</span>.
-                </p>
-            </section>
+            </section> -->
+
+
 
             <section>
-                <h2>Operadores Binarios</h2>
-                <table style="font-size:1em;">
-                    <tr>
-                        <th>Operador</th>
-                        <th>C</th>
-                        <th>Python</th>
-                    </tr>
-                    <tr>
-                        <td>Suma</td>
-                        <td>+</td>
-                        <td>+</td>
-                    </tr>
-                    <tr>
-                        <td>Resta</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Multiplicación</td>
-                        <td>*</td>
-                        <td>*</td>
-                    </tr>
-                    <tr>
-                        <td>División</td>
-                        <td>/</td>
-                        <td>/</td>
-                    </tr>
-                    <tr>
-                        <td>División entera</td>
-                        <td>/</td>
-                        <td>//</td>
-                    </tr>
-                    <tr>
-                        <td>Módulo</td>
-                        <td>%</td>
-                        <td>%</td>
-                    </tr>
-                    <tr>
-                        <td>Exponenciación</td>
-                        <td>No existe</td>
-                        <td>**</td>
-                    </tr>
-                </table>
-                <p style="font-size:0.9em;">División entera en C según tipo de dato.<br>
-                    Si tipo entero para numerador y denominador: división entera.</p>
-            </section>
-
-            <section>
-                <h2>Orden de Evaluación de Operadores</h2>
-                <div class="row r-fit-text">
-                    <ul style="font-size:0.9em;">
-                        <li><b>Precedencia:</b> Orden de evaluación de operadores adyacentes, estableciendo prioridades.
+                <h4>Arreglos</h4>
+                <div class="fragment">
+                    <ul>
+                        <li>Conjunto homogéneo y ordenado de un tipo de datos.</li>
+                        <li>Se identifican por su posición relativa mediante un <em>índice</em> encerrado con
+                            <code>[]</code>
                         </li>
-                        <li><b>Asociatividad:</b> A igual precedencia, define orden de evaluación.</li>
-                        <li><b>Paréntesis:</b> Altera y fuerza orden de evaluación.</li>
+                        <li>Parten en el índice 0.</li>
                     </ul>
-                </div>
-                <div class="row r-fit-text">
-                    <table style="font-size:0.8em;">
-                        <tr>
-                            <th>Precedencia</th>
-                            <th>Descripción</th>
-                            <th>C</th>
-                            <th>Python</th>
-                            <th>Asociatividad</th>
-                        </tr>
-                        <tr>
-                            <td>alta</td>
-                            <td>exponente</td>
-                            <td></td>
-                            <td>**</td>
-                            <td>&larr;</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>unarios (postfijos)</td>
-                            <td>++ --</td>
-                            <td></td>
-                            <td>&rarr;</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>unarios (prefijos)</td>
-                            <td>++ -- ~ ! * &amp; + -</td>
-                            <td>~ + -</td>
-                            <td>&larr;</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>casting de tipo</td>
-                            <td>(type)</td>
-                            <td></td>
-                            <td>&larr;</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>multiplicativos</td>
-                            <td>* / %</td>
-                            <td>* / // %</td>
-                            <td>&rarr;</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>aditivos</td>
-                            <td>+ -</td>
-                            <td>+ -</td>
-                            <td>&rarr;</td>
-                        </tr>
-                        <tr>
-                            <td>baja</td>
-                            <td>NOT lógico</td>
-                            <td></td>
-                            <td>not</td>
-                            <td>&larr;</td>
-                        </tr>
-                    </table>
-                </div>
-            </section>
-
-            <section>
-                <h2>Ojo con conversiones!</h2>
-                <ul style="font-size:0.9em;">
-                    <li>Expresión puede tener muchos tipos distintos.</li>
-                    <li>Entonces, el lenguaje hace conversión implícita (coerción), para usar el operador adecuado.</li>
-                    <li>Control <b>implícito</b> de conversión mediante <em>coerción</em>:</li>
-                </ul>
-                <pre><code class="language-c" data-trim>
-float   fVal;
-double  dVal;
-int   iVal;
-unsigned long ulVal;
-
-dVal = iVal * ulVal; //iVal es convertido a unsigned long.
-// El resultado es convertido a double 
-
-dVal = ulVal + fVal; //ulVal convertido a float.
-//El resultado es convertido a double            
-                </code></pre>
-            </section>
-
-            <section>
-                <h2>Sentencias de asignación</h2>
-                <ul>
-                    <li>Cambian dinámicamente el valor de una variable.</li>
-                    <li>C permite <b>incrustar una asignación en una expresión</b>.</li>
-
-                </ul>
-                <pre><code class="language-c" data-trim>
-a *= 5;
-//Equivalente a:
-a = a * 5;
-                </code></pre>
-            </section>
-
-            <section>
-                <h2>Sentencias de Asignación</h2>
-                <table style="font-size:1em;">
-                    <tr>
-                        <th>Operador</th>
-                        <th>C</th>
-                        <th>Python</th>
-                    </tr>
-                    <tr>
-                        <td>Asignación</td>
-                        <td>=</td>
-                        <td>=</td>
-                    </tr>
-                    <tr>
-                        <td>Suma y asignación</td>
-                        <td>+=</td>
-                        <td>+=</td>
-                    </tr>
-                    <tr>
-                        <td>Resta y asignación</td>
-                        <td>-=</td>
-                        <td>-=</td>
-                    </tr>
-                    <tr>
-                        <td>Multiplicación y asignación</td>
-                        <td>*=</td>
-                        <td>*=</td>
-                    </tr>
-                    <tr>
-                        <td>División y asignación</td>
-                        <td>/=</td>
-                        <td>/=</td>
-                    </tr>
-                    <tr>
-                        <td>Módulo y asignación</td>
-                        <td>%=</td>
-                        <td>%=</td>
-                    </tr>
-                    <tr>
-                        <td>Incremento</td>
-                        <td>++</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Decremento</td>
-                        <td>--</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>División entera y asignación</td>
-                        <td></td>
-                        <td>//=</td>
-                    </tr>
-                    <tr>
-                        <td>Exponente y asignación</td>
-                        <td></td>
-                        <td>**=</td>
-                    </tr>
-                </table>
-            </section>
-
-            <section>
-                <h4>Sentencias de Asignación</h4>
-                <div class="row">
-                    <div class="col">
-                        <!-- <b>Unarios de Asignación:</b> -->
-                        <pre><code class="language-c" data-trim>
-                        //pre-incremental
-                        sum = ++contador; 
-
-                        //equivale a:
-
-                        contador = contador + 1;
-                        sum = contador;
-                        </code></pre>
-                    </div>
-                    <div class="col">
-                        <pre><code class="language-c" data-trim>
-                        //post-incremental
-                        sum = contador++;
-                        
-                        //equivale a:
-                        aux = contador;
-                        contador = contador + 1;
-                        sum = aux;
-                        </code></pre>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- <b>Operadores Compuestos:</b> -->
                     <pre><code class="language-c" data-trim>
-                sum += a;
-
-                //equivale a:
-                sum = sum + a;
-                </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Sentencias de Asignación</h2>
-                <h3>Asignación Múltiple</h3>
-                <div class="row fragment">
-                    <div class="col">
-                        <b>C:</b>
-                        <pre><code class="language-c" data-trim>
-int a, b, c, d;
-a = b = c = d = 5;
-                        </code></pre>
-                    </div>
-                    <div class="col">
-                        <b>Python:</b>
-                        <pre><code class="language-python" data-trim>
-a = b = c = d = 5
-                        </code></pre>
-                    </div>
-                </div>
-                <div class="row fragment">
-                    <div class="col">
-                        <pre><code class="language-c" data-trim>
-int a = 10, b, c = 15;
-a += b = c -= 5;
-                </code></pre>
-                    </div>
-                    <div class="col">
-                        <pre><code class="language-python" data-trim>
-x, y, z = 20, 30, 40
-                </code></pre>
+int arr[6]; //6 enteros creados en arr.
+arr[3] = 222; //Al cuarto elemento de arr se le asigna un 222.
+        </code></pre>
+                    <div style="text-align:center;">
+                        <img src="images/array.png" style="width:75%;" alt="array">
                     </div>
                 </div>
             </section>
 
             <section>
-                <h2>Sentencias de Asignación</h2>
-                <h3>Operador Ternario</h3>
-                <b>C: Único operador ternario.</b>
-                <pre><code class="language-c" data-trim>
-retorno = op1 ? op2 : op3;  
-                        </code></pre>
-                <span style="font-size:0.9em;">Si op1 es verdadero, asigna op2; sino, asigna op3.</span>
-                <pre><code class="language-c" data-trim>
-cuenta = (a > 0) ? 0 : 1;
+                <h4>Recorrer un arreglo</h4>
+                <div class="fragment">
+                    <p>Podemos utilizar cualquiera de las estructuras de control iterativas para recorrerlos.</p>
+                    <pre><code class="language-c" data-trim>
+#include<stdio.h>
 
-//Equivale a:
-if (a > 0)
-    cuenta = 0;
-else cuenta = 1;
-                        </code></pre>
-                </li>
+int main(){
+    int i;
+    float a[5];
+    
+    for(i=0;i<5;i++){
+        float val; //¿Cuántas veces nace y muere val?
+        scanf("%f", &val);
+        a[i]=val;
+    } //¿Cómo reducir este código?
 
-            </section>
-
-            <!-- <section>
-                <h2>Asignación en expresiones</h2>
-                <ul>
-                    <li>C considera la asignación como un operador más.</li>
-                    <li>Permite incrustar asignación en cualquier expresión.</li>
-                    <li><b>C</b> Permitido.</li>
-                </ul>
-                <pre><code class="language-c" data-trim>
-while ( (c = getchar()) != EOF) {}
-                </code></pre>
-                <ul>
-                    <li><b>Python:</b> Sintaxis no lo permite.</li>
-                </ul>
-                <pre><code class="language-python" data-trim>
-if (d = 5 + c) > 6:
-                </code></pre>
-                <b>Error: Invalid syntax.</b>
-                <ul>
-                    <li><span style="color:green;">Pro:</span> Programación más compacta.</li>
-                    <li><span style="color:red;">Contra:</span> Fuente de error en la programación. Es fácil equivocarse
-                        confundiendo <b>==</b> e <b>=</b>.</li>
-                </ul>
-            </section> -->
-
-            <!-- <section>
-                <h2>Expresiones Relacionales y Lógicas</h2>
-                <ul>
-                    <li><b>Expresión Relacional:</b>
-                        <ul>
-                            <li>Usan operador relacional (binario) para comparar los valores de dos operandos.</li>
-                            <li>Cada operando puede ser una <b>expresión aritmética</b>.</li>
-                            <li>El <b>valor resultante</b> de la expresión es <b>booleano</b>.</li>
-                            <li>Incluye: ==, !=, &lt;, &lt;=, &gt;, &gt;=</li>
-                        </ul>
-                    </li>
-                    <li><b>Expresión Booleana:</b>
-                        <ul>
-                            <li>Consiste en variables, constantes y operadores booleanos.</li>
-                            <li>Se puede combinar con expresiones relacionales.</li>
-                            <li>Incluye: AND, OR, NOT y, a veces, XOR.</li>
-                        </ul>
-                    </li>
-                    <li><b>El único valor falso en C es el 0 (cero).</b></li>
-                </ul>
-            </section> -->
-
-            <section>
-                <h2>Expresiones Relacionales y Lógicas</h2>
-                <div class="row ">
-                    <div class="col">
-                        <table style="font-size:1em;">
-                            <tr>
-                                <th colspan="3">Operadores Relacionales</th>
-                            </tr>
-                            <tr>
-                                <th>Operador</th>
-                                <th>C</th>
-                                <th>Python</th>
-                            </tr>
-                            <tr>
-                                <td>Igual</td>
-                                <td>==</td>
-                                <td>==</td>
-                            </tr>
-                            <tr>
-                                <td>Distinto</td>
-                                <td>!=</td>
-                                <td>!= &lt;&gt;</td>
-                            </tr>
-                            <tr>
-                                <td>Mayor</td>
-                                <td>&gt;</td>
-                                <td>&gt;</td>
-                            </tr>
-                            <tr>
-                                <td>Menor</td>
-                                <td>&lt;</td>
-                                <td>&lt;</td>
-                            </tr>
-                            <tr>
-                                <td>Mayor o igual</td>
-                                <td>&gt;=</td>
-                                <td>&gt;=</td>
-                            </tr>
-                            <tr>
-                                <td>Menor o igual</td>
-                                <td>&lt;=</td>
-                                <td>&lt;=</td>
-                            </tr>
-                            <tr>
-                        </table>
-                    </div>
-                    <div class="col">
-                        <table style="font-size:1em;">
-                            <th colspan="3">Operadores Booleanos</th>
-                            </tr>
-                            <tr>
-                                <th>Operador</th>
-                                <th>C</th>
-                                <th>Python</th>
-                            </tr>
-                            <tr>
-                                <td>NOT</td>
-                                <td>!</td>
-                                <td>not</td>
-                            </tr>
-                            <tr>
-                                <td>AND</td>
-                                <td>&amp;&amp;</td>
-                                <td>and</td>
-                            </tr>
-                            <tr>
-                                <td>OR</td>
-                                <td>||</td>
-                                <td>or</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- <section>
-                <h2>Estructuras de control</h2>
-                <ul>
-                    <li>C/Python la ejecución es típicamente secuencial.</li>
-                    <li>Dos tipos básicos de estructuras control:
-                        <ul>
-                            <li><b>Condicional:</b> múltiples alternativas de ejecución, controladas por una condición.
-                            </li>
-                            <li><b>Iterativa:</b> Ejecución repetitiva de un grupo de sentencias, también controladas
-                                por una condición.</li>
-                        </ul>
-                    </li>
-                    <li>Se requiere mecanismo de agrupación de sentencias sobre las cuales se ejerce el control:
-                        <b>composición de sentencias</b>.
-                    </li>
-                    <li>En <b>C</b> se usa <em>{ }</em></li>
-                    <li><b>Python</b> compone por indentación.</li>
-                </ul>
-            </section> -->
-
-            <section>
-                <h3>Estructuras de control - Sentencias de selección</h3>
-                <b>if - else if - else</b>
-                <div class="row">
-                    <div class="col">
-                        <b>C:</b>
-                        <pre><code class="language-c" data-trim>
-if(condición_1) {
-    //....
-} else if(condición_k) {
-    //....
-} else {
-    //....
 }
-                        </code></pre>
-                    </div>
-                    <div class="col">
-                        <b>Python:</b>
-                        <pre><code class="language-python" data-trim>
-if condición_1:
-    #....
-elif condición_k:
-    #....
-else:
-    #....
-                        </code></pre>
-                    </div>
-                </div>
-                <p>En C las agrupaciones de sentencias se realizan con llaves {}</p>
-            </section>
-
-            <section>
-                <h3>Estructuras de control - Sentencias de selección</h3>
-                <b>switch</b>
-                <pre><code class="language-c" data-trim>
-switch(x){ //Debe ser una variable
-case x1:                                     
-    //.... 
-    break; 
-case x2: 
-    //.... 
-    break; 
-//.... 
-case xN: 
-    //.... 
-    break;  
-default: //opcional
-    //....
-} 
-                </code></pre>
-                <p>No existe en Python.</p>
-            </section>
-
-            <section>
-                <h3>Estructuras de control - Sentencias de iteración</h3>
-                <b>Ciclos controlados por condición: <em>while, do-while</em></b>
-                <div class="row">
-                    <div class="col">
-                        <b>C:</b>
-                        <pre><code class="language-c" data-trim>
-while(condición) { 
-    //...
-}
-
-do {
-    //...
-} while(condición);
-                        </code></pre>
-                    </div>
-                    <div class="col">
-                        <b>Python:</b>
-                        <pre><code class="language-python" data-trim>
-while condición: 
-    #...
-                        </code></pre>
-                    </div>
+        </code></pre>
                 </div>
             </section>
 
-
             <section>
-                <h2>Corto Circuito o Término anticipado de evaluación</h2>
+                <h4>Strings</h4>
+                <div class="fragment">
+                    <ul>
+                        <li><b>String:</b> Estructura de datos para representar palabras.</li>
+                        <li>Arreglo de <code>char</code> y el caracter <code>'\0'</code>.</li>
+                    </ul>
+                    <pre><code class="language-c" data-trim>
+// Los string terminan con '\0' (fin de string) 
+// '\0' ocupa 1 char en el string.
+char str[6] = "hola"; //String de largo máximo 5. 
+str[3] = 'i'; // ¿Qué hace? 
+printf("%s\n", str);
+        </code></pre>
+                    <div style="text-align:center;">
+                        <img src="images/string.png" style="width:75%;" alt="string">
+                    </div>
 
-                <pre><code class="language-c" data-trim>
-                    //Si primera condición se cumple, la expresion es true
-                    if((a >= 0) || (b < 10))
-
-                    //Si primera condición no se cumple, la expresion es false
-                    while ( (c = getchar()) != EOF && c != '\n' )
-                    </code></pre>
-
+                </div>
             </section>
 
             <section>
-                <h2>Saltos incondicionales</h2>
-                <ul>
-                    <li><b>C/Python:</b>
-                        <ul>
-                            <li><b>break:</b> Permite salir del ciclo más cercano.</li>
-                            <li><b>continue:</b> Permite pasar al ciclo siguiente.</li>
-                            <li>Se recomienda usarlos con precaución y criterio.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
+                <h4>Arreglos Multidimensionales e Inicialización</h4>
+                <div>
+                    <pre><code class="language-c" data-trim>
+#include<stdio.h>
 
-            <section>
-                <h2>Saltos incondicionales - Ejemplo</h2>
-                <pre><code class="language-c" data-trim>
-int main() {
-  int n;
-  do {
-    printf("Ingrese numero: ");
-    scanf("%d", &n);
-    if (n < 0)
-      break;
-    if (n >10) {
-      printf("Saltarse el valor.\n");
-      continue;
+int main(){
+    char nom[10] = "Camilo";
+    char a[5][20] = {"Juan", "Francisco", "Pedro"};	
+    int b[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}}, i, j;
+
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++) //¿Qué pasó con las llaves? 
+            printf("%d ", b[i][j]);
+        printf("\n");
     }
-    printf("El numero es: %d\n",  n);
-  } while (n != 0);
-
-  return 0;
 }
-                </code></pre>
-            </section>
-            <section>
-                <h4>Actividad 3.2: tipos básicos y ciclos en C</h4>
-                <p>A partir de su código de la Actividad 2.2, valide que los datos ingresados sean válidos, de no ser
-                    así, pida al usuario que los ingrese nuevamente.</p>
-                <p>Utiliza el código de la actividad en Github Classroom:
-                    <a href="https://classroom.github.com/a/R2RbK9V_" target="_blank">
-                        https://classroom.github.com/a/R2RbK9V_
-                    </a>
-                </p>
-            </section>
-
-
-            <!-- Clase Activa -->
-            <!-- <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 1.1</b><br>
-                    Cree un programa que solicite por pantalla una temperatura en grados Fahrenheit y arroje como
-                    resultado su transformación a Grados Celsius.
-                    <br><br>
-                    <span style="font-size:1.5em;">\( ^\circ C = \frac{5}{9} \times (^\circ F - 32) \)</span>
+        </code></pre>
                 </div>
-                <p style="font-size:0.8em;">Aprendemos: Entrada y Salida, Tipos de Datos, Conversiones, Operadores
-                    Aritméticos.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 1.2</b><br>
-                    Cree un programa que solicite por pantalla una temperatura en grados Celsius y pregunte si quiere
-                    como resultado su transformación a Grados Fahrenheit o Kelvin.
-                    <br><br>
-                    <span style="font-size:1.5em;">\( ^\circ K = ^\circ C + 273.15 \)</span>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: control condicional, if, u opciones, switch.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 1.3</b><br>
-                    Cree un programa que pregunte por pantalla un tipo de temperatura y un valor, y luego pregunte en
-                    que otra unidad quiere transformarlo. (por ejemplo, inicia como Kelvin, y se entrega Celsius o
-                    Fahrenheit).
-                    <br><br>
-                    <span style="font-size:1.5em;">\( ^\circ F = \frac{9}{5} \times (^\circ K - 273.15) + 32 \)</span>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: control condicional, if, u opciones, switch.</p>
             </section>
 
 
 
             <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio Desafío</b><br>
-                    Cree un programa que pregunte un día de la semana y luego una cantidad X de días. El programa debe
-                    retornar el día de la semana que será en X días.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Aritmética Modular, control de condición u opción.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.1</b><br>
-                    Cree un programa que solicite un número positivo entero y verifique si éste es primo o compuesto. No
-                    puede utilizar <b>break</b>.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Ciclos, Aritmética Modular.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.2</b><br>
-                    Cree un programa que solicite un número positivo entero y verifique si éste es primo o compuesto.
-                    Debe utilizar <b>break</b>.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Ciclos, Aritmética Modular. Comandos especiales</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 3</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 3.1</b><br>
-                    Cree un programa que solicite un número entero largo, y luego calcule cuántas veces aparece cada
-                    dígito en él. Si posee todos los dígitos pares se debe decir por pantalla que es un parista, y si
-                    posee todos los números impares, debe decir que es un imparista.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Ciclos, Corto Circuito</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 3</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio Desafío</b><br>
-                    Cree un programa que solicite una palabra, y calcule cuántas veces aparece cada letra del abecedario
-                    en ella. Luego, si posee todas las vocales debe decir que es una palabra <b>vocal total</b>.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Ciclos, Corto Circuito</p>
-            </section> -->
-
-
-            <section>
-                <h4>Actividad 3.2: tipos básicos y ciclos en C</h4>
-                <p> Cree un programa que solicite una palabra, y calcule cuántas veces aparece cada letra del abecedario
-                    en ella. Luego, si posee todas las vocales debe decir que es una palabra <b>vocal total</b>.</p>
-            </section>
-
-
-
-            <section>
-                <h2>Funciones en C</h2>
+                <h4>Funciones con Strings</h4>
                 <ul>
-                    <li class="fragment">Encapsula código.</li>
-                    <li class="fragment">Permite reutilizar código.</li>
-                    <li class="fragment">Se pueden compilar por separado.</li>
-                    <li class="fragment"><b>Retorna siempre un tipo de dato específico.</b></li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Funciones en C</h2>
-                <ul>
-                    <li>Se puede separar interfaz (prototipo) de implementación.</li>
-                    <li><b>Interfaz (prototipo):</b> Sólo define existencia y formato de función. Suficiente para ser
-                        invocada.</li>
-                </ul>
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-//tipo_retorno funcion(parametros con o sin nombre);
-float potencia(float a, float b);
-//....
-
-calculo = x * potencia(y, 2.5);
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Funciones en C</h2>
-                <ul>
-                    <li><b>Implementación:</b> Define implementación de código de función.</li>
-                </ul>
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-/*tipo_retorno funcion(parametros con nombre) {
-*   Implementacion...
-}*/
-
-float potencia(float a, float b) {
-    return pow(a,b);
-}
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Funciones en C</h2>
-                <ul>
-                    <li class="fragment">Si se utiliza solamente la implementación, esta tiene que estar definida
-                        <b>antes</b> de la
-                        función que la utiliza.
+                    <li><b>strlen(s):</b> Retorna el largo de un string <code>s</code>.</li>
+                    <li><b>strcpy(destino, origen):</b> Copia el string <code>origen</code> al string
+                        <code>destino</code>.
                     </li>
-                    <li class="fragment">Si se utiliza el prototipo, este debe estar defindo <b>antes</b> de
-                        la función que la usa.</li>
-                    <li class="fragment">Prototipo + Implementación: libertad de ubicación de la implementación
-                        diferentes
-                        archivos.</li>
-                </ul>
-            </section>
-
-            <!-- <section>
-                <h2>Funciones en Python</h2>
-                <ul>
-                    <li><b>Python</b> sólo permite implementación, sin prototipos.</li>
-                </ul>
-                <div class="exampleblock">
-                    <b>Python</b>
-                    <pre><code class="language-python">
-def nombre_funcion(parametros):
-    #...Implementacion
-    return &lt;expresion&gt;
-    </code></pre>
-                    <img src="images/funcion-python.png" style="width:65%;">
-                </div>
-            </section> -->
-
-
-
-            <section>
-                <h4>Ámbito (Scope)</h4>
-                <p>Corresponde al alcance de las variables, es decir,
-                    el segmento en el cual existen y pueden ser usadas &rarr; entre { y }.</p>
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-#include&lt;stdio.h&gt;
-
-void saludo(){ // var i sirve sólo dentro de función saludo.
-    int i = 5;
-    printf("Hola alumno numero %d", i);
-}
-
-int main(){// var a sirve sólo dentro de función main. 
-    int a = 10;
-    saludo();
-    printf("%d\n", a);
-    return 0;
-}
-    </code></pre>
-                </div>
+                    <li><b>strcmp(s1, s2):</b> Compara los strings <code>s1</code> y <code>s2</code>. Retorna 0 si son
+                        iguales.</li>
             </section>
 
             <section>
-                <h4>Variable local</h4>
-                <p>Definida dentro de un ámbito determinado, entre
-                    llaves { y }.</p>
-
-
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-                        #include&lt;stdio.h&gt;
-                        int main(){// var a sirve sólo dentro de función main. 
-
-                            int a = 10;
-                            if(a==10){
-                                int b = 1;
-                                printf("%d %d\n", a, b);
-                            }
-                        
-                            printf("%d %d\n", a, b); // ¿Qué pasa con la variable b?
-
-                            return 0;}
-                            </code></pre>
-                    <p>Aplica para todo elemento que contenga llaves.</p>
-
-            </section>
-
-            <section>
-                <h4>Variable Global</h4>
-                <p>Está definida <b>fuera de cualquier</b> ámbito. </p>
-
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int a=1; //global
-int b=2; //global
-
-int main(){
-    int a = 10; //local
-    b++;
-    printf("%d %d\n", a, b);//¿Qué imprime? 
-    return 0;
-}
-    </code></pre>
-                </div>
-                Puede ser llamada, modificada y utilizada desde cualquier ámbito, siempre y cuando <b>no exista
-                    una
-                    variable local</b> con el mismo nombre.</p>
-            </section>
-
-            <section>
-                <h4>Macro</h4>
-                <p>Valor o conjuntos de instrucciones constantes que se definen a nivel de
-                    preprocesamiento. No es una variable y no puede ser modificada.</p>
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-#include&lt;stdio.h&gt;
-#define MACRO 10
-
-int main(){
-    int a = 5;
-    printf("%d\n", a*MACRO);
-}
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h4>Constante</h4>
-                <p>Una variable constante es aquella que se declara con el keyword <b>const</b>, e implica que ésta no
-                    puede ser modificada. Tiene todo el resto de las propiedades de una variable común.</p>
-                <div class="exampleblock">
-
-                    <pre><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int main(){
-    const int a = 5;
-    a = 10; //¿Cómo actúa el compilador?
-    printf("%d\n", a);
-}
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h4>Actividad 3.3: Funciones en C</h4>
-                <p>Completa un programa que representa una calculadora. Este código usa macros, variables globales
-                    y locales, funciones y estructuras de control (for, switch).</p>
+                <h4>Actividad 4.1: Arreglos en C</h4>
+                <p>Completa las funciones para obtener el promedio y varianza de los números guardados en un arreglo.
+                </p>
                 <p>
 
-                    El código base está en Classroom. Completa las funciones vacías y prueba diferentes escenarios.
-                    <a href="https://classroom.github.com/a/qF_waakB" target="_blank">
-                        https://classroom.github.com/a/qF_waakB
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/MYR4fiJ2" target="_blank">
+                        https://classroom.github.com/a/MYR4fiJ2
                 </p>
             </section>
-<!-- 
+
             <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 1.1</b><br>
-                    Cree una función, sin recibir parámetros ni retorna valores, que salude por pantalla al usuario.
-                    Utilícela en la función main().
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Declaración y uso de función, función sin retorno, tipo de dato
-                    void.</p>
+                <h4>Actividad 4.2: Strings y Structs en C</h4>
+                <p>Completa las funciones para buscar en un arreglo de Structs.</p>
+                <p>
+
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/OQ7AZUuO" target="_blank">
+                        https://classroom.github.com/a/OQ7AZUuO
+                </p>
             </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 1</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 1.2</b><br>
-                    Cree una función que solicite por pantalla al usuario un número entero y lo retorne. Utilícela en la
-                    función main(), almacenando dicho valor en una variable y mostrándola por pantalla.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Declaración y uso de función, función con retorno, diferencia
-                    printf vs return.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <p>Responda a las preguntas expuestas en los comentarios de los siguientes códigos. Esta actividad será
-                    resuelta en clases junto al profesor.</p>
-                <p style="font-size:0.8em;">Aprendemos: Variables globales, variables locales, ámbito, ciclo de vida de
-                    una variable.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.1</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-//#include<math.h> //para función pow
-
-float potencia(float a, float b);
-
-int main(){
-    int x = 5, y = 6;
-    float calculo = x * potencia(y, 2.5);
-    // acá se hacen más cosas
-    return 0;
-}
-
-// ¿Cuál es el problema del código?
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.2</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-//#include<math.h> //para función pow
-
-int main(){
-    int x = 5, y = 6;
-    float calculo = x * potencia(y, 2.5);
-    // acá se hacen más cosas
-    return 0;
-}
-
-float potencia(float a, float b) {
-    return pow(a,b);
-}
-// ¿Cuál es el problema del código?
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.3</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-//#include<math.h> //para función pow
-
-float potencia(float a, float b) {
-    return pow(a,b);
-}
-
-int main(){
-    int x = 5, y = 6;
-    int calculo = x * potencia(y, 2.5);
-    // acá se hacen más cosas
-    return 0;
-}
-
-// ¿Cuál es el problema del código?
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.4</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-#define N 10
-
-int main(){
-    const int n = 5;
-    n = 10; //¿Cómo actúa el compilador?
-    printf("%d\n", n*N);
-
-    return 0;
-
-    // ¿Cuál es el problema del código?
-    // ¿Qué diferencia a n de N?
-}
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.5</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-
-int main(){
-    int i=10;
-
-    if(i==10){
-        int i = 5;
-    }
-
-    printf("El valor de i es: %d\n", i);
-    // ¿Qué valor imprime?
-
-    return 0;    
-}
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.6</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-
-void saludo(){
-    int i = 5;
-    printf("Hola, numero %d", i);
-}
-
-int main(){
-    int i = 10;
-    saludo();
-    printf("Hola, ¿qué tal?, numero %d\n", i);
-    return 0;
-}
-// ¿Qué imprime este código?
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 2</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 2.7</b>
-                    <pre><code class="language-c">
-//#include<stdio.h>
-
-int a=1;
-int b=2; 
-
-int main(){
-    int a = 10; 
-    b++;
-    printf("%d %d\n", a, b); 
-    return 0;
-}
-
-// ¿Qué imprime este código?
-    </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 3</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 3.1</b><br>
-                    Cree una función que reciba como parámetro una temperatura en grados Kelvin y retorne la temperatura
-                    en grados Celsius.
-                    <br>
-                    <span style="font-size:1.2em;">\( {^\circ}K = {^\circ}C + 273.15 \)</span>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Parámetros, valor de retorno.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 3</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 3.2</b><br>
-                    Cree una función que reciba como parámetro una temperatura, su tipo (Celsius, Fahrenheit o Kelvin),
-                    y un tipo de temperatura de salida diferente. La función debe retornar la temperatura en la opción
-                    de salida ingresada.
-                    <br>
-                    <span style="font-size:1.2em;">\( {^\circ}C = \frac{5}{9} \times ({^\circ}F - 32) \)</span>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Parámetros, valor de retorno.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 3</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio 3.3</b><br>
-                    Cree un programa que pregunte por pantalla un tipo de temperatura y un valor, y luego pregunte en
-                    que otra unidad quiere como transformarlo. (por ejemplo, inicia como Kelvin, y se entrega Celsius o
-                    Fahrenheit). <b>Debe usar las funciones creadas en el Ejercicio 3.1 y 3.2. Además, puede crear más
-                        funciones.</b>
-                    <br>
-                    <span style="font-size:1.2em;">\( {^\circ}F = \frac{9}{5} \times ({^\circ}K - 273.15) + 32 \)</span>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Modularización, Uso de funciones, construcción basada en
-                    funciones.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo Desafío</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio Desafío</b><br>
-                    Cree una función que reciba como parámetro un día de la semana y retorne un número que represente a
-                    dicho día.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Modularización, Uso de funciones, construcción basada en
-                    funciones.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo Desafío</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio Desafío</b><br>
-                    Cree una función que reciba como parámetro un número y retorne el nombre del día de la semana al que
-                    éste representa.
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Modularización, Uso de funciones, construcción basada en
-                    funciones.</p>
-            </section>
-
-            <section>
-                <h2>Clase Activa: Módulo 4</h2>
-                <div class="exampleblock">
-                    <b>Ejercicio Desafío</b><br>
-                    Cree un programa que pregunte un día de la semana y luego una cantidad X de días. El programa debe
-                    retornar el día de la semana que será en X días. <b>Debe utilizar las dos funciones diseñadas
-                        anteriormente.</b>
-                </div>
-                <p style="font-size:0.8em;">Aprendemos: Modularización, Uso de funciones, construcción basada en
-                    funciones.</p>
-            </section> -->
-
 
         </div>
+
     </div>
 
     <script src="dist/reveal.js"></script>

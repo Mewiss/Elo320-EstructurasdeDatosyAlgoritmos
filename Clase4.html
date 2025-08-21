@@ -92,25 +92,40 @@
 
             <section>
                 <h4>Diferencia entre %d y %i</h4>
-                <p>En C, <b>%d</b> y <b>%i</b> son especificadores de formato utilizados en funciones como <code>printf</code>
-                    y <code>scanf</code>.</p>
+                <p>En C, <b>%d</b> y <b>%i</b> son especificadores de formato utilizados en funciones como
+                    <code>printf</code>
+                    y <code>scanf</code>.
+                </p>
                 <ul>
                     <li><b>%d</b> se utiliza para imprimir o leer un número entero en formato decimal.</li>
                     <li><b>%i</b> también se utiliza para imprimir o leer un número entero, pero puede aceptar
-                        números en diferentes bases (decimal, octal y hexadecimal) dependiendo del prefijo del número.</li>         
+                        números en diferentes bases (decimal, octal y hexadecimal) dependiendo del prefijo del número.
+                    </li>
                 </ul>
             </section>
 
             <section>
-                <h4>Cómo retornar errores</h4>
-                
+                <h4>Diferencia entre %d y %i</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+#include <stdio.h>  
+int main() {
+    int num1 = 10, num2 = 010, num3 = 0x10; // 010 es octal, 0x10 es hexadecimal
+    printf("Decimal: %d\n", num1); // Imprime 10
+    printf("Octal: %i\n", num2); // Imprime 8
+    printf("Hexadecimal: %i\n", num3); // Imprime 16
+    return 0;
+}    </code></pre>
+                </div>
             </section>
 
 
-			<section>
-				<h2>Enumeración</h2>
-				<div class="fragment">
-					<pre><code class="language-c" data-trim>
+
+
+            <!--  <section>
+                <h4>Enumeración</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
 enum color {
     rojo, 
     amarillo, 
@@ -122,300 +137,45 @@ int col = rojo;
 if (col != azul){ 
     printf("No es azul\n");}
         </code></pre>
-				</div>
-				<div class="fragment">
-					<p><b>Python (clases)</b></p>
-					<pre><code class="language-python" data-trim>
+                </div>
+                <div class="fragment">
+                    <p><b>Python (clases)</b></p>
+                    <pre><code class="language-python" data-trim>
 class Colors(Enum):
     red = 1
     yellow = 2
     green = 3
         </code></pre>
-				</div>
-			</section> 
+                </div>
+            </section> -->
 
-            <!-- ...existing code... -->
 
-<section>
-    <h2>Clase Activa: Módulo 1</h2>
-    <div class="fragment">
-        <h3>Ejercicio 1.1</h3>
-        <p>
-            Cree una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego solicite al usuario esa cantidad de valores, necesarios, para rellenar este arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-void add_datos(int arreglo[], int tam);
 
-void add_datos(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Definir un arreglo, recorrer un arreglo, rellenar un arreglo. Paso por referencia.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 1</h2>
-    <div class="fragment">
-        <h3>Ejercicio 1.2</h3>
-        <p>
-            Cree una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego muestre por pantalla los valores almacenados en dicho arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-void imprimir_datos(int arreglo[], int tam);
-
-void imprimir_datos(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Definir un arreglo, recorrer un arreglo, rellenar un arreglo. Paso por referencia.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 1</h2>
-    <div class="fragment">
-        <h3>Ejercicio 1.3</h3>
-        <p>
-            Cree programa que declare un arreglo de enteros de un tamaño solicitado al usuario por pantalla. Luego, debe, en conjunto con el usuario, rellenar el arreglo y mostrar por pantalla su contenido. <b>Utilice las funciones creadas en los ejercicios 1.1 y 1.2</b>.
-        </p>
-        <p class="smalltab"><i>Aprendemos: Definir un arreglo, recorrer un arreglo, rellenar un arreglo. Paso por referencia.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.1</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego calcule el promedio entre todos los valores almacenados en dicho arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-float promedio(int arreglo[], int tam);
-
-float promedio(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.2</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego calcule la desviación estándar entre todos los valores almacenados en dicho arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-float desviacion(int arreglo[], int tam);
-
-float desviacion(int * arreglo, int tam);
-        </code></pre>
-        <p>
-            <span style="font-size:1.2em;">$$ \sigma = \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}}$$</span>
-        </p>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.3</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego calcule la varianza entre todos los valores almacenados en dicho arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-float varianza(int arreglo[], int tam);
-
-float varianza(int * arreglo, int tam);
-        </code></pre>
-        <p>
-            <span style="font-size:1.2em;">$$ V = \sigma^2 $$</span>
-        </p>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.4</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego entregue el arreglo ordenado de menor a mayor en el arreglo original. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-void sort(int arreglo[], int tam);
-
-void sort(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.5</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego entregue el menor valor del arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-int menor(int arreglo[], int tam);
-
-int menor(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 2</h2>
-    <div class="fragment">
-        <h3>Ejercicio 2.6</h3>
-        <p>
-            Cree y utilice una función que reciba como parámetro un arreglo de enteros y el tamaño de éste, y luego entregue el mayor valor del arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-int mayor(int arreglo[], int tam);
-
-int mayor(int * arreglo, int tam);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Operar sobre un arreglo, recorrer un arreglo.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 3</h2>
-    <div class="fragment">
-        <h3>Ejercicio 3.1</h3>
-        <p>
-            Cree un programa que solicite un tamaño <b>m</b> y <b>n</b>, y luego defina un arreglo bidimensional de enteros con dichos valores.
-        </p>
-        <p class="smalltab"><i>Aprendemos: Arreglo bidimensional.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 3</h2>
-    <div class="fragment">
-        <h3>Ejercicio 3.2</h3>
-        <p>
-            Cree una función que reciba como parámetros un arreglo bidimensional, y sus dimensiones <b>m</b> y <b>n</b>. La función debe permitir rellenar dicho arreglo. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-void add_datos_2(int arreglo[][n], int m, int n);
-
-void add_datos_2(int ** arreglo, int m, int n);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Arreglo bidimensional. Recorrido bidimensional.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo 3</h2>
-    <div class="fragment">
-        <h3>Ejercicio 3.3</h3>
-        <p>
-            Cree una función que reciba como parámetros dos arreglos bidimensionales de igual dimensión, y el valor de sus dimensiones <b>m</b> y <b>n</b>. Considerando que ambos arreglos pueden ser visto como matrices, la función debe calcular la suma de ambas de matrices y almacenar dicho resultado en alguna de las dos matrices pasadas como parámetros. Puede usar una de las dos siguientes declaraciones:
-        </p>
-        <pre><code class="language-c" data-trim>
-void suma(int m1[][], int m2[][n], int m, int n);
-
-void suma(int ** m1, int ** m2, int m, int n);
-        </code></pre>
-        <p class="smalltab"><i>Aprendemos: Arreglo bidimensional. Recorrido bidimensional.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Clase Activa: Módulo Desafío</h2>
-    <div class="fragment">
-        <h3>Ejercicio Desafío</h3>
-        <p>
-            Cree un programa que solicite al usuario ingresar una palabra. El programa debe determinar si la palabra es palíndroma o no. Utilice funciones para hacer su trabajo más ordenado y sencillo. Recuerde que una palabra es palíndroma si se lee de igual forma de izquierda a derecha como de derecha a izquierda.
-        </p>
-        <p>
-            <code>reconocer</code> es palíndroma. <code>programar</code> no es palíndroma.
-        </p>
-        <p class="smalltab"><i>Aprendemos: Strings, Arreglo de Caracteres. Recorrido Inverso.</i></p>
-    </div>
-</section>
-
-<section>
-    <h2>Información de Vital Importancia para la Clase Activa</h2>
-    <p style="font-size:2em; text-align:center;">
-        <i>Depende exclusivamente de uds. leerla y comprenderla.</i>
-    </p>
-</section>
-
-<!-- ...existing code... -->
-<!-- ...existing code... -->
-
-<section>
-    <h2>Arreglos</h2>
-    <div class="fragment">
-        <ul>
-            <li><b>Arreglo:</b> Conjunto homogéneo y ordenado de un tipo de datos.</li>
-            <li>Se identifican por su posición relativa mediante un <em>índice</em> encerrado con paréntesis cuadrado (<code>[]</code>, parte de índice 0).</li>
-        </ul>
-        <pre><code class="language-c" data-trim>
+            <section>
+                <h4>Arreglos</h4>
+                <div class="fragment">
+                    <ul>
+                        <li>Conjunto homogéneo y ordenado de un tipo de datos.</li>
+                        <li>Se identifican por su posición relativa mediante un <em>índice</em> encerrado con
+                            <code>[]</code>
+                        </li>
+                        <li>Parten en el índice 0.</li>
+                    </ul>
+                    <pre><code class="language-c" data-trim>
 int arr[6]; //6 enteros creados en arr.
 arr[3] = 222; //Al cuarto elemento de arr se le asigna un 222.
         </code></pre>
-        <div style="text-align:center;">
-            <img src="images/array.png" style="width:75%;" alt="array">
-        </div>
-    </div>
-</section>
+                    <div style="text-align:center;">
+                        <img src="images/array.png" style="width:75%;" alt="array">
+                    </div>
+                </div>
+            </section>
 
-<section>
-    <h2>Strings</h2>
-    <div class="fragment">
-        <ul>
-            <li><b>String:</b> Estructura de datos para representar palabras.</li>
-            <li>Arreglo de <code>char</code> y el caracter <code>'\0'</code>.</li>
-        </ul>
-        <pre><code class="language-c" data-trim>
-// Los string terminan con '\0' (fin de string) 
-// '\0' ocupa 1 char en el string.
-char str[6] = "hola"; //String de largo máximo 5. 
-str[3] = 'i'; // ¿Qué hace? 
-printf("%s\n", str);
-        </code></pre>
-        <div style="text-align:center;">
-            <img src="images/string.png" style="width:75%;" alt="string">
-        </div>
-        <ul>
-            <li>Veremos más sobre strings las próximas clases.</li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Arreglos Multidimensionales e Inicialización</h2>
-    <div class="fragment">
-        <p>Además, se pueden definir arreglos multidimensionales.</p>
-        <p>También, los arreglos pueden ser inicializados utilizando <code>{ }</code>.</p>
-        <pre><code class="language-c" data-trim>
-#include<stdio.h>
-
-int main(){
-    char nom[10] = "Camilo";
-    char a[5][20] = {"Juan", "Francisco", "Pedro"};	
-    int b[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}}, i, j;
-
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++) //¿Qué pasó con las llaves? 
-            printf("%d ", b[i][j]);
-        printf("\n");
-    }
-}
-        </code></pre>
-    </div>
-</section>
-
-<section>
-    <h2>Recorrer un arreglo</h2>
-    <div class="fragment">
-        <p>Podemos utilizar cualquiera de las estructuras de control iterativas para recorrerlos.</p>
-        <pre><code class="language-c" data-trim>
+            <section>
+                <h4>Recorrer un arreglo</h4>
+                <div class="fragment">
+                    <p>Podemos utilizar cualquiera de las estructuras de control iterativas para recorrerlos.</p>
+                    <pre><code class="language-c" data-trim>
 #include<stdio.h>
 
 int main(){
@@ -430,11 +190,91 @@ int main(){
 
 }
         </code></pre>
-    </div>
-</section>
+                </div>
+            </section>
 
-<!-- ...existing code... -->
+            <section>
+                <h4>Strings</h4>
+                <div class="fragment">
+                    <ul>
+                        <li><b>String:</b> Estructura de datos para representar palabras.</li>
+                        <li>Arreglo de <code>char</code> y el caracter <code>'\0'</code>.</li>
+                    </ul>
+                    <pre><code class="language-c" data-trim>
+// Los string terminan con '\0' (fin de string) 
+// '\0' ocupa 1 char en el string.
+char str[6] = "hola"; //String de largo máximo 5. 
+str[3] = 'i'; // ¿Qué hace? 
+printf("%s\n", str);
+        </code></pre>
+                    <div style="text-align:center;">
+                        <img src="images/string.png" style="width:75%;" alt="string">
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <h4>Arreglos Multidimensionales e Inicialización</h4>
+                <div>
+                    <pre><code class="language-c" data-trim>
+#include<stdio.h>
+
+int main(){
+    char nom[10] = "Camilo";
+    char a[5][20] = {"Juan", "Francisco", "Pedro"};	
+    int b[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}}, i, j;
+
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++) //¿Qué pasó con las llaves? 
+            printf("%d ", b[i][j]);
+        printf("\n");
+    }
+}
+        </code></pre>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Funciones con Strings</h4>
+                <ul>
+                    <li><b>strlen(s):</b> Retorna el largo de un string <code>s</code>.</li>
+                    <li><b>strcpy(destino, origen):</b> Copia el string <code>origen</code> al string
+                        <code>destino</code>.
+                    </li>
+                    <li><b>strcmp(s1, s2):</b> Compara los strings <code>s1</code> y <code>s2</code>. Retorna 0 si son
+                        iguales.</li>
+            </section>
+
+            <section>
+                <h4>Actividad 4.1: Arreglos en C</h4>
+                <p>Completa las funciones para obtener el promedio y varianza de los números guardados en un arreglo.
+                </p>
+                <p>
+
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/MYR4fiJ2" target="_blank">
+                        https://classroom.github.com/a/MYR4fiJ2
+                </p>
+            </section>
+
+            <section>
+                <h4>Actividad 4.2: Strings y Structs en C</h4>
+                <p>Completa las funciones para buscar en un arreglo de Structs.</p>
+                <p>
+
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/OQ7AZUuO" target="_blank">
+                        https://classroom.github.com/a/OQ7AZUuO
+                </p>
+            </section>
+
         </div>
+
     </div>
 
     <script src="dist/reveal.js"></script>
