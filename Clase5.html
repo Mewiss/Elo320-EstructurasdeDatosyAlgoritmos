@@ -121,7 +121,7 @@ class Colors(Enum):
             </section> -->
 
             <section>
-                <h2>Programa en Memoria</h2>
+                <h4>Programa en Memoria</h4>
                 <ul>
                     <li><em>Ejecutar</em>: llevar un programa (binario) a memoria.</li>
                     <li><em>Variables y Constantes</em>: espacios que se asignan y liberan en memoria</li>
@@ -132,40 +132,40 @@ class Colors(Enum):
             </section>
 
             <section>
-                <h2>Taxonomía de la memoria</h2>
-                <p>Segmentos de memoria:</p>
-                <img src="images/memoriastack.png" alt="Memoria stack" style="width:70%;">
+                <h4>Taxonomía de la memoria</h4>
+                <img src="images/memoriastack.png" class="r-stretch">
+                <p>Segmentos de memoria</p>
             </section>
-
+            <!-- 
             <section>
-                <h2>Taxonomía de la memoria</h2>
+                <h4>Taxonomía de la memoria</h4>
                 <ol>
                     <li><b>Memoria text o de código</b></li>
                     <li><b>Memoria static o estática</b></li>
                     <li><b>Memoria heap</b></li>
                     <li><b>Memoria stack o call stack</b></li>
                 </ol>
+            </section> -->
+
+            <section>
+                <h4>Memoria text</h4>
+                <p>Donde el programa compilado se mantiene en memoria.</p>
             </section>
 
             <section>
-                <h2>Memoria text</h2>
-                <p style="font-size:1.5em;">Donde el programa compilado se mantiene en memoria.</p>
-            </section>
-
-            <section>
-                <h2>Memoria static</h2>
+                <h4>Memoria static</h4>
                 <p>Mantiene variables globales y estáticas.</p>
                 <p>Ligado estático: variables (y valores) en la memoria hasta que programa termina.</p>
             </section>
 
             <section>
-                <h2>Memoria heap</h2>
+                <h4>Memoria heap</h4>
                 <p>Permite al programador crear y eliminar objetos de memoria dinámicamente.</p>
                 <p>Son referenciadas indirectamente mediante <b>punteros</b> y/o <b>referencias</b>.</p>
             </section>
 
             <section>
-                <h2>Memoria stack</h2>
+                <h4>Memoria stack</h4>
                 <p>Área dinámica de memoria donde se guardan las variables locales y la información de las funciones.
                 </p>
                 <p>Objetos se asignan/liberan automáticamente en tiempo de ejecución.</p>
@@ -174,7 +174,7 @@ class Colors(Enum):
 
             <!-- Ejemplo de código -->
             <section>
-                <h2>Variables estáticas - static</h2>
+                <h4>Variables estáticas - static</h4>
                 <pre><code class="language-c" data-trim>
 long int y; // var global
 
@@ -200,18 +200,30 @@ int fun() {
 
             <!-- Ejemplo de memoria -->
             <section>
-                <h2>Ejemplo</h2>
+                <h4>Ejemplo</h4>
                 <img src="images/progmemoria.png" alt="Memoria programa" style="width:90%;">
+            </section>
+
+
+            <!-- Resumen -->
+            <section>
+                <h3>Resumen</h3>
+                <ul>
+                    <li><strong>Stack</strong> → Variables locales, funciones (rápido, limitado).</li>
+                    <li><strong>Heap</strong> → Memoria dinámica (flexible, debes administrarla).</li>
+                    <li><strong>Data</strong> → Globales y estáticas (persisten toda la ejecución).</li>
+                    <li><strong>Text</strong> → Código ejecutable.</li>
+                </ul>
             </section>
 
             <!-- Dirección de memoria -->
             <section>
-                <h2>Dirección de Memoria o Referencia</h2>
+                <h4>Dirección de Memoria o Referencia</h4>
                 <ul>
                     <li>Las variables de stack son cajones que pueden guardar valores.</li>
                 </ul>
                 <pre><code class="language-c" data-trim>
-#include<stdio.h>
+#include&lt;stdio.h&gt;
 int main(){
   int b;
   scanf("%d", &b); // ¿Por qué &b?
@@ -221,20 +233,12 @@ int main(){
                 <p>El operador & nos entrega la ubicación de memoria donde se encuentra el cajón.</p>
             </section>
 
-            <!-- Analogía biblioteca -->
-            <section>
-                <h2>Analogía - Biblioteca</h2>
-                <img src="images/label.png" style="width:70%;">
-                <ul>
-                    <li>Valor 320 como identificador del libro.</li>
-                    <li><code>pu</code> → casillero.</li>
-                    <li><code>&pu</code> → ubicación casillero → pasillo 3, estante 2, fila 4.</li>
-                </ul>
-            </section>
+
 
             <!-- Punteros -->
             <section>
-                <h2>Punteros en C</h2>
+                <h4>Punteros en C</h4>
+                <p>Se definen con el modificador *, e indicando su tipo.</p>
                 <pre><code class="language-c" data-trim>
 int utfsm1 = 1680;
 int utfsm2 = 3939; 
@@ -246,23 +250,67 @@ printf("Dirección dentro de dir: %p\n", dir);
 printf("Valor dir: %d\n", *dir);
 printf("Dirección de dir: %p\n", &dir);
         </code></pre>
+                <p>Diremos que un puntero <b>apunta</b> a la dirección de memoria que almacena.</p>
             </section>
 
-        </div>
-    </div>
+            <section>
+                <h4>Tipos de Punteros</h4>
+                <ul>
+                    <li><b>Punteros a tipos primitivos</b>: int, float, char, etc.</li>
+                    <li><b>Punteros a arreglos</b>: apuntan al primer elemento del arreglo.</li>
+                    <li><b>Punteros a estructuras</b>: apuntan a la dirección de una estructura.</li>
+                    <li><b>Punteros a funciones</b>: apuntan a la dirección de una función.</li>
+                </ul>
+            </section>
 
-  
-  
-      <!-- Aritmética de punteros -->
-      <section>
-        <h2>Aritmética de Punteros</h2>
-        <ul>
-          <li>Indicar el tipo a un puntero sirve para realizar aritmética de punteros.</li>
-          <li>Transforma 1 unidad decimal en 1 unidad según el tamaño del tipo.</li>
-          <li>Podemos saber cuánta memoria hay entre un puntero y el siguiente (si existe).</li>
-          <li>Ejemplo: puntero a int avanza de a 4 bytes.</li>
-        </ul>
-        <pre><code class="language-c">
+            <section>
+                <h4>Valor NULL</h4>
+                <p>Un puntero puede inicializarse a NULL, indicando que no apunta a ninguna dirección válida.</p>
+                <pre><code class="language-c" data-trim>
+int *ptr = NULL; //Inicializado como puntero nulo:
+double *d = NULL;
+</code></pre>
+                <p>Es una buena práctica inicializar punteros a NULL para evitar errores de acceso a memoria.</p>
+            </section>
+
+            <section>
+                <h4>Dereferenciación</h4>
+                <p>Acceder al valor al que apunta un puntero usando el operador *.</p>
+                <pre><code class="language-c" data-trim>
+int utfsm1 = 1680; //Dos variables de tipo int.
+int utfsm2 = 3939; 
+
+int *dir = NULL;
+dir = &utfsm1; //Puntero a un int, apunta a donde está utfsm1
+
+printf("Dirección dentro de dir: |\%|p\n", dir);
+printf("Valor dir: |\%|d\n", *dir);
+printf("Dirección de dir: |\%|p\n", &dir);
+</code></pre>
+                <p>El operador * nos permite acceder al valor almacenado en la dirección a la que apunta el puntero.</p>
+            </section>
+
+            <section>
+                <h4>Aplicaciones de punteros</h4>
+                <ul>
+                    <li>Manipulación eficiente de arreglos y estructuras.</li>
+                    <li>Implementación de estructuras de datos dinámicas (listas, pilas, colas).</li>
+                    <li>Interacción con memoria dinámica (malloc, free).</li>
+                    <li>Optimización de rendimiento en ciertas operaciones.</li>
+            </section>
+
+
+
+
+            <!-- Aritmética de punteros -->
+            <section>
+                <h4>Aritmética de Punteros</h4>
+                <ul>
+                    <li>Transforma 1 unidad decimal en 1 unidad según el tamaño del tipo.</li>
+                    <li>Podemos saber cuánta memoria hay entre un puntero y el siguiente (si existe).</li>
+
+                </ul>
+                <pre><code class="language-c">
 float num = 2.5;
 float *f;
 f = &num; //Dirección a num.
@@ -270,18 +318,19 @@ f = &num; //Dirección a num.
 printf("Direccion f: %p\n", f); //¿Cuál es la diferencia
 printf("Direccion f+1: %p\n", f+1); //entre f y f+1?
         </code></pre>
-        <p>Respuesta: La diferencia es de 4 bytes (tamaño de float).</p>
-      </section>
 
-      <!-- Arreglos y punteros -->
-      <section>
-        <h2>Arreglos y Aritmética de Punteros</h2>
-        <ul>
-          <li>En C un arreglo puede trabajarse con aritmética de punteros.</li>
-          <li>Los arreglos son compatibles con punteros.</li>
-          <li>El compilador hace coerción y esto permite la aritmética de punteros.</li>
-        </ul>
-        <pre><code class="language-c">
+            </section>
+
+            <!-- Arreglos y punteros -->
+            <section>
+                <h4>Arreglos y Aritmética de Punteros</h4>
+                <ul>
+                    <li>Un arreglo puede trabajarse con aritmética de punteros.</li>
+                    <li>Los arreglos son compatibles con punteros.</li>
+                    <li>El nombre del arreglo es un puntero al primer elemento.</li>
+
+                </ul>
+                <pre><code class="language-c">
 int a[10], i;
 int *pa, *pb;
 pa = &a[0]; /* dir. elemento 0 de arreglo a */
@@ -296,125 +345,33 @@ for (i=0; i<10; i++){
 
 printf("%d ", *(pb+1)); //¿Qué pasa acá?
         </code></pre>
-      </section>
+            </section>
 
-      <!-- Paso por valor -->
-      <section>
-        <h2>Funciones y Punteros: Paso por Valor</h2>
-        <ul>
-          <li>Los parámetros copian los valores que fueron pasados como parámetros.</li>
-          <li>Las variables originales se mantienen inalteradas.</li>
-        </ul>
-        <pre><code class="language-c">
-#include<stdio.h>
+            <section>
+                <h4>Actividad 5.1: Punteros</h4>
+                <p>En parejas, corran el código y observen las salidas. Comenten las preguntas guía.</p>
+                <p>
 
-void swap(int a, int b){
-    int temp;
-    temp = a;
-    a = b;
-    b = temp;
-}
+                    El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/09zSRlZr" target="_blank">
+                        https://classroom.github.com/a/09zSRlZr
+                </p>
+            </section>
 
-int main(){
-    int x=2, y=3;
-    swap(x,y);
-    printf("x: %d, y: %d\n", x, y); //¿Qué imprime?
-    return 0;
-}
-        </code></pre>
-      </section>
+            
 
-      <!-- Paso por referencia -->
-      <section>
-        <h2>Funciones y Punteros: Paso por Referencia</h2>
-        <ul>
-          <li>Los parámetros son punteros locales, pero la desreferencia apunta a la misma variable.</li>
-          <li>Las variables originales se modifican.</li>
-        </ul>
-        <pre><code class="language-c">
-#include<stdio.h>
+            <section>
+                <h4>Actividad 5.2: Paso por valor y por referencia</h4>
+                <p>Completa el código base.</p>
+                <p>
 
-void swap(int *a, int *b){
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
-}
+                    El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/YdJZKeD8" target="_blank">
+                        https://classroom.github.com/a/YdJZKeD8
+                </p>
+            </section>
 
-int main(){
-    int x=2, y=3;
-    swap(&x,&y);
-    printf("x: %d, y: %d\n", x, y); //¿Qué imprime?
-    return 0;
-}
-        </code></pre>
-      </section>
-
-      <section>
-        <h2>Funciones y Punteros: Paso por Referencia (Caso 3)</h2>
-        <ul>
-          <li>¿Funciona este tercer caso?</li>
-        </ul>
-        <pre><code class="language-c">
-#include<stdio.h>
-
-void swap(int *a, int *b){
-    int *temp;
-    temp = a;
-    a = b;
-    b = temp;
-}
-
-int main(){
-    int x=2, y=3;
-    swap(&x,&y);
-    printf("x: %d, y: %d\n", x, y); //¿Qué imprime?
-    return 0;
-}
-        </code></pre>
-        <p>Respuesta: No, no funciona. Punteros locales.</p>
-      </section>
-
-      <section>
-        <h2>Funciones y Punteros: Paso por Referencia (Caso 4)</h2>
-        <ul>
-          <li>¿Funciona este cuarto caso?</li>
-        </ul>
-        <pre><code class="language-c">
-#include<stdio.h>
-
-void swap(int *a, int *b){
-    int *temp;
-    temp = a;
-    *a = *b;
-    *b = *temp;
-}
-
-int main(){
-    int x=2, y=3;
-    swap(&x,&y);
-    printf("x: %d, y: %d\n", x, y); //¿Qué imprime?
-    return 0;
-}
-        </code></pre>
-        <p>Respuesta: No, se pierde el valor de *a.</p>
-      </section>
-
-
-
-    <section>
-        <h4>Actividad 4.2: Strings y Structs en C</h4>
-        <p>Completa las funciones para buscar en un arreglo de Structs.</p>
-        <p>
-
-            El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
-            valores.
-            <a href="https://classroom.github.com/a/OQ7AZUuO" target="_blank">
-                https://classroom.github.com/a/OQ7AZUuO
-        </p>
-    </section>
-
-    </div>
+        </div>
 
     </div>
 

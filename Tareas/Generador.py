@@ -1,121 +1,96 @@
 import random
-import datetime
-import csv
+from datetime import datetime, timedelta
 
-# --- Datos base ---
-GENEROS = ["Acción", "Comedia", "Drama", "Ciencia ficción", "Romance", "Terror", "Documental", "Animación"]
-CLASIFICACIONES = ["ATP", "+7", "+13", "+16", "+18"]
-NOMBRES = ["Ana", "Luis", "Carla", "Pedro", "Marta", "Juan", "Sofía", "Diego", "Camila", "Andrés"]
-
-# --- Funciones auxiliares ---
-def generar_peliculas(n=10):
-    peliculas = []
-    for i in range(n):
-        titulo = f"Pelicula_{i+1}"
-        año = random.randint(1980, 2024)
-        genero = random.choice(GENEROS)
-        duracion = random.randint(60, 180)
-        clasif = random.choice(CLASIFICACIONES)
-        peliculas.append((titulo, año, genero, duracion, clasif))
-    return peliculas
-
-def generar_series(n=5):
-    series = []
-    for i in range(n):
-        titulo = f"Serie_{i+1}"
-        genero = random.choice(GENEROS)
-        clasif = random.choice(CLASIFICACIONES)
-        temporadas = random.randint(1, 10)
-        caps = random.randint(6, 24)
-        duracion_cap = random.randint(20, 60)
-        series.append((titulo, genero, clasif, temporadas, caps, duracion_cap))
-    return series
-
-def generar_usuarios(n=5):
-    usuarios = []
-    for i in range(n):
-        nombre = NOMBRES[i % len(NOMBRES)] + f"_{i}"
-        fecha = f"{random.randint(1970,2015)}-{random.randint(1,12):02}-{random.randint(1,28):02}"
-        genero = random.choice(["M", "F"])
-        categorias = random.sample(GENEROS, 2)
-        usuarios.append((nombre, fecha, genero, categorias))
-    return usuarios
-
-def generar_historial(usuarios, peliculas, series, n=50):
-    historial = []
-    for i in range(n):
-        usuario = random.choice(usuarios)[0]
-        if random.random() < 0.6:
-            titulo, año, genero, duracion, clasif = random.choice(peliculas)
-            visto = random.randint(int(duracion*0.5), duracion)
-        else:
-            titulo, genero, clasif, temporadas, caps, duracion_cap = random.choice(series)
-            visto = random.randint(int(duracion_cap*0.5), duracion_cap)
-        fecha = datetime.date.today() - datetime.timedelta(days=random.randint(0, 365))
-        historial.append((usuario, titulo, fecha.isoformat(), visto))
-    return historial
-
-def guardar_csv(nombre, encabezados, filas):
-    with open(nombre, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(encabezados)
-        writer.writerows(filas)
-
-# --- Generar datos pequeños (ejemplo) ---
-peliculas_small = [
+# ---------------- INVENTARIO ---------------- #
+peliculas = [
     ("Inception", 2010, "Ciencia ficción", 148, "+13"),
     ("Titanic", 1997, "Romance", 195, "+13"),
     ("Avengers", 2012, "Acción", 143, "ATP"),
     ("Parasite", 2019, "Drama", 132, "+16"),
     ("Toy Story", 1995, "Comedia", 81, "ATP"),
+    ("La La Land", 2016, "Musical", 128, "+13"),
+    ("La Gran Muralla", 2016, "Acción", 103, "+13"),
+    ("Drive", 2011, "Thriller", 100, "+16"),
+    ("El Rey León", 1994, "Animación", 88, "ATP"),    
+    ("Como Entrenar a tu Dragón", 2010, "Animación", 98, "TP")
 ]
-series_small = [
-    ("Breaking Bad", "Drama", "+16", 5, 13, 47),
-    ("Stranger Things", "Ciencia ficción", "+13", 4, 8, 50),
-    ("The Office", "Comedia", "ATP", 9, 24, 22),
+
+series = [
+    ("Breaking Bad", "Drama", "+16", 5, [7, 13, 13, 13, 16]),
+    ("Stranger Things", "Ciencia ficción", "+13", 4, [8, 9, 8, 9]),
+    ("The Office", "Comedia", "ATP", 9, [6, 22, 23, 14, 26, 24, 24, 24, 25]),
+    ("Better Call Saul", "Drama", "+16", 6, [10, 10, 10, 10, 10, 13]),
+    ("One Piece", "Aventura", "ATP", 10, [61, 16, 14, 30, 13, 29, 33, 35, 73, 45]),
 ]
-usuarios_small = [
-    ("Ana", "2000-05-15", "F", ["Romance", "Comedia"]),
-    ("Luis", "1998-11-03", "M", ["Acción", "Ciencia ficción"]),
-    ("Carla", "2010-08-21", "F", ["Comedia", "Animación"]),
-    ("Pedro", "1985-03-12", "M", ["Drama", "Documental"]),
+
+
+
+
+
+# Asignamos duraciones de capítulos (aleatorias)
+def generar_duraciones(num_temporadas, caps_por_temp):
+    return [
+        [random.randint(20, 60) for _ in range(caps)]
+        for caps in caps_por_temp
+    ]
+
+series_duraciones = {
+    titulo: generar_duraciones(n_temp, caps_por_temp)
+    for titulo, _, _, n_temp, caps_por_temp in series
+}
+
+# ---------------- USUARIOS ---------------- #
+usuarios = [
+    ("Luffy", "2002-05-14", 22, "F", ["Ciencia ficción", "Drama", "Aventura", "Comedia"]),
+    ("Eleven", "2000-11-02", 24, "M", ["Acción", "Thriller", "Animación"]),
+    ("Walter White", "1998-08-21", 26, "M", ["Drama", "Romance", "Comedia"]),
+    ("Timón", "2005-01-30", 19, "F", ["Animación"]),
+    ("Rose", "2003-06-17", 21, "M", ["Aventura", "Comedia"]),
 ]
-historial_small = generar_historial(usuarios_small, peliculas_small, series_small, 20)
 
-guardar_csv("inventario_small.csv",
-    ["tipo", "titulo", "año", "genero", "duracion", "clasificacion", "temporadas", "caps_por_temp", "duracion_cap"],
-    [["pelicula", *p, "", "", ""] for p in peliculas_small] +
-    [["serie", s[0], "", s[1], "", s[2], s[3], s[4], s[5]] for s in series_small]
-)
-guardar_csv("usuarios_small.csv",
-    ["nombre", "fecha_nacimiento", "genero", "categorias_favoritas"],
-    [[u[0], u[1], u[2], "|".join(u[3])] for u in usuarios_small]
-)
-guardar_csv("historial_small.csv",
-    ["usuario", "titulo", "fecha_visualizacion", "duracion"],
-    historial_small
-)
+# ---------------- HISTORIAL ---------------- #
+def generar_historial(usuarios, peliculas, series):
+    historial = []
+    for user, _, _, _, _ in usuarios:
+        # Vieron entre 3 y 6 contenidos
+        vistos = random.randint(3, 6)
+        for _ in range(vistos):
+            if random.choice([True, False]):  # Película
+                peli = random.choice(peliculas)
+                titulo = peli[0]
+                fecha = datetime(2024, 1, 1) + timedelta(days=random.randint(0, 200))
+                duracion = random.randint(30, peli[3])
+                historial.append((user, "Pelicula", titulo, fecha.strftime("%Y-%m-%d"), duracion))
+            else:  # Serie
+                serie = random.choice(series)
+                titulo, _, _, _, caps_por_temp = serie
+                temp = random.randint(1, len(caps_por_temp))
+                cap = random.randint(1, caps_por_temp[temp-1])
+                duracion = random.randint(15, 50)
+                fecha = datetime(2024, 1, 1) + timedelta(days=random.randint(0, 200))
+                historial.append((user, "Serie", f"{titulo} T{temp}C{cap}", fecha.strftime("%Y-%m-%d"), duracion))
+    return historial
 
-print("Archivos pequeños generados ✅")
+historial = generar_historial(usuarios, peliculas, series)
 
-# --- Generar datos grandes (1000+ registros) ---
-peliculas_big = generar_peliculas(500)
-series_big = generar_series(200)
-usuarios_big = generar_usuarios(100)
-historial_big = generar_historial(usuarios_big, peliculas_big, series_big, 2000)
+# ---------------- GUARDAR ARCHIVOS ---------------- #
+with open("inventario.txt", "w", encoding="utf-8") as f:
+    f.write("=== Peliculas ===\n")
+    for titulo, anio, genero, duracion, clasificacion in peliculas:
+        f.write(f"{titulo};{anio};{genero};{duracion};{clasificacion}\n")
 
-guardar_csv("inventario_big.csv",
-    ["tipo", "titulo", "año", "genero", "duracion", "clasificacion", "temporadas", "caps_por_temp", "duracion_cap"],
-    [["pelicula", *p, "", "", ""] for p in peliculas_big] +
-    [["serie", s[0], "", s[1], "", s[2], s[3], s[4], s[5]] for s in series_big]
-)
-guardar_csv("usuarios_big.csv",
-    ["nombre", "fecha_nacimiento", "genero", "categorias_favoritas"],
-    [[u[0], u[1], u[2], "|".join(u[3])] for u in usuarios_big]
-)
-guardar_csv("historial_big.csv",
-    ["usuario", "titulo", "fecha_visualizacion", "duracion"],
-    historial_big
-)
+    f.write("\n=== Series ===\n")
+    for titulo, genero, clasificacion, n_temp, caps_por_temp in series:
+        f.write(f"{titulo};{genero};{clasificacion};{n_temp};{caps_por_temp}\n")
+        for t, duraciones in enumerate(series_duraciones[titulo], 1):
+            f.write(f"  Temporada {t}: {duraciones}\n")
 
-print("Archivos grandes (1000+ registros) generados ✅")
+with open("infousuarios.txt", "w", encoding="utf-8") as f:
+    for nombre, fnac, edad, genero, favs in usuarios:
+        f.write(f"{nombre};{fnac};{edad};{genero};{','.join(favs)}\n")
+
+with open("historial.txt", "w", encoding="utf-8") as f:
+    for usuario, tipo, titulo, fecha, duracion in historial:
+        f.write(f"{usuario};{tipo};{titulo};{fecha};{duracion}\n")
+
+print("✅ Archivos inventario.txt, infousuarios.txt e historial.txt creados.")
