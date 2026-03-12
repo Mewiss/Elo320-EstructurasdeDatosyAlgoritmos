@@ -1,0 +1,23 @@
+\frametitle{Preview Próx. Clases: Arreglos y Strings}
+\small
+\begin{itemize}
+	\item \textbf{Arreglo:} Tipo estructurado consistente en conjunto homogéneo y ordenado de elementos.
+	\item Se identifican por su posición relativa mediante un \emph{índice} encerrado con paréntesis cuadrados (parte de índice 0).
+	\begin{lstlisting}[language=C,basicstyle=\scriptsize,escapeinside={|}{|}]
+//Arreglos estáticos (se liberan al terminar
+// el ámbito donde fueron declaradas):
+int foo[10]; //10 enteros creados en foo.
+foo[3] = 7; //A cuarto elemento se asigna un 7.
+	\end{lstlisting}
+	
+	\item \textbf{String:} Arreglo de caracteres.
+	\begin{lstlisting}[language=C,basicstyle=\scriptsize,escapeinside={|}{|}]
+// Los string se delimitan con caracter '\0'
+// (requiere espacio de 1 char):
+char nombre[10] = "Juan"; //String de largo máximo 10.
+nombre[1] = 'e'; //Qué hace?
+printf("|\%|s\n", nombre);
+	\end{lstlisting}
+
+	\item Veremos más sobre arreglos la próxima clase. 	
+\end{itemize}

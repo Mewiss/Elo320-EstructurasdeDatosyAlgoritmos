@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+
+        .reveal .flex-container {
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Decodificación de Códigos de Barras</h2>
+                <h4 style="color: #ff9900;">EAN-13: Eficiencia Asintótica con Tablas Hash</h4>
+
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+
+
+            <section>
+                <h4>Codificación EAN-13</h4>
+                <p class="fragment fade-up">El código se divide lógicamente para identificar el origen y el producto
+                    mediante 13 dígitos.
+                </p>
+
+                <div style="font-size: 1.1em; margin-top: 30px;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 20px;">
+                        <thead>
+                            <tr style="background-color: #333; color: #ff9900;">
+                                <th style="padding: 10px; border: 1px solid #555;">Dígitos</th>
+                                <th style="padding: 10px; border: 1px solid #555;">Nombre</th>
+                                <th style="padding: 10px; border: 1px solid #555;">Función</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fragment fade-up">
+                                <td style="padding: 10px; border: 1px solid #555;">1 al 3</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Código de País (Prefijo GS1)</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Identifica el país o región de la
+                                    organización.</td>
+                            </tr>
+                            <tr class="fragment fade-up">
+                                <td style="padding: 10px; border: 1px solid #555;">4 al 12</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Código de Empresa y Producto</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Identifica la empresa
+                                    y el número único del artículo.</td>
+                            </tr>
+                            <tr class="fragment fade-up">
+                                <td style="padding: 10px; border: 1px solid #555;">13 (Final)</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Dígito de Verificación (Control)</td>
+                                <td style="padding: 10px; border: 1px solid #555;">Se calcula usando los primeros 12
+                                    dígitos para asegurar que no haya errores
+                                    de lectura.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </section>
+
+            <section>
+                <h3>Codificación EAN-13</h3>
+                <div class="fragment fade-up">
+                    <p>El EAN-13 usa anchos de barra (módulos) para codificar 13 dígitos.</p>
+                    <img class="fragment fade-up" src="images/EAN13-Format.jpg.webp" alt="Ejemplo de Código EAN-13"
+                        style="width:60%;">
+
+                    <ul class="fragment fade-up r-fit-text">
+                        <li>Caracteres especiales: Inicio (101), Centro (01010), Fin (101).</li>
+                        <li>Caracteres de datos: 6 a la izquierda y 6 a la derecha.</li>
+                        <li>El primer dígito (D13) no se codifica directamente.</li>
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+
+            <section>
+                <h3>Codificación de los datos</h3>
+                <p class="fragment fade-up">Cada dígito se representa como una secuencia de barras y espacios de 7
+                    módulos.</p>
+
+                <div class="fragment fade-up">
+                    <h4>Ejemplo de secuencia </h4>
+                    <p style="font-size: 1.2em;">2 - 1 - 2 - 2</p>
+                    <p class="fragment fade-up" style="font-size: 1.2em;">1101100</p>
+                    <p class="fragment fade-up" style="font-size: 1.2em;">barra(x2) - espacio (x1) - barra(x2) -
+                        espacio(x2)</p>
+                    <p class="fragment fade-up">Total: 7 módulos. Este patrón se busca en la tabla.</p>
+                </div>
+
+
+
+
+            </section>
+
+            <section>
+                <h3>Codificación de los datos </h3>
+
+                <p>
+                    Un mismo dígito puede tener hasta tres patrones de barras diferentes (L, G o
+                    R).</p>
+
+                <p class="fragment fade-up">El patrón '2122' o '1101100' siempre codifica un dígito único (en este caso,
+                    '2').</p>
+
+
+
+
+                <div class="row flex-container fragment fade-up" style="margin-top: 30px;">
+                    <div class="col">
+                        <h4>Patrón '2122' con Paridad R</h4>
+                        <p style="font-size: 1.2em;">1101100</p>
+                        <p>Ejemplo: Dígito '2' en la mitad derecha.</p>
+                    </div>
+                    <div class="col">
+                        <h4>Patrón '2122' con Paridad L</h4>
+                        <p style="font-size: 1.2em;">0010011</p>
+                        <p>Ejemplo: Dígito '2' en la mitad izquierda.</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- 
+            <h4 class="fragment fade-up" style="color: #ff9900;">La Clave: El Primer Dígito (D13)</h4>
+                <div class="fragment fade-up">
+                    <p>El primer dígito se codifica mediante la secuencia de paridades (L o G) de los 5 dígitos
+                        siguientes de la mitad izquierda.</p>
+                </div> -->
+            <section>
+                <h3>Codificación por Paridad </h3>
+
+
+                <div class="flex-container fragment fade-up">
+                    <div style="width: 30%;">
+                        <h5>Paridad L (Left)</h5>
+                        <ul>
+                            <li>Patrones "claros".</li>
+                            <li>Ejemplo (Dígito 4): 0100011</li>
+                        </ul>
+                    </div>
+                    <div style="width: 30%;">
+                        <h4>Paridad G (Group)</h4>
+                        <ul>
+                            <li>Patrones "oscuros" (con más barras).</li>
+                            <li>Ejemplo (Dígito 4): 1011100</li>
+                        </ul>
+                    </div>
+                    <div style="width: 30%;">
+                        <h4>Paridad R (Right)</h4>
+                        <ul>
+                            <li>Es el inverso binario de L.</li>
+                            <li>Ejemplo (Dígito 4): 1011100 (Inverso de L)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h3>Cálculo del Dígito de Verificación (D13)</h3>
+                <p>Asegura la precisión de la lectura. </p>
+
+                <div class=" r-fit-text" style="margin-top: 30px;">
+                    <h4>Paso 1: Suma Ponderada</h4>
+                    <ol>
+                        <li>Suma los dígitos en posiciones pares (D2, D4, D6, etc.) y multiplica el resultado
+                            por
+                            $\times 3$.</li>
+                        <li>Suma los dígitos en posiciones impares (D1, D3, D5, etc.).</li>
+                        <li>Suma los dos resultados.</li>
+                    </ol>
+                    <p style="color: #ff9900;">Ejemplo: $S = (\text{Pares} \times 3) + \text{Impares}$</p>
+                </div>
+
+            </section>
+
+            <section>
+                <h3>Cálculo del Dígito de Verificación (D13)</h3>
+
+                <h4>Paso 2: Cálculo Final</h4>
+                <p>Se busca el dígito que, al sumarse a $S$, hace que el resultado sea un múltiplo de
+                    10.</p>
+                <div class="code-container" style="font-size: 0.9em; margin-top: 10px;">
+                    <pre><code class="c" data-trim>
+// Si la suma total es 73:
+int modulo = S % 10; // 73 % 10 = 3
+int verificador = (10 - modulo) % 10; 
+// (10 - 3) % 10 = 7. El dígito es 7.
+                            </code></pre>
+                </div>
+                <p class="fragment fade-up" style="margin-top: 30px;">Si el escáner lee los 13 dígitos y recalcula el
+                    control, debe coincidir. Si no coincide, ¡error de lectura!</p>
+            </section>
+
+            <!-- <section>
+                <h3>6. Eficiencia: $O(\log N)$ vs. $O(1)$</h3>
+                <h3 style="color: red;">Decodificación: Búsqueda del Patrón</h3>
+
+                <div style="display: flex; justify-content: space-around; text-align: left; margin-top: 40px;">
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h4>Opción Lenta: Árbol Binario (ABB)</h4>
+                        <ul>
+                            <li>Necesita una clave compleja (Patrón + Paridad).</li>
+                            <li>Tiempo: $O(\log N)$.</li>
+                        </ul>
+                    </div>
+
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h4 style="color: lightgreen;">Opción Ideal: Tabla Hash</h4>
+                        <ul>
+                            <li>Mapea la clave "Dígito + Paridad" directamente.</li>
+                            <li>Tiempo: $O(1)$ (Constante).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>7. Implementación: La Tabla Hash en C</h3>
+                <p>La Tabla Hash se modela con arreglos, usando el dígito como índice para acceso inmediato.</p>
+
+                <div class="code-container fragment fade-up">
+                    <pre><code class="c" data-trim>
+// Patrones de Paridad 'L'
+const char *Paridad_L[] = { /* ... 10 patrones L ... */ };
+
+// Patrones de Paridad 'R'
+const char *Paridad_R[] = { /* ... 10 patrones R ... */ };
+
+char* buscar_patron_O1(int digito, char region) {
+    // La búsqueda es un acceso directo: O(1)
+    if (region == 'I') { 
+        return (char*)Paridad_L[digito]; 
+    } else {
+        return (char*)Paridad_R[digito];
+    }
+}
+                    </code></pre>
+                </div>
+            </section> -->
+
+            <section>
+                <h4>Extracción del Patrón: El Módulo</h4>
+                <p>El primer paso es pasar de una imagen a una secuencia de números. La unidad de medida es el Módulo
+                    (el ancho de barra más fino).</p>
+
+                <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 30px;">
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h5>Medición</h5>
+                        <p>Se mide el ancho de cada barra y espacio.</p>
+                        <p style="color: #ff9900;">Resultado: Una secuencia de anchos.</p>
+                    </div>
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h5>Normalización</h5>
+                        <p>Divide todos los anchos por la unidad mínima (el módulo). El resultado siempre es 1, 2, 3 o
+                            4.</p>
+                        <p style="color: lightgreen;">Resultado: La secuencia de anchos de módulo.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section>
+                <h3>Eficiencia: $O(\log N)$ vs. $O(1)$</h3>
+                
+                <div style="display: flex; justify-content: space-around; text-align: left; margin-top: 40px;">
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h4>Opción Lenta: Árbol Binario (ABB)</h4>
+                        <ul>
+                            <li>Necesita una clave compleja (Patrón + Paridad).</li>
+                            <li>Tiempo: $O(\log N)$.</li>
+                        </ul>
+                    </div>
+
+                    <div style="width: 45%;" class="fragment fade-up">
+                        <h4 style="color: lightgreen;">Opción Ideal: Tabla Hash</h4>
+                        <ul>
+                            <li>Mapea la clave "Dígito + Paridad".</li>
+                            <li>Tiempo: $O(1)$ (Constante).</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4>¿Cómo busca el escáner el dígito '2'?</h4>
+
+            </section>
+
+            <section>
+                <h3>Implementación: La Tabla Hash en C</h3>
+                <p>La Tabla Hash se modela con arreglos, usando el dígito como índice para acceso inmediato.</p>
+
+                <div class="code-container fragment fade-up">
+                    <pre><code class="c" data-trim>
+// Patrones de Paridad 'L' (Izquierda)
+// Índice [0] -> "0001101", Índice [1] -> "0011001", etc.
+const char *Paridad_L[] = { /* ... 10 patrones L ... */ };
+
+// Patrones de Paridad 'R' (Derecha)
+const char *Paridad_R[] = { /* ... 10 patrones R ... */ };
+
+char* buscar_patron_O1(int digito, char region) {
+    // La búsqueda es un acceso directo: O(1)
+    if (region == 'I') { 
+        return (char*)Paridad_L[digito]; 
+    } else {
+        return (char*)Paridad_R[digito];
+    }
+}
+                    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Resumen</h3>
+                <ul class="fragment fade-up">
+                    <li>El EAN-13 codifica 13 dígitos usando patrones de barras y espacios.</li>
+                    <li>El primer dígito se representa mediante la paridad de los siguientes 6 dígitos.</li>
+                    <li>El dígito de verificación asegura la precisión de la lectura.</li>
+                    <li>La decodificación eficiente usa tablas hash para acceso en tiempo constante $O(1)$.</li>
+                </ul>   
+            </section>
+
+            <section>
+                <h3>Referencias</h3>
+                <ul >
+                    <li>GS1. "EAN-13". Disponible en: <a
+                            href="https://www.accusoft.com/barcodes/ean-13/">https://www.accusoft.com/barcodes/ean-13/</a>
+                    </li>
+                    <li>GS1. "EAN/UPC Barcodes". Disponible en: <a
+                            href="https://www.gs1.org/standards/barcodes/ean-upc">https://www.gs1.org/standards/barcodes/ean-upc</a>
+                    </li>
+                    <li>Wikipedia. "EAN-13". Disponible en: <a
+                            href="https://en.wikipedia.org/wiki/EAN-13">https://en.wikipedia.org/wiki/EAN-13</a></li>
+                    
+                </ul>
+            </section>
+        </div>
+
+    </div>
+
+
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

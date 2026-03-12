@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Evaluación inicial de uso de estructuras</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            
+
+            <section>
+                <h4>Valgrind</h4>
+                <p>Herramienta para detectar errores de memoria en programas C/C++.</p>
+                <ul>
+                    <li class="fragment">Detecta memory leaks, accesos inválidos, uso de memoria no inicializada, etc.
+                    </li>
+                    <li class="fragment">Proporciona informes detallados para ayudar a localizar y corregir errores.
+                    </li>
+            </section>
+
+            <section>
+                <h4>Valgrind</h4>
+                <p>Uso básico:</p>
+                <pre><code class="language-bash">
+valgrind --leak-check=full ./mi_programa
+    </code></pre>
+                <ul>
+                    <li class="fragment">--leak-check=full: Modo detallado para detectar memory leaks.</li>
+                    <li class="fragment">./mi_programa: Ejecutable a analizar.</li>
+                </ul>
+                <p>Requiere que el programa se compile con la opción -g para incluir información de depuración.</p>
+            </section>
+
+            <section>
+                <h4>Valgrind</h4>
+                <p>Ejemplo de salida:</p>
+                <pre><code class="language-bash">
+==1234== Invalid write of size 1
+==1234==    at 0x1091A3: main (arreglo.c:23)
+==1234==  Address 0x5203040 is 0 bytes after a block of size 40 alloc'd
+==1234==    at 0x4C2F1C3: malloc (vg_replace_malloc.c:307)
+</code></pre>
+                <p>Indica un acceso inválido a memoria, con detalles sobre la ubicación del error (arreglo.c:23)</p>
+            </section>
+            <section>
+                <h4>Ejemplo de salida:</h4>
+                <pre><code>
+==1256== 24 bytes in 2 blocks are definitely lost in loss record 1 of 1
+==1256==    at 0x4C2F1C3: malloc (vg_replace_malloc.c:307)
+==1256==    by 0x10915B: insertar (lista.c:18)
+==1256==    by 0x1091F2: main (lista.c:41)
+
+    </code></pre>
+                <p>Indica memory leaks, con detalles sobre dónde se asignó la memoria que no fue liberada (lista.c:18)
+                </p>
+            </section>
+            <section>
+                <h4>Actividad 9.1: Detección de errores con Valgrind</h4>
+                <p class="r-fit-text">
+                    Corrige los errores de memoria en los siguientes archivos:
+                <ul>
+                    <li class="fragment">arreglo.c</li>
+                    <li class="fragment">lista.c</li>
+                </ul>
+                Utiliza valgrind para identificar y corregir los errores.
+                </p>
+
+                <p>El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/79TzczX2" target="_blank">
+                        https://classroom.github.com/a/79TzczX2</a>
+
+            </section>
+
+            <section>
+                <h4>Actividad 9.2: Medición de tiempo de ejecución</h4>
+                <p class="r-fit-text">
+                    Para distintos valores de N, compara los tiempos de ejecución de los 3 códigos disponibles.
+                </p>
+
+                <p>El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/79TzczX2" target="_blank">
+                        https://classroom.github.com/a/79TzczX2</a>
+
+            </section>
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

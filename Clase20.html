@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Introducción a Grafos</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            <section>
+                <section>
+                    <h4>¿Qué es un Grafo?</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-undirected.png" alt="Grafo no dirigido de ejemplo"
+                            style="width: 30%;">
+                    </div>
+                    <p><small>Es un TDA de fácil visualización, que modela un conjunto de objetos mediante nodos. Estos
+                            pueden estar conectados entre sí
+                            mediante enlaces.</small></p>
+
+                </section>
+
+                <section>
+                    <h4>Aplicaciones</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/redelec.png" alt="Diagrama de Redes Eléctricas" style="width: 95%;">
+                        <p>Redes Eléctricas</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Aplicaciones</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/redagua.png" alt="Diagrama de Redes de Agua Potable"
+                            style="width: 95%;">
+                        <p>Redes de Agua Potable</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Aplicaciones</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/southamerica.png" alt="Mapa de Sudamérica con coloreo de mapas"
+                            style="width: 95%;">
+                        <p>Coloreo de Mapas</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h4>Formalización de Grafos</h4>
+                    <p><small>Un grafo se define como una tupla $\mathcal{G} = (\mathcal{V}, \mathcal{A})$, en
+                            donde:</small></p>
+                    <ul>
+                        <li><small>$\mathcal{V}$: Es el conjunto de vértices o nodos,</small></li>
+                        <li><small>$\mathcal{A} = \{ (x,y)\ |\ (x,y) \in \mathcal{V}^2 \land x \neq y \}$: Es el
+                                conjunto de aristas o enlaces.</small></li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-undirected.png" alt="Grafo no dirigido de ejemplo"
+                            style="width: 30%;">
+                    </div>
+                    <p><small>Note que un arco $(x,y) \in \mathcal{A}$ conecta a dos nodos $x \in \mathcal{V} $ e $y \in
+                            \mathcal{V}$.</small></p>
+                </section>
+
+                <section>
+                    <h4>Formalización de Grafos</h4>
+                    <p><small>Un grafo se define como una tupla $\mathcal{G} = (\mathcal{V}, \mathcal{A})$, en
+                            donde:</small></p>
+                    <ul>
+                        <li><small>$\mathcal{V} = \{A,B,C,D,E\}$.</small></li>
+                        <li><small>$\mathcal{A} = \{(A,B), (A,C), (A,D), (B,C), (B,D), (C,D), (C,E), (D,E) \}$.</small>
+                        </li>
+                    </ul>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-undirected.png" alt="Grafo no dirigido de ejemplo"
+                            style="width: 30%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Conceptos</h4>
+                    <ul>
+                        <li>
+                            <small>Grafo No Dirigido: Enlaces sin dirección (o con todas las direcciones)</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-undirected.png" alt="Grafo no dirigido"
+                                    style="width: 24%;">
+                            </div>
+                        </li>
+                        <li>
+                            <small>Grafo Dirigido: Enlaces con una dirección específica.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-directed.png" alt="Grafo dirigido" style="width: 24%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Conceptos</h4>
+                    <ul>
+                        <li>
+                            <small>Grafo no Ponderado: Enlaces no poseen valor o son equivalentes.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-undirected.png" alt="Grafo no ponderado"
+                                    style="width: 24%;">
+                            </div>
+                        </li>
+                        <li>
+                            <small>Grafo Ponderado: Enlaces poseen diferentes pesos o valores.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-weighted.png" alt="Grafo ponderado" style="width: 27.5%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Conceptos</h4>
+                    <ul>
+                        <li>
+                            <small>Nodos Adyacentes: Nodos que se separan sólo por una arista.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-adjacent.png" alt="Ejemplo de nodos adyacentes"
+                                    style="width: 26%;">
+                            </div>
+                        </li>
+                        <li>
+                            <small>Vecindario: Todos los nodos adyacentes respecto a un vértice.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-neighbourhood.png" alt="Ejemplo de vecindario en un grafo"
+                                    style="width: 26%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Conceptos</h4>
+                    <ul>
+                        <li>
+                            <small>Cadena: Secuencia de enlaces tal que cada arista tiene exactamente un vértice en
+                                común con la arista previa.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-chain.png" alt="Ejemplo de cadena en un grafo"
+                                    style="width: 23%;">
+                            </div>
+                        </li>
+                        <li>
+                            <small>Camino: Secuencia de enlaces tal que cada vértice terminal de una arista es idéntica
+                                al vértice inicial de la siguiente.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-path.png" alt="Ejemplo de camino en un grafo"
+                                    style="width: 23%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Conceptos</h4>
+                    <ul>
+                        <li>
+                            <small>Ciclo: Camino en el que el vértice terminal de la última arista es idéntico al
+                                vértice inicial de la primera.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-cycle.png" alt="Ejemplo de ciclo en un grafo"
+                                    style="width: 23%;">
+                            </div>
+                        </li>
+                        <li>
+                            <small>Árbol de Expansión: Cadena de $(n-1)$ arcos que conecta toda la red y no contiene
+                                ciclos.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-spanning-tree.png" alt="Ejemplo de árbol de expansión"
+                                    style="width: 23%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Representación: Lista de Adyacencia</h4>
+                    <ul class="r-fit-text">
+
+                        <li>Arreglo de listas donde se almacenan los enlaces involucrados.</li>
+                        <li>Ejemplo en Grafo No Dirigido:
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-adjacent-list-undirected.png"
+                                    alt="Grafo no dirigido y su lista de adyacencia" style="width: 95%;">
+                            </div>
+                        </li>
+                        <li>Utilizados en grafos escasos (sparce): $ |\mathcal{A}| <<< {|\mathcal{V}|}^2$. </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Representación: Lista de Adyacencia</h4>
+                    <ul>
+                        <li><small>Grafo Dirigido:</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-adjacent-list-directed.png"
+                                    alt="Grafo dirigido y su lista de adyacencia" style="width: 65%;">
+                            </div>
+                        </li>
+                        <li><small>Memoria: $\Theta(|\mathcal{V}|+|\mathcal{A}|)$.</small></li>
+                        <li><small>Añadir Vértice: $\mathcal{O}(1)$.</small></li>
+                        <li><small>Añadir Arista: $\mathcal{O}(1)$.</small></li>
+                        <li><small>Eliminar Vértice: $\mathcal{O}(|\mathcal{V}|+|\mathcal{A}|)$.</small></li>
+                        <li><small>Eliminar Arista: $\mathcal{O}(|\mathcal{A}|)$.</small></li>
+                        <li><small>Buscar Arista: $\mathcal{O}(|\mathcal{V}|)$.</small></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Representación: Matriz de Adyacencia</h4>
+                    <ul class="r-fit-text">
+
+                        <li>Arreglo binario bidimensional: $A[i][j]$ indica si existe un enlace entre el nodo $i$
+                            y el nodo $j$.</li>
+                        <li>Ejemplo Grafo No Dirigido: Matriz Simétrica.
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-adjacent-matrix-undirected.png"
+                                    alt="Grafo no dirigido y su matriz de adyacencia" style="width: 70%;">
+                            </div>
+                        </li>
+                        <li>Utilizados para grafos densos, o cuando se necesita acceso rápido a los
+                            enlaces.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Representación: Matriz de Adyacencia</h4>
+                    <ul>
+                        <li><small>Grafo Dirigido: Matriz Asimétrica.</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/graph-adjacent-matrix-directed.png"
+                                    alt="Grafo dirigido y su matriz de adyacencia" style="width: 60%;">
+                            </div>
+                        </li>
+                        <li><small>Memoria: $\Theta(|\mathcal{V}|^2)$.</small></li>
+                        <li><small>Añadir Vértice: $\mathcal{O}(|\mathcal{V}|^2)$.</small></li>
+                        <li><small>Añadir Arista: $\mathcal{O}(1)$.</small></li>
+                        <li><small>Eliminar Vértice: $\mathcal{O}(|\mathcal{V}|^2)$</small></li>
+                        <li><small>Eliminar Arista: $\mathcal{O}(1)$.</small></li>
+                        <li><small>Buscar Arista: $\mathcal{O}(1)$</small></li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+
+
+                <section>
+                    <h4>Búsqueda en Grafos</h4>
+                    <ul>
+                        <li class="fragment">Verificar existencia de un elemento en el grafo.</li>
+                        <li class="fragment">Dos criterios: <strong>Exploración</strong> (cubrir más área) y
+                            <strong>Explotación</strong> (profundizar zona conocida).
+                        </li>
+                        <li class="fragment">Los algoritmos combinan estos criterios en distintas proporciones.</li>
+                    </ul>
+                </section>
+
+
+
+                <section>
+                    <h4>Breadth-first Search (BFS)</h4>
+                    <ul>
+                        <li class="fragment">BFS encuentra el mínimo recorrido (en aristas) desde un nodo hacia el
+                            resto.</li>
+                        <li class="fragment">Prioriza exploración de vecinos sobre explotación de ramas.</li>
+                        <li class="fragment">Utiliza una cola como TDA auxiliar.</li>
+                        <li class="fragment">Resultado: árbol de expansión BFS.</li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-1.png" alt="Paso 1 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-2.png" alt="Paso 2 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-3.png" alt="Paso 3 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-4.png" alt="Paso 4 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-5.png" alt="Paso 5 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-undirected-6.png" alt="Paso 6 de BFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-1.png" alt="Paso 1 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-2.png" alt="Paso 2 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-3.png" alt="Paso 3 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-4.png" alt="Paso 4 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-5.png" alt="Paso 5 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Breadth-first Search (BFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-bfs-directed-6.png" alt="Paso 6 de BFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+
+
+
+                <section>
+                    <h4>Depth-first Search (DFS)</h4>
+                    <ul>
+                        <li><small>Búsqueda en Profundidad o DFS, es un algoritmo de busqueda sin información que
+                                encuentra, desde un nodo, las ramas más profundas (en arcos), hacia el resto de los
+                                nodos.</small></li>
+                        <li><small>Ponderá la explotación de ramas por sobre la exploración de vecinos.</small>
+                        </li>
+                        <li><small>Utiliza una pila como TDA auxiliar.</small></li>
+                        <li><small>Resultado: árbol de expansión DFS.</small></li>
+                    </ul>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-1.png" alt="Paso 1 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-2.png" alt="Paso 2 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-3.png" alt="Paso 3 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-4.png" alt="Paso 4 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-5.png" alt="Paso 5 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-6.png" alt="Paso 6 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-7.png" alt="Paso 7 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-8.png" alt="Paso 8 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-9.png" alt="Paso 9 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-10.png" alt="Paso 10 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-11.png" alt="Paso 11 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-12.png" alt="Paso 12 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-13.png" alt="Paso 13 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-14.png" alt="Paso 14 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) no dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-undirected-15.png" alt="Paso 15 de DFS no dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-1.png" alt="Paso 1 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-2.png" alt="Paso 2 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-3.png" alt="Paso 3 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-4.png" alt="Paso 4 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-5.png" alt="Paso 5 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-6.png" alt="Paso 6 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-7.png" alt="Paso 7 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-8.png" alt="Paso 8 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-9.png" alt="Paso 9 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-11.png" alt="Paso 11 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-12.png" alt="Paso 12 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-13.png" alt="Paso 13 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-14.png" alt="Paso 14 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-15.png" alt="Paso 15 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+                <section>
+                    <h4>Depth-first Search (DFS) dirigido</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-dfs-directed-16.png" alt="Paso 16 de DFS dirigido"
+                            style="width: 80%;">
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Depth-first Search (DFS) Árbol Binario</h4>
+                    <div style="text-align: center;">
+                        <img src="images/dfs1" alt="DFS en un árbol binario" style="width: 70%;">
+                    </div>
+                </section>
+
+                <!--  <section>
+                    <h4>DFS: Ordenamiento Topológico</h4>
+                    <ul>
+                        <li><small>Un ordenamiento topológico es un ordenamiento lineal de todos los vértices en un
+                                Grafo Dirigido Acícliclo.</small></li>
+                        <li><small>Si $G=(\mathcal{V},\mathcal{A})$ contiene un enlace $(x, y) \in \mathcal{A}$,
+                                entonces $x$ aparece antes que $y$ en el orden final.</small></li>
+                        <li><small>Esto no sería posible si el grafo contiene algún ciclo.</small></li>
+                        <li><small>Podemos ver un ordenamiento topológico de un grafo como un ordenamiento de sus
+                                vértices a lo largo de una línea horizontal, de modo que todos los enlaces dirigidos
+                                vayan de izquierda a derecha.</small></li>
+                        <li><small>DFS es un algoritmo comunmente usado para esta labor.</small></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>DFS: Ordenamiento Topológico</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-topsort-1.png" alt="Paso 1 de ordenamiento topológico"
+                            style="width: 80%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h4>DFS: Ordenamiento Topológico</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/graph-topsort-2.png" alt="Paso 2 de ordenamiento topológico"
+                            style="width: 100%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Ejercicios</h4>
+                    <ul>
+                        <li><small>Dar una representación de lista de adyacencia para un árbol binario completo de 7
+                                vértices. Dar también una representación de una matriz de adyacencia para el mismo
+                                árbol. Asumir que los vértices están enumerados de 1 a 7.</small></li>
+                        <li><small>Realice el recorrido BFS y DFS del siguiente grafo:</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/example.png" alt="Grafo de ejemplo para BFS y DFS"
+                                    style="width: 50%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Ejercicios</h4>
+                    <ul>
+                        <li><small>Realice el ordenamiento topológico del siguiente grafo:</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/pancakes.png" alt="Grafo para ordenamiento topológico"
+                                    style="width: 70%;">
+                            </div>
+                        </li>
+                    </ul>
+                </section> -->
+            </section>
+
+            <section>
+                <section>
+                    <h4>Algoritmos de Optimización en Gráfos</h4>
+
+                    <ul>
+                        <li>Ruta más Corta:
+                            <ol>
+                                <li>Algoritmo de Dijkstra.</li>
+                                <li>Algoritmo de Bellmann-Ford.</li>
+                            </ol>
+                        </li>
+                        <li>Árbol de mínima expansión:
+                            <ol>
+                                <li>Algoritmo de Prim.</li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h4>Ruta más corta</h4>
+                    <small>
+                        <p>Imagine que ud. está jugando el famoso juego Pukamon GOES. Se encuentra en la ubicación A y
+                            en el resto de las posiciones hay un Pukamon diferente que ud. quiere atrapar.</p>
+                    </small>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra1.png" alt="Grafo de ejemplo con nodos A a E y pesos"
+                            style="width: 50%;">
+                    </div>
+                    <small>
+                        <ul>
+                            <li>Si ud. trata de enumerar todos los caminos posibles, demorará mucho en encontrar una
+                                solución.</li>
+                            <li>Ahora, imagine esta situación para 100, 1000 y 10000 ubicaciones distintas. Además, para
+                                100, 1000 y 1000 enlaces.</li>
+                            <li>¿Cómo podemos afrontar este problema de forma eficiente para encontrar un óptimo para
+                                cada ruta?</li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section>
+                    <h4>Ruta más corta</h4>
+                    <small>
+                        <p>Imagine que ud. está jugando el famoso juego Pukamon GOES. Se encuentra en la Posicion A y en
+                            el resto de las posiciones hay un Pukamon diferente que ud. quiere atrapar.</p>
+                    </small>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra1.png" alt="Grafo de ejemplo con nodos A a E y pesos"
+                            style="width: 50%;">
+                    </div>
+                    <br>
+                    <small>
+                        <p>Variantes:</p>
+                        <ul>
+                            <li>Origen simple (1 a todos).</li>
+                            <li>Destino simple (todos a 1).</li>
+                            <li>Par Origen-Destino (1 a 1).</li>
+                            <li>Todos los pares (todos a todos).</li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <small>
+                        <p>Algoritmo que permite determinar la distancia más corta en un Grafo Ponderado Positivo.
+                        </p>
+                        <ul>
+                            <li>Puede ser dirigido y no dirigido.</li>
+                            <li>Puede ser Cíclico o Acíclico.</li>
+                            <li>Los pesos solo pueden ser positivos.</li>
+                            <li>Original: $\mathcal{O}(|\mathcal{V}|^2)$.</li>
+                            <li>Otras implementaciones: $\mathcal{O}((|\mathcal{A}|+|\mathcal{V}|)
+                                \log{|\mathcal{V}|})$, $\mathcal{O}(|\mathcal{A}|+ |\mathcal{V}| \log{|\mathcal{V}|})$.
+                            </li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra1.png" alt="Paso 1 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra2.png" alt="Paso 2 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra3.png" alt="Paso 3 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra4.png" alt="Paso 4 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra5.png" alt="Paso 5 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra6.png" alt="Paso 6 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra7.png" alt="Paso 7 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra8.png" alt="Paso 8 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra9.png" alt="Paso 9 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra10.png" alt="Paso 10 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra11.png" alt="Paso 11 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra12.png" alt="Paso 12 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Dijkstra</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/dijkstra13.png" alt="Paso 13 del Algoritmo de Dijkstra"
+                            style="width: 75%;">
+                    </div>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <small>
+                        <p>Algoritmo iterativo basado en BFS que permite determinar la distancia más corta en un Grafo
+                            Ponderado.</p>
+                        <ul>
+                            <li>Puede ser dirigido y no dirigido.</li>
+                            <li>Puede ser Cíclico o Acíclico.</li>
+                            <li>Los pesos pueden ser positivos y negativos.</li>
+                            <li>Menos eficiente que Dijkstra, pero más versátil.</li>
+                            <li>Itera a lo más $|\mathcal{V}|-1$ veces. (cantidad de conexiones en óptimo).</li>
+                            <li>$\mathcal{O}(|\mathcal{A}| \times |\mathcal{V}|)$.</li>
+                            <li>Ejemplo: Primera iteración.</li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford1.png" alt="Paso 1 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford2.png" alt="Paso 2 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford3.png" alt="Paso 3 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford4.png" alt="Paso 4 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford5.png" alt="Paso 5 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford6.png" alt="Paso 6 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford7.png" alt="Paso 7 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford8.png" alt="Paso 8 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford9.png" alt="Paso 9 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford10.png" alt="Paso 10 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford11.png" alt="Paso 11 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford12.png" alt="Paso 12 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford13.png" alt="Paso 13 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford14.png" alt="Paso 14 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+                    <h4>Algoritmo de Bellman-Ford</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/bellmanford15.png" alt="Paso 15 del Algoritmo de Bellman-Ford"
+                            style="width: 75%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Árbol de Mímima Expansión</h4>
+                    <small>
+                        <p>Tal como vimos anteriormente, existen variados algoritmos de búsqueda en grafos que entregan
+                            árboles de expansión:</p>
+                        <ul>
+                            <li>BFS: Expansión mínima en grafos no ponderado.</li>
+                            <li>DFS: Expansión en profundidad.</li>
+                            <li>¿Pero que hacer en el caso de grafos ponderados?</li>
+                            <li>Algoritmo de Prim.</li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section>
+                    <h4>Árbol de Mímima Expansión</h4>
+                    <small>
+                        <p>Imagine que el ud. es programador del famoso juego LoT: League of TELegends, cuyo mapa se
+                            muestra en el siguiente grafo.</p>
+                    </small>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim1.png" alt="Mapa del juego LoT con nodos y aristas ponderadas"
+                            style="width: 40%;">
+                    </div>
+                    <small>
+                        <p>Debe programar el recorrido que deben seguir los soldados de infantería (minions) de su
+                            equipo desde la base ubicada en el nodo A hacia al resto de las ubicaciones de tal forma que
+                            el recorrido total sea mínimo, con el objetivo de sincronizar bien la salida periódica
+                            desde el origen (respawn).</p>
+                    </small>
+                </section>
+
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <small>
+                        <p>Algoritmo para encontrar el árbol de expansión mínima en un Grafo No Dirigido
+                            Ponderado. Falla con grafos dirigidos.</p>
+                        <ul>
+                            <li>Debe ser no dirigido.</li>
+                            <li>Puede ser Cíclico o Acíclico.</li>
+                            <li>Los pesos pueden ser positivos y negativos.</li>
+                            <li>Matriz de Adyacencia: $\mathcal{O}(|\mathcal{V}|^2)$.</li>
+                            <li>Lista de Adyacencia: $\mathcal{O}((|\mathcal{A}|+|\mathcal{V}|) \log{|\mathcal{V}|})$
+                            </li>
+                            <li>Otras implementaciones: $\mathcal{O}(|\mathcal{A}|+ |\mathcal{V}| \log{|\mathcal{V}|})$.
+                            </li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim1.png" alt="Paso 1 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim2.png" alt="Paso 2 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim3.png" alt="Paso 3 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim4.png" alt="Paso 4 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim5.png" alt="Paso 5 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim6.png" alt="Paso 6 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+                <section data-auto-animate>
+
+                    <h4>Algoritmo de Prim</h4>
+                    <div style="text-align: center;">
+                        <img src="images/graphs/prim7.png" alt="Paso 7 del Algoritmo de Prim" style="width: 60%;">
+                    </div>
+                </section>
+
+                <!-- <section>
+                    <h4>Ejercicios</h4>
+                    <ul>
+                        <li><small>Aplique los tres algoritmos vistos en ésta clase al siguiente grafo:</small>
+                            <div style="text-align: center;">
+                                <img src="images/graphs/example.png" alt="Grafo de ejemplo para ejercicios"
+                                    style="width: 50%;">
+                            </div>
+                            <small>Suponga en los casos que ud. lo necesite, que puede direccionar el grafo a su
+                                conveniencia.</small>
+                        </li>
+                    </ul>
+                </section> -->
+            </section>
+            <section>
+                <h4>Actividad 20: Ruta Más Corta</h4>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
+
+                    <!-- Columna del Grafo -->
+                    <div style="flex: 0 0 55%;">
+                        <img src="images/grafoACtividad.svg" alt="Grafo de ejemplo para ejercicios"
+                                    style="width: 50%;">
+                    </div>
+
+                    <!-- Columna de Instrucciones y Tabla -->
+                    <div style="flex: 0 0 40%; padding-left: 20px;">
+                        <p>Encuentra la ruta más corta desde el <strong>nodo 3</strong> hasta todos los demás nodos.</p>
+                        
+                        
+
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

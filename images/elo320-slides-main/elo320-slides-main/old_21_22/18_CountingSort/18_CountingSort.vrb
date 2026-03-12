@@ -1,0 +1,6 @@
+\frametitle{Ejercicios}
+\begin{itemize}
+\item Programe Counting Sort de tal forma que agregue los elementos ordenados desde derecha a izquierda si es que estuviesen repetidos.
+\item Para ordenar enteros, ¿Es siempre mejor Counting Sort que algoritmos de Ordenamiento por Comparación?
+\item Si le piden ordenar un arreglo con numeros del 1 a $n^3$ ¿Usaría ud. Counting Sort como algoritmo? Justifique.
+\end{itemize}

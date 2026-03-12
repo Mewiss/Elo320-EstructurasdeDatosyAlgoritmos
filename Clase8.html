@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h1>Unidad 2: Estructuras de datos</h1>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Tipos de Datos Abstractos TDA</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            <section>
+                <h4>Tipo de Datos </h4>
+                <ul>
+                    <li> Colección de valores y las operaciones que se pueden realizar con éstos.
+                        <br>Ejemplo: enteros (<code>int</code>) con operadores aritméticos.
+                    </li>
+
+                </ul>
+            </section>
+
+
+
+            <section>
+                <h4>TDA: Tipos de Datos Abstractos</h4>
+                <p class="fragment">Modelo que define un <b>conjunto de datos</b> y las <b>operaciones</b> posibles, sin
+                    importar la implementación.</p>
+                <ul>
+                    <li class="fragment">Interfaz: operaciones disponibles.</li>
+                    <li class="fragment">Implementación interna oculta.</li>
+                    <li class="fragment">Acceso solo mediante la interfaz.</li>
+                </ul>
+            </section>
+
+
+
+
+            <section>
+                <h4>Ejemplos de TDA</h4>
+                <ul>
+                    <li class="fragment"><b>Pila (Stack):</b> Inserción y eliminación por un único extremo (LIFO).</li>
+                    <li class="fragment"><b>Cola (Queue):</b> Inserción por un extremo y eliminación por el otro (FIFO).
+                    </li>
+                    <li class="fragment"><b>Lista:</b> Conjunto ordenado de elementos, con acceso a posiciones
+                        específicas.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Ejemplo: Lista como TDA</h4>
+                <p>Interfaz de operaciones de una lista:</p>
+                <ul>
+                    <li><code>crear_lista()</code></li>
+                    <li><code>insertar(lista, pos, valor)</code></li>
+                    <li><code>eliminar(lista, pos)</code></li>
+                    <li><code>buscar(lista, valor)</code></li>
+                    <li><code>imprimir(lista)</code></li>
+                </ul>
+                <p>La implementación puede variar (arreglos, listas enlazadas, etc.).</p>
+            </section>
+
+            <section>
+                <h4>Motivación del TDA</h4>
+                <p>Permiten:</p>
+                <ul>
+                    <li class="fragment">Diseñar programas más <b>modulares</b> y <b>reutilizables</b>.</li>
+                    <li class="fragment">Separar el <b>qué hace</b> un tipo de dato del <b>cómo lo hace</b>.</li>
+                    <li class="fragment">Facilitar la <b>abstracción</b> y el trabajo en equipo.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Problemas con Arreglos</h4>
+                <ul>
+                    <li>Eficientes y útiles, pero poco flexibles al cambiar tamaño.</li>
+                    <li>Eliminar o insertar requiere mover elementos → <b>O(n)</b>.</li>
+                    <li>Listas enlazadas ofrecen una alternativa más eficiente.</li>
+                </ul>
+            </section>
+
+            
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Lista enlazada simple</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada</h4>
+                <p>Es un TDA que enlaza nodos a través de punteros.</p>
+                <ul class="fragment">
+                    <li>No deben estar ordenados en memoria.</li>
+                    <li>No es necesario desplazar elementos: solo cambiar punteros.</li>
+                </ul>
+                <img class="fragment" src="images/linkedlist1.png" style="width:90%">
+
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Nodos</h4>
+                <div class="row">
+                    <div class="col fragment">
+
+                        <ul>
+                            <li>La lista se compone por nodos</li>
+                            <li>Los nodos se componen por dato y puntero</li>
+                        </ul>
+                        <img src="images/node.png" class="r-stretch">
+                    </div>
+                    <div class="col">
+
+                        <pre class="fragment"><code class="language-c">
+struct nodo {
+    int dato; // dato
+    struct nodo *sgte; // puntero a un nodo
+};
+
+typedef struct le_nodo {
+    float datos[20];
+    struct le_nodo *sgte;
+} nodo_t;
+  </code></pre>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
+            <section>
+                <h4>Lista Simple Enlazada: Inicializar</h4>
+                <pre><code class="language-c">
+#include<stdio.h>
+
+typedef struct nodo {
+    int dato;
+    struct nodo *sgte;
+} nodo_t;
+
+int main() {
+    nodo_t *inicio = NULL; 
+    // Lista vacía []
+    return 0;
+}
+  </code></pre>
+                <img src="images/init1.png" style="width:30%">
+            </section>
+
+            <section>
+                <h4>Actividad 8: Implementación de una lista enlazada</h4>
+                <p class="r-fit-text"><b>En grupos de a 3 personas,</b> deberán identificar
+                    a qué corresponde cada función en el código y
+                    cada diagrama para la interfaz de una lista enlazada.
+                    El código y los diagramas están desordenados.
+                    Las funciones disponibles son:
+                <ul>
+                    <li>first_node</li>
+                    <li>add_first</li>
+                    <li>add_middle</li>
+                    <li>append</li>
+                    <li>list_len</li>
+                    <li>print_list</li>
+                    <li>free_list</li>
+                </ul>
+                </p>
+
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Primer nodo</h4>
+                <pre><code class="language-c light-code">
+void first_node(nodo_t **cabeza, int dato){ 
+    nodo_t *nuevo = malloc(sizeof(nodo_t));
+    nuevo->dato = dato;
+    nuevo->sgte = NULL;
+    *cabeza = nuevo;
+}
+  </code></pre>
+                <img src="images/firstadd4.png" style="width:45%">
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Añadir al inicio</h4>
+                <pre><code class="language-c">
+void add_first(nodo_t **cabeza, int dato){          
+    nodo_t *nuevo = malloc(sizeof(nodo_t));
+    nuevo->dato = dato;
+    nuevo->sgte = *cabeza;
+    *cabeza = nuevo; 
+}
+  </code></pre>
+                <img src="images/addheader4.png" style="width:90%">
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Añadir entre nodos</h4>
+                <pre><code class="language-c">
+// no se modifica inicio, no es necesario **
+void add_middle(nodo_t *cabeza, int dato, int pos){ 	          
+    nodo_t *nuevo = malloc(sizeof(nodo_t));
+    nuevo->dato = dato;
+
+    nodo_t *recorredor = cabeza;
+    for(int cont=0; cont<pos-1; cont++)
+        recorredor = recorredor->sgte;
+
+    nuevo->sgte = recorredor->sgte;
+    recorredor->sgte = nuevo;
+}
+  </code></pre>
+                <img src="images/addmiddle6.png" style="width:50%">
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Añadir al final</h4>
+                <pre><code class="language-c">
+void append(nodo_t *cabeza, int dato){ 	          
+    nodo_t *nuevo = malloc(sizeof(nodo_t));
+    nuevo->dato = dato;
+
+    nodo_t *rec = cabeza;
+    while(rec->sgte!=NULL)
+        rec = rec->sgte;
+
+    nuevo->sgte = rec->sgte;
+    rec->sgte = nuevo;
+}
+  </code></pre>
+                <img src="images/append7.png" style="width:50%">
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Largo</h4>
+                <pre><code class="language-c">
+int list_len(nodo_t *cabeza){ 	          
+    int cont;
+    nodo_t *rec = cabeza;
+    for(cont=0; rec!=NULL; cont++)
+        rec = rec->sgte;
+    return cont;
+}
+  </code></pre>
+                <img src="images/length.png" style="width:90%">
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Imprimir</h4>
+                <pre><code class="language-c">
+void print_list(nodo_t *cabeza){ 	          
+    nodo_t *rec = cabeza;
+    int cont=0;
+    printf("--- Print Lista ---\n");
+    for(; rec!=NULL; cont++){
+        printf("Lista pos %d, valor: %d\n", cont, rec->dato);
+        rec = rec->sgte;
+    }
+    printf("--- Fin Lista ---\n\n");
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Liberar</h4>
+                <pre><code class="language-c">
+void free_list(nodo_t *cabeza){ 	          
+    nodo_t *rec = cabeza;
+    while(rec!=NULL){
+        cabeza = rec->sgte;
+        free(rec);
+        rec = cabeza;
+    }
+}
+  </code></pre>
+            </section>
+
+
+            <section>
+                <h3>Problemas con punteros</h3>
+            </section>
+
+            <section>
+                <h4>Dangling con lista enlazada</h4>
+                <img src="images/listdangling.png" style="width:85%;">
+
+            </section>
+            <section>
+                <h4>Memory Leak con lista enlazada</h4>
+                <img src="images/listmemoryleak.png" style="width:85%;">
+
+            </section>
+
+            <section>
+                <h4>Mejoras</h4>
+            </section>
+
+            <section>
+                <h4>Lista Enlazada DLC 1</h4>
+                <p>Existen otras implementaciones de listas enlazadas simples, donde se incluyen más punteros y
+                    variables de control.</p>
+                <pre><code class="language-c">
+#include<stdio.h>
+
+typedef struct nodo{
+    int dato; //dato, puede ser lo que uds. necesiten
+    struct nodo *sgte; // puntero a un nodo enlace.
+} nodo_t;
+
+typedef struct list{
+    nodo_t * inicio;
+    nodo_t * final;
+    int largo;
+} lista;
+
+int main(int argc, char **argv){
+    lista *L = malloc(sizeof(lista));
+    L->inicio = NULL;
+    L->final = NULL;
+    L->largo = 0;
+    // Equivalente a lista vacía []
+    // ¿Para que sirve esta nueva forma?
+    // Implemente las funciones de ésta clase considerando esta forma.
+
+    free(L);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Lista Enlazada DLC 1</h4>
+                <div style="text-align:center;">
+                    <img src="images/linkedlist2.png" style="width:90%;">
+                    <br><br>
+                    <img src="images/init2.png" style="width:25%;">
+                </div>
+            </section>
+
+            
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

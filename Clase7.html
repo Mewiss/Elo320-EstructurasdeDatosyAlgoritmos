@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Memoria Dinámica con Structs</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+
+            <!--  <section>
+                <h4>Enumeración</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+enum color {
+    rojo, 
+    amarillo, 
+    verde=20, 
+    azul};
+
+int col = rojo;
+
+if (col != azul){ 
+    printf("No es azul\n");}
+        </code></pre>
+                </div>
+                <div class="fragment">
+                    <p><b>Python (clases)</b></p>
+                    <pre><code class="language-python" data-trim>
+class Colors(Enum):
+    red = 1
+    yellow = 2
+    green = 3
+        </code></pre>
+                </div>
+            </section> -->
+
+
+
+            <section>
+                <h4>Ejemplo memoria dinámica</h4>
+                <pre><code class="language-c">
+                #include&lt;stdio.h&gt
+                #include&lt;stdlib.h&gt
+
+                int main(int argc, char **argv){
+                    int *arreglo=NULL, i;
+
+                    arreglo = malloc(10 * sizeof *arreglo);
+
+                    if(arreglo==NULL){
+                        printf("Error al reservar memoria...\n");
+                        return -1;
+                    }
+
+                    for(i=0;i<5;i++){
+                        arreglo[i]=i+1;
+                    }
+
+                    arreglo = realloc(arreglo, 5 * sizeof(int));
+
+                    for(i=0;i<5;i++){
+                        printf("%d ", arreglo[i]);
+                    }
+                    free(arreglo);  
+                    return 0;
+                }
+                </code></pre>
+
+
+            </section>
+
+
+
+
+            <!-- Slide: Introducción a struct -->
+            <section>
+                <h4>Struct en C</h4>
+                <ul class="r-fit-text">
+                    <li>Un <code>struct</code> permite agrupar variables bajo un mismo nombre.</li>
+                    <li>Se accede a los miembros usando el operador <code>.</code> (para variables) o <code>-></code>
+                        (para punteros).</li>
+                </ul>
+
+                <pre><code class="language-c">#include &lt;stdio.h&gt
+#include &lt;string.h&gt
+
+struct Estudiante {
+    char nombre[50];
+    char apellido[50];
+    float nota;};
+
+int main() {
+    struct Estudiante e1;
+    strcpy(e1.nombre, "Maria");
+    strcpy(e1.apellido, "Gonzalez");
+    e1.nota = 7.0;
+    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
+    return 0;}                </code></pre>
+
+
+            </section>
+
+
+            <!-- Slide: typedef struct -->
+            <section>
+                <h4>typedef struct</h4>
+                <p class="r-fit-text">
+                    Con <code>typedef</code> creamos un alias y evitamos escribir <code>struct</code> al declarar
+                    variables.
+                </p>
+                <pre><code class="language-c">#include &lt;stdio.h&gt
+#include &lt;string.h&gt
+
+typedef struct {
+    char nombre[50];
+    char apellido[50];
+    float nota;
+} Estudiante;
+
+int main() {
+    Estudiante e1; // no necesitamos escribir 'struct'
+    strcpy(e1.nombre, "Pedro");
+    strcpy(e1.apellido, "Perez");
+    e1.nota = 8.5;
+    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
+    return 0;}  </code></pre>
+            </section>
+
+
+            <!-- Slide: Ejemplo práctico con punteros -->
+            <section>
+                <h4>Struct y punteros</h4>
+                <pre><code class="language-c">
+Estudiante *ptr = malloc(sizeof(Estudiante));
+strcpy(ptr->nombre, "Ana");
+ptr->nota = 9.0;
+
+printf("%s - %.2f\n", ptr->nombre, ptr->nota);
+free(ptr);
+  </code></pre>
+                <p>Con typedef, el uso de punteros es más legible y no necesitamos escribir <code>struct</code>.</p>
+            </section>
+
+
+
+            <!-- Slide con código -->
+            <section>
+                <h4>Paso por valor vs paso por referencia con structs</h4>
+                <pre><code class="language-c">
+typedef struct {
+    char nombre[50];
+    char apellido[50];
+    float nota;
+} Estudiante;
+
+void modificar_por_valor(Estudiante e) {
+    e.nota = 7.0; // solo copia
+}
+
+void modificar_por_referencia(Estudiante *e) {
+    e->nota = 7.0; // modifica original
+}
+        </code></pre>
+            </section>
+
+
+            <section>
+                <h4>Actividad 6.2: Paso por valor y por referencia</h4>
+                <p>Completa el código base.</p>
+                <p>
+
+                    El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/4KzgJgON" target="_blank">
+                        https://classroom.github.com/a/4KzgJgON</a>
+                </p>
+            </section>
+
+            <section>
+                <h2>Argumentos por línea de comandos</h2>
+                <h4>CLI Arguments: argv y argc</h4>
+            </section>
+
+            <section>
+                <h4>argc y argv: parámetros de ejecución</h4>
+                <ul class="r-fit-text">
+                    <li>En C, podemos entregar argumentos a los ejecutables mediante la línea de comando.</li>
+                    <li>Esta función <code>main</code> contiene dos argumentos: <b>argc</b> y <b>argv</b>.</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){ //o *argv[]
+    return 0;
+}
+  </code></pre>
+                <ul>
+                    <li><b>argc</b>: Argument Count → cantidad de parámetros.</li>
+                    <li><b>argv</b>: Argument Vector → los parámetros (strings).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>argc y argv: parámetros de ejecución</h4>
+                <pre class="r-stretch"><code class="language-c">#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){ //o *argv[]
+
+    if(argc!=3){
+        printf("Debe ingresar 3 parámetros, intentelo nuevamente");
+        return -1; // exit(-1) si terminar proceso.
+    }
+
+    printf("Argumento 0: %s\n", argv[0]);
+    printf("Argumento 1: %s\n", argv[1]);
+    printf("Argumento 2: %s\n", argv[2]);
+
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>argc y argv: transformando tipos</h4>
+                <ul>
+                    <li>atoi() transforma string a int </li>
+                    <li>atol() transforma string a long</li>
+                    <li>atoll() transforma string a long long </li>
+                    <li>atof() transforma string a float. </li>
+                    <li>sscanf() lee un string y lo usa como scanf().</li>
+                    <li>strtol(): string a long con base (10, 16, 2, ...)</li>
+                    <li>strtod(): string a double</li>
+                    <li>⚠️ deben verificar el string!</li>
+                </ul>
+
+            </section>
+            <section>
+                <h4>argc y argv: transformando tipos</h4>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+int main(int argc, char **argv){ //o *argv[]
+
+    if(argc!=4){
+        printf("Debe ingresar 4 parámetros, intentelo nuevamente");
+        return -1;
+    }
+
+    int a;
+    sscanf(argv[2], "%d", &a);
+
+    printf("%d %d %ld\n", atoi(argv[1]), a, strtol(argv[3], NULL, 10));
+
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h2>Streams</h2>
+            </section>
+
+            <section>
+                <h4>Streams: Archivos</h4>
+                <ul class="r-fit-text">
+                    <li>C trabaja con streams para interactuar con dispositivos físicos o virtuales.</li>
+                    <li>Este puntero se mueve a través del stream.</li>
+                    <!-- <li><code>stdin</code>, <code>stdout</code>: streams de funciones básicas (<code>scanf()</code>,
+                        <code>printf()</code>).
+                    </li>
+                    <li><code>stderr</code>: salida sin buffer.</li> -->
+                    <li>Se crean streams a archivos con punteros <code>FILE</code>.</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+    FILE *arch; // puntero
+    arch = fopen("hola.txt","r"); // apertura stream
+    fclose(arch); // cerrar stream
+    return 0;}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: modos</h4>
+                <ul>
+                    <li>"r": Lectura (archivo debe existir)</li>
+                    <li>"w": Escritura (sobrescribe)</li>
+                    <li>"a": Anexar (crea si no existe)</li>
+                    <li>"r+": Lectura y escritura (inicio)</li>
+                    <li>"w+": Lectura y escritura</li>
+                    <li>"a+": Lectura y escritura (apéndice)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Archivos - Escritura</h4>
+                <ul>
+                    <li><code>fprintf()</code>: como printf, pero con archivo.</li>
+                    <li><code>fputs()</code>: escribe string.</li>
+                    <li><code>fputc()</code>: escribe caracter.</li>
+                </ul>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char *saludo = "Hola Mundo";
+
+    arch = fopen("test.txt","w");
+    fprintf(arch, "%s\n", saludo);
+    fputs("I'll be back", arch);
+    fputc('X', arch);
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Archivos - Lectura</h4>
+                <ul>
+                    <li><code>fscanf()</code>: como scanf, pero con archivo.</li>
+                    <li><code>fgets()</code>: lee string hasta <code>\n</code> o EOF.</li>
+                    <li><code>fgetc()</code>: lee un caracter.</li>
+                </ul>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+    FILE *arch;
+    char saludo[20];
+    arch = fopen("test.txt","r");
+
+    while(!feof(arch)){
+        fscanf(arch,"%s", saludo);
+        fprintf(stderr,"linea: %s\n", saludo);    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Archivos - Lectura</h4>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char saludo[5];
+
+    arch = fopen("test.txt","r");
+
+    while(fgets(saludo, 5, arch) != NULL){
+        fprintf(stderr,"linea: %s\n", saludo);
+    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: Lectura</h4>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char saludo;
+
+    arch = fopen("test.txt","r");
+
+    while((saludo=fgetc(arch)) != EOF){
+        fprintf(stderr,"linea: %c\n", saludo);
+    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: Manejo del puntero</h4>
+                <p>A diferencia de Python, en C se puede manejar el puntero del archivo:</p>
+                <ul>
+                    <li><code>rewind()</code>: inicio</li>
+                    <li><code>fseek()</code>: mueve n bytes</li>
+                    <li><code>ftell()</code>: posición actual</li>
+                    <li><code>fgetpos()</code>: guarda posición en <code>fpos_t</code></li>
+                    <li><code>fsetpos()</code>: mueve a posición guardada</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Otros Streams</h4>
+                <p>Existen variados streams en C:</p>
+                <ul>
+                    <li>Standard I/O: <code>scanf()</code>, <code>printf()</code></li>
+                    <li>Strings: <code>sscanf()</code>, <code>sprintf()</code></li>
+                    <li>Archivos: <code>fscanf()</code>, <code>fprintf()</code></li>
+                </ul>
+            </section>
+
+
+<section>
+    <h4>Actividad 7: Manejo de archivos, argumentos y structs</h4>
+    <p>Completa el código base en que se lee un archivo con los datos de distintos estudiantes y se calculan las estadísticas respectivas al curso.</p>
+    <p>El código base está en Classroom:
+        <a href="https://classroom.github.com/a/-TItUy0-" target="_blank">
+            https://classroom.github.com/a/-TItUy0-</a>
+</section>
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

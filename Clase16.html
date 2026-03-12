@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Complejidad Algorítmica</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+
+
+            <section id="analisis-asintotico">
+                <h4>Análisis Asintótico</h4>
+                <div class="r-fit-text">
+                    <p>Determinar el término predominante en $T(n)$, y luego encontrar
+                        cotas de rendimiento.</p>
+                    <p>Existen tres notaciones asintóticas:</p>
+                    <ul>
+                        <li>Big O ($\mathcal{O}$): Cota superior asintótica (peor desempeño).
+                        </li>
+                        <li>Big Omega ($\Omega$): Cota inferior asintótica ( mejor desempeño).
+                        </li>
+                        <li>Big Theta ($\Theta$): Cota compuesta (rendimiento
+                            promedio).</li>
+                    </ul>
+                    <p>Comúnmente, se utiliza la notación en peor escenario:
+                        Big O ($\mathcal{O}$).</p>
+
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Ejemplo: Búsqueda Lineal ($\mathcal{O}(n)$)</h4>
+                <p class="r-fit-text" style="text-align: center;">Buscar el valor K = 40 en una lista (se asume
+                    desordenada). El proceso revisa elemento por elemento.</p>
+
+                <div style="display: flex; justify-content: center; margin: 20px 0;">
+                    <div style="font-size: 0.7em; display: flex; flex-direction: column; text-align: center;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Índice:</div>
+                        <div id="index-row" style="display: flex;">
+                            <span class="fragment highlight-current-blue" data-fragment-index="1"
+                                style="width: 30px; border: 1px solid #ccc;" data-idx="0">0</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #ccc;" data-idx="1">1</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #ccc;" data-idx="2">2</span>
+                            <span style="width: 30px; border: 1px solid #ccc;" data-idx="3">3</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">4</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">5</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="5"
+                                style="width: 30px; border: 1px solid #ccc;">6</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">7</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">8</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">9</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">10</span>
+                        </div>
+                        <div style="font-weight: bold; margin-top: 5px;">Valor:</div>
+                        <div id="value-row" style="display: flex; font-weight: bold;">
+                            <span class="cell fragment highlight-current-red" data-fragment-index="1"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">2</span>
+                            <span class="cell fragment highlight-current-red" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">5</span>
+                            <span class="cell fragment highlight-current-red" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">12</span>
+                            <span class="cell fragment highlight-current-red" data-fragment-index="4"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">17</span>
+                            <span class="cell fragment highlight-current-red" data-fragment-index="4"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">23</span>
+                            <span class="cell fragment highlight-current-red" data-fragment-index="4"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">31</span>
+                            <span class="cell fragment highlight-current-green" data-fragment-index="5"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">40</span>
+                            <span class="cell" style="width: 30px; border: 1px solid #333; background: #eee;">55</span>
+                            <span class="cell" style="width: 30px; border: 1px solid #333; background: #eee;">61</span>
+                            <span class="cell" style="width: 30px; border: 1px solid #333; background: #eee;">78</span>
+                            <span class="cell" style="width: 30px; border: 1px solid #333; background: #eee;">88</span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="r-fit-text" style="font-size: 0.7em; width: 80%; margin: 0 auto; text-align: left;">
+                    <li class="fragment" data-fragment-index="1">
+                        Paso 1 (Índice 0): Comparamos 2 con $K=40$. No son iguales.
+                        <span class="fragment highlight-current-blue" data-fragment-index="1"> [Valor 2]</span>
+                    </li>
+                    <li class="fragment" data-fragment-index="2">
+                        Paso 2 (Índice 1): Comparamos 5 con $K=40$. No son iguales.
+                        <span class="fragment highlight-current-blue" data-fragment-index="2"> [Valor 5]</span>
+                    </li>
+                    <li class="fragment" data-fragment-index="3">
+                        Paso 3 (Índice 2): Comparamos 12 con $K=40$. No son iguales.
+                        <span class="fragment highlight-current-blue" data-fragment-index="3"> [Valor 12]</span>
+                    </li>
+                    <!-- <li class="fragment" data-fragment-index="4">
+            Paso 4 (Índice 3): Comparamos 17 con $K=40$. No son iguales.
+            <span class="fragment highlight-current-blue" data-fragment-index="4"> [Valor 17]</span>
+        </li>
+        <li class="fragment" data-fragment-index="5">
+            Paso 5 (Índice 4): Comparamos 23 con $K=40$. No son iguales.
+            <span class="fragment highlight-current-blue" data-fragment-index="5"> [Valor 23]</span>
+        </li>
+        <li class="fragment" data-fragment-index="6">
+            Paso 6 (Índice 5): Comparamos 31 con $K=40$. No son iguales.
+            <span class="fragment highlight-current-blue" data-fragment-index="6"> [Valor 31]</span>
+        </li> -->
+                    <li class="fragment" data-fragment-index="4">
+                        ...
+
+                    </li>
+                    <li class="fragment" data-fragment-index="5">
+                        Paso 7 (Índice 6): Comparamos 40 con $K=40$. ¡Sí!
+                        <span class="fragment highlight-green" data-fragment-index="5" style="font-weight: bold;">
+                            ¡Elemento Encontrado!</span>
+                    </li>
+
+                </ul>
+            </section>
+
+            <section>
+                <h4>Algoritmo de Búsqueda Lineal (Secuencial)</h4>
+
+                <div style="width: 70%; margin: 20px auto; text-align: left;">
+
+                    <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+int busquedaLineal(int arr[], int n, int x) {
+  // arr[] es el arreglo de largo n
+  // x es el valor a buscar
+
+  for (int i = 0; i < n; i++) { // Bucle que se ejecuta hasta 'n' veces
+    
+    if (arr[i] == x) {
+      return i; // Se encontró el elemento en el índice 'i'
+    }
+  }
+  
+  return -1; // No se encontró en la lista
+}
+        </code></pre>
+                </div>
+                <p class="r-fit-text">
+                    Complejidad: $\mathcal{O}(n)$
+                    Este algoritmo recorre la lista completa elemento por elemento hasta encontrar el valor deseado.
+                </p>
+            </section>
+
+            <section>
+                <h4>Ejemplo: Búsqueda Binaria ($\mathcal{O}(\log n)$)</h4>
+                <p class="r-fit-text" style="text-align: center;">Buscar el valor K = 40 en la lista ordenada de
+                    $n=11$ elementos.</p>
+
+                <div style="display: flex; justify-content: center; margin: 20px 0;">
+                    <div
+                        style="font-size: 0.7em; margin-right: 20px; display: flex; flex-direction: column; text-align: center;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Índice:</div>
+                        <div style="display: flex;">
+                            <span class="fragment highlight-current-blue" data-fragment-index="1"
+                                style="width: 30px; border: 1px solid #ccc;">0</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">1</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">2</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">3</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">4</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="1"
+                                style="width: 30px; border: 1px solid #ccc;">5</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="3"><span
+                                    class="fragment highlight-current-blue" data-fragment-index="2"
+                                    style="width: 30px; border: 1px solid #ccc;">6</span></span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #ccc;">7</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #ccc;">8</span>
+                            <span style="width: 30px; border: 1px solid #ccc;">9</span>
+                            <span class="fragment highlight-current-blue" data-fragment-index="2">
+                                <span class="fragment highlight-current-blue" data-fragment-index="1"
+                                    style="width: 30px; border: 1px solid #ccc;">10</span></span>
+                        </div>
+                        <div style="font-weight: bold; margin-top: 5px;">Valor:</div>
+                        <div id="array-cells" style="display: flex; font-weight: bold;">
+
+                            <span class="cell fragment semi-fade-out" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">2</span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">5</span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">12</span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">17</span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="2"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">23</span>
+                            <span class="fragment semi-fade-out" data-fragment-index="2">
+                                <span class="cell fragment highlight-current-blue" data-fragment-index="1"
+                                    style="width: 30px; border: 1px solid #333; background: #eee;">31</span></span>
+                            <span class="cell fragment highlight-current-blue" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">40</span>
+                            <span class="cell" style="width: 30px; border: 1px solid #333; background: #eee;">55</span>
+                            <span class="fragment semi-fade-out" data-fragment-index="3"><span
+                                    class="cell fragment highlight-current-blue" data-fragment-index="2"
+                                    style="width: 30px; border: 1px solid #333; background: #eee;">61</span></span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">78</span>
+                            <span class="cell fragment semi-fade-out" data-fragment-index="3"
+                                style="width: 30px; border: 1px solid #333; background: #eee;">88</span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="r-fit-text" style="font-size: 0.7em; width: 80%; margin: 0 auto; text-align: left;">
+                    <li class="fragment" data-fragment-index="1">
+                        Iteración 1: $\text{Low}=0$, $\text{High}=10$. $\text{Mid}=(0+10)/2 = 5$.
+                        <div style="margin-left: 20px; font-weight: normal;">
+                            Valor en $\text{Mid} = 31$. Como $40 > 31$, descartamos la mitad izquierda (índices
+                            0-4). $\text{Low} \rightarrow 6$.
+                        </div>
+                    </li>
+                    <li class="fragment" data-fragment-index="2">
+                        Iteración 2: $\text{Low}=6$, $\text{High}=10$. $\text{Mid}=(6+10)/2 = 8$.
+                        <div style="margin-left: 20px; font-weight: normal;">
+                            Valor en $\text{Mid} = 61$. Como $40 < 61$, descartamos la mitad derecha (índices 9-10).
+                                $\text{High} \rightarrow 7$. </div>
+                    </li>
+                    <li class="fragment" data-fragment-index="3">
+                        Iteración 3: $\text{Low}=6$, $\text{High}=7$. $\text{Mid}=(6+7)/2 = 6$.
+                        <div style="margin-left: 20px; font-weight: normal; color: green; font-weight: bold;">
+                            Valor en $\text{Mid} = 40$. Como $40 = 40$. ¡Elemento Encontrado!
+                        </div>
+                    </li>
+
+                </ul>
+
+
+            </section>
+
+            <section>
+                <h4>Análisis de Complejidad: Búsqueda Binaria</h4>
+
+
+
+                <pre class="lstlisting"><code class="language-C">
+// Búsqueda Binaria
+int binary_search(int arr[], int low, int high, int key) {
+    if (high >= low) {
+        int mid = low + (high - low) / 2; // O(1)
+        if (arr[mid] == key) return mid; // O(1)
+        
+        if (arr[mid] > key) 
+            return binary_search(arr, low, mid - 1, key); // T(n/2)
+        else
+            return binary_search(arr, mid + 1, high, key); // T(n/2)
+    }
+    return -1; // O(1)
+}
+            </code></pre>
+
+                <p class="r-fit-text">¿Cómo analizar un algoritmo recursivo?</p>
+            </section>
+
+
+            <!--  <section>
+                <h3>Método Maestro</h3>
+                <small>
+                    <div style="width: 80%; margin: 0 auto; text-align: left;">
+                        <p>Técnica para cálculo inmediato de complejidades promedio ($\Theta$) bajo ciertas condiciones
+                            basado en el árbol de recurrencia de dichas funciones.</p>
+
+                        <div style="border: 2px solid #333; padding: 15px; margin: 20px 0;">
+                            <h4 style="margin-top: 0;">Método Maestro</h4>
+                            <div style="text-align: center; font-size: 1.2em;">
+                                $$ T(n) = a \times T\Big(\frac{n}{b}\Big) + f(n) $$
+                            </div>
+                            <p style="margin-top: 10px; font-size: 0.8em;">Con $a \geq 1$, $b > 1$, $f(n) > 0 $ para $n
+                                \geq n_0$ con $n_0 \geq 0$.</p>
+                        </div>
+
+                        <ul class="r-fit-text">
+                            <li class="fragment" data-fragment-index="1">Largo/Altura: $\log_{b} n$</li>
+                            <li class="fragment" data-fragment-index="2">Cantidad de hojas: $a^{\log_{b} n} =
+                                n^{\log_{b} a}$</li>
+                            <li class="fragment" data-fragment-index="3">Costo total (Suma de niveles): $T(n) =
+                                \sum_{j=0}^{\log_{b}(n)-1} a^j f(\frac{n}{b^j}) + \Theta(n^{\log_{b}a})$</li>
+                        </ul>
+                    </div>
+                </small>
+            </section>
+
+
+            <section>
+                <h3>Método Maestro</h3>
+                <small>
+                    <div style="width: 80%; margin: 0 auto; text-align: left;">
+                        <p>Técnica para cálculo inmediato de complejidades promedio ($\Theta$) bajo ciertas condiciones
+                            basado en el árbol de recurrencia de dichas funciones.</p>
+
+                        <div
+                            style="border: 2px solid #00f; padding: 15px; margin: 20px 0; color: black; background-color: #f0f8ff;">
+                            <h4 style="margin-top: 0;">Caso 1</h4>
+                            <div style="text-align: center; font-size: 1.2em;">
+                                $$ T(n) = a \times T\Big(\frac{n}{b}\Big) + f(n) $$
+                            </div>
+
+                            <ul class="r-fit-text" style="list-style-type: none; padding-left: 0;">
+                                <li style="margin-top: 10px; font-weight: normal;">
+                                    Si $f(n) = \mathcal{O}(n^{\log_b a - \epsilon})$ con $\epsilon > 0$
+                                    <span class="fragment highlight-current-blue" data-fragment-index="1">$\rightarrow
+                                        T(n) = \Theta(n^{\log_b a})$.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="r-fit-text" style="font-size: 0.7em; margin-top: 20px;">
+                            Note que acá buscamos que $\log_b a$ sea mayor que el grado de complejidad $c$ ($f(n) =
+                            \mathcal{O}(n^c)$).
+                        </p>
+                    </div>
+                </small>
+            </section>
+
+
+            <section>
+                <h3>Método Maestro</h3>
+                <small>
+                    <div style="width: 80%; margin: 0 auto; text-align: left;">
+                        <p>Técnica para cálculo inmediato de complejidades promedio ($\Theta$) bajo ciertas condiciones
+                            basado en el árbol de recurrencia de dichas funciones.</p>
+
+                        <div
+                            style="border: 2px solid #00f; padding: 15px; margin: 20px 0; color: black; background-color: #f0f8ff;">
+                            <h4 style="margin-top: 0;">Caso 2</h4>
+                            <div style="text-align: center; font-size: 1.2em;">
+                                $$ T(n) = a \times T\Big(\frac{n}{b}\Big) + f(n) $$
+                            </div>
+
+                            <ul class="r-fit-text" style="list-style-type: none; padding-left: 0;">
+                                <li style="margin-top: 10px; font-weight: normal;">
+                                    Si $f(n) = \Theta(n^{\log_b a} \log^k n)$ con $k \geq 0$
+                                    <span class="fragment highlight-current-blue" data-fragment-index="1">$\rightarrow
+                                        T(n) = \Theta(n^{\log_b a} \log^{k+1} n)$.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="r-fit-text" style="font-size: 0.7em; margin-top: 20px;">
+                            Note que acá buscamos que $\log_b a$ sea igual que el grado de complejidad $c$ ($f(n) =
+                            \Theta(n^c)$).
+                        </p>
+                    </div>
+                </small>
+            </section>
+
+
+            <section>
+                <h3>Método Maestro</h3>
+                <small>
+                    <div style="width: 80%; margin: 0 auto; text-align: left;">
+                        <p>Técnica para cálculo inmediato de complejidades promedio ($\Theta$) bajo ciertas condiciones
+                            basado en el árbol de recurrencia de dichas funciones.</p>
+
+                        <div
+                            style="border: 2px solid #f00; padding: 15px; margin: 20px 0; color: black; background-color: #fff0f0;">
+                            <h4 style="margin-top: 0;">Caso 3</h4>
+                            <div style="text-align: center; font-size: 1.2em;">
+                                $$ T(n) = a \times T\Big(\frac{n}{b}\Big) + f(n) $$
+                            </div>
+
+                            <ul class="r-fit-text" style="list-style-type: none; padding-left: 0;">
+                                <li style="margin-top: 10px; font-weight: normal;">
+                                    Si $f(n) = \Omega(n^{\log_b a + \epsilon})$ con $\epsilon > 0$ y<br>
+                                    $a f(\frac{n}{b}) \leq c f(n)$ con $c < 1$ y $n \rightarrow \infty$. <span
+                                        class="fragment highlight-current-blue" data-fragment-index="1">Luego:
+                                        $\rightarrow T(n) = \Theta(f(n))$.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="r-fit-text" style="font-size: 0.7em; margin-top: 20px;">
+                            Note que acá buscamos que $\log_b a$ sea menor que el grado de complejidad $c$ ($f(n) =
+                            \Omega(n^c)$).
+                        </p>
+                    </div>
+                </small>
+            </section>
+
+            <section>
+                <h3>Método Maestro</h3>
+                <small>
+                    <p class="r-fit-text">
+                        El método maestro busca determinar qué elemento predomina en la complejidad del algoritmo
+                        que usa recursividad:
+                    </p>
+                    <ul class="r-fit-text" style="text-align: left; width: 80%; margin: 20px auto;">
+                        <li class="fragment" data-fragment-index="1">
+                            Caso 1: Trabajo de las hojas es polinomialmente mayor. Complejidad:
+                            $\mathbf{\Theta(n^{\log_b a})}$.
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            Caso 2: Trabajo entre hojas y raíz es asintóticamente igual. Complejidad:
+                            $\mathbf{\Theta(f(n) \cdot \log n)}$.
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            Caso 3: Trabajo en la raíz ($f(n)$) es polinomialmente mayor. Complejidad:
+                            $\mathbf{\Theta(f(n))}$.
+                        </li>
+                    </ul>
+                </small>
+            </section>
+            <section>
+                <h3>Funciones de Recurrencia</h3>
+                <small>
+                    <div style="width: 80%; margin: 0 auto;">
+                        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                            <h4 style="margin: 0 0 10px 0;">Búsqueda Binaria</h4>
+                            <pre class="lstlisting"><code class="language-C">
+int binarySearch(int arr[], int l, int r, int x){
+    if (r >= l) {
+        int mid = l + (r - l) / 2;
+
+        if (arr[mid] == x) 
+            return mid;
+
+        if (arr[mid] > x) //if-else 1 + T(n/2)
+            return binarySearch(arr, l, mid - 1, x);
+      return binarySearch(arr, mid + 1, r, x); //else
+    }
+
+    return -1;
+}
+                </code></pre>
+                        </div>
+                    </div>
+
+                    <ul class="r-fit-text" style="text-align: left; width: 70%; margin: 0 auto;">
+                        <li>$T(n) = 1$ (si $n = 1$). $T(n) = 1+ T(n/2) $ (si $n > 1$).</li>
+                        <li class="fragment" data-fragment-index="1">Luego: $T(n) = 1 + 1 + 1 + \dots + T(n/2^k)$</li>
+                        <li class="fragment" data-fragment-index="2">Al finalizar: $T(n/2^k) = T(1) \rightarrow n = 2^k$
+                        </li>
+                        <li class="fragment" data-fragment-index="3">$\log_2 n = log_2(2^k) \rightarrow k = \log_2 n $
+                        </li>
+                        <li class="fragment" data-fragment-index="4">$ T(n) = 1 + T(n/2) = 1 + \mathcal{O}(\log n) =
+                            \mathcal{O}(\log n)$</li>
+                    </ul>
+                </small>
+            </section>
+
+
+            <section>
+                <h4>Análisis de Complejidad: Búsqueda Binaria</h4>
+
+
+
+                <p>La Búsqueda Binaria divide el problema a la mitad en cada paso.</p>
+                <pre class="lstlisting"><code class="language-C">
+// Búsqueda Binaria
+int binary_search(int arr[], int low, int high, int key) {
+    if (high >= low) {
+        int mid = low + (high - low) / 2; // O(1)
+        if (arr[mid] == key) return mid; // O(1)
+        
+        if (arr[mid] > key) 
+            return binary_search(arr, low, mid - 1, key); // T(n/2)
+        else
+            return binary_search(arr, mid + 1, high, key); // T(n/2)
+    }
+    return -1; // O(1)
+}
+            </code></pre>
+            </section>
+
+            <section>
+                <h4>Análisis de Complejidad: Búsqueda Binaria</h4>
+                <h4>1. Definición de la Recurrencia</h4>
+                <ul class="r-fit-text" style="text-align: left; margin-top: 0;">
+                    <li class="fragment" data-fragment-index="1">
+                        $a$ (Subproblemas): Solo hacemos una llamada recursiva.
+                        $$\mathbf{a = 1}$$
+                    </li>
+                    <li class="fragment" data-fragment-index="2">
+                        $b$ (Divisor): El problema se reduce a la mitad en cada paso.
+                        $$\mathbf{b = 2}$$
+                    </li>
+                    <li class="fragment" data-fragment-index="3">
+                        $f(n)$ (Costo Extra): El trabajo de cálculo del punto medio y la comparación es constante.
+                        $$\mathbf{f(n) = \mathcal{O}(1)}$$
+                    </li>
+                </ul>
+                <div class="fragment highlight-current-blue" data-fragment-index="4" style="margin-top: 1em;">
+                    Relación de Recurrencia:
+                    $$T(n) = aT(n/b) + f(n)$$
+                    $$\mathbf{T(n) = 1T(n/2) + \mathcal{O}(1)}$$
+                </div>
+
+
+            </section>
+
+            <section>
+                <h3>Análisis de Complejidad: Búsqueda Binaria</h3>
+                <h4>2. Aplicación del Teorema Maestro</h4>
+
+                <div style="width: 80%; margin: 0 auto;">
+                    <div class="r-fit-text" style="text-align: center;">
+                        <p>Comparamos el costo de la recursión ($n^{\log_b a}$) con el costo extra ($f(n)$).</p>
+                    </div>
+
+                    <ul class="r-fit-text" style="font-size: 0.8em; text-align: left;">
+                        <li class="fragment" data-fragment-index="1">
+                            Cálculo de la Función de Comparación ($n^{\log_b a}$):
+                            $$\text{Costo de Recursión} = n^{\log_2 1}$$
+                            $$\text{Costo de Recursión} = n^0 = \mathbf{\Theta(1)}$$
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            Comparación con el Costo Extra ($f(n)$):
+                            $$\text{Comparación: } f(n) = \mathcal{O}(1) \quad \text{vs} \quad n^{\log_b a} =
+                            \Theta(1)$$
+                            Ambos términos son asintóticamente iguales.
+                        </li>
+                        <li class="fragment highlight-current-blue" data-fragment-index="3">
+                            El Caso Dominante: La condición cumple exactamente con el Caso 2 del Teorema Maestro:
+                            $$f(n) = \Theta(n^{\log_b a} \cdot \log^k n) \quad \text{donde } k=0$$
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Análisis de Complejidad: Búsqueda Binaria</h3>
+                <h4>3. Resultado Final</h4>
+
+                <div style="width: 80%; margin: 0 auto; text-align: center;">
+
+                    <div class="r-fit-text fragment" data-fragment-index="1" style="margin-bottom: 20px;">
+                        <p>La fórmula del Teorema Maestro para el Caso 2 es:</p>
+                        $$\mathbf{T(n) = \Theta(n^{\log_b a} \cdot \log n)}$$
+                    </div>
+
+                    <div class="r-fit-text fragment" data-fragment-index="2">
+                        <p>Sustituyendo el resultado del cálculo $n^{\log_b a} = 1$:</p>
+                        $$T(n) = \Theta(1 \cdot \log n)$$
+                    </div>
+
+                    <div class="r-fit-text fragment highlight-green" data-fragment-index="3"
+                        style="font-size: 1.5em; margin-top: 30px; padding: 20px; border: 2px solid green;">
+                        Conclusión: La complejidad de la Búsqueda Binaria es:
+                        $$\mathbf{T(n) = \Theta(\log n)}$$
+                    </div>
+
+                    <div class="r-fit-text fragment" data-fragment-index="4"
+                        style="margin-top: 20px; font-size: 0.7em;">
+                        <p>La complejidad logarítmica es altamente eficiente: si el problema de búsqueda se duplica, el
+                            tiempo de ejecución solo aumenta en una unidad de tiempo constante.</p>
+                    </div>
+
+                </div>
+            </section> -->
+
+            <section>
+                <h4>Complejidad Big O de la Operación de Búsqueda </h4>
+
+                <table class="r-fit-text" style="font-size: 0.8em; width: 100%; margin: 0 auto;">
+                    <thead>
+                        <tr>
+                            <th>Estructura</th>
+                            <th>Búsqueda</th>
+                            <th>Mejor Caso ($\Omega$)</th>
+                            <th>Caso Promedio ($\Theta$)</th>
+                            <th>Peor Caso ($\mathcal{O}$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lista/Arreglo (Desordenada)</td>
+                            <td>Secuencial</td>
+                            <td>$\mathcal{O}(1)$</td>
+                            <td>$\mathcal{O}(n)$</td>
+                            <td>$\mathcal{O}(n)$</td>
+                        </tr>
+                        <tr>
+                            <td>Lista/Arreglo (Ordenada)</td>
+                            <td>Binaria</td>
+                            <td>$\mathcal{O}(1)$</td>
+                            <td>$\mathcal{O}(\log n)$</td>
+                            <td>$\mathcal{O}(\log n)$</td>
+                        </tr>
+                        <tr>
+                            <td>Tabla Hash</td>
+                            <td>Acceso Directo</td>
+                            <td>$\mathcal{O}(1)$</td>
+                            <td>$\mathcal{O}(1)$</td>
+                            <td>$\mathcal{O}(n)$</td>
+                        </tr>
+                        <tr>
+                            <td>Árbol Binario de Búsqueda (ABB)</td>
+                            <td>Recorrido de Árbol</td>
+                            <td>$\mathcal{O}(\log n)$</td>
+                            <td>$\mathcal{O}(\log n)$</td>
+                            <td>$\mathcal{O}(n)$</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="r-fit-text" style="font-size: 0.6em; margin-top: 1em; text-align: left;">
+                    <ul>
+                        <li>$\mathcal{O}(1)$ en Tabla Hash: Solo si la función hash es buena y no hay colisiones.</li>
+                        <li>$\mathcal{O}(n)$ en Tabla Hash y ABB: Ocurre cuando la estructura se degenera (colisión
+                            masiva en Hash o árbol desbalanceado en ABB), forzando una búsqueda lineal.</li>
+                    </ul>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Actividad 16: Comparación de tiempos de ejecución </h4>
+
+
+                <div class="r-fit-text">
+                    <p>En Aragorn, clona y compila el código base para comparar lostiempo de ejecución.
+                        <a href="https://classroom.github.com/a/p8kptyI8">https://classroom.github.com/a/p8kptyI8</a>
+
+
+                    </p>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Análisis de Complejidad: Búsqueda Binaria</h4>
+
+
+                <p class="r-fit-text fragment" >
+                    La Búsqueda Binaria es un algoritmo Divide y Vencerás que en cada paso hace una llamada
+                    recursiva ($a=1$) y reduce el problema a la mitad ($n/b \rightarrow n/2$).
+                </p>
+
+                <!-- <p style="font-size:larger;">Recurrencia: T(n) = T(n/2) + O(1)</p> -->
+
+
+                <div class="r-fit-text fragment"
+                    style="border: 2px solid #555; padding: 15px; margin-top: 20px;">
+                    <p>Relación de Recurrencia (Forma General):</p>
+                    <h1>
+                        $$ \mathbf{T(n) = 1T(n/2) + c} $$
+                    </h1>
+                    <ul>
+                        <li>$a = 1$ (Una llamada recursiva).</li>
+                        <li>$b = 2$ (Problema dividido a la mitad).</li>
+                        <li>$f(n) = c$ (Costo de comparación y cálculo constante).</li>
+                    </ul>
+                </div>
+
+            </section>
+
+
+            <section>
+                <h4>Método de Sustitución: Búsqueda-Binaria</h4>
+
+                <p><strong>Demostrar T(n) = $\mathcal{O}(\log n)$</strong></p>
+
+
+                <div style="width: 90%; margin: 0 auto; text-align: left;">
+
+                    <p class="r-fit-text">
+                        Este método requiere adivinar la solución y luego demostrarla por
+                        inducción.
+                    </p>
+                    <div class="r-fit-text" style="font-size: 0.9em; ">
+                        <p>
+
+                            <strong>Recurrencia:</strong> $T(n) \leq T(n/2) + d$
+                        </p>
+                        <p class="fragment" data-fragment-index="1">
+                            Hipótesis Inductiva: Asumimos que $T(k) \leq c \log_2 k$ para todo $k < n$. </p>
+
+                                <div class="fragment" data-fragment-index="2" style="margin-top: 15px;">
+                                    <p><strong>Sustitución en T(n):</strong></p>
+                                    $$\begin{aligned}
+                                    T(n) &amp; \leq c \log_2 (n/2) + d \\
+                                    T(n) &amp; \leq c (\log_2 n - \log_2 2) + d \\
+                                    T(n) &amp; \leq c \log_2 n - c + d
+                                    \end{aligned}$$
+                                </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Método de Sustitución: Búsqueda-Binaria</h4>
+
+
+
+                <div style="width: 90%; margin: 0 auto; text-align: left;">
+
+                    <div class="r-fit-text" style="font-size: 0.9em; ">
+
+                        <p class="fragment" data-fragment-index="3" style="margin-top: 15px;">
+                            Prueba (Para que la hipótesis se mantenga):
+                            $$ T(n) \leq c \log_2 n $$
+                            Esto se cumple si $c \log_2 n - c + d \leq c \log_2 n$, lo que implica que
+                            $\mathbf{d \leq c}$.
+                        </p>
+                        <p class="fragment" data-fragment-index="4" style="margin-top: 15px; font-weight: bold;">
+                            Podemos elegir $c$ tal que $c \geq d$ (ej. $c = 2d$), por lo tanto:
+                            $$\mathbf{T(n) = \mathcal{O}(\log n)}$$
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Método del Árbol de Recurrencia: Búsqueda Binaria</h4>
+                <p>Sumando el Costo por Nivel</p>
+
+                <div style="width: 90%; margin: 0 auto; text-align: center;">
+                    <p class="r-fit-text">
+                        Se descompone la recurrencia nivel por nivel hasta la condición base.
+                    </p>
+
+                    <div
+                        style="font-size: 0.9em; margin-top: 20px; display: flex; justify-content: space-around; text-align: left;">
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li>Nivel 0 (Raíz): $T(n)$</li>
+                            <li>Nivel 1: $T(n/2)$</li>
+                            <li>Nivel 2: $T(n/4)$</li>
+                            <li>$\dots$</li>
+                            <li>Nivel k: $T(n/2^k)$</li>
+                        </ul>
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li>Costo/Nivel: $c$</li>
+                            <li>Costo/Nivel: $c$</li>
+                            <li>Costo/Nivel: $c$</li>
+                            <li>$\dots$</li>
+                            <li>Costo/Nivel: $c$</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Método del Árbol de Recurrencia: Búsqueda Binaria</h4>
+
+                <div style="width: 90%; margin: 0 auto; text-align: center;">
+
+                    <div class="r-fit-text fragment" data-fragment-index="1" style="margin-top: 30px;">
+                        <p style="font-weight: bold;">Altura del Árbol ($k$):</p>
+                        <p>El proceso termina cuando el tamaño es $1$: $n/2^k = 1 \implies 2^k = n$.</p>
+                        $$\mathbf{k = \log_2 n}$$
+                    </div>
+
+                    <div class="r-fit-text fragment" data-fragment-index="2">
+                        <p style="font-weight: bold;">Costo Total:</p>
+                        $$\mathbf{T(n)} = \sum_{\text{niveles}} (\text{Costo por nivel}) = c \times (\log_2 n + 1)$$
+                        $$\mathbf{T(n) = \Theta(\log n)}$$
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>El Método Maestro (Master Theorem)</h4>
+
+                <div style="width: 80%; margin: 0 auto; text-align: center;">
+                    <p class="r-fit-text fragment" data-fragment-index="1" style="margin-top: 10px;">
+                        Es un método directo y rápido para determinar la complejidad asintótica ($\mathbf{\Theta}$) de
+                        relaciones de recurrencia comunes.
+                    </p>
+                    <p class="r-fit-text fragment" data-fragment-index="2">
+                        Aplica a algoritmos Divide y Vencerás (como Merge Sort y Búsqueda Binaria).
+                    </p>
+
+                    <div class="r-fit-text fragment" data-fragment-index="3"
+                        style="border: 2px solid #008080; padding: 20px; margin-top: 20px; background-color: #f0f8ff; text-align: center;">
+                        <p style="font-size: 0.8em; margin-bottom: 5px;">La Recurrencia debe tener la forma:</p>
+                        <h1 style="margin: 0; font-size: 2em;">
+                            $$ \mathbf{T(n) = aT(n/b) + f(n)} $$
+                        </h1>
+                    </div>
+
+                    <ul class="r-fit-text fragment" data-fragment-index="4" style="margin-top: 20px; font-size: 0.8em;">
+                        <li>$\mathbf{a \geq 1}$: Número de subproblemas (Ej: $a=2$ en Merge Sort).</li>
+                        <li>$\mathbf{b > 1}$: Factor de reducción del tamaño (Ej: $b=2$ divide a la mitad).</li>
+                        <li>$\mathbf{f(n)}$: Costo del trabajo realizado fuera de la recursión (dividir y combinar).
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h4>Método Maestro: Comparación y Casos</h4>
+
+                <div style="width: 80%; margin: 0 auto; text-align: center;">
+
+                    <div class="r-fit-text fragment">
+                        <p style="margin-bottom: 5px; font-weight: bold;">Función de Comparación (Costo de las Hojas):
+                        </p>
+                        <h1 style="font-size: 1.5em; color: #cc5500;">
+                            $$ \mathbf{n^{\log_b a}} $$
+                        </h1>
+
+                        <p>
+                            El Teorema Maestro compara el costo en la raíz $\mathbf{f(n)}$ con el costo total de las
+                            hojas
+                            $\mathbf{n^{\log_b a}}$.
+                        </p>
+                    </div>
+
+
+
+                    <table class="r-fit-text fragment" style="width: 100%; margin: 20px auto; font-size: 0.75em;">
+                        <thead>
+                            <tr>
+                                <th>Caso</th>
+                                <th>Condición (Relación de Crecimiento)</th>
+                                <th>Resultado ($\mathbf{T(n)}$)</th>
+                                <th>Costo Dominante</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="fragment" >
+                                <td>Caso 1</td>
+                                <td>$f(n)$ es polinómicamente menor</td>
+                                <td>$\mathbf{\Theta(n^{\log_b a})}$</td>
+                                <td>Hojas (Recursión)</td>
+                            </tr>
+                            <tr class="fragment" >
+                                <td>Caso 2</td>
+                                <td>$f(n)$ es asintóticamente igual</td>
+                                <td>$\mathbf{\Theta(n^{\log_b a} \log^{k+1} n)}$</td>
+                                <td>Equilibrado (Costo * Altura)</td>
+                            </tr>
+                            <tr class="fragment" >
+                                <td>Caso 3</td>
+                                <td>$f(n)$ es polinómicamente mayor</td>
+                                <td>$\mathbf{\Theta(f(n))}$</td>
+                                <td>Raíz (Trabajo Extra)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Método Maestro: Búsqueda Binaria</h4>
+
+
+                <div style="width: 90%; margin: 0 auto; text-align: center;">
+
+                    <p class="r-fit-text">
+                        Recurrencia: $\mathbf{T(n) = 1T(n/2) + n^0}$ <br>
+
+                        </p>
+
+                    <ul class="r-fit-text" style="text-align: left; margin-top: 20px;">
+                        <li class="fragment" data-fragment-index="1">
+                            1. Parámetros: $a=1$, $b=2$. Costo extra: $f(n) = 1$.
+                        </li>
+                        <li class="fragment" data-fragment-index="2">
+                            2. Función de Comparación ($\mathbf{n^{\log_b a}}$):
+                            $$\mathbf{n^{\log_2 1} = n^0 = 1}$$
+                        </li>
+                        <li class="fragment" data-fragment-index="3">
+                            3. Comparación: $f(n) = 1$ y $n^{\log_b a} = 1$. Son asintóticamente iguales ($\Theta$).
+                            <p style="margin-top: 5px;">Esto corresponde al Caso 2 del Método Maestro, con $k=0$ (ya
+                                que $f(n) = \Theta(n^{\log_b a} \log^0 n)$).</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Método Maestro: Búsqueda Binaria</h4>
+
+
+                <div class="r-fit-text fragment" data-fragment-index="4"
+                    style="margin-top: 20px; padding: 10px; font-weight: bold;">
+                    <p><strong>Fórmula del Caso 2:</strong> $T(n) = \Theta(n^{\log_b a} \log^{k+1} n)$</p>
+                    <p style="margin-top: 10px;">Sustituyendo:</p>
+                    $$T(n) = \Theta(1 \cdot \log^{0+1} n)$$
+                    $$\mathbf{T(n) = \Theta(\log n)}$$
+
+                </div>
+            </section>
+
+            <section>
+                <h4>Links de ayuda</h4>
+                <ul class="r-fit-text" style="text-align: left; width: 80%; margin: 0 auto;">
+                    <li><a href="https://www.youtube.com/watch?v=dqFS-CXCEVQ&t=703s"
+                            target="_blank">Big O para algoritmos Recursivos | Análisis de Algoritmos</a></li>
+                            <li><a href="https://www.geeksforgeeks.org/dsa/how-to-analyse-complexity-of-recurrence-relation/"
+                                target="_blank">GeeksforGeeks: How to Analyse Complexity of Recurrence Relation</a></li>
+                    <!-- <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-4-master-method-for-solving-recurrences/"
+                            target="_blank">GeeksforGeeks: Master Method</a></li>
+                    <li><a href="https://www.coursera.org/lecture/algorithms-part1/divide-and-conquer-recursion-and-the-master-theorem-6YQ2D"
+                            target="_blank">Coursera: Divide and Conquer Recursion and the Master Theorem</a></li>
+                    <li><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/lecture-3-divide-and-conquer-recursion-and-the-master-theorem/"
+                            target="_blank">MIT OpenCourseWare: The Master Theorem</a></li> -->
+            </section>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

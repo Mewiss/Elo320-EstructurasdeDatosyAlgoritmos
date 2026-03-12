@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Memoria Dinámica</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+
+            <!--  <section>
+                <h4>Enumeración</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+enum color {
+    rojo, 
+    amarillo, 
+    verde=20, 
+    azul};
+
+int col = rojo;
+
+if (col != azul){ 
+    printf("No es azul\n");}
+        </code></pre>
+                </div>
+                <div class="fragment">
+                    <p><b>Python (clases)</b></p>
+                    <pre><code class="language-python" data-trim>
+class Colors(Enum):
+    red = 1
+    yellow = 2
+    green = 3
+        </code></pre>
+                </div>
+            </section> -->
+
+            <section>
+                <h4>Taxonomía de la memoria</h4>
+                <img src="images/memoriastack.png" class="r-stretch">
+                <p>Segmentos de memoria</p>
+            </section>
+
+            <!-- Resumen -->
+            <section>
+                <h3>Resumen</h3>
+                <ul>
+                    <li><strong>Stack</strong> → Variables locales, funciones (rápido, limitado).</li>
+                    <li><strong>Heap</strong> → Memoria dinámica (flexible, debes administrarla).</li>
+                    <li><strong>Data</strong> → Globales y estáticas (persisten toda la ejecución).</li>
+                    <li><strong>Text</strong> → Código ejecutable.</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h4>Memoria dinámica</h4>
+                <p>Controlada programador y almacenada en el <b>heap</b> de la memoria.</p>
+                <p class="fragment">Permite:</p>
+                <ul>
+
+                    <li class="fragment">Modificar tamaño de arreglo</li>
+                    <li class="fragment">Crear estructuras de datos flexibles (listas, árboles, grafos)</li>
+                    <li class="fragment">Administrar memoria en tiempo de ejecución</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Memoria dinámica: programación en C</h4>
+                <ul>
+
+                    <li class="fragment">Se accede mediante punteros.</li>
+                    <li class="fragment">3 instrucciones básicas de <code>stdlib.h</code>:</li>
+                    <ul class="fragment">
+                        <li> <code>malloc()</code>: reserva de memoria.</li>
+                        <li> <code>realloc()</code>: reasignación de memoria.</li>
+                        <li> <code>free()</code>: liberación de memoria.</li>
+                    </ul>
+                    <li class="fragment"><code>valgrind</code>: software para debugging de memoria.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Memoria dinámica: malloc</h4>
+                <ul>
+                    <li>Reserva memoria en el heap.</li>
+                    <li>Devuelve la dirección (puntero) de inicio.</li>
+                    <li>Usa <code>sizeof</code> como base del tamaño.</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt
+#include&lt;stdlib.h&gt
+
+int main(int argc, char **argv){
+    int *arreglo=NULL;
+    
+    // sizeof(tipo_de_dato) o sizeof(expresion)
+    arreglo = malloc(10 * sizeof(*arreglo));
+    // arreglo = malloc(10 * sizeof(int));
+    // arreglo = malloc(10 * sizeof *arreglo);     
+    // arreglo = (int *) malloc(10 * sizeof(int));  //cast opcional en C
+    return 0;
+}
+          </code></pre>
+            </section>
+
+            <section>
+                <h4>Memoria dinámica: calloc</h4>
+                <ul>
+                    <li><code>calloc()</code> reserva memoria y la inicializa en cero.</li>
+                    <li>Permite que todos los valores empiecen en cero.</li>
+                </ul>
+                <pre><code class="language-c">
+#include &lt;stdio.h&gt
+#include &lt;stdlib.h&gt
+int main() {
+    int *arreglo;
+    // calloc reserva 5 ints e inicializa todos en 0
+    arreglo = (int *) calloc(5, sizeof(int));
+
+    for(int i = 0; i < 5; i++)
+        printf("%d ", arreglo[i]); // imprime: 0 0 0 0 0
+    
+    free(arreglo);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Memoria dinámica: realloc</h4>
+                <ul>
+                    <li>Reasigna memoria reservada.</li>
+                    <li>Si se expande, puede cambiar de dirección.</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt
+#include&lt;stdlib.h&gt
+
+int main(int argc, char **argv){
+    int *arreglo=NULL;
+
+    arreglo = malloc(10 * sizeof(*arreglo));
+
+    arreglo = realloc(arreglo, 5 * sizeof(int));
+    arreglo = realloc(arreglo, 20 * sizeof *arreglo);
+
+    return 0;
+}
+          </code></pre>
+            </section>
+
+            <section>
+                <h4>Memoria dinámica: free</h4>
+                <ul>
+                    <li>Libera memoria reservada en heap.</li>
+                    <li>Evita fugas de memoria (memory leaks).</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt
+#include&lt;stdlib.h&gt
+
+int main(int argc, char **argv){
+    int *arreglo=NULL;
+
+    arreglo = malloc(10 * sizeof(*arreglo));
+    arreglo = realloc(arreglo, 5 * sizeof(int));
+    arreglo = realloc(arreglo, 20 * sizeof *arreglo);
+
+    free(arreglo);
+    return 0;
+}
+          </code></pre>
+            </section>
+
+            <!-- Problemas con punteros -->
+            <section>
+                <h3>Problemas con punteros</h3>
+            </section>
+
+            <section>
+                <h4>Memory Leak</h4>
+                <ul>
+                    <li>Pérdida de acceso a memoria reservada.</li>
+                    <li>No se puede liberar hasta fin del programa.</li>
+                    <li>Puede saturar la memoria.</li>
+                </ul>
+                <pre><code class="language-c">
+int main(int argc, char **argv){
+    int *p;
+    
+    p = malloc(sizeof(int));
+    p = malloc(sizeof(int)); // fuga, se pierde la dirección anterior
+
+    free(p);
+
+    return 0;
+}
+          </code></pre>
+            </section>
+
+            <section>
+                <h3>Dangling</h3>
+                <ul>
+                    <li>Puntero a memoria liberada o reasignada.</li>
+                    <li>Genera errores impredecibles (segfault, corrupción de memoria).</li>
+                </ul>
+                <pre><code class="language-c">
+int main(int argc, char **argv){
+    int x=2;
+    int *p, *q;
+
+    p = malloc(sizeof(int));
+    q = p;
+
+    free(p);  /* q aun mantiene referencia al heap */
+    *q = x;   // error
+
+    return 0;
+}
+          </code></pre>
+            </section>
+
+            <section>
+                <div class="row">
+                    <div class="col">
+
+                        <h5>Memory Leak</h5>
+                        <img src="images/lostheap.png" style="width:80%">
+                    </div>
+                    <div class="col">
+                        <h5>Dangling</h5>
+                        <img src="images/dangling.png" style="width:80%">
+
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Ejemplo completo</h3>
+                <pre><code class="language-c">
+                #include&lt;stdio.h&gt
+                #include&lt;stdlib.h&gt
+
+                int main(int argc, char **argv){
+                    int *arreglo=NULL, i;
+
+                    arreglo = malloc(10 * sizeof *arreglo);
+
+                    if(arreglo==NULL){
+                        printf("Error al reservar memoria...\n");
+                        return -1;
+                    }
+
+                    for(i=0;i<5;i++){
+                        arreglo[i]=i+1;
+                    }
+
+                    arreglo = realloc(arreglo, 5 * sizeof(int));
+
+                    for(i=0;i<5;i++){
+                        printf("%d ", arreglo[i]);
+                    }
+                    free(arreglo);  
+                    return 0;
+                }
+                </code></pre>
+
+
+            </section>
+
+          
+
+
+            
+
+            <!-- <section>
+                <h3>Esquema de memoria</h3>
+                <img src="images/memoryscheme.png" style="width:90%">
+            </section> -->
+            <section>
+                <h4>Actividad 6.1: Memoria dinámica</h4>
+                <p>Completa el código para modificar el tamaño de un arreglo de ints y eliminar un elemento.</p>
+                <p>
+
+                    El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/VD8B33XU" target="_blank">
+                        https://classroom.github.com/a/VD8B33XU</a>
+                </p>
+            </section>
+
+
+                        <!-- Slide: Introducción a struct -->
+            <section>
+                <h4>Struct en C</h4>
+                <ul>
+                    <li>Un <code>struct</code> permite agrupar variables bajo un mismo nombre.</li>
+                    <li>Se accede a los miembros usando el operador <code>.</code> (para variables) o <code>-></code>
+                        (para punteros).</li>
+                </ul>
+
+                <pre><code class="language-c">
+#include &lt;stdio.h&gt
+
+struct Estudiante {
+    char nombre[50];
+    char apellido[50];
+    float nota;};
+
+int main() {
+    struct Estudiante e1;
+    strcpy(e1.nombre, "Maria");
+    strcpy(e1.apellido, "Gonzalez");
+    e1.nota = 7.0;
+    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
+    return 0;
+}
+                </code></pre>
+
+
+            </section>
+
+
+<!-- Slide: typedef struct -->
+            <section>
+                <h4>typedef struct</h4>
+                <p>
+                   Con <code>typedef</code> creamos un alias y evitamos escribir <code>struct</code> al declarar variables.
+                </p>
+                <pre><code class="language-c">
+#include &lt;stdio.h&gt
+#include &lt;string.h&gt
+
+typedef struct {
+    char nombre[50];
+    char apellido[50];
+    float nota;
+} Estudiante;
+
+int main() {
+    Estudiante e1; // no necesitamos escribir 'struct'
+    strcpy(e1.nombre, "Pedro");
+    strcpy(e1.apellido, "Perez");
+    e1.nota = 8.5;
+
+    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            
+            <!-- Slide: Ejemplo práctico con punteros -->
+            <section>
+                <h4>Struct y punteros</h4>
+                <pre><code class="language-c">
+Estudiante *ptr = malloc(sizeof(Estudiante));
+strcpy(ptr->nombre, "Ana");
+ptr->nota = 9.0;
+
+printf("%s - %.2f\n", ptr->nombre, ptr->nota);
+free(ptr);
+  </code></pre>
+                <p>Con typedef, el uso de punteros es más legible y no necesitamos escribir <code>struct</code>.</p>
+            </section>
+
+
+
+            <!-- Slide con código -->
+            <section>
+                <h4>Paso por valor vs paso por referencia con structs</h4>
+                <pre><code class="language-c">
+typedef struct {
+    char nombre[50];
+    char apellido[50];
+    float nota;
+} Estudiante;
+
+void modificar_por_valor(Estudiante e) {
+    e.nota = 7.0; // solo copia
+}
+
+void modificar_por_referencia(Estudiante *e) {
+    e->nota = 7.0; // modifica original
+}
+        </code></pre>
+            </section>
+
+            
+            <section>
+                <h4>Actividad 6.2: Paso por valor y por referencia</h4>
+                <p>Completa el código base.</p>
+                <p>
+
+                    El código base está en Classroom:
+                    <a href="https://classroom.github.com/a/4KzgJgON" target="_blank">
+                        https://classroom.github.com/a/4KzgJgON</a>
+                </p>
+            </section>
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

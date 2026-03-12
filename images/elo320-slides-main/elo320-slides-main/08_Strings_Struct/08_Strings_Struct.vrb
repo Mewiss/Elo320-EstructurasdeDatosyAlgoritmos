@@ -1,0 +1,8 @@
+\frametitle{Desafíos}
+\begin{itemize}
+\item Escriba un programa que pide al usuario un número entre 1 y 100, y a continuación llama a una función que devuelve la suma de todos los números pares que van del 1 al número que dio el usuario. Al final esta suma se imprime en la pantalla.
+
+\item Escriba un programa que, dada la hora en su computadora, llama a una función que calcula y devuelve el ángulo entre las manecillas del reloj (hora(s) y minutos). Este valor el programa lo imprime en la pantalla. (ver la librería time.h para acceder a la hora en su sistema).
+
+\item Escriba un programa que, dado un arreglo de enteros de dos dimensiones (array [][]) inicializado de manera random (fíjense en las funciones en stdlib.h), definido global, desarrolle un algoritmo que encuentra el mínimo valor en el arreglo entero pero pasando una sola vez por cada elemento del arreglo.
+\end{itemize}

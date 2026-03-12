@@ -384,11 +384,47 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   display: flex;
   flex-direction: row;
   width: 100%;
+  align-items: flex-start;
 }
 
 .col {
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 90%;
+  /* width: 90%; */
+}
+
+/* Tema light-code para bloques de código en reveal.js */
+.reveal pre code.light-code {
+  background-color: white !important;
+  color: black !important;
+  border-radius: 8px;
+  padding: 10px;
+  display: block;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+/* Colores de sintaxis */
+.reveal pre code.light-code .hljs-keyword,
+.reveal pre code.light-code .hljs-type {
+  color: #0000cc;  /* azul para palabras clave */
+  font-weight: bold;
+}
+
+.reveal pre code.light-code .hljs-string {
+  color: #a31515;  /* rojo/marrón para cadenas */
+}
+
+.reveal pre code.light-code .hljs-number {
+  color: #098658;  /* verde para números */
+}
+
+.reveal pre code.light-code .hljs-comment {
+  color: #6a9955;  /* verde apagado para comentarios */
+  font-style: italic;
+}
+
+.reveal pre code.light-code .hljs-function,
+.reveal pre code.light-code .hljs-title {
+  color: #795e26;  /* marrón para funciones */
 }

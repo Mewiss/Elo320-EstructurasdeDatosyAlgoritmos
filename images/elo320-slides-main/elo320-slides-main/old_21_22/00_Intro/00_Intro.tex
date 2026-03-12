@@ -1,0 +1,243 @@
+%\documentclass[spanish]{beamer}
+
+\documentclass{beamer}
+\usepackage{pgf,pgfpages}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=0.5in]
+\usepackage{algorithm,algorithmic}
+%\usepackage{algorithm,algorithmicx}
+%\usepackage[noend]{algpseudocode}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	commentstyle=\color{red},
+}
+
+\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{algorithm}
+%\usepackage{algorithmic-C}
+%\usepackage{algorithmic}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{fancyvrb,relsize}
+\usepackage{tikz}
+\usetikzlibrary{trees, shapes, calc}
+\newcommand{\inputTikZ}[2]{%
+	\scalebox{#1}{\input{#2}}
+}
+
+\usetheme{Warsaw} %Gueno
+%\usetheme{Darmstadt} %OK!
+% \usetheme{Frankfurt} %OK!
+%\usetheme{Goettingen}
+%\usetheme{Dresden}
+%\usetheme{JuanLesPins} %OK!!
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{Rochester} %sobrio
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+
+%\usecolortheme{albatross}
+%\usecolortheme{seahorse}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily} %Gueno
+\usecolortheme{orchid}%Gueno
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{whale}
+
+
+\DefineVerbatimEnvironment%
+      {VerbatimNN}%
+      {Verbatim}%
+      {fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimNNN}%
+      {Verbatim}%
+      {fontsize=\relsize{-2}}
+
+\DefineVerbatimEnvironment%
+      {VerbatimPseudo}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimPseudoReduced}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-2}}
+\DefineVerbatimEnvironment%
+      {VerbatimPseudoReduced2}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-3}}
+\DefineVerbatimEnvironment%
+      {VerbatimC}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimReducedC}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-2}}
+\DefineVerbatimEnvironment%
+      {VerbatimReduced2C}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-3}}
+
+
+
+%\AtBeginSubsection[]
+%{
+% \begin{frame}
+% \frametitle{Sinopsis}
+% Aqui decides: cada seccion y subseccion:
+% \tableofcontents[currentsection,currentsubsection]
+ %O solamente la seccion (Solo uno de ellos)
+%\tableofcontents[currentsection]
+% \end{frame}
+%}
+
+% Si quieres que todo por default aparezca de poco en poco
+% descomenta esta linea
+%\beamerdefaultoverlayspecification{<+->}
+
+\setbeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercovered{transparent}
+
+\title{ELO320 - Estructuras de Datos y Algoritmos\\Introducción al Curso}
+%\subtitle{Ingeniería Civil Telemática UTFSM}
+\author{Dr. Nicolás Gálvez R.\\{\small nicolas.galvez@usm.cl}}
+\institute{Ing. Civil Telemática - Departamento de Electrónica}
+\titlegraphic{\includegraphics[scale=.18]{images/logoutfsm}}
+\date{2do Semestre 2022}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%\section*{Sinopsis}
+%\frame{  \frametitle{Sinopsis}\tableofcontents[pausesections]}
+
+\section{Introducción al Curso}
+\begin{frame}{¿Qué veremos en este curso?}
+\begin{itemize}
+\item Estructuras de Datos para manejo eficiente de datos.
+\item Los algoritmos se construyen sobre éstas.
+\begin{itemize}
+	\item Estructuras bases.
+	\item Construir sus propias estructuras.
+	\item Definir Tipos de Datos Abstractos. 
+	\item Programar de forma eficiente.
+	\item Analizar y comparar algortimos.
+\end{itemize}
+\item Piedra angular de la programación moderna: C. 
+\item Prerrequisitos: IWI131 (DMat) - TEL102 (TEL)
+\end{itemize}
+\end{frame}
+
+\section{Planificación del Curso}
+\begin{frame}{Planificación}
+Planificación $\rightarrow$ AULA USM.
+
+{\Large\begin{center}\url{https://aula.usm.cl}\end{center}}
+\end{frame}
+
+\section{Forma de Evaluación}
+\begin{frame}{Evaluaciones}
+El curso consta de las siguientes evaluaciones coordinadas y \textbf{obligatorias}:
+\begin{itemize}
+\item 2 Certamenes, cuyo promedio es $PC$. 
+\item 2 Tareas, cuyo promedio es $PT$. 
+\end{itemize}
+Además:
+\begin{itemize}
+\item 1 Certamen Recuperativo ($CR$) para ausencias debidamente justificadas en Dirección de Estudios. Reemplaza la nota del certamen no rendido.
+\end{itemize}
+\begin{exampleblock}{Ponderaciones}
+$$ \text{NotaFinal} = 0.7 \times PC + 0.3 \times PT $$
+\end{exampleblock}
+
+Sujeto a: 
+\begin{itemize}
+\item $PC \geq 45 \land PT \geq 45$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evaluaciones}
+Se entiende por obligatorio el rendir y entregar las evaluaciones con \textbf{contenido revisable}. Respuestas sin cohesión ni coherencia. respecto a los contenidos del curso y a lo solicitado en los enunciados de las actividades, serán consideradas \textbf{no válidas}.\\[1em]
+
+En caso de no cumplirse las reglas descritas, la máxima nota posible será un \textbf{54}.\\[1em]
+
+Cualquier punto no contemplado, ambigüedades, solicitudes y/o casos especiales quedan al criterio del profesor y/o coordinación de campus.
+\end{frame}
+
+\begin{frame}{Evaluaciones: Fechas}
+De no mediar ningún inconveniente futuro, las fechas de las evaluaciones son las siguientes:
+\begin{itemize}
+\item $C1$: Martes 08 de Noviembre.
+\item $C2$: Martes 06 de Diciembre.
+\item $CR$: Lunes 12 de Diciembre.\bigskip
+\item $T1$: Jueves 08 de Noviembre.
+\item $T2$: Jueves 06 de Diciembre. 
+\end{itemize}
+
+El horario de los certamenes se definirá pronto. Pudiendo ser tomados en horario de clases, o en un horario único coordinado (11-12 o 13-14). 
+\end{frame}
+
+
+\section{Paralelos}
+\begin{frame}{Paralelos}
+\begin{itemize}
+\item Paralelo 200: Martes 1-2 y Jueves 5-6.
+\item Paralelo 201: Martes 5-6 y Jueves 1-2.
+\end{itemize}
+\end{frame}
+
+\section{Bibliografía}
+\begin{frame}{Biblografía}
+\begin{alertblock}{Libro Guía}
+Thomas H. Cormen, Charles Eric Leiserson, Ronald L.Rivest, Clifford Stein. \textbf{Introduction to Algorithms (3° Edition, 2009, ISBN:9780262033848)}. Cambridge, Mass: MITPress.
+\end{alertblock}
+
+\begin{block}{Libro Recomendado}
+C. Shaffer, \textbf{Data Structures and Algorithm Analysis}, Dover Publications, 2011. 
+\end{block}
+\end{frame}
+
+\section{Estructura de Datos}
+\begin{frame}{¿Qué es una Estructura de Datos?}
+Una estructura de datos es una \textbf{abstracción} para organizar \textbf{datos} de manera que puedan ser manejados, procesados y utilizados \textbf{eficientemente} a través de un \textbf{programa}.
+
+\hspace*{-0.5cm}\inputTikZ{0.7}{images/eda1.tex}
+
+\textbf{Permiten que los algoritmos trabajen de forma eficaz sobre la información.}
+\end{frame}
+
+\begin{frame}{¿Ejemplos?}
+\begin{itemize}
+\item ¿Como se representan las palabras? \pause $\rightarrow$ \pause Strings. \pause
+\item ¿Qué estructuras de datos conocen en Python? \pause $\rightarrow$ \pause Listas, Tuplas, Diccionarios. \pause
+\item ¿Qué estructuras de datos conocen en C++? \pause $\rightarrow$ \pause STL de C++ \pause $\rightarrow$ \pause Vectores, Listas, Map.\pause
+\item ¿Cómo se implementa \textbf{Control+Z} en los computadores? \pause $\rightarrow$ \pause Stack o Pilas.\pause
+\item ¿Cómo se simula el comportamiento de filas en bancos, supermercados, etc.? \pause $\rightarrow$ \pause Queues o Colas.\pause
+\item ¿Cómo se representa la gramática de lenguajes naturales y no naturales? \pause $\rightarrow$ \pause Trees o Árboles. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{EOF}
+
+Pero para aprender todo esto debemos aprender C.\\[1em]
+
+¿Qué es C? Lo veremos en la próxima clase. 
+
+\end{frame}
+
+\end{document}

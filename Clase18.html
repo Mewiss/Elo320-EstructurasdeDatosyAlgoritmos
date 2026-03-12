@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Algoritmos de Ordenamiento 2: Ordenamiento lineal y Colas de prioridad</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+            <!-- SLIDE 1: Ordenamiento por comparación -->
+            <section>
+                <h2>Ordenamiento por Comparación</h2>
+                <p class="fragment fade-in">Algoritmos como InsertSort, MergeSort o QuickSort basan su lógica en el
+                    contraste de dos valores ($\leq$ o $ >$).</p>
+
+                <div class="r-frame"
+                    style="text-align: left; margin-top: 30px; background: #f0f0f0; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #FF5722;">Cota Inferior ($\Omega$)</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li class="fragment fade-in" data-fragment-index="1">Estos algoritmos pueden ser representados
+                            por un árbol binario de decisión.</li>
+                        <li class="fragment fade-in" data-fragment-index="2">El número de hojas en el árbol debe ser al
+                            menos $n!$ (permutaciones posibles).</li>
+                        <li class="fragment fade-in" data-fragment-index="3">La altura mínima del árbol determina la
+                            complejidad: $h \ge \log_2(n!)$.</li>
+                        <li class="fragment fade-in" data-fragment-index="4">Como $\log_2(n!) = \Omega(n \log n)$, este
+                            es el límite inferior teórico para todo Ordenamiento por Comparación.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Ordenamiento en tiempo lineal -->
+            <section>
+                <h2>Ordenamiento en Tiempo Lineal ($\mathcal{O}(n)$)</h2>
+                <p>Existen algoritmos que evitan la cota $\Omega(n \log n)$ porque no dependen de comparaciones. </p>
+
+                <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+                    <div class="fragment fade-in" data-fragment-index="1" style="flex: 1; text-align: center;">
+                        <h3 style="color: #4CAF50;">Counting Sort</h3>
+                        <p style="font-size: 0.8em;">Basado en el recuento de frecuencias.</p>
+                    </div>
+                    <div class="fragment fade-in" data-fragment-index="2" style="flex: 1; text-align: center;">
+                        <h3 style="color: #2196F3;">Radix Sort</h3>
+                        <p style="font-size: 0.8em;">Basado en el ordenamiento por dígitos.</p>
+                    </div>
+                </div>
+
+                <div class="fragment fade-in" data-fragment-index="3"
+                    style="margin-top: 40px; border-top: 1px solid #ddd; padding-top: 15px;">
+                    <p style="font-style: italic; font-size: 0.9em;">Advertencia: Ambos tienen restricciones y su
+                        complejidad real es más fina que un simple $\mathcal{O}(n)$.</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Counting Sort -->
+            <section data-state="section-title">
+                <h1>Counting Sort</h1>
+            </section>
+
+            <!-- SLIDE 3: Counting Sort - Concepto -->
+            <section>
+                <h2>Counting Sort</h2>
+                <p>Algoritmo de Ordenamiento basado en contar la cantidad de ocurrencias de cada elemento en el arreglo
+                    de entrada.</p>
+
+                <div style="text-align: left; margin-top: 30px;">
+                    <ul style="font-size: 0.9em;">
+                        <li class="fragment fade-in" data-fragment-index="1">Complejidad: $\mathbf{\mathcal{O}(n+k)}$,
+                            donde $n$ es el número de elementos y $k$ es el máximo valor del arreglo.</li>
+                        <li class="fragment fade-in" data-fragment-index="2">Uso: Ideal para enteros o representaciones
+                            discretas (claves pequeñas).</li>
+                        <li class="fragment fade-in" data-fragment-index="3">Restricciones: No apto para *strings*
+                            largos, *floats* o cuando $k$ es muy grande (ej. $k \gg n^2$).</li>
+                        <li class="fragment fade-in" data-fragment-index="4">Propiedad: Es un algoritmo estable
+                            (mantiene el orden relativo de elementos iguales).</li>
+                        <li class="fragment fade-in" data-fragment-index="5">Costo: Utiliza una cantidad significativa
+                            de memoria extra ($\mathcal{O}(n+k)$) para los arreglos auxiliares.</li>
+                    </ul>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Ejemplo: Counting Sort</h4>
+                <div class="r-fit-text" style="text-align: center; ">
+                    <!-- Estilos para las celdas de los arreglos -->
+                    <style>
+                        .array-cell-cs {
+                            width: 35px;
+                            padding: 5px 0;
+                            margin: 2px;
+                            border: 1px solid #666;
+                            display: inline-block;
+                            text-align: center;
+                            font-weight: 600;
+                            border-radius: 4px;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .array-label {
+                            font-weight: bold;
+                            margin-right: 10px;
+                            width: 30px;
+                            display: inline-block;
+                            text-align: left;
+                        }
+
+                        .A-array .array-cell-cs {
+                            border-color: #2196F3;
+                            background: #e3f2fd;
+                            color: #1565C0;
+                        }
+
+                        .C-array .array-cell-cs {
+                            border-color: #FF9800;
+                            background: #fff3e0;
+                            color: #E65100;
+                        }
+
+                        .B-array .array-cell-cs {
+                            border-color: #4CAF50;
+                            background: #e8f5e9;
+                            color: #2E7D32;
+                        }
+
+                        .highlight {
+                            border: 3px solid #E91E63 !important;
+                            background: #FCE4EC !important;
+                            color: #880E4F !important;
+                            transform: scale(1.05);
+                        }
+
+                        .ordered {
+                            border: 2px solid #0c0 !important;
+                            background: #e6ffe6 !important;
+                            color: #2E7D32 !important;
+                        }
+                    </style>
+
+                    <!-- Arreglo Inicial -->
+                    <p style="font-weight: bold; color: #555; margin-bottom: 10px;">Arreglo de Entrada A</p>
+                    <div class="A-array" style="display: flex; justify-content: center; margin-bottom: 30px;">
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="4">2</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="7">5</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="5">3</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="2">0</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="4">2</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="5">3</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="2">0</span>
+                        <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="5">3</span>
+                    </div>
+
+                    <!-- PASO 1: Conteo de Frecuencias -->
+                    <div class="fragment" data-fragment-index="1">
+                        <p style="font-weight: bold; color: #2196F3;margin-bottom: 5px;">Paso 1: Conteo de Frecuencias
+                            ($C[i]$)</p>
+
+                        <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                            <span class="array-label"></span>
+                            <span style="width: 40px; padding: 5px 0;">0</span>
+                            <span style="width: 40px; padding: 5px 0;">1</span>
+                            <span style="width: 40px; padding: 5px 0;">2</span>
+                            <span style="width: 40px; padding: 5px 0;">3</span>
+                            <span style="width: 40px; padding: 5px 0;">4</span>
+                            <span style="width: 40px; padding: 5px 0;">5</span>
+                        </div>
+
+                        <div class="C-array" style="display: flex; justify-content: center;">
+                            <span class="array-label">C</span>
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="9">
+                                <span class=" fragment " data-fragment-index="2">2</span></span>
+                            <!-- 0 aparece 2 veces -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="10">
+                                <span class=" fragment " data-fragment-index="3">0</span></span>
+                            <!-- 1 aparece 0 veces -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="11">
+                                <span class=" fragment " data-fragment-index="4">2</span></span>
+                            <!-- 2 aparece 2 veces -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="12">
+                                <span class=" fragment " data-fragment-index="5">3</span></span>
+                            <!-- 3 aparece 3 veces -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="13">
+                                <span class=" fragment " data-fragment-index="6">0</span></span>
+                            <!-- 4 aparece 0 veces -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="14">
+                                <span class=" fragment" data-fragment-index="7">1</span></span>
+                            <!-- 5 aparece 1 vez -->
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: Suma Acumulada -->
+                    <div class="fragment" data-fragment-index="8" style="margin-bottom: 30px;">
+                        <p style="font-weight: bold; color: #FF9800;">Paso 2: Suma Acumulada ($C[i]$ ahora indica el
+                            índice
+                            final)</p>
+                        <p style="font-size: 0.8em; color: #555; margin-bottom: 5px;">$C[i] = C[i] + C[i-1]$. Esto da el
+                            índice donde termina cada valor.</p>
+
+                        <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                            <span class="array-label"></span>
+                            <span style="width: 40px; padding: 5px 0;">0</span>
+                            <span style="width: 40px; padding: 5px 0;">1</span>
+                            <span style="width: 40px; padding: 5px 0;">2</span>
+                            <span style="width: 40px; padding: 5px 0;">3</span>
+                            <span style="width: 40px; padding: 5px 0;">4</span>
+                            <span style="width: 40px; padding: 5px 0;">5</span>
+                        </div>
+
+                        <div class="C-array" style="display: flex; justify-content: center;">
+                            <span class="array-label">C</span>
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="10">
+                                <span class="fragment " data-fragment-index="9">2</span></span>
+                            <!-- 2 (Inicio de los 1s) -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="11">
+                                <span class="fragment 
+                                " data-fragment-index="10">2</span></span>
+                            <!-- 2+0=2 (Inicio de los 2s) -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="12">
+                                <span class="fragment " data-fragment-index="11">4</span></span>
+                            <!-- 2+2=4 (Inicio de los 3s) -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="13">
+                                <span class="fragment " data-fragment-index="12">7</span></span>
+                            <!-- 4+3=7 (Inicio de los 4s) -->
+                            <span class="array-cell-cs fragment highlight-current-blue" data-fragment-index="14">
+                                <span class="fragment " data-fragment-index="13">7</span></span>
+                            <!-- 7+0=7 (Inicio de los 5s) -->
+
+                            <span class="array-cell-cs fragment " data-fragment-index="14">8</span>
+                            <!-- 7+1=8 (Fin del arreglo) -->
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+            </section>
+
+
+
+            <section>
+                <h4>Ejemplo: Counting Sort </h4>
+                <div class="r-fit-text" style="width: 95%; margin: 0 auto; text-align: center; font-size: 0.9em;">
+                    <!-- Estilos para las celdas de los arreglos -->
+                    <style>
+                        .array-cell-cs {
+                            width: 35px;
+                            padding: 5px 0;
+                            margin: 2px;
+                            border: 1px solid #666;
+                            display: inline-block;
+                            text-align: center;
+                            font-weight: 600;
+                            border-radius: 4px;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .array-label {
+                            font-weight: bold;
+                            margin-right: 10px;
+                            width: 30px;
+                            display: inline-block;
+                            text-align: left;
+                        }
+
+                        .A-array .array-cell-cs {
+                            border-color: #2196F3;
+                            background: #e3f2fd;
+                            color: #1565C0;
+                        }
+
+                        .C-array .array-cell-cs {
+                            border-color: #FF9800;
+                            background: #fff3e0;
+                            color: #E65100;
+                        }
+
+                        .B-array .array-cell-cs {
+                            border-color: #4CAF50;
+                            background: #e8f5e9;
+                            color: #2E7D32;
+                        }
+
+                        .highlight {
+                            border: 3px solid #E91E63 !important;
+                            background: #FCE4EC !important;
+                            color: #880E4F !important;
+                            transform: scale(1.05);
+                        }
+
+                        .ordered {
+                            border: 2px solid #0c0 !important;
+                            background: #e6ffe6 !important;
+                            color: #2E7D32 !important;
+                        }
+                    </style>
+
+
+
+
+                    <!-- PASO 3: Construcción de B y ajuste de índice -->
+                    <div class="fragment" data-fragment-index="1" style="margin-bottom: 30px;">
+                        <p style="font-weight: bold; color: #4CAF50;">Paso 3: Construcción de B (Estable)</p>
+                        <p style="font-size: 0.8em; color: #555; margin-bottom: 10px;">Se recorre $A$ de derecha a
+                            izquierda. Se usa $C[A[i]]$ como índice en $B$ y luego se decrementa $C[A[i]]$.</p>
+
+                        <!-- Arreglo A (Entrada) -->
+                        <div class="A-array" style="display: flex; justify-content: center; margin-bottom: 15px;">
+                            <span class="array-label">A</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="16">2</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="14">5</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="12">3</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="10">0</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="8">2</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="6">3</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="4">0</span>
+                            <span class="array-cell-cs fragment highlight-current-red" data-fragment-index="2">3</span>
+                            <!-- Ejemplo: Lee 3. C[3]=7. Escribe en B[6]. C[3]-- a 6. -->
+                        </div>
+
+                        <!-- Arreglo C (Final) -->
+                        <div class="C-array" style="display: flex; justify-content: center; margin-bottom: 15px;">
+                            <span class="array-label">C</span>
+                            <!-- 0-->
+
+
+
+                            <div class="r-stack">
+                                <span class="array-cell-cs fragment highlight-current-blue"
+                                    data-fragment-index="4">2</span>
+                                <span class="array-cell-cs fragment" data-fragment-index="5">
+                                    <span class="fragment highlight-current-blue" data-fragment-index="10">
+                                        1</span>
+                                </span>
+                                <span class="array-cell-cs fragment" data-fragment-index="11">0
+                                </span>
+                            </div>
+
+                            <!-- 1-->
+                            <span class="array-cell-cs">2</span>
+                            <!-- 2-->
+                            <div class="r-stack">
+                                <span class="array-cell-cs fragment highlight-current-blue"
+                                    data-fragment-index="8">4</span>
+                                <span class="array-cell-cs fragment" data-fragment-index="9">
+                                    <span class="fragment highlight-current-blue" data-fragment-index="16">
+                                        3</span>
+                                </span>
+                                <span class="array-cell-cs fragment" data-fragment-index="17">2
+                                </span>
+                            </div>
+                            <!-- 3-->
+                            <div class="r-stack">
+                                <span class="array-cell-cs fragment highlight-current-blue"
+                                    data-fragment-index="2">7</span>
+                                <span class="array-cell-cs fragment" data-fragment-index="3">
+                                    <span class="fragment highlight-current-blue" data-fragment-index="6">
+                                        6</span>
+                                </span>
+
+                                <span class="array-cell-cs fragment" data-fragment-index="7"><span
+                                        class="fragment highlight-current-blue" data-fragment-index="12">5</span>
+                                </span>
+
+                                <span class="array-cell-cs fragment" data-fragment-index="13">4
+                                </span>
+                            </div>
+
+                            <!-- 4-->
+                            <span class="array-cell-cs">7</span>
+
+                            <!-- 5-->
+                            <div class="r-stack">
+                                <span class="array-cell-cs fragment highlight-current-blue"
+                                    data-fragment-index="14">8</span>
+                                <span class="array-cell-cs fragment" data-fragment-index="15">7</span>
+                            </div>
+                        </div>
+
+                        <!-- Arreglo B (Salida Final) -->
+                        <div class="B-array" style="display: flex; justify-content: center;">
+                            <span class="array-label">B</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="10">0</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="4">0</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="16">2</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="8">2</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="12">3</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="6">3</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="2">3</span>
+                            <!-- Escribiendo el último 3 -->
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="14">5</span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+            </section>
+
+            <!-- SLIDE 36: Counting Sort (Código Completo) -->
+            <section>
+                <h4>Counting Sort (Implementación Estable)</h4>
+                <pre><code class="language-C" style="font-size: 0.7em; max-height: 500px;">
+void counting_sort(int A[], int largo, int max){
+    int i, ind_sgte, veces;
+    int B[largo]; // Arreglo de salida
+    int C[max + 1]; // Arreglo contador (de 0 a max)
+
+    // 1. Inicializar arreglo C
+    for(i = 0; i <= max; i++) 
+        C[i] = 0;
+
+    // 2. Contar ocurrencias
+    for(i = 0; i < largo; i++)
+        C[A[i]]++; 
+    
+    // 3. Calcular índices de inicio acumulados (para estabilidad)
+    ind_sgte = 0;
+    for(i = 0; i <= max; i++){ 
+        veces = C[i];
+        C[i] = ind_sgte; // C[i] ahora guarda la posición de inicio
+        ind_sgte += veces;
+    }
+
+    // 4. Mover elementos a B, manteniendo el orden relativo
+    for(i = 0; i < largo; i++){ 
+        // B[posición_de_A[i]] = A[i]
+        B[C[A[i]]] = A[i]; 
+        C[A[i]]++; // Mover al siguiente índice disponible para ese valor
+    }
+    
+    // 5. Copiar B de vuelta a A (o retornar B)
+    for(i = 0; i < largo; i++){ 
+        A[i] = B[i];
+    }
+}
+            </code></pre>
+
+            </section>
+
+            <section>
+                <h4>Ejercicio Práctico de Counting Sort</h4>
+                <p>Utilizando Counting Sort, ordene el siguiente arreglo de las notas obtenidas por los alumnos de un curso:</p>
+                <div class="fragment fade-in" data-fragment-index="1" style="font-size: 0.9em; margin-top: 30px;">
+                    <p style="font-family: monospace; background: #eee; padding: 10px; border-radius: 5px;">
+                        70, 85, 90, 75, 60, 95, 80, 70, 85, 100, 65, 90, 80, 75, 85
+                    </p>
+                </div>
+             
+            </section> 
+
+
+
+            <!-- SLIDE 38: Radix Sort - Concepto -->
+            <section>
+                <h2>Radix Sort</h2>
+                <p>Algoritmo de Ordenamiento basado en dígitos. Ordena los elementos aplicando un algoritmo de
+                    ordenamiento estable (como Counting Sort) sucesivamente a cada dígito (o *radix*), desde la unidad
+                    menor a la mayor.</p>
+
+                <div class="r-fit-text" style="text-align: left; margin-top: 30px;">
+                    <ul style="font-size: 0.9em;">
+                        <li class="fragment fade-in" data-fragment-index="1">Complejidad: $\mathbf{\mathcal{O}(d \times
+                            (n+k))}$, donde $d$ es la cantidad de dígitos, $n$ el número de elementos y $k$ la base
+                            (usualmente $k=10$ o $k=256$).</li>
+                        <li class="fragment fade-in" data-fragment-index="2">Caso Común: Si $k$ es una constante (como
+                            10), se considera $\mathbf{\mathcal{O}(d \times n)}$.</li>
+                        <li class="fragment fade-in" data-fragment-index="3">Pilar: Requiere que el sub-algoritmo usado
+                            para ordenar por dígito (ej. Counting Sort) sea estable.</li>
+                    </ul>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Ejemplo: Radix Sort</h4>
+
+                <div class="r-fit-text" style="width: 95%; margin: 0 auto; text-align: center; font-size: 0.8em;">
+                    <!-- Estilos para las celdas de los arreglos (reutilizados) -->
+                    <style>
+                        .array-cell-cs {
+                            width: 45px;
+                            /* Ligeramente más ancho para 2 dígitos */
+                            padding: 5px 0;
+                            margin: 2px;
+                            border: 1px solid #666;
+                            display: inline-block;
+                            text-align: center;
+                            font-weight: 600;
+                            border-radius: 4px;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                            transition: all 0.5s ease;
+                        }
+
+                        .array-label {
+                            font-weight: bold;
+                            margin-right: 10px;
+                            width: 30px;
+                            display: inline-block;
+                            text-align: left;
+                        }
+
+                        .A-array .array-cell-cs {
+                            border-color: #2196F3;
+                            background: #e3f2fd;
+                            color: #1565C0;
+                        }
+
+                        .B-array .array-cell-cs {
+                            border-color: #4CAF50;
+                            background: #e8f5e9;
+                            color: #2E7D32;
+                        }
+
+                        /* Destacar el dígito actual */
+                        .digit-highlight {
+                            font-size: 1.2em;
+                            font-weight: 900;
+                            color: #E91E63;
+                            text-decoration: underline;
+                            display: inline-block;
+                        }
+
+                        .highlight {
+                            border: 3px solid #E91E63 !important;
+                            background: #FCE4EC !important;
+                            color: #880E4F !important;
+                            transform: scale(1.05);
+                        }
+
+                        .ordered {
+                            border: 2px solid #0c0 !important;
+                            background: #e6ffe6 !important;
+                            color: #2E7D32 !important;
+                        }
+                    </style>
+
+
+
+                    <!-- ============================================== -->
+                    <!-- PASADA 1: Dígito menos significativo (Unidades) -->
+                    <!-- ============================================== -->
+                    <div class="fragment" data-fragment-index="1" style="margin-bottom: 30px;">
+                        <p style="font-weight: bold; color: #E91E63; margin-bottom: 5px;">
+                            <span class="digit-highlight">PASADA 1: UNIDADES</span> (Dígito menos significativo)
+                        </p>
+
+                        <!-- Entrada de la pasada 1 -->
+                        <div class="A-array" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                            <span class="array-cell-cs">1<span class="fragment highlight-current-red"
+                                    data-fragment-index="6">7</span></span>
+                            <span class="array-cell-cs">0<span class="fragment highlight-current-red"
+                                    data-fragment-index="5">9</span></span>
+                            <span class="array-cell-cs">2<span class="fragment highlight-current-red"
+                                    data-fragment-index="4">3</span></span>
+                            <span class="array-cell-cs">1<span class="fragment highlight-current-red"
+                                    data-fragment-index="3">0</span></span>
+                            <span class="array-cell-cs">0<span class="fragment highlight-current-red"
+                                    data-fragment-index="2">5</span></span>
+                        </div>
+
+                        <p style="font-size: 0.8em; color: #555; margin-bottom: 5px;" class="fragment"
+                            data-fragment-index="7">Resultado de Counting Sort (Ordenado por unidades):</p>
+
+                        <!-- Salida de la pasada 1 (Se convierte en la entrada de la pasada 2) -->
+                        <div class="B-array" style="display: flex; justify-content: center;">
+                            <span class="array-label">A'</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="3">10</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="2">23</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="4">05</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="6">17</span>
+                            <span class="array-cell-cs ordered fragment" data-fragment-index="5">09</span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- PASADA 2: Dígito más significativo (Decenas) -->
+                    <!-- ============================================== -->
+                    <div class="fragment" data-fragment-index="7">
+                        <p style="font-weight: bold; color: #4CAF50; margin-top: 25px; margin-bottom: 5px;">
+                            <span class="digit-highlight" style="color: #4CAF50;">PASADA 2: DECENAS</span> (Dígito más
+                            significativo)
+                        </p>
+
+                        <!-- Entrada de la pasada 2 (A' de la pasada 1) -->
+                        <div class="A-array" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                            <span class="array-cell-cs"><span class="fragment highlight-current-red"
+                                    data-fragment-index="12">1</span>0</span>                                    
+                            <span class="array-cell-cs"><span class="fragment highlight-current-red"
+                                    data-fragment-index="11">2</span>3</span>
+                            <span class="array-cell-cs"><span class="fragment highlight-current-red"
+                                    data-fragment-index="10">0</span>5</span>
+                            <span class="array-cell-cs"><span class="fragment highlight-current-red"
+                                    data-fragment-index="9">1</span>7</span>
+                            <span class="array-cell-cs"><span class="fragment highlight-current-red"
+                                    data-fragment-index="8">0</span>9</span>
+                        </div>
+
+                        <p style="font-size: 0.8em; color: #555; margin-bottom: 5px;" class="fragment"
+                            data-fragment-index="19">Resultado Final (Ordenado por decenas de forma estable):</p>
+
+                        <!-- Salida de la pasada 2 (Resultado Final) -->
+                        <div class="B-array" style="display: flex; justify-content: center;">
+                            <span class="array-label">B</span>
+                            <span class="array-cell-cs ordered highlight fragment" data-fragment-index="10">05</span>
+                            <span class="array-cell-cs ordered highlight fragment" data-fragment-index="8">09</span>
+                            <span class="array-cell-cs ordered highlight fragment" data-fragment-index="12">10</span>
+                            <span class="array-cell-cs ordered highlight fragment" data-fragment-index="9">17</span>
+                            <span class="array-cell-cs ordered highlight fragment" data-fragment-index="11">23</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </section>
+
+            <!-- SLIDES 39-42: Radix Sort: Idea General (Proceso por dígitos) -->
+            <!--   <section>
+                <h2>Radix Sort: Proceso por Dígitos</h2>
+                <div class="r-stack">
+                    <img src="images/radixsort1" alt="Paso 1: Ordenar por unidades" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="1" data-src="images/radixsort1">
+                    <img src="images/radixsort2" alt="Paso 2: Ordenar por decenas" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="2" data-src="images/radixsort2">
+                    <img src="images/radixsort3" alt="Paso 3: Ordenar por centenas" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="3" data-src="images/radixsort3">
+                    <img src="images/radixsort4" alt="Paso 4: Array final ordenado" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="4" data-src="images/radixsort4">
+                </div>
+            </section> -->
+
+            <!-- SLIDE 43: Radix Sort (Código General) -->
+            <section>
+                <h2>Radix Sort (Función Principal)</h2>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+int maximo(int *A, int tam) { 
+    // Función auxiliar para encontrar el elemento más grande y determinar 'd'
+    int mayor = A[0];
+    for (int i = 1; i < tam; i++)
+        if (A[i] > mayor)
+            mayor = A[i];
+    return mayor;
+}
+
+void RadixSort(int *A, int tam) {
+    int max = maximo(A, tam);
+
+    // Iterar por cada 'lugar' (unidad, decena, centena, etc.)
+    // 'lugar' comienza en 1 (unidades)
+    for (int lugar = 1; max / lugar > 0; lugar *= 10)
+        // Se asume que CountingSort se adapta para ordenar por el dígito 'lugar'
+        CountingSort(A, tam, lugar); 
+}
+            </code></pre>
+                </div>
+            </section>
+
+            <!-- SLIDE 44: Radix Sort (Código Counting Sort adaptado) -->
+            <section>
+                <h2>Radix Sort: Counting Sort Adaptado</h2>
+                <p>El Counting Sort debe modificarse para trabajar con un dígito específico (determinado por `lugar`),
+                    no con el valor total.</p>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.7em; max-height: 500px;">
+void CountingSort(int *A, int tam, int lugar){ // 'lugar' = 1, 10, 100...
+    int B[tam];
+    int C[10] = {0}; // El contador siempre es de tamaño 10 (dígitos 0-9)
+
+    // 1. Contar ocurrencias del dígito actual
+    for (int i = 0; i < tam; i++)
+        C[(A[i] / lugar) % 10]++; // Extraer el dígito en 'lugar'
+
+    // 2. Calcular índices de inicio acumulados
+    for(int i = 1; i < 10; i++)
+        C[i] += C[i-1];
+
+    // 3. Mover elementos a B desde atrás (para mantener la estabilidad)
+    for(int i = tam - 1; i >= 0; i--){ 
+        int digito = (A[i] / lugar) % 10;
+        
+        // C[digito] ahora apunta al final del segmento de ese dígito
+        B[C[digito] - 1] = A[i];
+        C[digito]--;
+    }
+    
+    // 4. Copiar B de vuelta a A
+    for(int i = 0; i < tam; i++)
+        A[i] = B[i];
+}
+            </code></pre>
+                </div>
+            </section>
+
+            <!-- SLIDE 45: Ejercicios -->
+            <!--   <section>
+                <h2>Ejercicios</h2>
+                <ul style="text-align: left;">
+                    <li class="fragment fade-in" data-fragment-index="1">Programe Counting Sort de tal forma que agregue
+                        los elementos ordenados desde derecha a izquierda si es que estuviesen repetidos (esto garantiza
+                        la estabilidad).</li>
+                    <li class="fragment fade-in" data-fragment-index="2">Para ordenar enteros, ¿Es siempre mejor
+                        Counting Sort que algoritmos de Ordenamiento por Comparación? </li>
+                    <li class="fragment fade-in" data-fragment-index="3">Si le piden ordenar un arreglo con números del
+                        1 a $n^3$ ¿Usaría ud. Counting Sort como algoritmo? Justifique. </li>
+                </ul>
+            </section>-->
+
+            <!-- SLIDE 46: Ejercicios (Radix Sort) -->
+              <section>
+                <h4>Ejercicio Práctico de Radix Sort</h4>
+                <p>Utilizando Radix Sort, ordene lexicográficamente la siguiente lista de palabras en inglés:</p>
+                <div class="fragment fade-in" data-fragment-index="1" style="font-size: 0.9em; margin-top: 30px;">
+                    <p style="font-family: monospace; background: #eee; padding: 10px; border-radius: 5px;">
+                        cow, dog, sea, rug, row, mob, box, tab, bar, ear, tar, dig, big, tea, now, fox.
+                    </p>
+                </div>
+                <p class="fragment fade-in" data-fragment-index="2" style="margin-top: 30px; color: #4CAF50;">
+                    Clave: Considere el abecedario (26 letras) como la base $k$ del Counting Sort adaptado.
+                </p>
+            </section>  
+            </section>
+
+
+
+            <section>
+                <h2>Heap</h2>
+                <p>Estructura de datos basada en un árbol binario completo que satisface la propiedad de heap:
+                    En un Max Heap, para cada nodo $i$, el valor de $i$ es mayor o igual que el de sus hijos.</p>
+            </section>
+
+            <section >
+                <h4 style="margin-bottom: 0;">La Propiedad de Montículo (Heap Property)</h4>
+                <p style="font-size: 0.8em; color: #777;">Un heap es un árbol binario casi completo donde
+                    cada nodo es mayor (Heap Máximo) o menor (Heap Mínimo) que sus hijos.</p>
+
+                <div class="r-stack" >
+
+                    <!-- === Base: Dos Contenedores de Árboles === -->
+                    <div style="display: flex; justify-content: space-around; height: 70%;">
+
+                        <!-- ÁRBOL CUMPLIENDO LA PROPIEDAD (Heap Máximo) -->
+                        <div
+                            style="width: 48%; border: 2px solid #4CAF50; padding: 10px; border-radius: 8px; background: #e8f5e9;">
+                            <p style="color: #4CAF50; margin: 0 0 10px 0;">✅ CUMPLE (Heap Máximo)</p>
+                            <svg width="100%" height="300" viewBox="0 0 300 300" style="display: block;">
+                                <!-- Líneas -->
+                                <line x1="150" y1="40" x2="80" y2="100" stroke="#4CAF50" stroke-width="2" />
+                                <line x1="150" y1="40" x2="220" y2="100" stroke="#4CAF50" stroke-width="2" />
+                                <line x1="80" y1="100" x2="40" y2="160" stroke="#4CAF50" stroke-width="2" />
+                                <line x1="80" y1="100" x2="120" y2="160" stroke="#4CAF50" stroke-width="2" />
+
+                                <!-- Nodos (Max Heap: Padre > Hijos) -->
+                                <!-- 1. Nivel 0 (Raíz) -->
+                                <circle cx="150" cy="40" r="20" fill="#4CAF50" />
+                                <text x="150" y="45" text-anchor="middle" fill="white" font-weight="bold">95</text>
+
+                                <!-- 2. Nivel 1 -->
+                                <circle cx="80" cy="100" r="20" fill="#4CAF50" />
+                                <text x="80" y="105" text-anchor="middle" fill="white" font-weight="bold">80</text>
+
+                                <circle cx="220" cy="100" r="20" fill="#4CAF50" />
+                                <text x="220" y="105" text-anchor="middle" fill="white" font-weight="bold">70</text>
+
+                                <!-- 3. Nivel 2 -->
+                                <circle cx="40" cy="160" r="20" fill="#4CAF50" />
+                                <text x="40" y="165" text-anchor="middle" fill="white" font-weight="bold">15</text>
+
+                                <circle cx="120" cy="160" r="20" fill="#4CAF50" />
+                                <text x="120" y="165" text-anchor="middle" fill="white" font-weight="bold">65</text>
+
+                                <!-- Verificación de la propiedad -->
+                                <text x="150" y="220" text-anchor="middle" fill="#4CAF50" font-weight="bold"
+                                    font-size="16">95 > 80 y 70</text>
+                                <text x="150" y="240" text-anchor="middle" fill="#4CAF50" font-weight="bold"
+                                    font-size="16">80 > 15 y 65</text>
+                            </svg>
+                        </div>
+
+                        <!-- ÁRBOL INCUMPLIENDO LA PROPIEDAD -->
+                        <div
+                            style="width: 48%; border: 2px solid #E91E63; padding: 10px; border-radius: 8px; background: #FCE4EC;">
+                            <p style="color: #E91E63; margin: 0 0 10px 0;">❌ NO CUMPLE (Falla en el Montículo)</p>
+                            <svg width="100%" height="300" viewBox="0 0 300 300" style="display: block;">
+                                <!-- Líneas -->
+                                <line x1="150" y1="40" x2="80" y2="100" stroke="#E91E63" stroke-width="2" />
+                                <line x1="150" y1="40" x2="220" y2="100" stroke="#E91E63" stroke-width="2" />
+                                <line x1="80" y1="100" x2="40" y2="160" stroke="#E91E63" stroke-width="2" />
+                                <line x1="80" y1="100" x2="120" y2="160" stroke="#E91E63" stroke-width="2" />
+
+                                <!-- Nodos (El 85 y el 90 están mal colocados) -->
+                                <!-- 1. Nivel 0 (Raíz) -->
+                                <circle cx="150" cy="40" r="20" fill="#E91E63" />
+                                <text x="150" y="45" text-anchor="middle" fill="white" font-weight="bold">85</text>
+
+                                <!-- 2. Nivel 1 -->
+                                <circle cx="80" cy="100" r="20" fill="#E91E63" />
+                                <text x="80" y="105" text-anchor="middle" fill="white" font-weight="bold">60</text>
+
+                                <circle cx="220" cy="100" r="20" fill="#E91E63" />
+                                <text x="220" y="105" text-anchor="middle" fill="white" font-weight="bold">75</text>
+
+                                <!-- 3. Nivel 2 -->
+                                <circle cx="40" cy="160" r="20" fill="#E91E63" />
+                                <text x="40" y="165" text-anchor="middle" fill="white" font-weight="bold">90</text>
+                                <!-- ¡FALLA AQUÍ! -->
+
+                                <circle cx="120" cy="160" r="20" fill="#E91E63" />
+                                <text x="120" y="165" text-anchor="middle" fill="white" font-weight="bold">10</text>
+
+                                <!-- Explicación de la falla -->
+                                <text x="150" y="220" text-anchor="middle" fill="#E91E63" font-weight="bold"
+                                    font-size="16">❌ Falla en el nodo 60</text>
+                                <text x="150" y="240" text-anchor="middle" fill="#E91E63" font-weight="bold"
+                                    font-size="16">Su hijo (90) es MAYOR.</text>
+                                <circle cx="80" cy="100" r="22" fill="none" stroke="#E91E63" stroke-width="3"
+                                    class="fragment" data-fragment-index="1" />
+                                <circle cx="40" cy="160" r="22" fill="none" stroke="#E91E63" stroke-width="3"
+                                    class="fragment" data-fragment-index="1" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+            </section>
+
+            <section>
+                <h2>HeapSort</h2>
+                <p>Algoritmo de ordenamiento basado en la estructura de datos Heap (Montículo). Utiliza un Max Heap para
+                    ordenar los elementos extrayendo repetidamente el máximo y reconstruyendo el heap.</p>
+
+                <div class="r-fit-text" style="text-align: left; margin-top: 30px;">
+                    <ul style="font-size: 0.9em;">
+                        <li class="fragment fade-in" data-fragment-index="1">Complejidad: $\mathbf{\mathcal{O}(n \log
+                            n)}$ en
+                            todos los casos (mejor, promedio y peor).</li>
+                        <li class="fragment fade-in" data-fragment-index="2">In-place: Requiere espacio adicional
+                            constante
+                            $\mathbf{\mathcal{O}(1)}$.</li>
+                        <li class="fragment fade-in" data-fragment-index="3">No Estable: No mantiene el orden relativo
+                            de
+                            elementos iguales.</li>
+                    </ul>
+            </section>
+
+            <!-- SLIDE 1: Heapify -->
+            <section>
+                <h2>HeapSort: Heapify</h2>
+                <div class="fragment" data-fragment-index="1">
+                    <h4 style="color: #4CAF50;">Función Clave para Mantener la Propiedad Heap</h4>
+                </div>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void heapify(int arr[], int i, int tam){ // arreglo, índice, tamaño
+    int mayor = i; // al inicio el nodo es el mayor
+    int l = hijo_izq(i); 
+    int r = hijo_der(i); 
+
+    // 1. Comparar con el hijo izquierdo
+    if (l < tam && arr[l] > arr[mayor]) 
+        mayor = l; 
+    
+    // 2. Comparar con el hijo derecho
+    if (r < tam && arr[r] > arr[mayor]) 
+        mayor = r;
+
+    // 3. Intercambio y recursión
+    if (mayor != i){ // si el mayor no es el padre original
+        // Realizar el intercambio
+        int temp = arr[i];
+        arr[i] = arr[mayor];
+        arr[mayor] = temp;
+
+        // Llamada recursiva en el sub-árbol afectado
+        heapify(arr, mayor, tam); 
+    }
+}
+            </code></pre>
+                </div>
+            </section>
+
+            <!-- SLIDES 2-10: Build Heap (Proceso por imágenes) -->
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso  de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <div class="r-stack">
+                    <!-- Simulación de build-heap1 a build-heap9 -->
+                    <img src="images/heapsort/build-heap1.png" alt="Paso 1: Arreglo inicial antes de Build Heap"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="1"
+                        data-src="images/heapsort/build-heap1.png">
+                    <img src="images/heapsort/build-heap2.png" alt="Paso 2: Heapify en el penúltimo nivel"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="2"
+                        data-src="images/heapsort/build-heap2.png">
+                    <img src="images/heapsort/build-heap3.png" alt="Paso 3" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="3"
+                        data-src="images/heapsort/build-heap3.png">
+                    <img src="images/heapsort/build-heap4.png" alt="Paso 4" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="4"
+                        data-src="images/heapsort/build-heap4.png">
+                    <img src="images/heapsort/build-heap5.png" alt="Paso 5" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="5"
+                        data-src="images/heapsort/build-heap5.png">
+                    <img src="images/heapsort/build-heap6.png" alt="Paso 6" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="6"
+                        data-src="images/heapsort/build-heap6.png">
+                    <img src="images/heapsort/build-heap7.png" alt="Paso 7" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="7"
+                        data-src="images/heapsort/build-heap7.png">
+                    <img src="images/heapsort/build-heap8.png" alt="Paso 8" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="8"
+                        data-src="images/heapsort/build-heap8.png">
+                    <img src="images/heapsort/build-heap9.png" alt="Paso 9: Max Heap Finalizado" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="9"
+                        data-src="images/heapsort/build-heap9.png">
+                </div>
+            </section>
+
+            <!-- SLIDE 11: Build Heap (Código) -->
+            <section>
+                <h4>HeapSort: Build Heap </h4>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void build_heap(int arr[], int tam){ // arreglo y tamaño
+
+    // Empezamos desde el último nodo interno (tam/2) hasta la raíz (1 o 0)
+    for (int i = tam / 2; i >= 0; i--){ 
+        heapify(arr, i, tam);
+    }
+}
+            </code></pre>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="margin-top: 30px;">
+                    Eficiencia: La construcción del heap es sorprendentemente eficiente, con una complejidad de
+                    $\mathbf{\mathcal{O}(n)}$.
+                </p>
+            </section>
+
+            
+            
+
+            <!-- SLIDES 12-16: HeapSort (Proceso por imágenes) -->
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <div class="r-stack">
+                    <!-- Simulación de HeapSort1 a HeapSort6 -->
+                    <img src="images/heapsort/HeapSort1.png" alt="Paso 1: Intercambio Raíz y último elemento"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="1"
+                        data-src="images/heapsort/HeapSort1.png">
+                    <img src="images/heapsort/HeapSort2.png" alt="Paso 2: Re-Heapify" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="2"
+                        data-src="images/heapsort/HeapSort2.png">
+                    <img src="images/heapsort/HeapSort3.png" alt="Paso 3: Siguiente intercambio" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="3"
+                        data-src="images/heapsort/HeapSort3.png">
+                    <img src="images/heapsort/HeapSort4.png" alt="Paso 4" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="4"
+                        data-src="images/heapsort/HeapSort4.png">
+                    <img src="images/heapsort/HeapSort5.png" alt="Paso 5" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="5"
+                        data-src="images/heapsort/HeapSort5.png">
+                    <img src="images/heapsort/HeapSort6.png" alt="Paso 6: Array ordenado" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="6"
+                        data-src="images/heapsort/HeapSort6.png">
+                </div>
+            </section>
+
+            <!-- SLIDE 17: HeapSort (Código) -->
+            <section>
+                <h2>HeapSort (Código)</h2>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void HeapSort(int arr[], int tam){ // arreglo y tamaño
+
+    int temp;
+
+    // Fase 1: Construir el Max Heap
+    build_heap(arr, tam);
+
+    // Fase 2: Extraer elementos uno por uno
+    for (int i = tam - 1; i > 0; i--){ // 'i' actúa como el nuevo tamaño del heap
+        
+        // 1. Intercambiar la raíz (max) con el último elemento del heap
+        temp = arr[0]; 
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        // 2. Arreglar el heap (el elemento más grande fue movido)
+        heapify(arr, 0, i); 
+    }
+}
+            </code></pre>
+                </div>
+                <p class="fragment r-fit-text" data-fragment-index="1" style="margin-top: 30px;">
+                    Complejidad: HeapSort es $\mathbf{\mathcal{O}(n \log n)}$ en el mejor, peor y caso promedio,
+                    ya que $\log n$ es el costo de cada llamada a `heapify`.
+                </p>
+            </section>
+
+            <!-- SECCIÓN: Colas de Prioridad -->
+            <section>
+                <h2>Colas de Prioridad (Priority Queues)</h2>
+                <div class="r-fit-text">
+                    <p>La estructura de Heap Binario (Binary Heap) es la base de las Colas de Prioridad, donde
+                        los datos se asocian con un valor entero que representa su prioridad.</p>
+
+                    <h4 style="margin-top: 20px; color: #4CAF50;">Aplicaciones Comunes:</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Schedulers de clúster: Manejo de trabajos con diferentes niveles de importancia
+                            (e.g., `qsub`, `sbatch`).</li>
+                        <li>Prioridad de procesos: Gestión de la asignación de CPU en sistemas operativos (Task
+                            Manager).</li>
+                        <li>Algoritmos de grafos como el de Dijkstra (para encontrar el camino más corto).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SLIDE 19: Colas de Prioridad: Operaciones básicas -->
+            <section>
+                <h4>Colas de Prioridad: Operaciones y Costos</h4>
+                <div class="r-fit-text">
+
+                    <div style="flex: 1; padding-right: 20px;">
+                        <h4 style="color: #2196F3;">Operaciones Básicas</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>`get_heap`: Retorna el valor del máximo valor en la cola.</li>
+                            <li>`pop_heap`: Retorna y remueve el valor máximo en la cola. </li>
+                            <li>`increase_key`: Actualiza la prioridad de un elemento, y reordena el heap. </li>
+                            <li>`insert_key`: Añade un nuevo valor a la cola, y la reordena.</li>
+                        </ul>
+                    </div>
+
+                    <div style="flex: 1; padding-left: 20px; border-left: 2px solid #ccc;">
+                        <h4 style="color: #FF9800;">Complejidad Algorítmica</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li class="fragment" data-fragment-index="1">`get_heap`: $\mathbf{\mathcal{O}(1)}$
+                                (acceso directo a la raíz).</li>
+                            <li class="fragment" data-fragment-index="2">`pop_heap`: $\mathbf{\mathcal{O}(\log
+                                n)}$ (costo de `heapify`).</li>
+                            <li class="fragment" data-fragment-index="3">`increase_key`:
+                                $\mathbf{\mathcal{O}(\log n)}$ (subir el elemento por el heap).</li>
+                            <li class="fragment" data-fragment-index="4">`insert_key`: $\mathbf{\mathcal{O}(\log
+                                n)}$ (bajar o subir el elemento por el heap). </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

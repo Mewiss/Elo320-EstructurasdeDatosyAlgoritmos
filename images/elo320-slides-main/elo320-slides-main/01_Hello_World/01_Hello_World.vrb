@@ -1,0 +1,28 @@
+\frametitle{C Estructura general}
+\begin{itemize}
+	\item Requiere un método de inicio de ejecución: \textbf{main}
+\end{itemize}
+
+%\vspace{-.45cm}
+%  \begin{columns}[t]
+%\begin{column}{5.1cm}
+\begin{exampleblock}{C}
+\begin{lstlisting}[language=C,basicstyle=\scriptsize]
+#include<stdio.h>
+
+int main() {
+	printf("Hola Mundo\n");
+	return 0;
+}
+\end{lstlisting}
+\end{exampleblock}
+%\end{column}
+%\begin{column}{5.1cm}
+\begin{block}{Python}
+	\begin{lstlisting}[language=Python,basicstyle=\scriptsize]
+if __name__ == "__main__":
+	print("Hola Mundo!")
+	\end{lstlisting}
+\end{block}
+%\end{column}
+%\end{columns}

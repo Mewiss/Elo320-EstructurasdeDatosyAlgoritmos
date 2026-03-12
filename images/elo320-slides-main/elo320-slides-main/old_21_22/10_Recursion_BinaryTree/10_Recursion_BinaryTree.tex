@@ -1,0 +1,621 @@
+%\documentclass[spanish]{beamer}
+
+\documentclass{beamer}
+\usepackage{pgf,pgfpages}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=0.5in]
+\usepackage{algorithm,algorithmic}
+%\usepackage{algorithm,algorithmicx}
+%\usepackage[noend]{algpseudocode}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	commentstyle=\color{red},
+	literate={á}{{\'a}}1
+	{ã}{{\~a}}1
+	{é}{{\'e}}1
+	{É}{{\'E}}1
+	{ó}{{\'o}}1
+	{í}{{\'i}}1
+	{ñ}{{\~n}}1
+	{¡}{{!`}}1
+	{¿}{{?`}}1
+	{ú}{{\'u}}1
+	{Í}{{\'I}}1
+	{Ó}{{\'O}}1
+}
+
+\usepackage{beamerthemesplit}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+%\usepackage[latin1]{inputenc}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{algorithm}
+%\usepackage{algorithmic-C}
+%\usepackage{algorithmic}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{fancyvrb,relsize}
+\usepackage{hhline}
+\usepackage{tikz}
+\usetikzlibrary{trees, shapes, calc}
+\newcommand{\inputTikZ}[2]{%
+	\scalebox{#1}{\input{#2}}
+}
+
+\usetheme{Warsaw} %Gueno
+%\usetheme{Darmstadt} %OK!
+% \usetheme{Frankfurt} %OK!
+%\usetheme{Goettingen}
+%\usetheme{Dresden}
+%\usetheme{JuanLesPins} %OK!!
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{Rochester} %sobrio
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+
+%\usecolortheme{albatross}
+%\usecolortheme{seahorse}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily} %Gueno
+\usecolortheme{orchid}%Gueno
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{whale}
+
+
+\DefineVerbatimEnvironment%
+      {VerbatimNN}%
+      {Verbatim}%
+      {fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimNNN}%
+      {Verbatim}%
+      {fontsize=\relsize{-2}}
+
+\DefineVerbatimEnvironment%
+      {VerbatimPseudo}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimPseudoReduced}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-2}}
+\DefineVerbatimEnvironment%
+      {VerbatimPseudoReduced2}%
+      {Verbatim}%
+      {numbers=left, fontsize=\relsize{-3}}
+\DefineVerbatimEnvironment%
+      {VerbatimC}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-1}}
+\DefineVerbatimEnvironment%
+      {VerbatimReducedC}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-2}}
+\DefineVerbatimEnvironment%
+      {VerbatimReduced2C}%
+      {Verbatim}%
+      {commandchars=@ªº, numbers=left, fontsize=\relsize{-3}}
+
+
+
+%\AtBeginSubsection[]
+%{
+% \begin{frame}
+% \frametitle{Sinopsis}
+% Aqui decides: cada seccion y subseccion:
+% \tableofcontents[currentsection,currentsubsection]
+ %O solamente la seccion (Solo uno de ellos)
+%\tableofcontents[currentsection]
+% \end{frame}
+%}
+
+% Si quieres que todo por default aparezca de poco en poco
+% descomenta esta linea
+%\beamerdefaultoverlayspecification{<+->}
+
+\setbeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercovered{transparent}
+
+\title{ELO320 - Estructuras de Datos y Algoritmos\\Tipos de Datos Abstractos\\Árboles Binarios y Recursividad}
+%\subtitle{Ingeniería Civil Telemática UTFSM}
+\author{Dr. Nicolás Gálvez R.\\{\small nicolas.galvez@usm.cl}}
+\institute{Ing. Civil Telemática - Departamento de Electrónica}
+\titlegraphic{\includegraphics[scale=.18]{images/logoutfsm}}
+\date{2do Semestre 2022}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%\section*{Sinopsis}
+%\frame{  \frametitle{Sinopsis}\tableofcontents[pausesections]}
+%
+%
+
+\section{Recursividad}
+%funciones recursivas
+
+\begin{frame}[fragile]
+ \frametitle{Recursividad}
+
+Los procesos recursivos son aquellos ciclos autorreferentes, vale decir, una definición (matemática, funciones, programas) depende parcialmente de sí misma. 
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/obs-recursion}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Recursividad}
+Una definición recursiva se compone de dos elementos básicos:
+\begin{enumerate}
+\item Un caso base que detiene el ciclo.
+\item Una llamada autorreferente con un elemento. 
+\end{enumerate}
+
+\begin{block}{Factorial}
+$ f(0) = 1 $\\
+$ f(n) = n \times f(n-1)$.
+\end{block}
+
+\begin{exampleblock}{Factorial en C}
+\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+int factorial(int n){
+	if (n<0)
+		return -1; //Valor de Error
+	elif(n==0) // caso base, sin condicion -> loop infinito
+		return 1; 
+	return n * factorial(n-1); // llamado a un elemento parcial del caso
+}
+
+\end{lstlisting}
+\end{exampleblock}
+Entenderemos por recursivdad como la técnica en la cual alguna función depende de su propia definición, vale decir, \textbf{se llama a sí misma} para formar un ciclo.
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Recursividad: Ejemplos}
+\begin{enumerate}
+\item Sequencia de Fibonacci.
+\item Polinomio de Hermite.
+\item Triángulo de Pascal.
+\item Fractales.
+\begin{itemize}
+\item Curva de Peano.
+\item Curva de Koch.
+\item Curva de Hilbert. 
+\end{itemize}
+\item \textbf{Árboles}.
+\end{enumerate}
+\end{frame}
+
+
+\section{Árboles}
+%conceptos de árboles, recursivadad en teoria
+\begin{frame}[fragile]
+ \frametitle{Árboles}
+
+Los árboles son una estructura de dato no-lineal, jerárquica y enlazada que permite acceso eficiente a los elementos de la estructura tanto como a actualización de la misma.
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/arbol1}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Aplicaciones}
+Los árboles son extensamente utilizados en diversas áreas de las telecomunicaciónes, tecnologías de la información, matemáticas, electrónica e informática:
+\begin{itemize}
+\item Compilación e interpretación de elementos sintácticos de un lenguaje.
+\item Representación expresiones aritméticas y/o lógicas.
+\item Representación de estructuras de búsqueda de datos.
+\item Sistemas de archivos y directorios.
+\item Clases y herencia en POO.
+\item Compresión de datos.
+\item Computación Evolutiva.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Conceptos}
+
+Un árbol está formado por un conjunto finito de elementos, llamados nodos los cuales son enlazados entre sí según jerarquía padre-hijo.
+\begin{itemize}
+\item Primer nodo $\rightarrow$  raíz del árbol.
+\item Relación padre-hijo $\rightarrow$ jerarquía.
+\item Nodos $\rightarrow$ varios sucesores.
+\item Nodos $\rightarrow$ único antecesor.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.6\linewidth]{images/example1}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Conceptos}
+\small
+Los componentes de los árboles son nombrados y clasificados según sus características.
+\begin{itemize}
+\item Primer nodo $\rightarrow$  raíz del árbol.
+\item Nodo con sucesores $\rightarrow$ padre.
+\item Sucesor de un nodo $\rightarrow$ hijo.
+\item Nodos con padre e hijos $\rightarrow$ nodo intermedio.
+\item Nodo sin hijos $\rightarrow$ hoja (nodo terminal).
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.6\linewidth]{images/concepto}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Conceptos}
+\small
+Además en un árbol, se identifica la siguiente información:
+\begin{itemize}
+\item Camino: Secuencia entre dos nodos siguiendo relación jerárquica padre hijo.
+$$\text{camino}(4,47)=\{4,12,61,47\}$$ 
+\item Largo Camino: Número de enlaces (nodos-1) entre dos nodos en relación jerárquica.
+$$\text{largo}(4,47)=3$$ 
+\item Rama: Camino de la raíz a una hoja.
+$$\text{rama}_1 = \text{camino}(4,2)$$
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.67\linewidth]{images/concepto2}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Conceptos}
+\small
+\begin{itemize}
+\item Grado de Nodo: Cantidad de hijos.
+$$\text{grado}(47)=0$$ 
+\item Grado del árbol: Máximo número de hijos para cada nodo.
+$$\text{grado}(A)=3$$ 
+\item Profundidad: Cantidad de predecesores del nodo.
+$$\text{profundidad}(2) = 2$$
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.67\linewidth]{images/concepto2}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Conceptos}
+\small
+\begin{itemize}
+\item Altura: Profundidad Máxima de los nodos o largo del camino más grande. 
+$$\text{altura}(A)=3$$ 
+\item Nivel: Número de enlaces del camino de la raíz al nodo (parte en 0). 
+$$\text{nivel}(4)=3$$ 
+\item Bosque: Colección o conjunto de árboles.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.67\linewidth]{images/concepto2}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles: Recursividad}
+\small
+Los árboles son estructuras de datos recursiva, debido a que cada hijo de un nodo es la raíz de un árbol de menor altura (sub-árbol). 
+
+
+\begin{center}
+\includegraphics[width=.6\linewidth]{images/arbolrecursivo}
+\end{center}
+
+
+Por esta razón, las funciones y métodos de árboles son facilmente aplicables con técnicas recursivas.
+\end{frame}
+
+\section{Árboles Binarios}
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios}
+\small
+En este curso nos concentraremos en árboles binarios, i.e., árboles cuyo grado es 2. 
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/binarytree}
+\end{center}
+
+Aplicaciones:
+\begin{itemize}
+\item Gramática de lenguajes, i.e. matemáticas.
+\item Árboles de Decisión.
+\item \textbf{Árbol Binario de Búsqueda.}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Implementación}
+\small
+Un árbol binario tiene a lo más dos hijos, y se implementa muy similar a las listas enlazadas.
+
+\begin{center}
+\includegraphics[width=.60\linewidth]{images/binarytree2}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Implementación}
+\small
+\begin{center}
+\includegraphics[width=.60\linewidth]{images/binarytree2}
+\end{center}
+
+\begin{exampleblock}{Árbol Binario en C}
+\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+typedef struct nodo{
+	int dato;
+	struct nodo *hijo_izq;
+	struct nodo *hijo_der;
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t *raiz; // árbol vacío
+	return 0;
+}
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Implementación}
+\small
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/binarytree2}
+\end{center}
+
+Detalles:
+\begin{itemize}
+\item El puntero de control se encuentra siempre en la raíz. 
+\item Los nodos cuyos hijos apunten a \texttt{NULL}, son hojas.
+\item \textbf{¿Cómo podemos recorrer un árbol (binario)?.} - En seguida.
+\item \textbf{¿Cómo agregar, buscar, eliminar elementos de un árbol binario?} - ABB: Próxima clase.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Recorridos}
+\small 
+Muchas aplicaciones necesitan procesar un árbol visitando sus nodos, y realizando acciones sobre ellos: \textit{mostrar su contenido}, \textit{sumar valores guardados}, \textit{encontrar un nodo específico}, etc.\\
+\bigskip
+Explicaremos dos de las formas más clásicas para recorrer un árbol:
+\begin{itemize}
+\item Recorrido en anchura.
+\item Recorrido en profundidad.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Recorrido en Anchura}
+\small 
+Tiene como criterio visitar todos los nodos de un nivel antes de pasar al siguiente.
+
+\begin{center}
+\includegraphics[width=.55\linewidth]{images/breadthsearch}
+\end{center}
+
+
+\begin{itemize}
+\item No puede realizarse directamente por recursividad.
+\item Se utiliza una \textbf{Queue/Cola} como estructura auxiliar.
+\item Recorre todos los nodos de un nivel, antes de pasar al siguiente. 
+\item Se realiza dequeue y enqueues hasta pasar por todos lo niveles.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Recorrido en Profundidad}
+\small 
+Tiene como criterio visitar los nodos por profundidad hasta llegar una hoja, luego retrocede y continúa.
+\begin{center}
+\includegraphics[width=.45\linewidth]{images/dfs1}
+\end{center}
+
+Tres de los tipos de recorrido en profundidad más utilizados son:
+\begin{itemize}
+\item Pre-orden.
+\item In-orden.
+\item Post-orden.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. Pre-orden}
+\small 
+Recorrido recursivo que sigue la siguiente orden de visitas:
+\begin{enumerate}
+\item Visitar nodo actual.
+\item Visitar hijo izquierdo en pre-orden.
+\item Visitar hijo derecho en pre-orden.
+\end{enumerate}
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs1}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. Pre-orden}
+\small 
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs1}
+\end{center}
+
+\begin{exampleblock}{Pre-orden en C}
+\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+void print_preorden(node_t *root){
+	printf("Dato: |\%|d\n", root->dato);
+	
+	if(root->hijo_izq != NULL)
+		print_preorden(root->hijo_izq);
+
+	if(root->hijo_der != NULL)
+		print_preorden(root->hijo_der);
+}
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. In-orden}
+\small 
+Recorrido recursivo que sigue la siguiente orden de visitas:
+\begin{enumerate}
+\item Visitar hijo izquierdo en in-orden.
+\item Visitar nodo actual.
+\item Visitar hijo derecho en in-orden.
+\end{enumerate}
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs2}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. In-orden}
+\small 
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs2}
+\end{center}
+
+\begin{exampleblock}{In-orden en C}
+\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+void print_inorden(node_t *root){
+
+	if(root->hijo_izq != NULL)
+		print_inorden(root->hijo_izq);
+
+	printf("Dato: |\%|d\n", root->dato);
+	
+
+	if(root->hijo_der != NULL)
+		print_inorden(root->hijo_der);
+}
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. Post-orden}
+\small 
+Recorrido recursivo que sigue la siguiente orden de visitas:
+\begin{enumerate}
+\item Visitar hijo izquierdo en post-orden.
+\item Visitar hijo derecho en post-orden.
+\item Visitar nodo actual.
+\end{enumerate}
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs3}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Árboles binarios: Rec. Prof. Post-orden}
+\small 
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/dfs3}
+\end{center}
+
+\begin{exampleblock}{Post-orden en C}
+\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+void print_postorden(node_t *root){
+
+	if(root->hijo_izq != NULL)
+		print_postorden(root->hijo_izq);
+
+	if(root->hijo_der != NULL)
+		print_postorden(root->hijo_der);
+
+	printf("Dato: |\%|d\n", root->dato);
+}
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+
+%conceptos de árboles binarios y búsqueda en profundidad. recursivdad en teoria
+
+
+%\section{Árbol Binario Busqueda}
+%regla menor a la izq, mayor a la derecha
+%implementar recorrer: 3 metodos.
+%metdos, insertar, buscar, elimnar -> modificar (combination).
+%recursividad en practica
+
+
+%\begin{frame}[fragile]
+% \frametitle{Lista Simple Enlazada: Inicializar}
+%
+%Las listas, en su versión más básica, dependen de un puntero al inicio de la lista. Éste suele llamarse \textit{header}, \textit{cabecera} o  \textit{inicio}.
+%\begin{exampleblock}{C}
+%\begin{lstlisting}[language=C, basicstyle=\tiny, escapeinside={|}{|}]
+%#include<stdio.h>
+%
+%typedef struct nodo{
+%	int dato; //dato, puede ser lo que uds. necesiten
+%	struct nodo *sgte; // puntero a un nodo enalce.
+%} nodo_t;
+%
+%int main(int argc, char **argv){
+%
+%	nodo_t * inicio = NULL; 
+%	// Inicializamos la lista, con su puntero de inicio apuntando a NULL
+%	// Equivalente a lista vacía []
+%
+%	return 0;
+%}
+%\end{lstlisting}
+%\end{exampleblock}
+%\end{frame}
+%
+%\begin{frame}[fragile]
+% \frametitle{Lista Simple Enlazada: Inicializar}
+%\begin{center}
+%\includegraphics[width=.9\linewidth]{images/linkedlist1}
+%\end{center}
+%
+%\end{frame}
+
+
+
+\end{document}

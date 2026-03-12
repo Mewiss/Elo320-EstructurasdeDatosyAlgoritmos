@@ -1,0 +1,19 @@
+\frametitle{Recorrer un arreglo}
+Podemos utilizar cualquiera de las estructuras de control iterativas para recorrerlos.
+\begin{exampleblock}{C}
+\begin{lstlisting}[language=C,basicstyle=\scriptsize,escapeinside={|}{|}]
+#inclede<stdio.h>
+
+int main(){
+	int i;
+	float a[5];
+	
+	for(i=0;i<5;i++){
+		float val; //¿Cuántas veces nace y muere val?
+		scanf("|\%|f", &val);
+		a[i]=val;
+	} //¿Cómo reducir este código?
+
+}
+\end{lstlisting}
+\end{exampleblock}

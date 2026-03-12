@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Complejidad Algorítmica</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            <section id="analisis-de-complejidad">
+                <h4>Análisis de Complejidad</h4>
+                <div class="slide" data-title="Complejidad en Algoritmos">
+                    <strong>¿Cómo podemos comparar dos algoritmos que resuelven un mismo problema?</strong>
+                    <ul class="r-fit-text">
+                        <li class="fragment">Opción 1: programar ambos y ver cuántos recursos computacionales consumen.
+                            <ul>
+                                <li>Costoso $\rightarrow$ sólo uno será utilizado.</li>
+                                <li>Posible mala implementación $\rightarrow$ se subestima.</li>
+                                <li>Casos de prueba pueden favorecer a algún algoritmo.</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Opción 2: Análisis de Algoritmo $\rightarrow$ Análisis de Tiempo de
+                            Ejecución.</li>
+                        <li class="fragment">Opción 3: Análisis Asintótico.</li>
+                    </ul>
+                    </small>
+                </div>
+            </section>
+            <section>
+                <div class="slide" data-title="Complejidad en Algoritmos">
+                    <h4>Complejidad en Algoritmos</h4>
+
+                    <div class="r-fit-text">
+                        <ul>
+                            <li>Medir eficiencia $\rightarrow$ para $n \rightarrow \infty$ </li>
+                            <li>Técnicas de estimación del costo.</li>
+                            <li>Definir costos de un algoritmo antes de implementarlo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment">
+                        <p>Se miden por recursos utilizados:</p>
+                        <ul>
+                            <li>Tiempo.</li>
+                            <li>Memoria.</li>
+                            <li>Ancho de Banda usado.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+            <section>
+
+
+                <div class="slide" data-title="Complejidad en Algoritmos">
+                    <div class="fragment r-fit-text">
+                        <p>El tiempo de ejecución de un algoritmo varía según dónde sea implementado. Por esta
+                            razón, nos referiremos a
+                            los siguientes elementos (normalizados):</p>
+                        <ul>
+                            <li>Cantidad de accesos a la memoria.</li>
+                            <li>Número de comparaciones</li>
+                            <li>Cantidad de veces que se ejecuta un ciclo.</li>
+                        </ul>
+                    </div>
+                    <h4>Complejidad en tiempo</h4>
+                    <p class="fragment" style="text-align: center;"><strong>Nº de operaciones realizadas</strong>
+                        $\times$
+                        <strong>Costo de cada operación</strong>.
+                    </p>
+
+
+                </div>
+            </section>
+            <section>
+
+                <div class="slide" data-title="Complejidad en Algoritmos">
+
+                    <h4>Complejidad en tiempo</h4>
+                    <p style="text-align: center;"><strong>Nº de operaciones realizadas</strong> $\times$
+                        <strong>Costo de cada operación</strong>.
+                    </p>
+
+                    <p>Utilizaremos una medida estándar:</p>
+                    <div style="text-align: center;"><strong>Costo de cada operación</strong> $\rightarrow$
+                        <strong>1</strong>.
+                    </div>
+
+                </div>
+
+            </section>
+            <section>
+
+                <h4>Tiempo de ejecución de un Algoritmo</h4>
+                <div class="r-fit-text">
+                    <p>Definiremos $T(n)$ como la función de tiempo de ejecución de un algoritmo con input $n$, y la
+                        expresaremos en función a la cantidad de instrucciones.</p>
+                    <p style="margin-top: 1em;">Costo de las operaciones en unidades de tiempo [ut]:</p>
+                    <ul>
+                        <li class="fragment">Instrucciones básicas: $1$</li>
+                        <li class="fragment">Secuencia de $n$ instrucciones: $c \times n = n$ (c: cte. de costo)
+                        </li>
+                        <li class="fragment">if-else: $T(\text{condición}) + \text{max}\{T(\text{if}),
+                            T(\text{else})\}$</li>
+                        <li class="fragment">while: $(n+1) \times T(\text{condición}) + n \times T(\text{while}) $
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+            <section>
+
+                <h4>Ejemplo de tiempo de ejecución</h3>
+                    <pre class="lstlisting"><code class="language-C">
+1 int suma(int n) {
+2 	int sum = 0, i, j;
+3 	for (i=0; i &lt; n; i++)
+4 		for (j=0; j &lt; n; j++)
+5 			sum++;
+6 	return sum;
+7 }
+            </code></pre>
+                    <ul class="r-fit-text">
+                        <li>Orden del número de iteraciones: $n^2$.
+                            <ul>
+                                <li>Costo L.2: 3.</li>
+                                <li>Costo for (L.3, L.4): $1+(n+1)+n = 2n+2$.</li>
+                                <li>Costo L.5: 1.</li>
+                                <li>Costo L.6: 1.</li>
+                            </ul>
+                        </li>
+                        <li>Costo for interno (L.4 + L.5): $2n+2+ (n \times 1) = 3n+2$.</li>
+                        <li>Costo de doble for (L.3 + L.4 + L.5): $(2n+2) + n \times (3n+2) = 3n^2 + 4n + 2$.
+                        </li>
+                        <li>Costo total: $3n^2 + 4n + 6$.</li>
+                    </ul>
+
+            </section>
+
+
+
+
+            <section id="analisis-asintotico">
+                <h4>Análisis Asintótico</h4>
+                <div class="r-fit-text">
+                    <p>Determinar el término predominante en $T(n)$, y luego encontrar
+                        cotas de rendimiento.</p>
+                    <p class="fragment">Existen tres notaciones asintóticas:</p>
+                    <ul>
+                        <li class="fragment">Big O ($\mathcal{O}$): Cota superior asintótica (peor desempeño).
+                        </li>
+                        <li class="fragment">Big Omega ($\Omega$): Cota inferior asintótica ( mejor desempeño).
+                        </li>
+                        <li class="fragment">Big Theta ($\Theta$): Cota compuesta (rendimiento
+                            promedio).</li>
+                    </ul>
+                    <p class="fragment">Comúnmente, se utiliza la notación en peor escenario:
+                        Big O ($\mathcal{O}$).</p>
+
+                </div>
+
+            </section>
+
+
+
+
+            <section>
+                <h4>Análisis Asintótico: Big O ($\mathcal{O}$)</h4>
+
+                <div style="text-align: center;">
+                    <p>Cota asintótica que limita el peor desempeño de un algoritmo.</p>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: flex-start; width: 100%;">
+
+                    <div
+                        style="flex: 0 0 40%; padding-right: 15px; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                        <img src="images/bigO.png" style="width: 100%; height: auto; object-fit: contain;">
+                    </div>
+
+                    <div class="r-fit-text" style="flex: 0 0 60%; display: flex; flex-direction: column;">
+                        <p>Sean $f$ y $g$ dos funciones en $\mathbb{R}$, diremos que:</p>
+                        <div style="text-align: center;">
+                            $$f(n) = \mathcal{O}(g(n)) \iff f(n) \in \mathcal{O}(g(n))$$
+                        </div>
+                        <p>Donde:</p>
+                        <div style="text-align: center;">
+                            $$ \mathcal{O}(g(n)) = \{f(n)\ |\ \exists c \in \mathbb{R}, f(n) \leq c \times g(n);\
+                            \forall n \geq n_0\}$$
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Análisis Asintótico: Big Omega ($\Omega$)</h4>
+
+                <div style="text-align: center;">
+                    <p>Cota asintótica que limita el mejor desempeño de un algoritmo.</p>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: flex-start; width: 100%;">
+
+                    <div
+                        style="flex: 0 0 40%; padding-right: 15px; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                        <img src="images/bigOmega.png" alt="Big Omega graph"
+                            style="width: 100%; height: auto; object-fit: contain;">
+                    </div>
+
+                    <div class="r-fit-text" style="flex: 0 0 60%; display: flex; flex-direction: column;">
+                        <h4>Big Omega ($\Omega$)<small style="font-size: 0.65em;"> (ejemplo)</small></h4>
+                        <p>Sean $f$ y $g$ dos funciones en $\mathbb{R}$, diremos que:</p>
+                        <div style="text-align: center;">
+                            $$f(n) = \Omega(g(n)) \iff f(n) \in \Omega(g(n))$$
+                        </div>
+                        <p>Donde:</p>
+                        <div style="text-align: center;">
+                            $$ \Omega(g(n)) = \{f(n)\ |\ \exists c \in \mathbb{R}, c \times g(n) \leq f(n) ;\
+                            \forall n \geq n_0\}$$
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section>
+                <div class="slide" data-title="Análisis Asintótico: Big Theta ($\Theta$)">
+                    <h4>Análisis Asintótico: Big Theta ($\Theta$)</h4>
+
+                    <div style="text-align: center;">
+                        <p>Cota asintótica que limita el desempeño promedio de un algoritmo.</p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: row; align-items: flex-start; width: 100%;">
+
+                        <div
+                            style="flex: 0 0 40%; padding-right: 15px; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                            <img src="images/bigTheta.png" alt="Big Theta graph"
+                                style="width: 100%; height: auto; object-fit: contain;">
+                        </div>
+
+                        <div class="r-fit-text" style="flex: 0 0 60%; display: flex; flex-direction: column;">
+                            <h4>Big Theta ($\Theta$)<small style="font-size: 0.65em;"> (ejemplo)</small></h4>
+                            <p>Sean $f$ y $g$ dos funciones en $\mathbb{R}$, diremos que:</p>
+                            <div style="text-align: center;">
+                                $$f(n) = \Theta(g(n)) \iff f(n) \in \Theta(g(n))$$
+                            </div>
+                            <p>Donde:</p>
+                            <div style="text-align: center;">
+                                $$ \Theta(g(n)) = \{f(n)\ |\ \exists (c_1, c_2) \in \mathbb{R}^2, c_1 \times g(n)
+                                \leq f(n) \leq c_2 \times g(n);\ \forall n \geq n_0\}$$
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section>
+
+                <h3>Análisis Asintótico</h3>
+                <h4>¿Cuál es la complejidad del siguiente algoritmo</h4>
+                <pre class="lstlisting"><code class="language-C">
+1 int suma(int n) {
+2 	int sum = 0, i, j;
+3 	for (i=0; i &lt; n; i++)
+4 		for (j=0; j &lt; n; j++)
+5 			sum++;
+6 	return sum;
+7 }</code></pre>
+
+                <ul class="r-fit-text">
+                    <li>Costo total $f(n) = 3n^2 + 4n + 6 $.</li>
+                    <li>$g(n) = n^2$, término del grado superior.</li>
+                    <li>Cota superior: <code>suma</code> $= \mathcal{O}(n^2) \rightarrow f(n) \leq 10 \times
+                        g(n) $</li>
+                    <li>Cota inferior: <code>suma</code> $= \Omega(n^2) \rightarrow 1 \times g(n) \leq f(n)
+                        $
+                    </li>
+                    <li>Cota promedio: <code>suma</code> $= \Theta(n^2) \rightarrow 1 \times g(n) \leq f(n)
+                        \leq
+                        10 \times g(n)$</li>
+                </ul>
+
+
+
+            </section>
+            <section>
+
+                <div class="slide" data-title="Análisis Asintótico">
+                    <h3>Análisis Asintótico</h3>
+                    <small>
+                        <div style="text-align: center;">
+                            <img src="images/timecomplexity2.png" alt="time complexity graph 2" style="width: 70%;">
+                        </div>
+                    </small>
+
+                </div>
+            </section>
+
+            <section>
+                <h4>Clases de Notación Big O y Escalabilidad</h4>
+
+                <table class="r-fit-text" style="font-size: 0.7em; width: 100%; margin: 0 auto;">
+                    <thead>
+                        <tr>
+                            <th>Clase</th>
+                            <th>Notación</th>
+                            <th>Escalabilidad</th>
+                            <th>$n=10$</th>
+                            <th>$n=100$</th>
+                            <th>$n=1000$</th>
+                            <th>$n=10000$</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Constante</td>
+                            <td>$\mathcal{O}(1)$</td>
+                            <td>Tiempo fijo (independiente de $n$).</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Logarítmica</td>
+                            <td>$\mathcal{O}(\log n)$</td>
+                            <td>Tasa de crecimiento muy lenta.</td>
+                            <td>3.32</td>
+                            <td>6.64</td>
+                            <td>9.97</td>
+                            <td>13.29</td>
+                        </tr>
+                        <tr>
+                            <td>Lineal</td>
+                            <td>$\mathcal{O}(n)$</td>
+                            <td>Crecimiento proporcional a $n$.</td>
+                            <td>10</td>
+                            <td>100</td>
+                            <td>1000</td>
+                            <td>10000</td>
+                        </tr>
+                        <tr>
+                            <td>Log-Lineal</td>
+                            <td>$\mathcal{O}(n \log n)$</td>
+                            <td>Crecimiento eficiente (óptimo para ordenamiento).</td>
+                            <td>33.2</td>
+                            <td>664</td>
+                            <td>9970</td>
+                            <td>132,900</td>
+                        </tr>
+                        <tr>
+                            <td>Cuadrática</td>
+                            <td>$\mathcal{O}(n^2)$</td>
+                            <td>Crecimiento al cuadrado (lento para $n$ grande).</td>
+                            <td>100</td>
+                            <td>10,000</td>
+                            <td>$10^6$</td>
+                            <td>$10^8$</td>
+                        </tr>
+                        <tr>
+                            <td>Cúbica</td>
+                            <td>$\mathcal{O}(n^3)$</td>
+                            <td>Crecimiento al cubo (solo útil para $n$ muy pequeño).</td>
+                            <td>1,000</td>
+                            <td>$10^6$</td>
+                            <td>$10^9$</td>
+                            <td>$10^{12}$</td>
+                        </tr>
+                        <tr>
+                            <td>Exponencial</td>
+                            <td>$\mathcal{O}(2^n)$</td>
+                            <td>Crecimiento explosivo (solo factible para $n \leq 40$).</td>
+                            <td>1,024</td>
+                            <td>Inviable</td>
+                            <td>Inviable</td>
+                            <td>Inviable</td>
+                        </tr>
+                        <tr>
+                            <td>Factorial</td>
+                            <td>$\mathcal{O}(n!)$</td>
+                            <td>Crecimiento extremo (computacionalmente intratable).</td>
+                            <td>$3.6 \times 10^6$</td>
+                            <td>Inviable</td>
+                            <td>Inviable</td>
+                            <td>Inviable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+
+                <div class="slide" data-title="Análisis Asintótico">
+                    <h4>Análisis Asintótico</h4>
+
+                    <div style="text-align: center;">
+                        <img src="images/timecomplexity-3.png" alt="time complexity graph 2" style="width: 100%;">
+                    </div>
+
+                    <!-- ...existing code... -->
+<p style="font-size:x-small">
+    <a href="https://www.geeksforgeeks.org/dsa/analysis-algorithms-big-o-analysis/" target="_blank" rel="noopener noreferrer">
+        Fuente: GeeksforGeeks — Análisis de algoritmos (Big O)
+    </a>
+</p>
+<!-- ...existing code... -->
+                </div>
+            </section>
+            <section>
+
+                <div class="slide" data-title="Análisis Asintótico">
+                    <h3>Análisis Asintótico</h3>
+                    <small>
+                        <div style="text-align: center;">
+                            <img src="images/bigO2.png" alt="Big O graph 2" style="width: 70%;">
+                        </div>
+                    </small>
+
+                </div>
+            </section>
+
+
+            <!--  <section>
+                <div class="slide" data-title="Ejercicios">
+                    <h3>Ejercicios</h3>
+                    <small>
+                        <ul>
+                            <li>Revisite las implementaciones de listas, pilas, colas y árboles y determine la
+                                complejidad de sus métodos.</li>
+                            <li>Mostrar la evolución de Insert Sort en el arreglo A = {31, 41, 59, 26, 41, 58}</li>
+                            <li>Reescribir Insert Sort para ordenamiento de datos de manera decreciente.</li>
+                            <li>Expresar la ecuación $n^3/1000 - 100n^2 - 100n + 3$ en términos de notación
+                                asintótica.
+                            </li>
+                            <li>Considere el problema de sumar dos números enteros expresados base binaria,
+                                almacenados
+                                en dos arreglos A y B de n elementos (bits) cada uno. La suma de los dos enteros se
+                                debe
+                                almacenar en forma binaria en un arreglo C de (n+1) elementos. Escriba una función
+                                en C
+                                para la suma los dos enteros. ¿Qué complejidad tiene su función? Compárela con la de
+                                sus
+                                compañeros.</li>
+                        </ul>
+                    </small>
+
+                </div>
+            </section> -->
+
+            <section>
+                <h4>Actividad 15: Comparación de tiempos de ejecución </h4>
+
+
+                <div class="r-fit-text">
+                    <p>En Aragorn, clona y compila el código base para comparar lostiempo de ejecución.
+                        <a href="https://classroom.github.com/a/p8kptyI8">https://classroom.github.com/a/p8kptyI8</a>
+
+
+                    </p>
+                </div>
+
+            </section>
+            
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+\frametitle{Analogía - Biblioteca}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/label}
+\end{center}
+
+
+\begin{itemize}
+\item Valor 321 como identificador del libro. \pause
+\item \texttt{int * ubi;} \pause $\rightarrow$ \pause puntero al libro.
+\item \textbf{ubi} \pause $\rightarrow$ \pause Pasillo 3, Estante 3, Fila 1.
+\item \textbf{*ubi} \pause $\rightarrow$ \pause 321.
+\end{itemize}

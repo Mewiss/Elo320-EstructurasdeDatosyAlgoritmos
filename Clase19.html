@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Otros Algoritmos: Colas de prioridad y Backtracking</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            <section>
+                <h2>HeapSort</h2>
+                <p>Algoritmo de ordenamiento basado en la estructura de datos Heap (Montículo). Utiliza un Max Heap para
+                    ordenar los elementos extrayendo repetidamente el máximo y reconstruyendo el heap.</p>
+
+                <div class="r-fit-text" style="text-align: left; margin-top: 30px;">
+                    <ul style="font-size: 0.9em;">
+                        <li class="fragment fade-in" data-fragment-index="1">Complejidad: $\mathbf{\mathcal{O}(n \log
+                            n)}$ en
+                            todos los casos (mejor, promedio y peor).</li>
+                        <li class="fragment fade-in" data-fragment-index="2">In-place: Requiere espacio adicional
+                            constante
+                            $\mathbf{\mathcal{O}(1)}$.</li>
+                        <li class="fragment fade-in" data-fragment-index="3">No Estable: No mantiene el orden relativo
+                            de
+                            elementos iguales.</li>
+                    </ul>
+            </section>
+
+            <!-- SLIDE 1: Heapify -->
+            <section>
+                <h2>HeapSort: Heapify</h2>
+                <div class="fragment" data-fragment-index="1">
+                    <h4 style="color: #4CAF50;">Función Clave para Mantener la Propiedad Heap</h4>
+                </div>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void heapify(int arr[], int i, int tam){ // arreglo, índice, tamaño
+    int mayor = i; // al inicio el nodo es el mayor
+    int l = hijo_izq(i); 
+    int r = hijo_der(i); 
+
+    // 1. Comparar con el hijo izquierdo
+    if (l < tam && arr[l] > arr[mayor]) 
+        mayor = l; 
+    
+    // 2. Comparar con el hijo derecho
+    if (r < tam && arr[r] > arr[mayor]) 
+        mayor = r;
+
+    // 3. Intercambio y recursión
+    if (mayor != i){ // si el mayor no es el padre original
+        // Realizar el intercambio
+        int temp = arr[i];
+        arr[i] = arr[mayor];
+        arr[mayor] = temp;
+
+        // Llamada recursiva en el sub-árbol afectado
+        heapify(arr, mayor, tam); 
+    }
+}
+            </code></pre>
+                </div>
+            </section>
+
+            <!-- SLIDES 2-10: Build Heap (Proceso por imágenes) -->
+            <!-- <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <div class="r-stack">
+                    <img src="images/heapsort/build-heap1.png" alt="Paso 1: Arreglo inicial antes de Build Heap"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="1"
+                        data-src="images/heapsort/build-heap1.png">
+                    <img src="images/heapsort/build-heap2.png" alt="Paso 2: Heapify en el penúltimo nivel"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="2"
+                        data-src="images/heapsort/build-heap2.png">
+                    <img src="images/heapsort/build-heap3.png" alt="Paso 3" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="3"
+                        data-src="images/heapsort/build-heap3.png">
+                    <img src="images/heapsort/build-heap4.png" alt="Paso 4" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="4"
+                        data-src="images/heapsort/build-heap4.png">
+                    <img src="images/heapsort/build-heap5.png" alt="Paso 5" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="5"
+                        data-src="images/heapsort/build-heap5.png">
+                    <img src="images/heapsort/build-heap6.png" alt="Paso 6" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="6"
+                        data-src="images/heapsort/build-heap6.png">
+                    <img src="images/heapsort/build-heap7.png" alt="Paso 7" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="7"
+                        data-src="images/heapsort/build-heap7.png">
+                    <img src="images/heapsort/build-heap8.png" alt="Paso 8" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="8"
+                        data-src="images/heapsort/build-heap8.png">
+                    <img src="images/heapsort/build-heap9.png" alt="Paso 9: Max Heap Finalizado" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="9"
+                        data-src="images/heapsort/build-heap9.png">
+                </div>
+            </section> -->
+
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <!-- Simulación de build-heap1 a build-heap9 -->
+                <img src="images/heapsort/build-heap1.png" alt="Paso 1: Arreglo inicial antes de Build Heap"
+                    style="max-width: 80%;" data-src="images/heapsort/build-heap1.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap2.png" alt="Paso 2: Heapify en el penúltimo nivel"
+                    style="max-width: 80%;" data-src="images/heapsort/build-heap2.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap3.png" alt="Paso 3" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap3.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap4.png" alt="Paso 4" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap4.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap5.png" alt="Paso 5" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap5.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap6.png" alt="Paso 6" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap6.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap7.png" alt="Paso 7" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap7.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap8.png" alt="Paso 8" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap8.png">
+            </section>
+
+            <section>
+                <h2>HeapSort: Build Heap </h2>
+                <p>Proceso de construcción del Max Heap a partir de un arreglo desordenado, aplicando
+                    `heapify` desde el último nodo interno hacia la raíz.</p>
+                <img src="images/heapsort/build-heap9.png" alt="Paso 9: Max Heap Finalizado" style="max-width: 80%;"
+                    data-src="images/heapsort/build-heap9.png">
+
+            </section>
+
+            <!-- SLIDE 11: Build Heap (Código) -->
+            <section>
+                <h4>HeapSort: Build Heap </h4>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void build_heap(int arr[], int tam){ // arreglo y tamaño
+
+    // Empezamos desde el último nodo interno (tam/2) hasta la raíz (1 o 0)
+    for (int i = tam / 2; i >= 0; i--){ 
+        heapify(arr, i, tam);
+    }
+}
+            </code></pre>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="margin-top: 30px;">
+                    Eficiencia: La construcción del heap es sorprendentemente eficiente, con una complejidad de
+                    $\mathbf{\mathcal{O}(n)}$.
+                </p>
+            </section>
+
+
+
+
+            <!-- SLIDES 12-16: HeapSort (Proceso por imágenes) -->
+            <!-- <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <div class="r-stack">
+                    <img src="images/heapsort/HeapSort1.png" alt="Paso 1: Intercambio Raíz y último elemento"
+                        style="max-width: 80%;" class="fragment fade-in current-visible" data-fragment-index="1"
+                        data-src="images/heapsort/HeapSort1.png">
+                    <img src="images/heapsort/HeapSort2.png" alt="Paso 2: Re-Heapify" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="2"
+                        data-src="images/heapsort/HeapSort2.png">
+                    <img src="images/heapsort/HeapSort3.png" alt="Paso 3: Siguiente intercambio" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="3"
+                        data-src="images/heapsort/HeapSort3.png">
+                    <img src="images/heapsort/HeapSort4.png" alt="Paso 4" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="4"
+                        data-src="images/heapsort/HeapSort4.png">
+                    <img src="images/heapsort/HeapSort5.png" alt="Paso 5" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="5"
+                        data-src="images/heapsort/HeapSort5.png">
+                    <img src="images/heapsort/HeapSort6.png" alt="Paso 6: Array ordenado" style="max-width: 80%;"
+                        class="fragment fade-in current-visible" data-fragment-index="6"
+                        data-src="images/heapsort/HeapSort6.png">
+                </div>
+            </section> -->
+
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort1.png" alt="Paso 1: Intercambio Raíz y último elemento"
+                    style="max-width: 80%;" data-src="images/heapsort/HeapSort1.png">
+            </section>
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort2.png" alt="Paso 2: Re-Heapify" style="max-width: 80%;"
+                    data-src="images/heapsort/HeapSort2.png">
+            </section>
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort3.png" alt="Paso 3: Siguiente intercambio" style="max-width: 80%;"
+                    data-src="images/heapsort/HeapSort3.png">
+            </section>
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort4.png" alt="Paso 4" style="max-width: 80%;"
+                    data-src="images/heapsort/HeapSort4.png">
+            </section>
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort5.png" alt="Paso 5" style="max-width: 80%;"
+                    data-src="images/heapsort/HeapSort5.png">
+            </section>
+            <section>
+                <h4>HeapSort (Proceso de Ordenamiento)</h4>
+                <p>Proceso de extracción de la raíz y re-heapificación, paso a paso.</p>
+                <img src="images/heapsort/HeapSort6.png" alt="Paso 6: Array ordenado" style="max-width: 80%;"
+                    data-src="images/heapsort/HeapSort6.png">
+
+            </section>
+
+            <!-- SLIDE 17: HeapSort (Código) -->
+            <section>
+                <h2>HeapSort (Código)</h2>
+                <div style="background: #f7f7f7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <pre><code class="language-C" style="font-size: 0.8em; max-height: 400px;">
+void HeapSort(int arr[], int tam){ // arreglo y tamaño
+
+    int temp;
+
+    // Fase 1: Construir el Max Heap
+    build_heap(arr, tam);
+
+    // Fase 2: Extraer elementos uno por uno
+    for (int i = tam - 1; i > 0; i--){ // 'i' actúa como el nuevo tamaño del heap
+        
+        // 1. Intercambiar la raíz (max) con el último elemento del heap
+        temp = arr[0]; 
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        // 2. Arreglar el heap (el elemento más grande fue movido)
+        heapify(arr, 0, i); 
+    }
+}
+            </code></pre>
+                </div>
+                <p class="fragment r-fit-text" data-fragment-index="1" style="margin-top: 30px;">
+                    Complejidad: HeapSort es $\mathbf{\mathcal{O}(n \log n)}$ en el mejor, peor y caso promedio,
+                    ya que $\log n$ es el costo de cada llamada a `heapify`.
+                </p>
+            </section>
+
+            <!-- SECCIÓN: Colas de Prioridad -->
+            <section>
+                <h2>Colas de Prioridad (Priority Queues)</h2>
+                <div class="r-fit-text">
+                    <p>La estructura de Heap Binario (Binary Heap) es la base de las Colas de Prioridad, donde
+                        los datos se asocian con un valor entero que representa su prioridad.</p>
+
+                    <h4 style="margin-top: 20px; color: #4CAF50;">Aplicaciones Comunes:</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Schedulers de clúster: Manejo de trabajos con diferentes niveles de importancia
+                            (e.g., `qsub`, `sbatch`).</li>
+                        <li>Prioridad de procesos: Gestión de la asignación de CPU en sistemas operativos (Task
+                            Manager).</li>
+                        <li>Algoritmos de grafos como el de Dijkstra (para encontrar el camino más corto).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SLIDE 19: Colas de Prioridad: Operaciones básicas -->
+            <section>
+                <h4>Colas de Prioridad: Operaciones y Costos</h4>
+                <div class="r-fit-text">
+
+                    <div style="flex: 1; padding-right: 20px;">
+                        <h4 style="color: #2196F3;">Operaciones Básicas</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li>`get_heap`: Retorna el valor del máximo valor en la cola.</li>
+                            <li>`pop_heap`: Retorna y remueve el valor máximo en la cola. </li>
+                            <li>`increase_key`: Actualiza la prioridad de un elemento, y reordena el heap. </li>
+                            <li>`insert_key`: Añade un nuevo valor a la cola, y la reordena.</li>
+                        </ul>
+                    </div>
+
+                    <div style="flex: 1; padding-left: 20px; border-left: 2px solid #ccc;">
+                        <h4 style="color: #FF9800;">Complejidad Algorítmica</h4>
+                        <ul style="font-size: 0.9em;">
+                            <li class="fragment" data-fragment-index="1">`get_heap`: $\mathbf{\mathcal{O}(1)}$
+                                (acceso directo a la raíz).</li>
+                            <li class="fragment" data-fragment-index="2">`pop_heap`: $\mathbf{\mathcal{O}(\log
+                                n)}$ (costo de `heapify`).</li>
+                            <li class="fragment" data-fragment-index="3">`increase_key`:
+                                $\mathbf{\mathcal{O}(\log n)}$ (subir el elemento por el heap).</li>
+                            <li class="fragment" data-fragment-index="4">`insert_key`: $\mathbf{\mathcal{O}(\log
+                                n)}$ (bajar o subir el elemento por el heap). </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <h4> Actividad 19.1: Simulación de Triage</h4>
+
+                <p>Aplicando Min-heap, simula la gestión de 5 pacientes con prioridades 1 (más urgente) a 5 (menos
+                    urgente).</p>
+                <ol>
+                    <li>Inserción (Llegada): Insertar P1-P5 y aplicar Heapify para mantener la propiedad Min-Heap.</li>
+                    <li>Extracción (Atención): Extraer los 3 pacientes más urgentes, aplicando heapify para restaurar el
+                        Heap.</li>
+                </ol>
+                <p> Los pacientes y su prioridad serán: P1,3; P2,5; P3,1; P4,4; P5,2.</p>
+
+
+            </section>
+
+
+            <section>
+
+                <h3 class="slide-header"> Algoritmo Avanzado: Backtracking (Vuelta Atrás)</h3>
+
+                <p>Técnica algorítmica utilizada para encontrar soluciones a problemas de decisión u
+                    optimización que involucran la exploración de un gran espacio de estados (ej.
+                    rompecabezas, laberintos, combinaciones).</p>
+            </section>
+            <section>
+                <h3>¿Cómo funciona?</h3>
+                <ol>
+                    <li>Hacer una Suposición: Se elige una opción para el estado actual.</li>
+                    <li>Llamada Recursiva: Se avanza a la siguiente etapa con el cambio.</li>
+                    <li>Verificación: Si la suposición falla (viola restricciones o no conduce a
+                        la meta).</li>
+                    <li>Vuelta Atrás: Se deshace el cambio y se prueba la siguiente opción
+                        disponible (el corazón del Backtracking).</li>
+                </ol>
+                <p style="font-style: italic; margin-top: 15px;">Es una búsqueda en profundidad (DFS) que poda ramas
+                    inválidas del árbol de búsqueda.</p>
+            </section>
+
+
+            <section>
+                <h3>Aplicaciones Clave</h3>
+                <ul style="font-size: 0.9em;">
+                    <li>Sudoku Solver: El ejemplo más clásico.</li>
+                    <li>Problema de las N-Reinas: Colocar N reinas sin que se ataquen.</li>
+                    <li>Laberintos: Encontrar una salida.</li>
+                    <li>Optimización: Problema de la Mochila (Knapsack).</li>
+                    <li>Generación de Combinaciones o Permutaciones.</li>
+                </ul>
+
+            </section>
+
+            <section>
+                <h4> Actividad 19.2: Sudoku con Backtracking</h4>
+
+                <p>Aplica Backtracking para resolver el siguiente sudoku</p>
+
+                <div style="width: 40%; text-align: center;">
+                    <h3 style="margin-bottom: 10px;">Mini-Sudoku (4x4)</h3>
+                    <!-- Estructura simple de tabla para simular el Sudoku 2x2 -->
+                    <table style="width: 100%; border-collapse: collapse; font-size: 1.5em; table-layout: fixed;">
+                        <tr>
+                            <td style="border: 2px solid black; background-color: #eee;">1</td>
+                            <td style="border: 2px solid black; border-right: 4px solid black;"></td>
+                            <td style="border: 2px solid black;"></td>
+                            <td style="border: 2px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid black; border-bottom: 4px solid black;"></td>
+                            <td
+                                style="border: 2px solid black; border-right: 4px solid black; border-bottom: 4px solid black;">
+                                2</td>
+                            <td style="border: 2px solid black; border-bottom: 4px solid black;">1</td>
+                            <td style="border: 2px solid black; border-bottom: 4px solid black;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid black;">3</td>
+                            <td style="border: 2px solid black; border-right: 4px solid black;"></td>
+                            <td style="border: 2px solid black;"></td>
+                            <td style="border: 2px solid black;">2</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid black;">2</td>
+                            <td style="border: 2px solid black; border-right: 4px solid black;"></td>
+                            <td style="border: 2px solid black;">3</td>
+                            <td style="border: 2px solid black;"></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

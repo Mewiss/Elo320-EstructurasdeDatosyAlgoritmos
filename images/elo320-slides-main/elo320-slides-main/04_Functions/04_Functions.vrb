@@ -1,0 +1,18 @@
+\frametitle{Variable Global}
+
+\begin{exampleblock}{C}
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}]
+#include<stdio.h>
+
+int a=1; //global
+int b=2; //global
+
+int main(){
+	int a = 10; //local
+	b++;
+	printf("|\%|d |\%|d\n", a, b);//¿Qué imprime?
+	return 0;
+}
+\end{lstlisting}\end{exampleblock}
+
+En python, no se pueden modificar variables globales dentro de una función.

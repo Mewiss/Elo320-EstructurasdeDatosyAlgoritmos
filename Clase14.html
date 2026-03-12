@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Tablas Hash</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            <section>
+                <h4>Tablas Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Estructura de datos en la que las operaciones de inserción, búsqueda y eliminación son muy rápidas,
+                    independientemente del tamaño de los datos.
+                </p>
+                <ul style="font-size: 0.9em; text-align: left; margin-top: 20px;">
+                    <li class="fragment fade-up">Arreglo Asociativo.</li>
+                    <li class="fragment fade-up">Pares llave-valor.</li>
+                    <li class="fragment fade-up">Llaves únicas.</li>
+                    <li class="fragment fade-up">Función hash.</li>
+                </ul>
+
+                <div class="fragment fade-up" style="margin-top: 30px;">
+
+                </div>
+            </section>
+
+            <section>
+                <h4>Tablas Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Diseñadas originalmente para resolver el <strong>problema de búsqueda</strong> $\rightarrow$ basada
+                    en arreglos, pero sin trabajar con el índice.
+                </p>
+                <p class="fragment" style="font-size: 0.9em; margin-top: 20px;">
+                    Hoy en día, las tablas hash son usadas en múltiples aplicaciones:</p>
+                <ul style="font-size: 0.9em; text-align: left; margin-top: 20px;">
+                    <li class="fragment fade-up">Diccionarios en Python.</li>
+                    <li class="fragment fade-up">Map en C++.</li>
+                    <li class="fragment fade-up">Sistemas de contraseñas (encriptación).</li>
+                    <li class="fragment fade-up">Memoria Caché.</li>
+                </ul>
+
+                <div style="margin-top: 30px;">
+
+                </div>
+
+                <!-- <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+            En <strong>promedio</strong>, la complejidad de los métodos de Tablas Hash es <strong>$\mathcal{O}(1)$</strong>. Lo veremos en la próxima clase.
+        </p> -->
+            </section>
+
+            <section>
+                <h4>Tablas Hash: componentes</h4>
+                <div class="fragment fade-up r-fit-text">
+                    <p style="font-size: 0.9em;">
+                        El conjunto $D$ formado por tuplas llave-valor $(k.v)$, se almacena en
+                        un arreglo $A$.
+                    </p>
+
+                    <p style="font-size: 1.1em; margin-top: 10px;" class="fragment fade-up">
+                        $$ D = \{(k_1,v_1), (k_2,v_2), \dots (k_n, v_n) \} $$
+                    </p>
+                    <div class="fragment fade-up " style="margin-top: 30px;">
+                        <p style="font-size: 0.9em; margin-top: 20px;">
+                            El índice del arreglo asociado a un par se obtiene aplicando una función de transformación
+                            $H(k)$, llamada <strong>función hash</strong>.
+                        </p>
+
+                        <p style="font-size: 1.1em; margin-top: 10px;">
+                            $$ H: D_k \rightarrow \{1, 2, 3, \dots, m\}$$
+                            $$ A[H(k_i)] = v_i;\ \forall i \in \{1,2,3,\dots,n\} $$
+                        </p>
+
+
+                    </div>
+            </section>
+
+            <section>
+                <h4>Tablas Hash: componentes</h4>
+                <img src="images/Introduction-to-Hashing.webp" alt="hash" style="width: 90%; margin-top: 20px;">
+                <p style="font-size:small;">Fuente: <url>https://www.geeksforgeeks.org/dsa/hashing-data-structure/</url>
+                </p>
+            </section>
+
+            <section>
+                <h4>Tabla Hash: Métodos</h4>
+                <div class="r-stack" style="width: 90%; margin: 0 auto; text-align: left;">
+                    <div style="padding: 15px; border: 1px solid #ff9900; background-color: #333;">
+                        <pre><code class="c" >
+int search(int array[10], char *key){
+    return array[hash(key)];
+}
+
+void insert(int array[10], char *key, int value){
+    array[hash(key)] = value;    
+}
+
+void remove(int array[10], char *key){
+    array[hash(key)] = NULL; 
+    //NOTA: Esto es conceptual, 
+    //C no permite NULL en int arrays directamente
+}
+                </code></pre>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Tablas Hash: Funciones Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Debe mapear las llaves $k$ a índices del arreglo $A$ de tamaño $m$.
+                </p>
+
+                <p class="fragment" style="color: #ff9900; margin-top: 20px;">Se busca que sea:</p>
+                <ul style="font-size: 0.9em; text-align: left;">
+                    <li class="fragment fade-up"><strong>Simple</strong> $\rightarrow$ fácil implementación y bajo costo
+                        computacional.</li>
+                    <li class="fragment fade-up"><strong>Uniforme</strong> $\rightarrow$ que las claves tengan la misma
+                        chance de ser mapeadas a cualquier índice (minimizar conflictos).</li>
+                </ul>
+
+                <p class="fragment" style="color: #ff9900; margin-top: 20px;">Técnicas heurísticas comunes:</p>
+                <ul style="font-size: 0.9em; text-align: left;" class="fragment fade-up">
+                    <li>Método de la División.</li>
+                    <li>Método de la Multiplicación.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Tablas Hash: Método de la División</h4>
+                <p style="font-size: 0.9em;">
+                    En este método las claves son transformadas en índices del arreglo mediante el uso de resto
+                    aritmético o módulo sobre el largo del arreglo $m$:
+                </p>
+
+                <p style="font-size: 1.5em; margin-top: 20px;" class="fragment fade-up">
+                    $$ h(k) = k\ \mathrm{mod}\ m$$
+                </p>
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La recomendación general es usar un largo de arreglo $m$ que no esté relacionado con la distribución
+                    de llaves. Por lo general, se elige un <strong>número primo</strong>.
+                </p>
+            </section>
+
+            <section>
+                <h4>Tablas Hash: Método de la Multiplicación</h4>
+                <p style="font-size: 0.8em;">
+                    Este método minimiza la dependencia del tamaño $m$ y se compone de los siguientes pasos:
+                </p>
+                <ol style="font-size: 0.8em; text-align: left;" class="fragment fade-up">
+                    <li>Multiplicar la llave $k$ por una constante $\alpha \in ]0,1[$.</li>
+                    <li>Obtener la parte fraccional del resultado.</li>
+                    <li>Multiplicar dicha parte por el tamaño del arreglo $m$.</li>
+                    <li>Truncar (parte entera) el resultado final.</li>
+                </ol>
+
+                <p style="font-size: 1em; margin-top: 20px;" class="fragment fade-up">
+                    $$ h(k) = \lfloor m \times  ((k\times \alpha)\ \mathrm{mod}\ 1) \rfloor $$
+                </p>
+
+                <p class="fragment fade-up" style="font-size: 0.7em; margin-top: 20px;">
+                    En este caso, el tamaño de $m$ no es crítico. Esto permite que comúnmente se use una potencia de dos
+                    para el tamaño del arreglo: $m = 2^p$.
+                </p>
+            </section>
+
+            <section>
+                <h4>Tablas Hash: Uso de Strings</h4>
+                <p style="font-size: 0.9em;">
+                    Utilizamos los valores ASCII de los caracteres para generar un valor numérico.
+                </p>
+
+                <div class="r-stack r-fit-text" style="width: 80%; margin: 0 auto;">
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li class="fragment fade-up">Valores ASCII:
+                            <p style="margin-top: 5px;">$$h = 104,\ a=97,\ s=115$$</p>
+                        </li>
+                        <li class="fragment fade-up">Suma de valores (Simple):
+                            <p style="margin-top: 5px;">$$104+97+115+104 = 420 $$</p>
+                        </li>
+                        <li class="fragment fade-up">Radix-128 (Más Uniforme):
+                            <p style="margin-top: 5px;">$$(104\times 128^3) + (97 \times 128^2) + (115\times 128^1)
+                                + (104\times 128^0) = 219707880 $$</p>
+                        </li>
+
+
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Actividad 14.1: Tabla hash para búsqueda de codificación EAN-13</h4>
+
+
+                <div class="r-fit-text">
+                    <p>Implementa la función <code>hashFuncion</code> para definir dónde se guarda cada código EAN.</p>
+                    <p>Completa el código base act14-1.c: <a
+                            href="https://classroom.github.com/a/cfH8TnTH">https://classroom.github.com/a/cfH8TnTH</a>
+                        </li>
+
+                    </p>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Tablas Hash: Conflictos</h4>
+                <p style="font-size: 0.9em;">
+                    Dos llaves pueden ser asignadas a un mismo índice por la función hash.
+                    Esto es lo que se llama <strong>conflicto</strong>.
+                </p>
+
+
+            </section>
+
+            <section>
+                <h4>Solución de conflictos: Hashing Abierto</h4>
+                <p style="font-size: 0.9em;">
+                    El arreglo fijo, pasa a ser un arreglo de punteros, los cuales establecen una <strong>lista
+                        enlazada</strong>
+                    para almacenar los nodos en conflicto.
+                </p>
+
+
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda entonces es doble: en el arreglo y en la lista. Para evitar confusiones, en los nodos de
+                    la lista se guarda el par (llave, valor).
+                </p>
+            </section>
+
+            <section>
+                <h4>Solución de conflictos: Hashing Cerrado</h4>
+                <p style="font-size: 0.9em;">
+                    Aquí, se realizan <strong>corrimientos</strong> de la posición de inserción si hay un conflicto.
+                    Esto evita el uso de estructuras de datos adicionales, pero habrá que tener cuidado con el
+                    overflow de memoria.
+                </p>
+
+
+            </section>
+
+            <section>
+                <h4>Solución de conflictos: Hashing Cerrado con Sondeo Lineal</h4>
+                <p style="font-size: 0.9em;">
+                    Busca insertar el dato en el casillero
+                    disponible <strong>más cercano</strong> ($\text{posición} + 1, \text{posición} + 2, \dots$).
+                </p>
+
+                <div class="fragment fade-up" style="margin-top: 30px;">
+
+                </div>
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda, por lo tanto, sigue un proceso similar: parte de la posición entregada por la función
+                    hash, avanzando de forma lineal hasta encontrar el dato correcto.
+                </p>
+            </section>
+
+            <section>
+                <h4>Solución de conflictos: Hashing Cerrado con Sondeo Cuadrático</h4>
+                <p style="font-size: 0.9em;">
+                    Un problema del sondeo lineal es que los datos tienden a agruparse ("clustering"). Para evitar esto,
+                    la misma técnica se aplica pero buscando en saltos cuadráticos (e.g., $1^2, 2^2, 3^2$) o cada $C$
+                    casilleros (Sondeo Doble).
+                </p>
+
+                <div class="fragment fade-up" style="margin-top: 30px;">
+
+                </div>
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda, por lo tanto, sigue un proceso similar: parte de la posición entregada por la función
+                    hash, avanzando según la secuencia de saltos hasta encontrar el dato correcto.
+                </p>
+            </section>
+
+            <section>
+                <h4>Actividad 14.2: Resolución de conflictos en Tabla hash </h4>
+
+
+                <div class="r-fit-text">
+                    <p>Implementa las distintas funciones que permitan guardar una base de datos de mascotas donde podrían existir conflictos al utilizar la tabla hash que se proponec.</p>
+                    <p>Completa todos los <code>ToDo</code> del código base act14-2.c: <a
+                            href="https://classroom.github.com/a/cfH8TnTH">https://classroom.github.com/a/cfH8TnTH</a>
+                        </li>
+
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Árboles binarios de búsqueda</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Un ABB es una implementación del árbol binario
+                    que permite guardar y buscar eficientemente datos </p>
+                <div style="text-align: center;">
+                    <img src="images/abb1.png" alt="Diagrama de un Árbol Binario de Búsqueda" style="width: 45%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Los hijos izquierdos guardan
+                    información menor (o igual), y los hijos derechos guardan información mayor, con respecto a la
+                    de su padre.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb2.png"
+                        alt="Diagrama de ABB mostrando la regla: Menor a la izquierda, Mayor a la derecha"
+                        style="width: 45%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <div style="text-align: center;">
+                    <img src="images/abb2.png"
+                        alt="Diagrama de ABB mostrando la regla: Menor a la izquierda, Mayor a la derecha"
+                        style="width: 42%;">
+                </div>
+                <p style="font-size: 0.8em;">Esto facilita la búsqueda, inserción, y eliminación de elementos.
+                    Además, los recorridos
+                    son más efectivos.</p>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Por ejemplo, es fácil determinar el lugar y posición de los valores en
+                    un intervalo. </p>
+
+
+
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="images/abb3.png" alt="Diagrama de ABB que ilustra el sucesor y antecesor"
+                        class="r-stretch">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+
+
+                <ul class="r-fit-text">
+                    <li><strong>¿Cómo determinan el sucesor y predecesor de un padre?</strong>
+                        <br class="fragment"><span style="color: red;">Sucesor: buscar en la derecha, todo hacia la
+                            izquierda.</span>
+                        <br class="fragment"><span style="color: blue;">Antecesor: buscar en la izquierda, todo
+                            hacia la
+                            derecha.</span>
+                    </li>
+
+                </ul>
+
+
+                <img src="images/abb3.png" alt="Diagrama de ABB que ilustra el sucesor y antecesor" class="r-stretch">
+
+            </section>
+
+            <section>
+                <h4>ABB: Operaciones</h4>
+                <p style="font-size: 0.8em;">Las operaciones más comunes de los ABB son:</p>
+                <ul>
+                    <li><code>init()</code>: Inicializar el árbol (root == NULL).</li>
+                    <li><code>size()</code>: Cantidad de elementos en el árbol.</li>
+                    <li><code>x_preorden()</code>: Operación x en pre-orden.</li>
+                    <li><code>x_inorden()</code>: Operación x en in-orden. </li>
+                    <li><code>x_postorden()</code>: Operación x en post-orden. </li>
+                    <li><code>search()</code>: Buscar un elemento en el árbol.</li>
+                    <li><code>insert()</code>: Insertar un elemento en el árbol.</li>
+                    <li><code>delete()</code>: Eliminar un elemento en el árbol.</li>
+                    <li><code>clear()</code>: Limpiar el árbol.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Recorrer</h4>
+                <p class="r-fit-text">¿Como se imprimirían los datos del siguiente árbol con recorrido
+                    pre-orden, in-orden y post-orden?</p>
+
+                <img src="images/abb1.png" alt="Diagrama de un Árbol Binario de Búsqueda" class="r-stretch">
+                <ul class="r-fit-text">
+                    <li class="fragment" data-fragment-index="1">Pre-orden: 19 - 6 - 2 - 15 - 7 - 17 - 30 - 21 - 27
+                        - 36 </li>
+                    <li class="fragment" data-fragment-index="2">In-orden: 2 - 6 - 7 - 15 - 17 - 19 - 21 - 27 - 30 -
+                        36 </li>
+                    <li class="fragment" data-fragment-index="3">Post-orden: 2 - 7 - 17 - 15 - 6 - 27 - 21 - 36 - 30
+                        - 19 </li>
+                </ul>
+
+
+            </section>
+
+            <section>
+                <h4>ABB: Buscar</h4>
+                <div style="text-align: center;">
+                    <img src="images/abb-search.png" alt="Diagrama que muestra la búsqueda en un ABB"
+                        style="width: 35%;">
+                </div>
+                <p>Se puede hacer de dos formas:</p>
+                <ul>
+                    <li class="fragment">Usando un puntero para recorrer el árbol.</li>
+                    <li class="fragment"><strong>Recursivamente</strong>.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Búsqueda recursiva</h4>
+                <div class="r-frame"
+                    style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-top: 15px;">
+
+                    <pre><code class="c" data-trim data-noescape>
+nodo_t * search_recursiva(nodo_t * raiz, int value) {
+    // Caso base
+    if (raiz == NULL || raiz->dato == value) 
+        return raiz;
+    
+    if (value < raiz->dato) 
+        return search_recursiva(raiz->hijo_izq, value);
+    
+    return search_recursiva(raiz->hijo_der, value);
+}
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Búsqueda con puntero</h4>
+                <pre><code class="c" data-trim data-noescape>
+nodo_t * search_puntero(nodo_t * raiz, int value) {
+    nodo_t *actual = raiz;
+
+    while (actual != NULL) {       
+        if (actual->dato == value)  // Caso base
+            return actual;
+        
+        else if (value < actual->dato) 
+            actual = actual->hijo_izq;
+        
+        else 
+            actual = actual->hijo_der; }    
+    return NULL; // Si el bucle termina sin encontrar el valor
+}
+                </code></pre>
+
+            </section>
+
+            <section>
+                <h4>ABB: Insertar</h4>
+                <p style="font-size: 0.8em;">Debemos buscar el lugar donde insertar, de modo de
+                    <strong>mantener</strong> el orden de nuestro ABB.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb-insert.png" alt="Diagrama que ilustra el proceso de inserción en un ABB"
+                        style="width: 45%;">
+                </div>
+                <p style="font-size: 0.8em;">Nota: Si nuestro árbol no acepta elementos repetidos, al encontrar el
+                    valor se detiene.</p>
+            </section>
+
+            <section>
+                <h4>ABB: Insertar</h4>
+                <div class="r-frame"
+                    style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-top: 15px;">
+                    <h3>Recursivamente</h3>
+                    <pre><code class="c" data-trim data-noescape>
+void insert(nodo_t ** raiz, int value){ 
+}
+                </code></pre>
+                </div>
+            </section>
+
+            <!--  <section>
+                    <h4>ABB: Insertar</h4>
+                    <p>Cree el árbol binario que represente la siguiente secuencia de enteros: </p>
+                    $$\mathbf{10 - 5 - 7 - 14 - 12 - 18 - 15}$$
+                    <div class="fragment" data-fragment-index="1">
+                        <div class="r-frame"
+                            style="background-color: #fff3cd; border: 1px solid #ffc300; padding: 15px; margin-top: 20px;">
+                            <h3>Spoiler</h3>
+                            <div style="text-align: center;">
+                                <img src="images/abb-insert-example.png"
+                                    alt="Diagrama del ABB resultante de la secuencia 10, 5, 7, 14, 12, 18, 15"
+                                    style="width: 35%;">
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+
+
+
+            <!-- <section>
+                    <h4>Ejercicios</h4>
+                    <ul>
+                        <li>Para el siguiente conjunto $\{1, 4, 5, 10, 16, 17, 21\}$, dibuje árboles binarios de
+                            búsqueda con altura 2, 3, 4, 5, y 6.</li>
+                        <li>Escriba funciones recursivas para recorrer un árbol binario de búsqueda en pre-orden y
+                            post-orden.</li>
+                        <li>Asuma que tiene números entre 1 y 1000 en un árbol binario de búsqueda y quiere buscar el
+                            nodo 363. ¿Cuál de las siguientes secuencias de nodos NO podría ser una secuencia de nodos
+                            examinados en el árbol para llegar al nodo 363?
+                            <ol>
+                                <li>2, 252, 401, 398, 330, 344, 397, 363.</li>
+                                <li>924, 220, 911, 244, 898, 258, 362, 363.</li>
+                                <li>925, 202, 911, 240, 912, 245, 363.</li>
+                                <li>2, 399, 387, 219, 266, 382, 381, 278, 363.</li>
+                                <li>935, 278, 347, 621, 299, 392, 358, 363.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section> -->
+
+
+
+
+
+
+
+            <section>
+                <h4>Actividad 13: Árbol Binario de Búsqueda con Mascotas</h4>
+                <div class="r-fit-text">
+                <p>Implementa las funciones <code>insertar</code> y <code>buscar</code> en un ABB que almacene
+                    estructuras de tipo <code>Mascota</code> (con <strong>tipo</strong> y <strong>nombre</strong>).</p>
+                <ul>
+                    <li>Completa el código base con los <code>TODOs</code>: <a href="https://classroom.github.com/a/nhZ1Y1BB">https://classroom.github.com/a/nhZ1Y1BB</a></li>
+                    <li>Recuerda que el criterio de orden es el <strong>nombre</strong> de la mascota.</li>
+                    <li>Usa la función <code>strcmp(a, b)</code> para comparar cadenas:</li>
+                    <ul>
+                        <li><code>&lt; 0</code> si <code>a &lt; b</code></li>
+                        <li><code>= 0</code> si <code>a == b</code></li>
+                        <li><code>&gt; 0</code> si <code>a &gt; b</code></li>
+                    </ul>
+                    <li>Inserta al menos <strong>15 mascotas</strong> y prueba buscar por nombre.</li>
+                </ul>
+                </div>
+            
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar</h4>
+                <p style="font-size: 0.8em;">Al igual que en insertar, deberemos buscar el nodo a eliminar. Pero
+                    para poder eliminarlo, tendremos que considerar los siguientes casos:</p>
+                <ul>
+                    <li>Nodo objetivo es una hoja (no tiene hijos).</li>
+                    <li>Nodo objetivo tiene un sólo hijo.</li>
+                    <li>Nodo objetivo tiene dos hijos.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar hoja.</h4>
+                <p style="font-size: 0.8em;">Es el caso más sencillo, solo corresponde a liberar el nodo desde el
+                    puntero del padre.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-nochild.png" alt="Diagrama del caso de eliminación de un nodo hoja"
+                        style="width: 90%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar nodo con 1 hijo.</h4>
+                <p style="font-size: 0.8em;">Caso intermedio. acá se elimina el nodo encontrado, pero su posición es
+                    ocupada por su único hijo. Se eleva ese sub-árbol, un nivel.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-onechild.png"
+                        alt="Diagrama del caso de eliminación de un nodo con un hijo" style="width: 90%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar nodo con 2 hijos.</h4>
+                <p style="font-size: 0.8em;">Caso recursivo o iterativo. Cuenta de dos pasos:</p>
+                <ul>
+                    <li>Reemplazar el nodo objetivo por una copia de su sucesor o antecesor (uds. eligen).</li>
+                    <li>Borrar el sucesor o antecesor original.</li>
+                </ul>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-twochild.png"
+                        alt="Diagrama del caso de eliminación de un nodo con dos hijos, usando el sucesor"
+                        style="width: 100%;">
+                </div>
+            </section>
+
+
+
+        </div>
+
+        <!-- c -->
+
+
+
+
+
+    </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Algoritmos de Ordenamiento</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+            <section>
+                <h4>InsertSort</h4>
+                <p class="r-fit-text" style="text-align: left; width: 80%; margin: 20px auto;">
+                    Es un método de ordenamiento de elementos, en el cual a través de la visitas de subconjuntos,
+                    un elemento es <strong>insertado</strong> en la posición ordenada que le corresponde.
+                </p>
+
+
+            </section>
+
+            <section>
+                <h4>Ejemplo: Insertion Sort ($\mathcal{O}(n^2)$)</h4>
+
+                <div style="display: flex; justify-content: center; margin: 20px 0;">
+                    <div style="font-size: 0.7em; display: flex; flex-direction: column; text-align: center;">
+
+
+
+                        <div style="font-weight: bold; margin-top: 5px;">Inicio:</div>
+                        <div style="display: flex; font-weight: bold;">
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">12</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">11</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">13</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">5</span>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="1"
+                            style="font-weight: bold; margin-top: 15px; color: #008000;">Iteración $i=1$:</div>
+                        <div class="fragment" data-fragment-index="1" style="display: flex; font-weight: bold;">
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">11</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">12</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">13</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">5</span>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="2"
+                            style="font-weight: bold; margin-top: 15px; color: #008000;">Iteración $i=2$:</div>
+                        <div class="fragment" data-fragment-index="2" style="display: flex; font-weight: bold;">
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">11</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">12</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">13</span>
+                            <span style="width: 40px; border: 1px solid #333; background: #eee;">5</span>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="3"
+                            style="font-weight: bold; margin-top: 15px; color: #008000;">Iteración $i=3$:</div>
+                        <div class="fragment" data-fragment-index="3" style="display: flex; font-weight: bold;">
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">5</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">11</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">12</span>
+                            <span style="width: 40px; border: 1px solid #0c0; background: #e6ffe6;">13</span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="r-fit-text"
+                    style="font-size: 0.8em; width: 80%; margin: 20px auto 0 auto; text-align: left;">
+                    <li class="fragment" data-fragment-index="1">
+                        <strong style="color: #cc5500;">Iteración $i=1$:</strong> $\text{Key}=11$. El 11 es menor que
+                        12. Se desplaza 12 a la derecha y se inserta 11 al inicio.
+                    </li>
+                    <li class="fragment" data-fragment-index="2">
+                        <strong style="color: #cc5500;">Iteración $i=2$:</strong> $\text{Key}=13$. El 13 es mayor que el
+                        último elemento ordenado (12). No hay desplazamientos.
+                    </li>
+                    <li class="fragment" data-fragment-index="3">
+                        <strong style="color: #cc5500;">Iteración $i=3$:</strong> $\text{Key}=5$. El 5 es menor que
+                        todos los elementos ordenados. Se desplazan los tres elementos a la derecha y se inserta 5 al
+                        inicio.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>InsertSort</h4>
+
+                <p>¿Cuál es la complejidad del
+                    siguiente algoritmo?</p>
+                <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+void insertionSort(int arr[], int n){
+    int i, key, j;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+        
+        // Mover elementos de arr[0..i-1], que son mayores que key,
+        // a una posición adelante de su posición actual
+        while (j >= 0 && arr[j] > key) { //esto puede ser un for
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+            </code></pre>
+
+            </section>
+
+            <section>
+                <h4>InsertSort: Complejidad</h4>
+
+                <div style="width: 80%; margin: 0 auto; text-align: left;">
+                    <ul style="font-size: 1.1em; margin-bottom: 30px;">
+                        <li>
+                            <strong>Cota Superior: $\mathcal{O}(n^2)$</strong>
+                            <br>
+                            <span style="font-size: 0.8em; font-style: italic;">(Caso peor: todo invertido).</span>
+                        </li>
+                        <li style="margin-top: 15px;">
+                            <strong>Cota Inferior: $\Omega(n)$</strong>
+                            <br>
+                            <span style="font-size: 0.8em; font-style: italic;">(Mejor caso: todo ordenado).</span>
+                        </li>
+                        <li style="margin-top: 15px;">
+                            <strong>Cota Promedio: $\Theta(n^2)$</strong>
+                            <br>
+                            <span style="font-size: 0.8em; font-style: italic;">(Caso promedio para arreglos
+                                aleatorios).</span>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </section>
+
+            <section>
+                <h3>Merge Sort</h3>
+
+                <p class="r-fit-text">
+                    Algoritmo de ordenamiento recursivo que aplica la técnica Divide & Conquer (Divide y
+                    Vencerás).
+                </p>
+                <!-- <p style="font-weight: bold; color: #008080;">Análisis de Complejidad</p>
+                <ul class="r-fit-text">
+                    <li>Peor escenario: $\mathbf{\mathcal{O}(n \log n)}$</li>
+                    <li>Mejor escenario: $\mathbf{\Omega(n \log n)}$</li>
+                    <li>Escenario Promedio: $\mathbf{\Theta(n \log n)}$</li>
+                </ul> -->
+
+                <p style="font-weight: bold; color: #008080;">Características</p>
+                <ul class="r-fit-text">
+                    <li>Es Estable y rápido para grandes tamaños de datos.</li>
+                    <li>Generalmente es superado por Quick Sort en la práctica.</li>
+                    <li>Necesita un espacio de memoria extra para el ordenamiento
+                        ($\mathbf{\Theta(n)}$).</li>
+                </ul>
+
+            </section>
+
+            <section>
+                <h4>Ejemplo: Merge Sort </h4>
+                <div class="r-fit-text">
+
+                    <div style="width: 95%; margin: 0 auto; text-align: center;">
+
+                        <div style="margin-bottom: 20px;">
+                            <p style="font-weight: bold; color: #800080;">Paso 0: Inicio</p>
+                            <div style="display: inline-flex; border: 1px solid #333;">
+                                <span style="width: 30px; padding: 5px; background: #eee;">3</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">8</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">2</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">5</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">1</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">4</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">7</span>
+                                <span style="width: 30px; padding: 5px; background: #eee;">6</span>
+                            </div>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="1" style="margin-bottom: 20px;">
+                            <p style="font-weight: bold; color: #008080;">Paso 1: Dividir (Nivel 1)</p>
+                            <div style="display: inline-flex; border: 1px dashed #008080;">
+                                <div style="display: inline-flex; margin-right: 10px; border-right: 1px solid #333;">
+                                    <span style="width: 30px; padding: 5px; background: #f0f8ff;">3</span>
+                                    <span style="width: 30px; padding: 5px; background: #f0f8ff;">8</span>
+                                    <span style="width: 30px; padding: 5px; background: #f0f8ff;">2</span>
+                                    <span style="width: 30px; padding: 5px; background: #f0f8ff;">5</span>
+                                </div>
+                                <div style="display: inline-flex;">
+                                    <span style="width: 30px; padding: 5px; background: #fff8f0;">1</span>
+                                    <span style="width: 30px; padding: 5px; background: #fff8f0;">4</span>
+                                    <span style="width: 30px; padding: 5px; background: #fff8f0;">7</span>
+                                    <span style="width: 30px; padding: 5px; background: #fff8f0;">6</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="2" style="margin-bottom: 20px;">
+                            <p style="font-weight: bold; color: #008080;">Paso 2: Dividir (Nivel 2 - hasta llegar a
+                                elementos unitarios)</p>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">3</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">8</span>
+                            </div>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">2</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">5</span>
+                            </div>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">1</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">4</span>
+                            </div>
+                            <div style="display: inline-flex;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">7</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">6</span>
+                            </div>
+                        </div>
+
+                        <div class="fragment" data-fragment-index="2" style="margin-bottom: 20px;">
+                            <p style="font-weight: bold; color: #008080;">Ordenamos</p>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">3</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">8</span>
+                            </div>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">2</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #d3e9ff; border: 1px solid #00f;">5</span>
+                            </div>
+                            <div style="display: inline-flex; margin-right: 15px;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">1</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">4</span>
+                            </div>
+                            <div style="display: inline-flex;">
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">6</span>
+                                <span
+                                    style="width: 30px; padding: 5px; background: #ffefd5; border: 1px solid #f90;">7</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <ul class="r-fit-text"
+                        style="font-size: 0.75em; width: 80%; margin: 20px auto 0 auto; text-align: left;">
+                        <li class="fragment" data-fragment-index="1">
+                            Fase 1 (Divide): El arreglo se divide en dos mitades. El costo de división es
+                            $\mathcal{O}(1)$.
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Ejemplo: Merge Sort </h4>
+
+
+
+                <div style="width: 95%; margin: 0 auto; text-align: center;">
+
+
+                    <div style="margin-bottom: 20px;">
+                        <p style="font-weight: bold; color: #cc5500;">Paso 3: Mezclar (Nivel 2 - Costo
+                            $\mathcal{O}(n)$
+                            total)</p>
+
+                        <div style="display: inline-flex; margin-right: 10px; border: 1px solid #00f;">
+                            <span style="width: 30px; padding: 5px; background: #d3e9ff;">3</span>
+                            <span style="width: 30px; padding: 5px; background: #d3e9ff;">8</span>
+                            <span style="width: 30px; padding: 5px; background: #d3e9ff;">2</span>
+                            <span style="width: 30px; padding: 5px; background: #d3e9ff;">5</span>
+                        </div>
+                        <div style="display: inline-flex; border: 1px solid #f90;">
+                            <span style="width: 30px; padding: 5px; background: #ffefd5;">1</span>
+                            <span style="width: 30px; padding: 5px; background: #ffefd5;">4</span>
+                            <span style="width: 30px; padding: 5px; background: #ffefd5;">6</span>
+                            <span style="width: 30px; padding: 5px; background: #ffefd5;">7</span>
+                        </div>
+                    </div>
+
+                    <div class="fragment" data-fragment-index="2" style="margin-bottom: 20px;">
+                        <p style="font-weight: bold; color: #cc5500;">Ordenar</p>
+                        <div style="display: inline-flex; border: 2px solid #00f; background: #d3e9ff;">
+                            <span style="width: 30px; padding: 5px;">2</span>
+                            <span style="width: 30px; padding: 5px;">3</span>
+                            <span style="width: 30px; padding: 5px;">5</span>
+                            <span style="width: 30px; padding: 5px;">8</span>
+                        </div>
+                        <div style="display: inline-flex; border: 2px solid #f90; background: #ffefd5;">
+                            <span style="width: 30px; padding: 5px;">1</span>
+                            <span style="width: 30px; padding: 5px;">4</span>
+                            <span style="width: 30px; padding: 5px;">6</span>
+                            <span style="width: 30px; padding: 5px;">7</span>
+                        </div>
+                    </div>
+
+                    <div class="fragment " data-fragment-index="3" style="margin-bottom: 20px;">
+                        <p style="font-weight: bold; color: #cc5500;">Paso 4: Mezcla Final</p>
+                        <div style="display: inline-flex; border: 2px solid #0c0; background: #e6ffe6;">
+                            <span style="width: 30px; padding: 5px;">1</span>
+                            <span style="width: 30px; padding: 5px;">2</span>
+                            <span style="width: 30px; padding: 5px;">3</span>
+                            <span style="width: 30px; padding: 5px;">4</span>
+                            <span style="width: 30px; padding: 5px;">5</span>
+                            <span style="width: 30px; padding: 5px;">6</span>
+                            <span style="width: 30px; padding: 5px;">7</span>
+                            <span style="width: 30px; padding: 5px;">8</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <ul class="r-fit-text"
+                    style="font-size: 0.75em; width: 80%; margin: 20px auto 0 auto; text-align: left;">
+
+                    <li class="fragment" data-fragment-index="3">
+                        Fase 2 (Merge): Las sublistas de tamaño 1 se mezclan para formar listas ordenadas de
+                        tamaño 2, luego 4. Este trabajo lineal se realiza en cada nivel.
+                    </li>
+                    <!--  <li class="fragment" data-fragment-index="5">
+                            Costo Total: La altura del árbol de recursión es $\log_2 n = 3$ niveles. El costo
+                            $\mathcal{O}(n)$ se repite 3 veces. Resultado: $\mathbf{\mathcal{O}(n \log n)}$.
+                        </li> -->
+                </ul>
+
+
+            </section>
+
+
+
+            <section>
+                <h4>MergeSort</h4>
+                <div style="width: 80%; margin: 0 auto; text-align: left;">
+                    <div style="border: 1px solid #ccc; padding: 15px; background-color: #f8f8f8;">
+                        <h5 style="margin-top: 0; margin-bottom: 10px; font-weight: bold;">Función mergeSort</h5>
+                        <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+void mergeSort(int arr[], int l, int r){ //l=izq, r=der (indices)
+    if (l < r) {
+        int m = l + (r - l) / 2; //div. entera
+
+        mergeSort(arr, l, m);    // T(n/2) - dividir
+        mergeSort(arr, m + 1, r); // T(n/2) - post-orden
+
+        merge(arr, l, m, r);    // O(n) - mezclar
+    }
+}
+            </code></pre>
+                    </div>
+                    <p class="r-fit-text" style="margin-top: 15px;">
+                        Relación de Recurrencia: $\mathbf{T(n) = 2T(n/2) + \mathcal{O}(n)}$
+                    </p>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>MergeSort</h4>
+                <div style="width: 80%; margin: 0 auto; text-align: left;">
+                    <div style="border: 1px solid #ccc; padding: 15px; background-color: #f8f8f8;">
+                        <h5 style="margin-top: 0; margin-bottom: 10px; font-weight: bold;">Función merge (La clave de
+                            $\mathcal{O}(n)$)</h5>
+                        
+                        <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+void merge(int arr[], int l, int m, int r){
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    int L[n1], R[n2]; //arreglos temporales (Costo de espacio)
+
+    for (i = 0; i &lt; n1; i++) 
+        L[i] = arr[l + i];
+    for (j = 0; j &lt; n2; j++)
+        R[j] = arr[m + 1 + j];
+
+    i = 0; j=0; k = l; //mezcla
+    while (i &lt; n1 && j &lt; n2) {
+        if (L[i] &lt;= R[j])
+            arr[k] = L[i]; i++;
+        else
+            arr[k] = R[j]; j++;
+        k++;
+    }
+
+    while (i &lt; n1) //si sobra de L
+        arr[k] = L[i]; i++; k++; 
+    while (j &lt; n2)  //si sobra de R
+        arr[k] = R[j]; j++; k++;
+}
+            </code></pre>
+                      
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 1: INTRODUCCIÓN -->
+            <section>
+                <h4>QuickSort</h4>
+                <p>Es un algoritmo de ordenamiento no estable de complejidad promedio esperada $\Theta(n \log n)$, sin embargo, puede en sus peores casos llegar a $\mathcal{O}(n^2)$. Al igual que MergeSort utiliza la técnica de Divide & Conquer.</p>
+                
+                <br>
+                <p>QuickSort es uno de los algoritmos más implementados en estándares de lenguajes actualmente:</p>
+                <ul>
+                    <li>Usa recursividad.</li>
+                    <li>No usa estructuras de datos anexas (es in-place).</li>
+                    <li>Técnicas para evitar complejidad $\mathcal{O}(n^2)$ (pivote aleatorio, mediana de 3, etc).</li>
+                    <li>Naturalmente modelado para disminuir complejidad.</li>
+                </ul>
+            </section>
+
+            <!-- SLIDE 2: TRES PASOS -->
+            <section>
+                <h4>QuickSort: Tres Pasos</h4>
+                <ol>
+                    <li>Dividir (Partition): Separa el arreglo en dos sub-arreglos (particiones) alrededor de un pivote, donde los miembros de uno son siempre menor que el pivote y los del otro son mayores.</li>
+                    <li>Conquistar: Ordenar recursivamente los sub-arreglos generados.</li>
+                    <li>Combinar: Como la partición inicial garantiza que los sub-arreglos ya están en el lado correcto del pivote, la combinación es una tarea trivial (no se requiere trabajo adicional).</li>
+                </ol>
+            </section>
+
+            <!-- SLIDE 3: IDEA GENERAL (Reemplazo de imagen) -->
+           <!--  <section>
+                <h4>QuickSort: Idea General</h4>
+                <div class="r-fit-text" style="font-size: 1.2em; margin-top: 50px;">
+                    <p style="text-align: center;">
+                        [ Arreglo Original ] 
+                        <br> 
+                        $\downarrow$ (Elegir Pivote y Partición)
+                        <br>
+                        [ Sub-Arreglo Izquierdo ] - $\mathbf{[ \text{PIVOTE} ]}$ - [ Sub-Arreglo Derecho ]
+                        <br> 
+                        $\downarrow$ (Recursión en Izquierda y Derecha)
+                        <br> 
+                        [ Resultado Ordenado ]
+                    </p>
+                </div>
+                <p style="text-align: center; margin-top: 50px; font-size: 0.6em;">
+                    Nota: esto es sólo la idea general y no como exactamente funciona el proceso de intercambio.
+                </p>
+            </section> -->
+
+            <section>
+    <h4>Ejemplo: Quick Sort</h4>
+    <p class="r-fit-text" style="text-align: center;">Ordenar el siguiente arreglo de $n=8$ elementos: <strong>[3, 8, 2, 5, 1, 4, 7, 6]</strong></p>
+
+    <div class="r-fit-text" style="width: 95%; margin: 0 auto; text-align: center;">
+
+        <div style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #800080;">Paso 0: Inicio</p>
+            <div style="display: inline-flex; border: 1px solid #333;">
+                <span style="width: 30px; padding: 5px; background: #eee;">3</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">8</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">2</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">5</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">1</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">4</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">7</span>
+                <span style="width: 30px; padding: 5px; background: #eee;">6</span>
+            </div>
+        </div>
+
+        <div class="fragment" data-fragment-index="1" style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #008080;">Paso 1: Partición (Nivel 1). Pivote = 3</p>
+            <div style="display: inline-flex; border: 1px dashed #008080;">
+                <!-- Sub-arreglo de menores -->
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #00f; background: #f0f8ff;">
+                    <span style="width: 30px; padding: 5px;">2</span>
+                    <span style="width: 30px; padding: 5px;">1</span>
+                </div>
+                <!-- Pivote en su lugar -->
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #0c0; background: #e6ffe6;">
+                    <span style="width: 30px; padding: 5px;">3</span>
+                </div>
+                <!-- Sub-arreglo de mayores -->
+                <div style="display: inline-flex; border: 2px solid #f90; background: #fff8f0;">
+                    <span style="width: 30px; padding: 5px;">5</span>
+                    <span style="width: 30px; padding: 5px;">8</span>
+                    <span style="width: 30px; padding: 5px;">4</span>
+                    <span style="width: 30px; padding: 5px;">7</span>
+                    <span style="width: 30px; padding: 5px;">6</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <ul class="r-fit-text" style="font-size: 0.75em; width: 80%; margin: 20px auto 0 auto; text-align: left;">
+        <li class="fragment" data-fragment-index="1">
+            <strong>Fase 1 (Divide/Partición):</strong> Se elige un Pivote (ej. <strong>3</strong>). El arreglo se reordena: los menores a la izquierda, los mayores a la derecha. El pivote (3) ya está en su posición final ordenada.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h4>Ejemplo: Quick Sort </h4>
+    <div class="r-fit-text" style="width: 95%; margin: 0 auto; text-align: center;">
+
+        <div class="fragment" data-fragment-index="1" style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #008080;">Paso 2: Partición Recursiva (Lado Izquierdo). Pivote = 2</p>
+            <!-- [1] [2] (Pivote) | [3] (Ordenado) | [5, 8, 4, 7, 6] (Sin procesar) -->
+            <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #00f; background: #f0f8ff;">
+                    <span style="width: 30px; padding: 5px;">1</span>
+                </div>
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #0c0; background: #e6ffe6;">
+                    <span style="width: 30px; padding: 5px;">2</span>
+                </div>
+                <div style="display: inline-flex; margin-right: 5px; border: 1px solid #333; background: #ccc;">
+                    <span style="width: 30px; padding: 5px;">3</span>
+                </div>
+                <div style="display: inline-flex; border: 1px solid #333; background: #eee;">
+                    <span style="width: 30px; padding: 5px;">5</span>
+                    <span style="width: 30px; padding: 5px;">8</span>
+                    <span style="width: 30px; padding: 5px;">4</span>
+                    <span style="width: 30px; padding: 5px;">7</span>
+                    <span style="width: 30px; padding: 5px;">6</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="fragment" data-fragment-index="2" style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #008080;">Paso 3: Partición Recursiva (Lado Derecho). Pivote = 5</p>
+            <!-- [1, 2, 3] (Ordenado) | [4] | [5] (Pivote) | [8, 7, 6] -->
+            <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin-right: 5px; border: 1px solid #333; background: #ccc;">
+                    <span style="width: 30px; padding: 5px;">1</span>
+                    <span style="width: 30px; padding: 5px;">2</span>
+                    <span style="width: 30px; padding: 5px;">3</span>
+                </div>
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #00f; background: #f0f8ff;">
+                    <span style="width: 30px; padding: 5px;">4</span>
+                </div>
+                <div style="display: inline-flex; margin-right: 5px; border: 2px solid #0c0; background: #e6ffe6;">
+                    <span style="width: 30px; padding: 5px;">5</span>
+                </div>
+                <div style="display: inline-flex; border: 2px solid #f90; background: #fff8f0;">
+                    <span style="width: 30px; padding: 5px;">8</span>
+                    <span style="width: 30px; padding: 5px;">7</span>
+                    <span style="width: 30px; padding: 5px;">6</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fragment" data-fragment-index="3" style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #008080;">Paso 4: Particiones anidadas (P=8, P=7, P=6)...</p>
+            <!-- [1, 2, 3, 4, 5] (Ordenado) | [6, 7, 8] (Ordenado) -->
+            <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin-right: 5px; border: 1px solid #333; background: #ccc;">
+                    <span style="width: 30px; padding: 5px;">1</span>
+                    <span style="width: 30px; padding: 5px;">2</span>
+                    <span style="width: 30px; padding: 5px;">3</span>
+                    <span style="width: 30px; padding: 5px;">4</span>
+                    <span style="width: 30px; padding: 5px;">5</span>
+                </div>
+                <div style="display: inline-flex; border: 1px solid #333; background: #ccc;">
+                    <span style="width: 30px; padding: 5px;">6</span>
+                    <span style="width: 30px; padding: 5px;">7</span>
+                    <span style="width: 30px; padding: 5px;">8</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fragment" data-fragment-index="4" style="margin-bottom: 20px;">
+            <p style="font-weight: bold; color: #cc5500;">Paso 5: Resultado Final (Combinación Trivial)</p>
+            <div style="display: inline-flex; border: 2px solid #0c0; background: #e6ffe6;">
+                <span style="width: 30px; padding: 5px;">1</span>
+                <span style="width: 30px; padding: 5px;">2</span>
+                <span style="width: 30px; padding: 5px;">3</span>
+                <span style="width: 30px; padding: 5px;">4</span>
+                <span style="width: 30px; padding: 5px;">5</span>
+                <span style="width: 30px; padding: 5px;">6</span>
+                <span style="width: 30px; padding: 5px;">7</span>
+                <span style="width: 30px; padding: 5px;">8</span>
+            </div>
+        </div>
+
+    </div>
+
+    <ul style="font-size: 0.75em; width: 80%; margin: 20px auto 0 auto; text-align: left;">
+        <li class="fragment" data-fragment-index="1">
+            <strong>Fase 2 (Conquistar):</strong> El proceso de partición se repite recursivamente en los sub-arreglos [Azul] y [Naranja].
+        </li>
+        <li class="fragment" data-fragment-index="4">
+            <strong>Fase 3 (Combinar):</strong> En Quick Sort, la combinación es trivial. Como los pivotes ya están en su lugar final, no se requiere trabajo adicional.
+        </li>
+    </ul>
+</section>
+            <!-- SLIDE 4: ESQUEMAS DE PARTICIÓN -->
+            <section>
+                <h4>Esquemas de Partición</h4>
+                <div class="r-fit-text">
+                <p>QuickSort se basa en un esquema de particiones que puede ser implementado de variadas formas. Estos esquemas dependen de un valor pivote, que permite ordenar los sub-arreglos.</p>
+                <br>
+                <p>Generalmente, se comparan dos de las formas más utilizadas:</p>
+                <ul>
+                    <li>Forma Lomuto: Pivote al final. Fácil implementación. A menudo más lento debido a intercambios redundantes.</li>
+                    <li>Forma Hoare: Forma original. Pivote al inicio. Sofisticado. Muy eficiente (requiere menos intercambios en promedio).</li>
+                </ul>
+                </div>
+            </section>
+
+            <!--  SLIDES 5-19: PARTICIÓN DE HOARE (Simulación visual del ejemplo) -->
+            <!--
+            <section>
+                <h4>Partition: Hoare's Scheme - Inicial</h4>
+                <p>Arreglo de ejemplo: $[13, 19, 9, 5, 12, 8, 7, 4, 21, 2, 6, 11]$. Pivote inicial: 13</p>
+                <div class="array-container">
+                    <div class="array-cell"><span class="pivot-marker">Pivote</span>13</div>
+                    <div class="array-cell">19</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell">21</div>
+                    <div class="array-cell">2</div>
+                    <div class="array-cell">6</div>
+                    <div class="array-cell">11</div>
+                </div>
+                <p style="text-align: center;">Indices: $i = \text{inicio} - 1 = 0$, $j = \text{fin} + 1 = 13$</p>
+            </section>
+
+            <section>
+                <h4>Partition: Hoare's Scheme - Búsqueda I/J</h4>
+                <p>1. Buscar $i$ tal que $arr[i] \ge \text{Pivote}$.</p>
+                <p>2. Buscar $j$ tal que $arr[j] \le \text{Pivote}$.</p>
+                <div class="array-container fragment" data-fragment-index="1">
+                    <div class="array-cell">13</div>
+                    <div class="array-cell" style="background-color: #00ff0044;"><span class="pointer-i">i=1</span>19</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell">21</div>
+                    <div class="array-cell">2</div>
+                    <div class="array-cell">6</div>
+                    <div class="array-cell" style="background-color: #ff000044;"><span class="pointer-j">j=12</span>11</div>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #00ff00;">$i$ avanza a 1 (19 > 13). </p>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #ff0000;">$j$ retrocede a 12 (11 < 13). </p>
+            </section>
+
+            <section>
+                <h4>Partition: Hoare's Scheme - Intercambio (Swap)</h4>
+                <p>Intercambiar $arr[i]$ y $arr[j]$ si $i < j$.</p>
+                <div class="array-container fragment" data-fragment-index="1">
+                    <div class="array-cell">13</div>
+                    <div class="array-cell" style="background-color: #ff000044;"><span class="pointer-i">i=1</span>11</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell">21</div>
+                    <div class="array-cell">2</div>
+                    <div class="array-cell">6</div>
+                    <div class="array-cell" style="background-color: #00ff0044;"><span class="pointer-j">j=12</span>19</div>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #ff00ff;">¡Intercambio! (19 $\leftrightarrow$ 11)</p>
+            </section>
+            
+            <section>
+                <h4>Partition: Hoare's Scheme - Repetir Búsqueda</h4>
+                <p>1. Buscar $i$ tal que $arr[i] \ge \text{Pivote}$. ($i$ comienza en 2)</p>
+                <p>2. Buscar $j$ tal que $arr[j] \le \text{Pivote}$. ($j$ comienza en 11)</p>
+                <div class="array-container fragment" data-fragment-index="1">
+                    <div class="array-cell">13</div>
+                    <div class="array-cell">11</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell" style="background-color: #00ff0044;"><span class="pointer-i">i=8</span>21</div>
+                    <div class="array-cell">2</div>
+                    <div class="array-cell" style="background-color: #ff000044;"><span class="pointer-j">j=10</span>6</div>
+                    <div class="array-cell">19</div>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #00ff00;">$i$ avanza a 8 (21 $\ge$ 13).</p>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #ff0000;">$j$ retrocede a 10 (6 $\le$ 13).</p>
+            </section>
+            
+            <section>
+                <h4>Partition: Hoare's Scheme - Intercambio (Swap)</h4>
+                <p>Intercambiar $arr[i]$ y $arr[j]$ si $i < j$.</p>
+                <div class="array-container fragment" data-fragment-index="1">
+                    <div class="array-cell">13</div>
+                    <div class="array-cell">11</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell" style="background-color: #ff000044;"><span class="pointer-i">i=8</span>6</div>
+                    <div class="array-cell">2</div>
+                    <div class="array-cell" style="background-color: #00ff0044;"><span class="pointer-j">j=10</span>21</div>
+                    <div class="array-cell">19</div>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #ff00ff;">¡Intercambio! (21 $\leftrightarrow$ 6)</p>
+            </section>
+
+            <section>
+                <h4>Partition: Hoare's Scheme - Repetir Búsqueda (Convergencia)</h4>
+                <p>1. Buscar $i$ tal que $arr[i] \ge \text{Pivote}$. ($i$ comienza en 9)</p>
+                <p>2. Buscar $j$ tal que $arr[j] \le \text{Pivote}$. ($j$ comienza en 9)</p>
+                <div class="array-container fragment" data-fragment-index="1">
+                    <div class="array-cell">13</div>
+                    <div class="array-cell">11</div>
+                    <div class="array-cell">9</div>
+                    <div class="array-cell">5</div>
+                    <div class="array-cell">12</div>
+                    <div class="array-cell">8</div>
+                    <div class="array-cell">7</div>
+                    <div class="array-cell">4</div>
+                    <div class="array-cell">6</div>
+                    <div class="array-cell" style="background-color: #00ff0044; border: 2px solid #ff00ff;"><span class="pointer-i">i=9</span>2</div>
+                    <div class="array-cell">21</div>
+                    <div class="array-cell">19</div>
+                </div>
+                <p class="fragment" data-fragment-index="1" style="text-align: center; color: #00ff00;">$i$ avanza a 9 (2 $\not\ge$ 13) hasta el final del arreglo o $arr[i] \ge \text{Pivote}$. En la implementación, $i$ siempre se detiene en el pivote si no hay mayores antes.</p>
+                
+                <p class="fragment" data-fragment-index="2" style="text-align: center; color: #ff0000;">$j$ retrocede a 9 (2 $\le$ 13). <span class="highlight">CRUCE: $j \le i$. ¡Detener Partición!</span></p>
+                
+            </section>
+
+            <section>
+                <h4>Partition: Hoare's Scheme - Corte</h4>
+                <p>El esquema de Hoare retorna el índice $j$ (el último elemento que fue menor o igual al pivote).</p>
+                <p style="text-align: center; color: #ff00ff;">El índice de corte es $\mathbf{j=9}$ (el valor 2).</p>
+                <div class="array-container">
+                    <div class="array-cell" style="background-color: #5555ff44;">13</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">11</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">9</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">5</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">12</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">8</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">7</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">4</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">6</div>
+                    <div class="array-cell" style="background-color: #5555ff44;">2</div>
+                    <div class="array-cell" style="background-color: #ff555544;">21</div>
+                    <div class="array-cell" style="background-color: #ff555544;">19</div>
+                </div>
+                <p style="text-align: center; margin-top: 20px; font-weight: bold; color: #5555ff;">Sub-arreglo 1 (Indices 0 a 9) $\le$ Pivote (13)</p>
+                <p style="text-align: center; font-weight: bold; color: #ff5555;">Sub-arreglo 2 (Indices 10 a 11) $>$ Pivote (13)</p>
+                <p style="text-align: center; font-size: 0.7em;">El pivote (13) puede estar en cualquiera de las particiones (en este caso, la izquierda).</p>
+            </section>
+             -->
+            <!-- SLIDE 20: CÓDIGO PARTITION -->
+            <section>
+                <h4>Partition: Hoare's Scheme (Implementación)</h4>
+                <div class="example-block">
+                    <span class="code-title">CÓDIGO PARTITION</span>
+                    <pre class="code-container">
+int partition(int arr[], int inicio, int fin){
+    int pivote = arr[inicio];
+    int i = inicio - 1, j = fin + 1, temp;
+    
+    while (i < j){
+        do{
+            i++;
+        }while (arr[i] < pivote);
+        
+        do{
+            j--;
+        }while (arr[j] > pivote);
+
+        if(j <= i)
+            break;
+        
+        // Intercambio
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    return j; // Retorna el punto de corte
+}
+                    </pre>
+                </div>
+            </section>
+            
+            <!-- SLIDE 21: CÓDIGO QUICKSORT -->
+            <section>
+                <h4>QuickSort (Función Principal)</h4>
+                <p>Quicksort en sí es un procedimiento sencillo y recursivo.</p>
+                <div class="example-block">
+                    <span class="code-title">CÓDIGO QUICKSORT</span>
+                    <pre class="code-container">
+void quickSort(int arr[], int inicio, int fin){
+    if (inicio < fin) {
+        
+        // 1. Divide: Generar el punto de corte (j)
+        int corte = partition(arr, inicio, fin);
+        
+        // 2. Conquistar: Llamada recursiva a la partición izquierda
+        quickSort(arr, inicio, corte);
+        
+        // 3. Conquistar: Llamada recursiva a la partición derecha
+        quickSort(arr, corte + 1, fin);
+    }
+}
+                    </pre>
+                </div>
+            </section>
+            
+           
+
+            <!-- SLIDE 23: QUICKSORT ALEATORIZADO -->
+            <section>
+                <div class="r-fit-text">
+                <h4>QuickSort Aleatorizado</h4>
+                <p>¿Cuál es el peor escenario de QuickSort?</p>
+                <p>Es cuando siempre nos queda una partición de 1 y otra de $n-1$ (ej. el pivote es siempre el mínimo o el máximo).</p>
+                <ul>
+                    <li>Prácticamente tendremos que recorrer completamente el arreglo $n$ veces.</li>
+                    <li>La recursión no será de largo $\log n$ sino $n$.</li>
+                    <li>Por lo tanto, la complejidad en el peor escenario es $\mathbf{\mathcal{O}(n^2)}$.</li>
+                </ul>
+
+                <p style="margin-top: 20px;">Para evitar esto, la elección del pivote se hace de forma aleatoria (o usando la mediana de tres), así el tiempo esperado (concepto estadístico) del peor escenario es $\mathcal{O}(n \log n)$. (Nota: el peor caso determinista sigue siendo $\mathcal{O}(n^2)$).</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 24: CÓDIGO QUICKSORT ALEATORIZADO -->
+            <section>
+                <h4>QuickSort Aleatorizado (Función Principal)</h4>
+                <div class="example-block">
+                    <span class="code-title">QUICKSORT ALEATORIZADO</span>
+                    <pre class="code-container">
+void quickSort(int arr[], int inicio, int fin){
+    if (inicio < fin) {
+        
+        // Se llama a la función de partición que elige el pivote aleatoriamente
+        int corte = random_partition(arr, inicio, fin);
+        
+        quickSort(arr, inicio, corte);
+        quickSort(arr, corte + 1, fin);
+    }
+}
+                    </pre>
+                </div>
+            </section>
+
+            <!-- SLIDE 25: CÓDIGO RANDOM PARTITION -->
+            <section>
+                <h4>Random Partition (Partición Aleatoria)</h4>
+                <div class="example-block">
+                    <span class="code-title">RANDOM PARTITION</span>
+                    <pre class="code-container">
+int random_partition(int arr[], int inicio, int fin){
+    // 1. Elegir un índice aleatorio entre inicio y fin
+    int index = rand() % (fin - inicio + 1) + inicio; 
+    
+    // 2. Intercambiar el pivote elegido (index) con el inicio
+    int temp_swap = arr[index];
+    arr[index] = arr[inicio];
+    arr[inicio] = temp_swap;
+
+    // 3. Llamar al esquema de partición de Hoare con el nuevo pivote en 'inicio'
+    return partition(arr, inicio, fin); 
+}
+
+// Nota: La función partition ahora usa el elemento en 'inicio' como pivote,
+// que ya fue aleatorizado por 'random_partition'.
+                    </pre>
+                </div>
+            </section>
+
+
+            <!-- 
+            <section>
+                <h3>Funciones de Recurrencia</h3>
+                <h4>Repaso: MergeSort</h4>
+                <small>
+                    <p class="r-fit-text" style="text-align: left; margin-top: 10px;">
+                        ¿Cómo podemos determinar la complejidad de MergeSort si éste trabaja recursivamente?
+                    </p>
+                    <ul class="r-fit-text" style="text-align: left; width: 80%; margin: 10px auto;">
+                        <li>Peor escenario: $\mathcal{O}(n \log n)$</li>
+                        <li>Mejor escenario: $\Omega(n \log n)$</li>
+                        <li>Escenario Promedio: $\Theta(n \log n)$</li>
+                    </ul>
+
+                    <p class="r-fit-text" style="text-align: left; margin-top: 20px; font-weight: bold;">
+                        Funciones de recurrencia:
+                    </p>
+                    <p class="r-fit-text" style="text-align: left; font-size: 0.9em;">
+                        Relaciones matemáticas recursivas utilizadas para explicar la complejidad de este tipo de
+                        algoritmos.
+                    </p>
+                </small>
+            </section>
+
+
+            <section>
+                <h4>Funciones de Recurrencia</h4>
+                <small>
+                    <div style="width: 80%; margin: 0 auto;">
+                        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                            <h5 style="margin: 0 0 10px 0;">Factorial ($\mathcal{O}(n)$)</h5>
+                            <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+int factorial(int n){
+    if(n>0)
+        exit(-1);
+
+    if(n==0)
+        return 1;
+    return n * factorial(n-1); // 1 + T(n-1)
+}
+                </code></pre>
+                        </div>
+                    </div>
+
+                    <ul class="r-fit-text" style="text-align: left; width: 70%; margin: 0 auto;">
+                        <li>$T(n) = 1 + T(n-1)$ (si $n > 0$); $T(n) = 1$ (si $n = 1$).</li>
+                        <li class="fragment" data-fragment-index="1">Luego: $T(n) = 1 + 1 + 1 + \dots + T(1) = n$.</li>
+                        <li class="fragment" data-fragment-index="2">$T(n) = n \rightarrow \mathcal{O}(n)$.</li>
+                    </ul>
+                </small>
+            </section>
+
+
+            <section>
+                <h4>Funciones de Recurrencia</h4>
+                <small>
+                    <div style="width: 80%; margin: 0 auto;">
+                        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                            <h5 style="margin: 0 0 10px 0;">Búsqueda Binaria ($\mathcal{O}(\log n)$)</h5>
+                            <pre class="lstlisting"><code class="language-C" style="font-size: 0.8em;">
+int binarySearch(int arr[], int l, int r, int x){
+    if (r >= l) {
+        int mid = l + (r - l) / 2;
+
+        if (arr[mid] == x) 
+            return mid;
+
+        if (arr[mid] > x) //if-else 1 + T(n/2)
+            return binarySearch(arr, l, mid - 1, x);
+    return binarySearch(arr, mid + 1, r, x); //else
+    }
+    return -1;
+}
+                </code></pre>
+                        </div>
+                    </div>
+
+                    <ul class="r-fit-text" style="text-align: left; width: 70%; margin: 0 auto;">
+                        <li>$T(n) = 1+ T(n/2) $ (si $n > 1$); $T(n) = 1$ (si $n = 1$).</li>
+                        <li class="fragment" data-fragment-index="1">Luego: $T(n) = 1 + 1 + 1 + \dots + T(n/2^k)$</li>
+                        <li class="fragment" data-fragment-index="2">Al finalizar: $T(n/2^k) = T(1) \rightarrow n = 2^k$
+                        </li>
+                        <li class="fragment" data-fragment-index="3"> $\log_2 n = \log_2(2^k) \rightarrow k = \log_2 n $
+                        </li>
+                        <li class="fragment" data-fragment-index="4">$ T(n) = 1 + T(n/2) = 1 + \mathcal{O}(\log n) =
+                            \mathcal{O}(\log n)$</li>
+                    </ul>
+                </small>
+            </section>
+        </div> -->
+
+
+
+
+
+
+        </div>
+
+        <script src="dist/reveal.js"></script>
+        <script src="plugin/notes/notes.js"></script>
+        <script src="plugin/markdown/markdown.js"></script>
+        <script src="plugin/highlight/highlight.js"></script>
+        <script src="plugin/countdown/countdown.js"></script>
+        <script src="plugin/animate/plugin.js"></script>
+        <script src="plugin/animate/svg.min.js"></script>
+        <script src="plugin/math/math.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: true,
+                autoAnimateEasing: 'ease-out',
+                autoAnimateDuration: 0.8,
+                hash: true,
+                slideNumber: true,
+                dependencies: [
+
+                    { src: "plugin/countdown/countdown.js" },
+
+                ],
+                animate: {
+                    autoplay: true
+                },
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+                countdown: { defaultTime: 300, autostart: true },
+
+
+                autoAnimateUnmatched: true
+
+            });
+
+            Reveal.configure({ pdfSeparateFragments: false });
+        </script>
+</body>
+
+</html>

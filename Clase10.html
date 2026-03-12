@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Estructuras de datos Lineales</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            <section>
+                <h4>Lista Simple Enlazada: Inicializar</h4>
+                <p>Las listas, en su versión más básica, dependen de un puntero al inicio de la lista. Éste suele
+                    llamarse <em>header</em>, <em>cabecera</em> o <em>inicio</em>.</p>
+                <div class="example">
+                    <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+typedef struct nodo{
+	int dato; //dato, puede ser lo que uds. necesiten
+	struct nodo *sgte; // puntero a un nodo enalce.
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t * inicio = NULL; 
+	// Inicializamos la lista, con su puntero de inicio apuntando a NULL
+	// Equivalente a lista vacía []
+	return 0;
+}
+    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>Lista Simple Enlazada: Inicializar</h4>
+                <p><img src="images/linkedlist1.png" width="90%"></p>
+                <p><img src="images/init1.png" width="30%"></p>
+            </section>
+
+            <section>
+                <h4>Lista Enlazada PRO</h4>
+                <p>Existen otras implementaciones de listas enlazadas simples, donde se incluyen más punteros y
+                    variables de control.</p>
+                <div class="example">
+                    <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+typedef struct nodo{
+	int dato;
+	struct nodo *sgte;
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t * inicio = NULL;
+	nodo_t * final = NULL;
+	int largo = 0;
+	return 0;
+}
+    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>Lista Enlazada PRO</h4>
+                <p><img src="images/linkedlist2.png" width="90%"></p>
+                <p><img src="images/init2.png" width="25%"></p>
+            </section>
+
+            <section data-auto-animate>
+                <h4>Lista Doblemente Enlazada</h4>
+                <p>Modificación de la lista simple enlazada. </p>
+                <img src="images/doublelinkedlist1.png" width="100%">
+                <p>Éste TDA tiene un
+                    enlace más, para acceder rápidamente al nodo previo y mejorar la navegación.</p>
+
+            </section>
+
+            <section data-auto-animate>
+                <h4>Lista Doblemente Enlazada</h4>
+                <ul>
+                    <li>Controlar el inicio de la lista.</li>
+                    <li>Apuntar al siguiente elemento en la lista.</li>
+                    <li>Apuntar al anterior elemento en la lista.</li>
+                    <li>Acceder a cada nodo.</li>
+                </ul>
+                <p><img src="images/doublelinkedlist1.png" width="100%"></p>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Nodos</h4>
+                <div class="example">
+                    <pre><code class="language-c">
+struct nodo{
+	int dato;
+	struct nodo *sgte;
+	struct nodo *prev;
+};
+
+typedef struct le_nodo{
+	float datos[20];
+	struct le_nodo *sgte;
+	struct le_nodo *prev;
+} nodo_t;
+    </code></pre>
+                </div>
+                <p><img src="images/node_double.png" width="45%"></p>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Interfaz</h4>
+                <ul>
+                    <li>Inicializar Lista</li>
+                    <li>Agregar un elemento a una lista</li>
+                    <li>Determinar el largo de una lista</li>
+                    <li>Eliminar un elemento de una lista</li>
+                    <li>Imprimir una lista</li>
+                    <li>Limpiar una lista</li>
+                </ul>
+                <p><img src="images/doublelinkedlist1.png" width="100%"></p>
+            </section>
+            <!-- 
+            <section>
+                <h4>Lista Doblemente Enlazada: Inicializar</h4>
+                <p>Las listas dobles siguen la misma dinámica que las listas simples enlazadas.</p>
+                <div class="example">
+                    <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+typedef struct nodo{
+	int dato;
+	struct nodo *sgte;
+	struct nodo *prev;
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t * inicio = NULL;
+	return 0;
+}
+    </code></pre>
+                </div>
+                <p><img src="images/init1.png" width="30%"></p>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Añadir nodos</h4>
+                <p>Esquema General:</p>
+                <p><img src="images/add_double.png" width="100%"></p>
+                <ol>
+                    <li class="fragment">Crear el nodo <code>nuevo</code> y asignar el dato</li>
+                    <li class="fragment">Buscar la posición a agregar el nodo</li>
+                    <li class="fragment">Cambiar los punteros</li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Eliminar nodos</h4>
+                <p>Esquema General:</p>
+                <p><img src="images/del_double.png" width="100%"></p>
+                <p>Ojo, que no siempre se pueden borrar nodos: <strong>lista vacía</strong>.</p>
+                <ol>
+                    <li class="fragment">Buscar la posición del nodo a eliminar</li>
+                    <li class="fragment">Cambiar los punteros</li>
+                    <li class="fragment">Eliminar el nodo</li>
+                </ol>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Precauciones al añadir/eliminar</h4>
+                <p><img src="images/add_double.png" width="100%"></p>
+                <ul>
+                    <li class="fragment">Implemente esta función</li>
+                    <li class="fragment">¿Qué precaución hay que tener si se quiere agregar/eliminar al inicio o al
+                        final de la lista?</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada: Funciones</h4>
+                <ul>
+                    <li>Determinar el largo de una lista</li>
+                    <li>Imprimir una lista</li>
+                    <li>Limpiar una lista</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada PRO</h4>
+                <div class="example">
+                    <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+typedef struct nodo{
+	int dato;
+	struct nodo *sgte;
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t * inicio = NULL;
+	nodo_t * final = NULL;
+	int largo = 0;
+	return 0;
+}
+    </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>Lista Doblemente Enlazada PRO+</h4>
+                <div class="example">
+                    <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+typedef struct nodo{
+	int dato;
+	struct nodo *sgte;
+} nodo_t;
+
+int main(int argc, char **argv){
+	nodo_t * inicio = NULL;
+	nodo_t * final = NULL;
+	nodo_t * actual = NULL;
+	int largo = 0;
+	int pos_actual = 0;
+	return 0;
+}
+    </code></pre>
+                </div>
+                <p><img src="images/doublelinkedlist3.png" width="100%"></p>
+            </section>
+
+            <section>
+                <h4>Ejercicio: Construyendo la lista de Python en C</h4>
+                <p>Implemente una lista de cada tipo; Simple, Simple PRO, Doble, Doble PRO, Doble PRO+; para algún tipo
+                    de dato a su elección, que incluya las funciones más conocidas de las listas de Python:</p>
+                <ul>
+                    <li><code>list()</code> o <code>[]</code></li>
+                    <li><code>.insert(pos, value)</code></li>
+                    <li><code>.append(value)</code></li>
+                    <li><code>.clear()</code></li>
+                    <li><code>del lista[pos]</code></li>
+                    <li><code>.remove(value)</code></li>
+                    <li><code>.sort()</code></li>
+                    <li><code>.reverse()</code></li>
+                    <li><code>.count(value)</code></li>
+                    <li><code>.index(value)</code></li>
+                </ul>
+            </section> -->
+
+            <section data-auto-animate>
+                <h4>Pilas o Stacks</h4>
+                <p>TDA que permite operar solo en uno de sus extremos. Es de tipo <strong>LIFO</strong> (Last In, First
+                    Out). Puede ser implementada con arreglos o listas.</p>
+                <img class="r-stretch" src="images/stack_illustration.png">
+                <!--   <ul>
+    <li>Control+Z/Control+Y: Operaciones de Deshacer o Rehacer (undo/redo)</li>
+    <li>Compilación: Fórmulas matemáticas en notación de primer orden</li>
+    <li>Búsqueda en árboles: Búsqueda en Profundidad (DFS)</li>
+  </ul> -->
+            </section>
+
+            <section data-auto-animate>
+                <h4>Pilas o Stacks: Interfaz</h4>
+                <img class="r-stretch" src="images/stack_illustration.png">
+                <ul>
+                    <li><code>push()</code>: Ingresa un nuevo elemento en la pila</li>
+                    <li><code>pop()</code>: Elimina el elemento superior de la pila</li>
+                    <li><code>peak()</code>: Devuelve el valor del primer elemento en la pila</li>
+                    <li><code>is_empty()</code>: Revisa si la pila está vacía</li>
+                    <li><code>is_full()</code>: Revisa si la pila está llena (solo para tamaños fijos)</li>
+
+                </ul>
+            </section>
+
+            <section data-auto-animate>
+                <h4>Pilas o Stacks</h4>
+                <p><img src="images/stack-base.png" width="95%"></p>
+            </section>
+
+            <section data-auto-animate>
+                <h4>Pilas o Stacks: <code>push()</code></h4>
+                <p><img src="images/stack-push.png" width="95%"></p>
+            </section>
+
+            <section data-auto-animate>
+                <h4>Pilas o Stacks: <code>pop()</code></h4>
+                <p><img src="images/stack-pop.png" width="95%"></p>
+            </section>
+
+            <section>
+                <h4>Listas Circulares</h4>
+                <p>Es una variación de la lista simple/doble enlazada en la que el primer elemento está conectado con el
+                    último, creando así una estructura circular.</p>
+                <img class="fragment" src="images/circular-ll.png" width="70%">
+                <img class="fragment" src="images/circular-dll.png" width="85%">
+            </section>
+
+            <section>
+                <h4>Listas Circulares: Ventajas </h4>
+
+                <ul>
+                    <li class="fragment">Cualquier nodo puede ser la cabecera o final</li>
+                    <li class="fragment">Si una estructura tiene dos punteros, ahora solo es necesario uno</li>
+                    <li class="fragment">Útil para lecturas reiterativas de elementos</li>
+                </ul>
+                <!-- <h4>Aplicaciones:</h4>
+                <ul>
+                    <li>Colas o Queues</li>
+                    <li>Buffers circulares dinámicos y estáticos</li>
+                    <li>Planificación de ejecución de componentes de CPU</li>
+                    <li>Round robin scheduling</li>
+                </ul> -->
+            </section>
+
+            <section>
+                <h4>Colas o Queues</h4>
+                <p>TDA que permite operar en un extremo para entrada y en otro extremo para salida. Es de tipo
+                    <strong>FIFO</strong> (First In, First Out). Puede implementarse con arreglos o listas.
+                </p>
+                <p><img src="images/queue_illustration.png" width="50%"></p>
+                <!-- <ul>
+                    <li>Planificación de recursos. Priorización</li>
+                    <li>Colas de impresión</li>
+                    <li>Comunicación asincrónica e interrupciones de sistema</li>
+                    <li>Teoría de Colas</li>
+                </ul> -->
+            </section>
+
+            <section>
+                <h4>Colas o Queues: Interfaz</h4>
+                <ul>
+                    <li><code>enqueue()</code>: Ingresa un nuevo elemento al final de la cola</li>
+                    <li><code>dequeue()</code>: Elimina el primer elemento de la cola</li>
+                    <li><code>size()</code>: Devuelve el tamaño de la queue</li>
+                    <li><code>check()</code>: Devuelve el valor de un elemento de la cola</li>
+                    <li><code>is_empty()</code>: Revisa si la queue está vacía</li>
+                    <li><code>is_full()</code>: Revisa si la queue está llena (solo para tamaños fijos)</li>
+
+                </ul>
+            </section>
+
+            <section>
+                <h4>Colas o Queues</h4>
+                <p><img src="images/queue1.png" width="95%"></p>
+            </section>
+
+            <section>
+                <h4>Colas o Queues: <code>enqueue()</code></h4>
+                <p><img src="images/enqueue1.png" width="95%"></p>
+            </section>
+
+            <section>
+                <h4>Colas o Queues: <code>dequeue()</code></h4>
+                <p><img src="images/dequeue1.png" width="95%"></p>
+            </section>
+
+            <section>
+                <h4>Colas o Queues Circulares</h4>
+                <p>Es una fila o cola que se implementa utilizando estructuras de datos circulares, i.e., listas
+                    enlazadas circulares.</p>
+                <img class="r-stretch" src="images/queue2.png">
+                <p>Ventaja principal: necesita sólo un puntero para manejar la posición final. No hay necesidad de
+                    recorrer toda la fila para hacer cambios.</p>
+
+            </section>
+
+            <section>
+                <h4>Colas o Queues Circulares: <code>enqueue()</code></h4>
+                <p><img src="images/enqueue2.png" width="95%"></p>
+            </section>
+
+            <section>
+                <h4>Colas o Queues Circulares: <code>dequeue()</code></h4>
+                <p><img src="images/dequeue2.png" width="95%"></p>
+            </section>
+
+            <!-- <section>
+  <h4>Desafío</h4>
+  <ul>
+    <li>Invierta una palabra utilizando pilas</li>
+    <li>Invierta una palabra usando queues</li>
+    <li>Invierta una lista utilizando stacks</li>
+    <li>Invierta una lista utilizando colas</li>
+  </ul>
+</section> -->
+
+            <section>
+                <h4>Actividad Clase 10: Elegir la estructura adecuada</h4>
+                <p>En grupos, deben discutir las posibles estructuras de datos con las que se podría representar cada caso:</p>
+                <ul>
+                    <li>Listas Doblemente Enlazadas</li>
+                    <li>Pilas (Stack)</li>
+                    <li>Colas (Queue)</li>
+                    <li>Buffers Circulares</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 1: Editor de Texto</h4>
+                <p>Supongamos que estamos diseñando un editor de texto con función <strong>Deshacer/Rehacer</strong>.
+                </p>
+                <p>¿Qué estructura usarías para implementar la funcionalidad de deshacer?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 2: Cola de Impresión</h4>
+                <p>Una impresora recibe trabajos de varios usuarios y los procesa en orden de llegada.</p>
+                <p>¿Qué estructura usarías para gestionar la cola de impresión?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 3: Playlist de Música</h4>
+                <p>Queremos que las canciones se reproduzcan en orden, y al terminar la última, volver a la primera.</p>
+                <p>¿Qué estructura usarías para manejar la playlist?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 4: Almacenamiento temporal de datos de sensores</h4>
+                <p>Un microcontrolador recibe datos de un sensor a velocidad constante y debe mantener los últimos N
+                    valores.</p>
+                <p>¿Qué estructura usarías para mantener estos datos de forma eficiente?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 5: Navegador Web - Historial</h4>
+                <p>Deseamos implementar la función de <strong>ir hacia atrás y hacia adelante</strong> en un navegador
+                    web.</p>
+                <p>¿Qué estructura usarías para almacenar las páginas visitadas?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 6: Tareas de CPU en tiempo real</h4>
+                <p>Un sistema operativo debe ejecutar procesos en un esquema de <strong>round-robin</strong>, alternando
+                    entre ellos continuamente.</p>
+                <p>¿Qué estructura usarías para gestionar la cola de procesos?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Caso 7: Tareas de CPU en tiempo real</h4>
+                <p>Un sistema operativo debe ejecutar procesos en un esquema de <strong>round-robin</strong>, alternando
+                    entre ellos continuamente.</p>
+                <p>¿Qué estructura usarías para gestionar la cola de procesos?</p>
+                <ul>
+                    <li>Opciones: Lista doblemente enlazada, Stack, Queue, Buffer Circular</li>
+                </ul>
+            </section>
+
+            <section>
+    <h4>Caso 7: Manejo de paquetes en un router</h4>
+    <p>Un router recibe paquetes de datos que deben ser enviados en el mismo orden en que llegaron. 
+       Si el buffer se llena, debe descartar los más antiguos.</p>
+    <p>¿Qué estructura usarías para gestionar los paquetes en el buffer?</p>
+    <ul>
+        <li>Opciones: Lista enlazada, Queue, Buffer Circular, Stack</li>
+    </ul>
+</section>
+
+<section>
+    <h4>Caso 8: Editor colaborativo en línea</h4>
+    <p>En un editor como Google Docs, varios usuarios editan un documento simultáneamente. 
+       El sistema debe mantener historial de cambios y permitir deshacer/rehacer.</p>
+    <p>¿Qué estructura usarías para manejar el documento y el historial de acciones?</p>
+    <ul>
+        <li>Opciones: Lista doblemente enlazada, Stack, Queue, Lista circular</li>
+    </ul>
+</section>
+
+<section>
+    <h4>Caso 9: Simulación de tráfico vehicular</h4>
+    <p>En una simulación de ciudad, los autos entran y salen de las calles a través de intersecciones. 
+       Deben mantenerse en orden de llegada para avanzar correctamente.</p>
+    <p>¿Qué estructura usarías para representar el flujo de autos en una calle?</p>
+    <ul>
+        <li>Opciones: Queue, Buffer Circular, Lista enlazada, Stack</li>
+    </ul>
+</section>
+
+<section>
+    <h4>Caso 10: Motor de videojuegos (eventos en tiempo real)</h4>
+    <p>Un videojuego recibe eventos como teclas presionadas, colisiones y disparos. 
+       El motor debe procesarlos en orden de llegada sin acumular un backlog infinito.</p>
+    <p>¿Qué estructura usarías para gestionar los eventos?</p>
+    <ul>
+        <li>Opciones: Queue, Buffer Circular, Lista enlazada, Stack</li>
+    </ul>
+</section>
+
+<section>
+    <h4>Caso 11: Sistema de mensajería instantánea</h4>
+    <p>En aplicaciones como WhatsApp, los mensajes deben mantenerse en orden de envío y 
+       permitir al usuario desplazarse hacia atrás y adelante en la conversación.</p>
+    <p>¿Qué estructura usarías para almacenar y navegar los mensajes?</p>
+    <ul>
+        <li>Opciones: Lista doblemente enlazada, Queue, Stack, Lista circular</li>
+    </ul>
+</section>
+
+<section>
+    <h4>Caso 12: Resolución de expresiones matemáticas</h4>
+    <p>Un programa debe evaluar expresiones con paréntesis y operadores, 
+       como <code>(5 + 3) * (12 / (4 - 2))</code>, respetando la precedencia y el orden.</p>
+    <p>¿Qué estructura usarías para manejar operadores y operandos?</p>
+    <ul>
+        <li>Opciones: Stack, Queue, Lista enlazada, Buffer Circular</li>
+    </ul>
+</section>
+
+
+            <section>
+                <h4>Discusión en grupos</h4>
+                <p>Divídanse en grupos y discutan:</p>
+                <ol>
+                    <li>Qué estructura es más adecuada para cada caso</li>
+                    <li>Justifiquen su elección</li>
+                    <li>Piensen en ventajas y desventajas</li>
+                </ol>
+            </section>
+
+           <!--  <section>
+                <h4>Conclusión de la actividad</h4>
+                <ul>
+                    <li>Stack: útil para deshacer/rehacer, DFS, reversión de datos</li>
+                    <li>Queue: útil para colas de impresión, planificación y procesamiento FIFO</li>
+                    <li>Lista doblemente enlazada: flexible, permite inserción/eliminación en cualquier posición</li>
+                    <li>Buffer Circular: ideal para mantener un tamaño fijo de datos recientes, como sensores o audio, y
+                        round-robin</li>
+                </ul>
+            </section>
+
+ -->
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

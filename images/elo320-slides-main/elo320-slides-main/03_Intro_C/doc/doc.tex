@@ -1,0 +1,318 @@
+\documentclass{article}
+%\usepackage[spanish]{babel}
+\usepackage[pdftex]{graphicx,color} 
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage[export]{adjustbox}
+%\usepackage{amslatex}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        backgroundcolor=, %\color{lbcolor},
+        tabsize=4,
+        rulecolor=,
+        language=C,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        %columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+\topmargin -0.5in
+\textwidth 6.8in
+\textheight 9.0in
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{multicol}
+%ointpoints{punto}{puntos}
+
+\begin{document}
+\vspace{.5pc}
+\centerline{\sc Clase Activa 1}
+\centerline{\sc ELO320 - Estructura de Datos y Algoritmos}
+\centerline{\sc Prof. Nicolás Gálvez Ramírez}
+\vspace{2pc}
+%\noindent {\bf Instrucciones}:
+%\begin{itemize}
+%    \item Conteste cada pregunta en una hoja separada. Éstas serán entregadas de tal forma al finalizar el certamen.
+%    \item Si decide no contestar una pregunta, debe entregar una hoja sin respuestas en su lugar. 
+%    \item Rotule claramente cada una de sus hojas con su Nombre Completo, Rol USM y Número de Paralelo.
+%    \item El certamen tiene una duración de 60 minutos.
+%\end{itemize}
+
+%\noindent {\bf Preguntas}
+%\medskip
+\begin{itemize}
+
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{Operadores Binarios}:
+
+\begin{tabular}{|l|l|l|l|}\hline 
+	\textbf{Operador} &\textbf{C} & \textbf{Python}   \\ \hline \hline
+	Negación lógica & !  &  $\mbox{not}$ \\  \hline
+	Dirección       & \&  &  \emph{No existe} \\  \hline
+	Derreferencia   & * &  \emph{No existe} \\  \hline
+%	Complemento a 1 & $\sim$ & $\sim$  \\  \hline
+	Incremento      & ++ &  \emph{No existe} \\  \hline
+	Decremento      & - - & \emph{No existe} \\  \hline
+	Signo más       & + &  + \\  \hline
+	Negativo        & - &  - \\  \hline
+	Casting         & (tipo) &  \emph{No existe} \\  \hline
+\end{tabular}\\[1em]
+Los operadores unarios agrupan de derecha a izquierda. Ejemplo: \textcolor{blue}{$-+ x$} equivalente a \textcolor{blue}{$-(+ x)$}.
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{Operadores Binarios}:
+
+\begin{tabular}{|l|l|l|l|}\hline
+	\textbf{Operador} &\textbf{C} & \textbf{Python}   \\ \hline \hline
+	Suma         & +  & +  \\  \hline
+	Resta       & - &  - \\  \hline
+	Multiplicación & * & *  \\  \hline
+	División      & / &  / \\  \hline
+	División entera & /  & //  \\  \hline
+	Módulo      & \% & \% \\  \hline
+	Exponenciación   & \emph{No existe}  &  ** \\  \hline
+\end{tabular}\\[1em]
+
+\textbf{División entera en C según tipo de dato.} Ejemplo, $\frac{5}{4} = 1$ y $\frac{5.0}{4} = 1.25 $. 
+\end{minipage}
+
+\item \textbf{Precedencia de operadores}:
+
+\begin{center}
+\begin{tabular}{|l|l||l|l|c|}\hline 
+	\multirow{2}{*}{\textbf{Precedencia}}  & \multirow{2}{*}{\textbf{Descripción}} & 
+	\multicolumn{2}{|c|}{\textbf{Operador}} & \multirow{2}{*}{\textbf{Asociatividad}} \\ \hhline{~~--~}
+	& & \textbf{C} & \textbf{Python} &  \\ \hline \hline
+	alta & exponente &  & $**$ & $\leftarrow$  \\	\hline
+	& unarios (postfijos) & \tiny $++$ $--$ &  & $\rightarrow$ \\	\hline
+	& unarios (prefijos) & \tiny$++$ $--$ $\sim$ ! * \& + - & \tiny $\sim$ + - & $\leftarrow$ \\	\hline
+	& casting de tipo &(type) & & $\leftarrow$ \\	\hline
+	& multiplicativos & \tiny * / \% & \tiny * / // \%	 & $\rightarrow$  \\	\hline
+	& aditivos & \tiny $+$ $-$ & \tiny $+$ $-$ & $\rightarrow$  \\	\hline
+%	& corrimiento & \tiny $<<$ $>>$ & \tiny $<<$ $>>$ & $\rightarrow$  \\	\hline
+%	& bitwise AND  & \& & \&    & $\rightarrow$  \\	\hline
+%	& bitwise XOR & $\wedge$ & $\wedge$ & $\rightarrow$  \\	\hline
+%	& bitwise OR  & $|$ & $|$ & $\rightarrow$  \\	\hline
+	baja & NOT lógico  &	& $\mathbf{not}$ & $\leftarrow$ \\	\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{Entender coherciones}:
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}]
+float   fVal;
+double  dVal;
+int   iVal;
+unsigned long ulVal;
+
+dVal = iVal * ulVal; //iVal es convertido a unsigned long.
+// El resultado es convertido a double 
+
+dVal = ulVal + fVal; //ulVal convertido a float.
+//El resultado es convertido a double            
+	\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{Asignaciones}:
+
+\medskip
+\begin{tabular}{|l|l|l|}\hline
+	\textbf{Operador} &\textbf{C} & \textbf{Python}   \\ \hline 
+	Asignación         & $=$  & $=$  \\  \hline
+	Suma y asignación       & $+=$ & $+=$ \\  \hline
+	Resta y asignación          & $-=$ & $-=$  \\  \hline
+	Multiplicación y asignación       & $*=$ & $*=$ \\  \hline
+	División y asignación   & $/=$ & $/=$  \\  \hline
+	Módulo y asignación   & $\%=$ & $\%=$  \\  \hline
+%	Bitwise AND y asignación   &  $\&=$ &  \\  \hline
+%	Bitwise OR y asignación   & $|=$ &   \\  \hline
+%	Bitwise XOR y asignación   & $\wedge=$ &  \\  \hline
+%	Corrimiento der. y asignación   & $>>=$ &   \\  \hline
+%	Corrimiento izq. y asignación   & $<<=$ &   \\  \hline
+	Incremento    & $++$ &  \\  \hline
+	Decremento   & $--$ &   \\  \hline
+	División entera y asignación   &  & $//=$  \\  \hline
+	Exponente y asignación   & & $**=$  \\  \hline
+\end{tabular}
+\end{minipage}
+
+\item \textbf{Unarios de Asignación - C:}
+
+\begin{minipage}[h]{0.45\textwidth}
+\begin{lstlisting}[language=C, basicstyle=\scriptsize] 
+//pre-incremental
+sum = ++contador; 
+
+//equivale a:
+
+contador = contador + 1;
+sum = contador;
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[h]{0.45\textwidth}
+\begin{lstlisting}[language=C, basicstyle=\scriptsize] 
+//post-incremental
+sum = contador++;
+ 
+//equivale a:
+aux = contador;
+contador = contador + 1;
+sum = aux;
+\end{lstlisting}
+\end{minipage}
+\newpage
+\item Operador Ternario:
+
+\begin{minipage}[h]{0.45\textwidth}
+\begin{lstlisting}[language=C, basicstyle=\scriptsize] 
+retorno = op1 ? op2 : op3;  
+\end{lstlisting}
+{\scriptsize \textbf{Si op1 es verdadero, asigna op2; sino, asigna op3.}}\\
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\begin{lstlisting}[language=C, basicstyle=\scriptsize] 
+cuenta = (a > 0) ? 0 : 1;
+
+//Equivale a:
+if (a > 0)
+	cuenta = 0;
+else cuenta = 1;
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{Expresiones Relacionales y Lógicas}:
+
+\begin{tabular}{|l|l|l|}\hline \hline
+	\multicolumn{3}{|c|}{\textbf{Operadores Relacionales}} \\ \hline
+	\textbf{Operador} &\textbf{C} & \textbf{Python}   \\ \hline 
+	Igual         & $==$  & $==$  \\  \hline
+	Distinto       & $!=$ & $!=$ $<>$ \\  \hline
+	Mayor          & $>$ & $>$  \\  \hline
+	Menor       & $<$ & $<$ \\  \hline
+	Mayor o igual   & $>=$ & $>=$  \\  \hline
+	Menor o igual   & $<=$ & $<=$  \\  \hline
+	\multicolumn{3}{|c|}{\textbf{Operadores Booleanos}} \\ \hline
+	\textbf{Operador} &\textbf{C}  & \textbf{Python}   \\ \hline 
+	NOT   & !  &   \textbf{not} \\  \hline
+	AND   & $\&\&$  & \textbf{and}  \\  \hline
+	OR   & $||$  & \textbf{or}  \\  \hline
+\end{tabular}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{if-else if-else}:
+
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}] 
+if(condicion_1) {
+    //....
+} else if(condicion_k) {
+    //....
+} else {
+    //....
+}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}[h]{0.45\textwidth}
+
+\item \textbf{switch}:
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}] 
+switch(x){ //Debe ser una variable
+case x1:                                     
+	//.... 
+	break; 
+case x2: 
+	//.... 
+	break; 
+//.... 
+case xN: 
+	//.... 
+	break;  
+default: //opcional
+	//....
+} 
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{while - do while}:
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}] 
+while(condicion) { 
+    //...
+}
+
+do {
+    //...
+} while(condicion);
+		\end{lstlisting}
+
+\end{minipage}
+
+\begin{minipage}[h]{0.45\textwidth}
+\item \textbf{for}:
+\begin{lstlisting}[language=C, basicstyle=\scriptsize, escapeinside={|}{|}] 
+//En general:
+for(sentencia_inicial;condicion;sentencia_fin_ciclo) { 
+    //...
+} 
+
+//Uso corriente
+for(i=0; i<N; i++) { 
+    //...
+} 
+
+//Equivalente a:
+i=0;
+while(i<N) {
+    //...
+    i++;
+}
+\end{lstlisting}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[h]{0.45\textwidth}
+\item Corto Circuito o Término anticipado de la evaluación: 
+
+\begin{lstlisting}[language=C, basicstyle=\scriptsize] 
+//Sin tildes por codificacion de caracteres.
+//Si primera condicion se cumple, la expresion es true, no se evalua el resto
+if((a >= 0) || (b < 10))
+
+//Si primera condicion no se cumple, la expresion es false, no se evalua el resto.
+while ( c > 0 && c+=1 < 10 ))
+\end{lstlisting}
+\end{minipage}
+\end{itemize}
+\end{document}
+

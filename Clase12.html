@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Árboles binarios</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+
+
+            <section>
+                <section data-state="recursion-intro">
+                    <h2>Recursividad</h2>
+                    <p>Un proceso recursivo es un ciclo autorreferente cuya definición depende, en parte, de su propia
+                        ejecución </p>
+                    <div style="text-align: center;">
+                        <img class="r-stretch" src="images/obs-recursion.png"
+                            alt="Diagrama de un ciclo de recursión auto-referente" class="r-stretch">
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Recursividad</h2>
+                    <p>Una definición recursiva se compone de dos elementos básicos:</p>
+                    <ol>
+                        <li>Un caso base que detiene el ciclo.</li>
+                        <li>Una llamada autorreferente con un elemento. </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h4>Ejemplo de Recursividad</h4>
+                    <div class="r-stack">
+                        <div class="fragment fade-in-then-semi-out" data-fragment-index="1">
+                            <div class="r-frame"
+                                style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                                <h3>Factorial</h3>
+                                <p>$ f(0) = 1 $ (caso base)</p>
+                                <p>$ f(n) = n \times f(n-1)$ (llamada autorreferente)</p>
+                            </div>
+                        </div>
+                        <div class="fragment fade-in" data-fragment-index="2">
+                            <div class="r-frame"
+                                style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-bottom: 20px;">
+                                <h3>Factorial en C</h3>
+                                <pre><code class="c" data-trim data-noescape>
+int factorial(int n){
+    if (n<0)
+        return -1; //Valor de Error
+    // caso base, sin condicion -> loop infinito
+    
+    else if(n==0) 
+        return 1; 
+    return n * factorial(n-1); // llamado a un elemento parcial del caso
+}
+                        </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fragment fade-in" data-fragment-index="3">Entenderemos por recursividad como la
+                        técnica en la cual alguna función depende de su propia definición, vale decir, <strong>se
+                            llama a sí misma</strong> para formar un ciclo.</p>
+                </section>
+
+                <section>
+                    <h2>Recursividad: Ejemplos</h2>
+                    <ul>
+                        <li class="fragment">Sequencia de Fibonacci.</li>
+                        <li class="fragment">Polinomio de Hermite.</li>
+                        <li class="fragment">Triángulo de Pascal.</li>
+                        <li class="fragment">Fractales.</li>
+                        <li class="fragment"><strong class="fragment">Árboles</strong>.</li>
+                    </ul>
+                </section>
+            </section>
+
+
+            <section data-state="trees-intro">
+                <h2>Árboles</h2>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/arbol1.png"
+                        alt="Diagrama de estructura de datos de árbol jerárquico">
+                </div>
+
+                <p>Estructura de dato no-lineal, jerárquica y enlazada, que permite el acceso
+                    eficiente a sus elementos.</p>
+
+            </section>
+
+            <section>
+                <h2>Árboles: Aplicaciones</h2>
+
+                <ul>
+                    <li>Compilación e interpretación de elementos sintácticos de un lenguaje.</li>
+                    <li>Representación expresiones aritméticas y/o lógicas.</li>
+                    <li>Representación de estructuras de búsqueda de datos.</li>
+                    <li>Sistemas de archivos y directorios.</li>
+                    <li>Clases y herencia en POO.</li>
+                    <li>Compresión de datos.</li>
+                    <li>Computación Evolutiva.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <p>Un árbol se forma por un conjunto finito de nodos
+                    enlazados entre sí según jerarquía padre-hijo.</p>
+
+                <div>
+                    <img class="r-stretch" src="images/example1.png" alt="Diagrama simple de la estructura de un árbol"
+                        style="width: 60%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <ul style="font-size: 0.8em;">
+                    <li>Primer nodo &rarr; &nbsp;raíz del árbol.</li>
+                    <li>Nodo con sucesores &rarr; padre.</li>
+                    <li>Sucesor de un nodo &rarr; hijo.</li>
+                    <li>Nodos con padre e hijos &rarr; nodo intermedio.</li>
+                    <li>Nodo sin hijos &rarr; hoja (nodo terminal).</li>
+                </ul>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/concepto.png"
+                        alt="Diagrama de árbol con la terminología: raíz, padre, hijo, hoja" style="width: 50%;">
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <div>
+                    <img class="r-stretch" src="images/concepto2.png"
+                        alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                </div>
+
+                <ul class="r-fit-text">
+                    <li class="fragment">Camino: Secuencia entre dos nodos siguiendo relación jerárquica
+                        padre hijo.
+                        $$\text{camino}(4,47)=\{4,12,61,47\}$$
+                    </li>
+
+                    <li class="fragment">Rama: Camino de la raíz a una hoja.
+                        $$\text{rama}_1 = \text{camino}(4,2)$$
+                    </li>
+                </ul>
+
+            </section>
+
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <div>
+                    <img class="r-stretch" src="images/concepto2.png"
+                        alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                </div>
+
+                <ul class="r-fit-text">
+
+
+                    <li>Largo Camino: Número de enlaces (nodos-1) entre dos nodos en
+                        relación jerárquica.
+                        $$\text{largo}(4,47)=3$$
+                    </li>
+
+                    <li>Profundidad: Cantidad de predecesores del nodo.
+                        $$\text{profundidad}(2) = 2$$
+                    </li>
+                </ul>
+
+            </section>
+
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <div>
+                    <img class="r-stretch" src="images/concepto2.png"
+                        alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                </div>
+
+                <ul class="r-fit-text">
+                    <li>Grado de Nodo: Cantidad de hijos.
+                        $$\text{grado}(47)=0$$
+                    </li>
+                    <li>Grado del árbol: Máximo número de hijos para cada nodo.
+                        $$\text{grado}(A)=3$$
+                    </li>
+
+
+                </ul>
+
+            </section>
+
+
+
+
+
+            <section>
+                <h4>Árboles: Conceptos</h4>
+                <div>
+                    <img class="r-stretch" src="images/concepto2.png"
+                        alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                </div>
+
+                <ul class="r-fit-text">
+                    <li>Altura: Profundidad máxima de los nodos o largo del camino más grande:
+                        $$\text{altura}(A)=3$$
+                    </li>
+                    <li>Nivel: Número de enlaces del camino de la raíz al nodo (parte en 0).
+                        $$\text{nivel}(4)=3$$
+                    </li>
+                    <li>Bosque: Colección o conjunto de árboles.</li>
+                </ul>
+
+            </section>
+
+
+
+            <section>
+                <h2>Árboles: Recursividad</h2>
+                <p class="r-fit-text">Los árboles son estructuras de datos recursiva, debido a que cada
+                    hijo de un nodo es la raíz de un árbol de menor altura (sub-árbol). Por esta razón, las funciones y
+                    métodos de árboles son facilmente
+                    aplicables con técnicas recursivas.</p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/arbolrecursivo.png"
+                        alt="Diagrama de árbol que resalta los subárboles como estructuras recursivas"
+                        style="width: 60%;">
+                </div>
+            </section>
+
+
+            <section>
+                <h2>Árboles binarios</h2>
+                <p style="font-size: 0.8em;">En este curso nos concentraremos en árboles binarios, i.e.,
+                    árboles cuyo grado es 2. </p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/binarytree.png" alt="Diagrama de un árbol binario"
+                        style="width: 40%;">
+                </div>
+                <h3>Aplicaciones:</h3>
+                <ul>
+                    <li>Gramática de lenguajes, i.e. matemáticas.</li>
+                    <li>Árboles de Decisión.</li>
+                    <li><strong>Árbol Binario de Búsqueda.</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Aplicaciones:</h4>
+                <ul>
+                    <li>Gramática de lenguajes, i.e. matemáticas.</li>
+                    <li>Árboles de Decisión.</li>
+                    <li><strong>Árbol Binario de Búsqueda.</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Implementación</h4>
+                <p style="font-size: 0.8em;">Un árbol binario tiene a lo más dos hijos, y se implementa muy
+                    similar a las listas enlazadas.</p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/binarytree2.png"
+                        alt="Diagrama de la implementación de un nodo binario con punteros izquierdo y derecho"
+                        style="width: 60%;">
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Árboles binarios: Implementación</h4>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <img class="r-stretch" src="images/binarytree2.png"
+                                alt="Diagrama de la implementación de un nodo binario con punteros izquierdo y derecho"
+                                style="width: 80%;">
+                        </div>
+
+                        <div class="row">
+
+                            <pre><code class="c" data-trim data-noescape>
+typedef struct nodo{
+    int dato;
+    struct nodo *hijo_izq;
+    struct nodo *hijo_der;
+} nodo_t;
+
+int main(int argc, char **argv){
+    nodo_t *raiz; // árbol vacío
+    return 0;
+}
+                    </code></pre>
+                        </div>
+                    </div>
+                    <div class="col">
+
+
+                        <ul>
+                            <li>El puntero de control se encuentra siempre en la raíz. </li>
+                            <li>Los nodos cuyos hijos apunten a <code>NULL</code>, son hojas.</li>
+                            <!-- <li><strong>¿Cómo podemos recorrer un árbol (binario)?</strong> - En seguida.</li>
+                            <li><strong>¿Cómo agregar, buscar, eliminar elementos de un árbol binario?</strong></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Árboles binarios: Recorrido en Anchura</h4>
+                <p style="font-size: 0.8em;">Tiene como criterio visitar todos los nodos de un nivel antes
+                    de pasar al siguiente.</p>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/breadthsearch.png"
+                            alt="Diagrama que muestra el recorrido en anchura (Breadth-First Search)"
+                            style="width: 80%;">
+                    </div>
+
+                    <div class="col ">
+                        <ul style="font-size: 0.8em;">
+                            <!-- <li>No puede realizarse directamente por recursividad.</li> -->
+                            <li>Se utiliza una <strong>Queue/Cola</strong> como estructura auxiliar.</li>
+                            <li>Recorre todos los nodos de un nivel, antes de pasar al siguiente. </li>
+                            <li>Se realiza dequeue y enqueues hasta pasar por todos lo niveles.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Recorrido en Profundidad</h4>
+                <p style="font-size: 0.8em;">Tiene como criterio visitar los nodos por profundidad hasta
+                    llegar una hoja, luego retrocede y continúa.</p>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/dfs1.png"
+                            alt="Diagrama que muestra el recorrido en profundidad (Depth-First Search)"
+                            style="width: 45%;">
+                    </div>
+                    <div class="col ">
+                        <p>Tres de los tipos de recorrido en profundidad más utilizados son:</p>
+                        <ul>
+                            <li>Pre-orden.</li>
+                            <li>In-orden.</li>
+                            <li>Post-orden.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Pre-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar nodo actual.</li>
+                    <li>Visitar hijo izquierdo en pre-orden.</li>
+                    <li>Visitar hijo derecho en pre-orden.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs1.png"
+                        alt="Diagrama que ilustra el recorrido Pre-orden (Nodo, Izq, Der)" style="width: 40%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Pre-orden</h4>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/dfs1.png"
+                            alt="Diagrama que ilustra el recorrido Pre-orden (Nodo, Izq, Der)" style="width: 40%;">
+                    </div>
+                    <div class="col">
+
+                        <pre><code class="c" data-trim data-noescape>
+void print_preorden(node_t *root){
+    printf("Dato: %d\n", root->dato);
+    
+    if(root->hijo_izq != NULL)
+        print_preorden(root->hijo_izq);
+
+    if(root->hijo_der != NULL)
+        print_preorden(root->hijo_der);
+}
+                    </code></pre>
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. In-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar hijo izquierdo en in-orden.</li>
+                    <li>Visitar nodo actual.</li>
+                    <li>Visitar hijo derecho en in-orden.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs2.png"
+                        alt="Diagrama que ilustra el recorrido In-orden (Izq, Nodo, Der)">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. In-orden</h4>
+                <div class="row">
+                    <div class="col">
+                        <img class="r-stretch" src="images/dfs2.png"
+                            alt="Diagrama que ilustra el recorrido In-orden (Izq, Nodo, Der)" style="width: 80%;">
+                    </div>
+                    <div class="col">
+                        <pre><code class="c" data-trim data-noescape>
+void print_inorden(node_t *root){
+
+    if(root->hijo_izq != NULL)
+        print_inorden(root->hijo_izq);
+
+    printf("Dato: %d\n", root->dato);
+    
+    if(root->hijo_der != NULL)
+        print_inorden(root->hijo_der);
+}
+                    </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Post-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar hijo izquierdo en post-orden.</li>
+                    <li>Visitar hijo derecho en post-orden.</li>
+                    <li>Visitar nodo actual.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs3.png"
+                        alt="Diagrama que ilustra el recorrido Post-orden (Izq, Der, Nodo)">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Post-orden</h4>
+                <div class="row">
+                    <div class="col">
+                        <img class="r-stretch" src="images/dfs3.png"
+                            alt="Diagrama que ilustra el recorrido Post-orden (Izq, Der, Nodo)" style="width: 70%;">
+                    </div>
+                    <div class="col">
+                        <pre><code class="c" data-trim data-noescape>
+void print_postorden(node_t *root){
+
+    if(root->hijo_izq != NULL)
+    print_postorden(root->hijo_izq);
+
+    if(root->hijo_der != NULL)
+    print_postorden(root->hijo_der);
+
+    printf("Dato: %d\n", root->dato);
+}
+                    </code></pre>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Actividad 12.1: Construcción y recorridos de un árbol</h4>
+                <p>Implementa en C la estructura de un árbol binario:</p>
+                <ul>
+                    <li>Crea un nodo con valor entero.</li>
+                    <li>Construye manualmente un árbol de 5 nodos.</li>
+                    <li>Implementa funciones recursivas para:</li>
+                    <ul>
+                        <li>Recorrido en Pre-Orden</li>
+                        <li>Recorrido en In-Orden</li>
+                        <li>Recorrido en Post-Orden</li>
+                    </ul>
+                </ul>
+                <p><strong>Pregunta:</strong> ¿Qué diferencias observas entre los tres recorridos?</p>
+            </section>
+
+            <section>
+                <h4>Actividad 12.2: Árbol de Expresiones</h4>
+                <p>Representa en C la expresión <code>(3 + 5) * 2</code> como un árbol binario.</p>
+                <ul>
+                    <li>Cada nodo interno debe ser un operador (+, *, etc.).</li>
+                    <li>Cada hoja debe ser un número.</li>
+                    <li>Recorre el árbol en post-orden para obtener la notación postfija.</li>
+                    <li>Implementa una función recursiva que <strong>evalúe</strong> la expresión.</li>
+                </ul>
+                <p><strong>Pregunta:</strong> ¿Qué ventajas tiene representar expresiones como árboles?</p>
+            </section>
+
+
+
+
+           <!-- c -->
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>
