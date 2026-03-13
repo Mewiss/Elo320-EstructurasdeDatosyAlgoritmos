@@ -2,467 +2,1767 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+	<title>reveal.js</title>
 
-    <link rel="stylesheet" href="dist/reset.css">
-    <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/elo320.css">
-    <link rel="stylesheet" href="css/animRestricciones.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/elo320.css">
+	<link rel="stylesheet" href="css/animRestricciones.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 
-    <style>
-        .fragment.bold {
-            font-weight: normal;
-        }
+	<style>
+		.fragment.bold {
+			font-weight: normal;
+		}
 
-        .fragment.bold.visible {
-            font-weight: bold;
-        }
+		.fragment.bold.visible {
+			font-weight: bold;
+		}
 
-        .reveal td {
-            font-size: 60%;
-        }
+		.reveal td {
+			font-size: 60%;
+		}
 
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0
-        }
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0
+		}
 
-        .tg td {
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 28px;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
+		.tg td {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
 
-        .tg th {
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 28px;
-            font-weight: normal;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
+		.tg th {
+			border-color: black;
+			border-style: solid;
+			border-width: 1px;
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			font-weight: normal;
+			overflow: hidden;
+			padding: 10px 5px;
+			word-break: normal;
+		}
 
-        .tg .tg-0lax {
-            text-align: center;
-            vertical-align: center;
-            font-size: 3vw;
-            border-width: 2px
-        }
+		.tg .tg-0lax {
+			text-align: center;
+			vertical-align: center;
+			font-size: 3vw;
+			border-width: 2px
+		}
 
-        .tg .tg-small {
-            text-align: center;
-            vertical-align: center;
-            font-size: 2vw
-        }
+		.tg .tg-small {
+			text-align: center;
+			vertical-align: center;
+			font-size: 2vw
+		}
 
-        .smalltab {
-            font-size: 2vw
-        }
-    </style>
+		.smalltab {
+			font-size: 2vw
+		}
+	</style>
 </head>
 
 <body>
 
-    <div class="reveal">
+	<div class="reveal">
+		<div class="slides">
 
-        <div class="slides">
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+				<h2>Introducción</h2>
+				<p>Marie González-Inostroza</p>
 
-            <section class="Title" data-include>
-                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h2>Testeo y mejoras de algoritmos</h2>
-                <p>Marie González-Inostroza</p>
+			</section>
 
-            </section>
+			<section>
+				<div class="col">
+					<div class="row">
+						<h1>¡Hola!</h1>
+					</div>
 
+					<div class="row central-content r-fit-text">
+						<img src="images/C0/Marie.png">
 
-            <!-- SLIDE 1: INTRODUCCIÓN Y CONTEXTO (0-10 min) -->
-            <section data-state="intro">
+						<p>Soy Marie González. Estoy aquí porque me encanta enseñar sobre tecnología.</p>
+						<p>
+							Me pueden contactar al mail marie.gonzalez@usm.cl*
+						</p>
 
-                <h3>Pruebas y mejoras de un algoritmo</h3>
-                <div class="fragment fade-in-then-semi-out">
-                    <p style="font-size: 1.5em;">Verificación</p>
-                    <small>¿Hace lo que debe?</small>
-                </div>
-                <div class="fragment fade-in-then-semi-out">
-                    <p style="font-size: 1.5em;">Depuración</p>
-                    <small>¿Maneja lo que no debe?</small>
-                </div>
-                <div class="fragment fade-in-then-semi-out">
-                    <p style="font-size: 1.5em;">Optimización</p>
-                    <small>¿Lo hace de forma eficiente?</small>
-                </div>
-                <!-- <aside class="notes">
-        Motivación (8 min): La calidad es el 70% del tiempo de desarrollo. Sin estas fases, el proyecto es frágil. Hoy transformaremos nuestros proyectos en soluciones robustas.
-      </aside> -->
-            </section>
+						<small>
+							Respondo en horario hábil
+							(L-V de 9 a 18 hrs)
+						</small>
 
-            <!-- SLIDE 2: PILAR I - VERIFICACIÓN Y PRUEBAS (10-25 min) -->
-            <section data-state="verification">
-                <h4>PILAR I: Diseño de Casos de Prueba</h4>
-                <div class="r-fit-text" style="text-align: center;">
-                    <p><strong>1. Prioridad: Comprensibilidad</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>Un programa fácil de entender es más fácil de codificar y depurar.</li>
-                        <li>Si no es comprensible, es difícil corregir.</li>
-                    </ul>
-                    <p class="fragment fade-in" style="margin-top: 20px;"><strong>2. Pruebas Empíricas
-                            Metódicas</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>Benchmark: Conjunto de datos de referencia para medir las
-                            optimizaciones.</li>
-                        <li>No confiar en la primera prueba.</li>
-                    </ul>
-                    <p class="fragment fade-in"><strong>3. Análisis de Rendimiento (Casos de Entrada)</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>La eficiencia depende de la entrada.</li>
-                        <li>Analizar: Mejor Caso, Peor Caso y Caso Promedio.</li>
-                        <li>Diseñar pruebas que reflejen la distribución real de los datos.</li>
-                    </ul>
+					</div>
+				</div>
+			</section>
 
 
-                </div>
-                <aside class="notes">
-                    1. Comprensibilidad (5 min): El código limpio es el primer paso. 2. Empíricas (5 min): No es "lo que
-                    funcione", es "lo que demuestro que funciona" con benchmarks. 3. Casos (5 min): La eficiencia del
-                    algoritmo varía. Debemos probar los límites (Peor Caso) que romperían nuestro proyecto.
-                </aside>
-            </section>
+			<section>
+				<h3>Coordenadas</h3>
+				<ul>
+					<li class="fragment">Nombre de la asignatura: Estructuras de Datos y Algoritmos</li>
+					<li class="fragment">Sigla: ELO-320</li>
+					<li class="fragment">Requisito: IWI-131 o TEL-102</li>
+					<li class="fragment">Dedicación: 5 SCT 118 hrs </li>
+					<li class="fragment">Clases presenciales (en general):</li>
+					<ul class="fragment">
+						<li>jueves 16:05 a 18:00 Sala F-406 </li>
+					</ul>
+					<li class="fragment">Ayudantía: horario por confimar</li>
+					<li class="fragment">Plataforma: AULA y github classroom</li>
+					<li class="fragment">Horario de consultas: M 14.00 a 14.30 previa cita</li>
 
-            <!-- SLIDE 3: PILAR II - MANEJO DE ERRORES Y DEPURACIÓN (25-45 min) -->
-            <section data-state="debugging">
-                <h4>PILAR II: Depuración y Robustez</h4>
+				</ul>
+			</section>
 
-
-                <div class="r-fit-text">
-
-                    <div class="fragment fade-in">
-                        <p>Buscamos abordar los Race Conditions (condiciones de
-                            carrera) que hacen fallar algoritmos.</p>
-                    </div>
-
-                    <p class="fragment fade-in"><strong>1. Programación Sólida</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>Comprobación de Parámetros: Verificar al inicio de la función (ej. ¿el contenedor está
-                            vacío antes de eliminar?).</li>
-                        <li>Assert: Usarlos para clarificar cómo debe operar el código internamente,
-                            pero no como manejo de errores para el usuario final.</li>
-                        <li>Evitar `null`: Usar operadores de cortocircuito (`&&` o `||`) para evitar evaluar
-                            atributos de objetos que podrían ser `null`.</li>
-                    </ul>
-                    <p class="fragment fade-in"><strong>2. Manejo de Excepciones (`try-catch`)</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>En programas reales, es la mejor práctica para tratar errores de datos de entrada o
-                            fallos externos.</li>
-                        <li>Es vital detectar overflows y underflows en estructuras (ej. colas).</li>
-                    </ul>
-
-                </div>
-                <aside class="notes">
-                    Depuración y Excepciones (20 min): No solo corregir, sino hacer el código defensivo. Mostrar ejemplo
-                    rápido de try-catch en el lenguaje del proyecto. Enfatizar la diferencia entre un Assert (que mata
-                    el programa si se viola) y un try-catch (que recupera el flujo).
-                </aside>
-            </section>
+			<section>
+				<h5>Equipo docente</h5>
+				<div class="row .central-content">
+					<div class="col fragment">
+						<img src="images/C0/Cristian.jpg">
+						<p>Cristian Pizarro</p>
+						<p>Ay. contacto</p>
+					</div>
+					<div class="col fragment">
+						<img src="images/C0/Javiera.jpeg">
+						<p>Javiera Fuentes</p>
+						<p>Ay. corrección</p>
+					</div>
+					<div class="col fragment">
+						<img src="images/C0/">
+						<p>Camilo Muñoz</p>
+						<p>Ay. corrección</p>
+					</div>
+				</div>
+			</section>
 
 
-            <section>
-                <h4 style="color: #4CAF50;">Ejemplo: Uso de `assert()`</h4>
-                <p class="r-fit-text">Utilizado para comprobar precondiciones internas. Si la condición falla,
-                    el programa termina.</p>
-                <pre><code data-trim data-noescape>
-#include &lt;assert.h&gt;
-#include &lt;stdio.h&gt;
 
-// Función que calcula el factorial
-int factorial(int n) {
-    // n debe ser positivo o cero. Si no, hay un error de lógica.
-    assert(n >= 0 && "El factorial no puede ser 
-    calculado para números negativos."); 
-    
-    if (n == 0) {
-        return 1;
-    }
-    return n * factorial(n - 1);
-}
+			<section>
+				<h3>Resultados de aprendizaje</h3>
+				<small class="fragment">Al terminar el curso la/el estudiante será capaz de: </small>
+				<ul class="r-fit-text">
+					<li class="fragment">Calcular complejidad de algoritmos, empleando funciones de órdenes de
+						complejidad. </li>
+					<li class="fragment">Utiliza algoritmos basados en arreglos, árboles, tablas de hash y colas de
+						prioridad, implementándolos en pseudocódigo y en C. </li>
+
+					<li class="fragment">Emplea algoritmos de ordenamiento, implementándolos en pseudocódigo y en C.
+					</li>
+
+					<li class="fragment">Ejecuta algoritmos básicos para grafos, implementando soluciones en
+						pseudocódigo y en C. </li>
+					<li class="fragment">Analiza estructuras de datos avanzadas, conociendo los tipos de problemas donde
+						aplicarlas. </li>
+					<li class="fragment">Diseña soluciones eficientes utilizando los algoritmos vistos en el curso.
+					</li>
+					<li class="fragment">Verifica el correcto funcionamiento de programas, sometiéndolos a datos de
+						prueba escogidos convenientemente. </li>
+
+				</ul>
+			</section>
+			<section>
+				<h2>Evaluaciones</h2>
+				<div class="row central-content">
+
+					<div class="col fragment">
+						<img data-id="tareas" style='width: 50%; ' src="images/icons/report.png">
+						<h5>Tareas (T)</h5>
+					</div>
+
+
+					<div class="col fragment">
+						<img data-id="pruebas" style='width: 50%' src="images/icons/test.png">
+						<h5>Certámenes (C)</h5>
+					</div>
+
+					<div class="col fragment">
+						<img data-id="proyecto" style='width: 50%' src="images/icons/project.png">
+						<h5>Proyecto (P)</h5>
+					</div>
+
+				</div>
+
+				<div class="row central-content fragment">
+					<p>Nota Final
+						NF=T*0.35+C*0.35+P*0.3 </p>
+					<p>Condición: C ≥ 50, T ≥ 50 y P≥ 50</p>
+				</div>
+
+
+			</section>
+
+
+			<section>
+				<h2>Sobre las tareas</h2>
+				<ul>
+					<li class="fragment">Individuales</li>
+					<li class="fragment">Entrega el día antes del certamen</li>
+					<li class="fragment">Duración: ~4 semanas</li>
+					<li class="fragment">Estudio práctico del contenido</li>
+					<li class="fragment">Antelación y dedicación recomendadas</li>
+					<li class="fragment">Uso de software de detección de copias</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Sobre los certámenes</h2>
+				<ul>
+					<li class="fragment">Individuales</li>
+					<li class="fragment">En horario de clases</li>
+					<li class="fragment">Duración: 1 hora</li>
+					<li class="fragment">Preguntas de diseño, análisis y corrección de errores</li>
+					<li class="fragment">Contenido en base a la tarea</li>
+				</ul>
+
+			</section>
+
+			<section>
+				<h2>Sobre el proyecto</h2>
+				<ul>
+					<li class="fragment">Objetivo: aplicar lo aprendido en el curso en un problema más complejo</li>
+					<li class="fragment">Grupos de 2 a 3 personas</li>
+					<li class="fragment">Tiene 2 entregas</li>
+					<li class="fragment">Duración: ~4 semanas</li>
+					<li class="fragment">Antelación y dedicación recomendadas</li>
+					<li class="fragment">Uso de software de detección de copias</li>
+				</ul>
+			</section>
+
+
+
+
+			<section>
+				<h2>Metodología</h2>
+				<ul>
+					<li class="fragment">Cátedras cortas</li>
+					<li class="fragment">Clases con metodologías activas</li>
+					<ul class="fragment">
+						<li>Ejercicios de programación</li>
+						<li>Preguntas Individuales y grupales</li>
+						<li>Estudios de casos</li>
+					</ul>
+					<li class="fragment">Se requiere participación activa</li>
+					<li class="fragment">Avances de tareas y proyecto durante la clase</li>
+				</ul>
+
+			</section>
+
+			<section>
+				<h4>Qué se espera de ustedes en este curso:</h4>
+				<ul>
+					<li class="fragment">Equivocarse</li>
+					<li class="fragment">Colaboración</li>
+					<li class="fragment">Experimentar</li>
+					<li class="fragment">Disciplina</li>
+				</ul>
+
+			</section>
+
+			<!-- ...existing code... -->
+
+
+
+
+			<section>
+				<h2>¿Qué veremos en este curso?</h2>
+				<ul>
+					<li class="fragment">Estructuras de Datos para manejo eficiente de datos</li>
+					<li class="fragment">Algoritmos construidos sobre estas estructuras</li>
+					<ul class="fragment">
+						<li>Estructuras bases</li>
+						<li>Construir sus propias estructuras</li>
+						<li>Definir Tipos de Datos Abstractos</li>
+						<li>Programar de forma eficiente</li>
+						<li>Analizar y comparar algoritmos</li>
+					</ul>
+					<li class="fragment">Lenguaje de programación: C</li>
+				</ul>
+			</section>
+
+
+
+
+			<section>
+				<h2>Sistema Operativo</h2>
+				<ul>
+					<li class="fragment"><strong>Linux</strong> recomendado</li>
+					<li class="fragment">Windows/MacOS bajo responsabilidad del estudiante, sin soporte</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Bibliografía</h2>
+				<ul>
+					<li class="fragment"><strong>Libro Guía:</strong> Introduction to Algorithms (Cormen et al.)</li>
+					<li class="fragment"><strong>Libro Recomendado:</strong> Data Structures and Algorithm Analysis
+
+						(Shaffer)</li>
+				</ul>
+			</section>
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+				<h2>Conceptos básicos</h2>
+
+			</section>
+
+			<section>
+				<h2>¿Qué es una Estructura de Datos?</h2>
+				<p class="fragment">Una estructura de datos es una <strong>abstracción</strong> para organizar
+					<strong>datos</strong> de manera que puedan ser manejados, procesados y utilizados
+					<strong>eficientemente</strong> a través de un <strong>programa</strong>.
+				</p>
+				<p class="fragment">Permiten que los algoritmos trabajen de forma eficaz sobre la información.</p>
+			</section>
+
+			<section>
+				<h2>Ejemplos</h2>
+				<ul>
+					<li class="fragment">Palabras → Strings</li>
+					<li class="fragment">Python: Listas, Tuplas, Diccionarios</li>
+					<li class="fragment">C++: Vectores, Listas, Map</li>
+					<li class="fragment">Control+Z → Stack/Pilas</li>
+					<li class="fragment">Filas en bancos/supermercados → Queues/Colas</li>
+					<li class="fragment">Gramática de lenguajes → Trees/Árboles</li>
+				</ul>
+			</section>
+
+			<!-- 			<section>
+				<h4>Actividad 1.1.1: Somos personas, tenemos datos distintos</h4>
+				<ul>
+					<li>En grupos de a 4 personas, deben presentarse y seleccionar 4 datos que los representen como
+						estudiantes de este curso.</li>
+					<li>Por ejemplo: nombre, carrera, hobbies, algo que les gustaría aprender en este curso.</li>
+
+			</section>
+
+			<section>
+				<h4>Actividad 1.1.2: Somos personas, tenemos datos distintos</h4>
+				<ul>
+					<li>Cada grupo comparte los datos seleccionados</li>
+					<li>Discutimos cómo estos datos podrían ser organizados en una estructura de datos</li>
+					<li>Cada grupo agrega la información a la planilla</li>
+			</section> -->
+
+
+
+			<section>
+				<h2>¿Qué es un Algoritmo?</h2>
+				<p class="fragment"><strong>Secuencia de pasos</strong> para
+					resolver un problema o realizar una tarea.</p>
+				<p class="fragment">
+					Debe ser <strong>preciso</strong>, <strong>finito</strong> y
+					<strong>eficiente</strong>.
+				</p>
+			</section>
+			<section>
+				<h4>Actividad 1.1: Nuestro primer algoritmo</h4>
+				<ul>
+					<li>En grupos de 3 personas, deben analizar el siguiente problema: <b>Un grupo de amigos se fue de
+							vacaciones y cada uno pagó distintas cosas para el grupo. Ahora, desean dividir las cuentas
+							de modo que cada uno aporte lo mismo. Por lo tanto, deben calcular los montos que cada uno
+							debe pagar y a quién.</b></li>
+					<li>Definan una estructura de datos que les permita guardar la información de los amigos
+					</li>
+					<li>Escriban un <strong>algoritmo paso a paso</strong> (tipo pseudocódigo) para resolver este problema.</li>
+				</ul>
+			</section>
+
+
+			<!-- ...existing code... -->
+
+
+			<section class="Title" data-include>
+				<p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+				<h2>Introducción a C</h2>
+				<p>Marie González-Inostroza</p>
+
+			</section>
+
+			<section>
+				<h2>¿Por qué es C tan relevante?</h2>
+				<ul>
+					<li class="fragment">Diseñado para desarrollar UNIX OS.</li>
+					<li class="fragment">Maneja actividades de bajo nivel (en la memoria), a pesar de ser un lenguaje de
+						alto nivel.</li>
+					<li class="fragment">Se relaciona eficientemente con instrucciones de máquina.</li>
+					<li class="fragment">Perdura su uso en el tiempo.</li>
+					<li class="fragment">La mayoría de software tiene una relación directa o indirecta con
+			</section>
+
+			<!--  Elementos Generales - Datos
+			<section>
+				<h2>Elementos Generales - Datos</h2>
+				<ul>
+					<li><b>Datos Primitivos:</b> enteros, reales, caracteres.</li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+int contador = 10;
+char nombre[10] = "Eduardo";
+float PI = 3.14159;
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+contador = 10
+nombre = "Eduardo"
+PI = 3.14159
+						</code></pre>
+					</div>
+				</div>
+				<ul>
+					<li><b>Estructurados:</b> agrupar/componer conjuntos de datos del mismo tipo en una unidad (e.g.
+						Arreglo).</li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+char semana[5][20] = {"Lu","Ma","Mi","Ju","Vi"};
+printf("%s\n", semana[1]);
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+semana = ["Lu","Ma","Mi","Ju","Vi"]
+print(semana[1])
+						</code></pre>
+					</div>
+				</div>
+			</section>-->
+			<!-- 
+			<section>
+				<h2>Elementos Generales - Estructuras de Control</h2>
+				<ul>
+					<li><b>Concurrencia:</b> computación paralela (e.g. procesos y hebras).</li>
+				</ul>
+			</section> -->
+
+			<!-- Métodos de Implantación -->
+			<section>
+				<h2>Métodos de Implantación</h2>
+				<ul>
+					<li class="fragment"><b>Compilación:</b> (e.g. C, C++)<br>
+						Traduce a lenguaje de máquina para posterior ejecución (interpretación directa por el
+						procesador).
+					</li>
+					<li class="fragment"><b>Interpretación:</b> (e.g. LISP, Python)<br>
+						Una máquina virtual interpreta directamente el código fuente durante la ejecución.
+					</li>
+					<li class="fragment"><b>Híbrido:</b> (e.g. Java, C#)<br>
+						Se compila a un lenguaje intermedio, que luego es interpretado.
+					</li>
+				</ul>
+			</section>
+
+			<!-- Uso de Código en C -->
+			<section>
+				<h2>Uso de Código en C</h2>
+				<ul>
+					<li class="fragment"><b>Modularización:</b> descomponer programas en unidades de desarrollo más
+						pequeñas (módulos).
+					</li>
+					<li class="fragment"><b>Compilación Separada o Independiente:</b> Módulos de un programa se pueden
+						compilar por
+						separado (bibliotecas).</li>
+					<li class="fragment"><b>Reutilización:</b> Módulos y clases se pueden reutilizar para diferentes
+						programas.</li>
+				</ul>
+			</section>
+
+			<!-- Popularidad de Lenguajes -->
+			<section>
+				<h4>Popularidad de Lenguajes (stackoverflow, redmonk)</h4>
+				<img src="images/01-popularity.png" style="width: 80%;">
+			</section>
+
+			<!-- Rendimiento de Lenguajes -->
+			<section>
+				<h4>Rendimiento de Lenguajes</h4>
+				<img src="images/01-benchmark.png" style="width: 70%;">
+				<p>
+					<a href="http://benchmarksgame.alioth.debian.org/u32/performance.php" target="_blank">
+						http://benchmarksgame.alioth.debian.org/u32/performance.php
+					</a>
+				</p>
+			</section>
+
+			<!-- Aprendamos C -->
+			<section>
+				<h2>Aprendamos C</h2>
+				<p>¡Comencemos a programar en C!</p>
+			</section>
+
+			<!-- C Estructura general -->
+			<section>
+				<h2>C Estructura general</h2>
+				<ul>
+					<li>Requiere un método de inicio de ejecución: <b>main</b></li>
+				</ul>
+				<div class="row">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+#include<stdio.h>
 
 int main() {
-    printf("Factorial de 5: %d\n", factorial(5));
-    // El siguiente caso fallaría si se ejecuta en modo DEBUG:
-    // factorial(-1); 
+    printf("Hola Mundo\n");
     return 0;
 }
-      </code></pre>
+						</code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+if __name__ == "__main__":
+    print("Hola Mundo!")
+						</code></pre>
+					</div>
+				</div>
+			</section>
 
-            </section>
 
-            <section>
-                <h4>Ejemplo Manejo de nulls</h4>
-                <p class="r-fit-text">Evitar los "Segmentation Faults" comprobando si la asignación de memoria o la
-                    entrada de puntero ha
-                    fallado.</p>
-                <pre><code data-trim data-noescape>
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+			<section>
+				<h4>Actividad 1.2: Hola Mundo</h4>
+				<p>Objetivo: Familiarizarse con la sintaxis básica de C.</p>
 
-int inicializar_estructura(void *ptr) {
-    // COMPROBACIÓN: Si el puntero de entrada es NULL, devuelve un error.
-    if (ptr == NULL) {
-        fprintf(stderr, "Error: Puntero de entrada NULL.\n");
-        return -1; // Usar código de error
-    }
-    // ... Lógica de inicialización ...
-    return 0; // Éxito
-}
+				<p>En parejas, escriban un programa en C que imprima "Hola Mundo" en la consola.</p>
+				<p>Utiliza el código de la actividad en Github Classroom:
+					<a href="https://classroom.github.com/a/kpFmBvxb" target="_blank">
+						https://classroom.github.com/a/kpFmBvxb
+					</a>
+
+				</p>
+			</section>
+
+
+			<section>
+				<h4>Compilación: gcc</h4>
+				<div class="row r-fit-text">
+					<ul>
+						<li class="fragment">C es un lenguaje compilado, esto significa que:</li>
+						<li class="fragment">Su código es transformado, a través de un compilador, a lenguaje máquina.
+						</li>
+						<li class="fragment">El resultado de la compilación es un binario ejecutable.</li>
+						<li class="fragment">Binarios ejecutables: .bin, .exe, .appinstall, etc.</li>
+					</ul>
+				</div>
+				<div class="row fragment r-fit-text">
+					<img src="images/gcc.png" style="width:70%;">
+				</div>
+			</section>
+
+			<section>
+				<h4>Compilación: gcc</h4>
+				<div class="row r-fit-text">
+					<img src="images/gcc-win.png" style="width:70%;">
+				</div>
+			</section>
+
+			<section>
+				<h2>Compilación: gcc</h2>
+				<div class="fragment">
+					<p><b>Compilación directa</b></p>
+					<pre><code class="language-bash" data-trim>
+[user@pc dir]$ gcc -o ejecutable codigo1.c codigo2.c -Wall
+        </code></pre>
+					<ul>
+						<li class="fragment"><b>-o</b> (output): indica que lo siguiente es el nombre del ejecutable.
+						</li>
+						<li class="fragment"><b>codigoX.c</b>: es el archivo de nuestro código (puede ser más de uno).
+						</li>
+						<li class="fragment"><b>-Wall</b>: indica al compilador que de aviso de potenciales peligros
+							(warnings).</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Compilación por pasos 
+			<section>
+				<h2>Compilación: gcc</h2>
+				<div class="fragment">
+					<p><b>Compilación por pasos</b></p>
+					<pre><code class="language-bash" data-trim>
+[user@pc dir]$ gcc -c codigo1.c -Wall
+[user@pc dir]$ gcc -c codigo2.c -Wall
+[user@pc dir]$ gcc -o ejecutable codigo1.o codigo2.o 
+        </code></pre>
+					<ul>
+						<li class="fragment"><b>-c</b>: indica que un archivo.c será compilado independientemente a un
+							archivo objeto .o.</li>
+						<li class="fragment"><b>-o</b> (output): indica que lo siguiente es el nombre del ejecutable.
+						</li>
+						<li class="fragment"><b>-Wall</b>: indica al compilador que de aviso de potenciales peligros
+							(warnings).</li>
+						<li class="fragment">En la última instrucción se enlazan todos los archivos compilados, de forma
+							independiente, en un ejecutable.</li>
+					</ul>
+				</div>
+			</section> -->
+
+			<section>
+				<h4>Tipificación de Datos</h4>
+
+
+				<div class="row">
+
+					<div class="col">
+						<p class="fragment">Explícita (C):</p>
+						<ul>
+							<li class="fragment">Siempre detecta errores de tipo.</li>
+							<li class="fragment">Restricciones sobre operaciones y valores de diferentes tipos.</li>
+							<li class="fragment">No hay ejecución si tipos son erróneos o incompatibles.</li>
+							<li class="fragment">Tipificación estática y explícita.</li>
+						</ul>
+					</div>
+
+					<div class="col">
+						<p class="fragment">Implícita (Python):</p>
+						<ul>
+							<li class="fragment">Conversiones que permiten relajar restricciones.</li>
+							<li class="fragment">Flexibilidad y agilidad.</li>
+							<li class="fragment">Genera errores no detectados.</li>
+						</ul>
+
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Tipos de datos en C</h2>
+				<ul>
+					<li class="fragment">Define el tipo de dato de cada variable antes de usarlas (tipificación
+						explícita):</li>
+				</ul>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
 
 int main() {
-    int *data = (int *)malloc(sizeof(int) * 10);
-    
-    // COMPROBACIÓN: malloc puede fallar si no hay memoria disponible.
-    if (data == NULL) {
-        fprintf(stderr, "Error fatal: Fallo al asignar memoria.\n");
-        // En un programa real, aquí se liberan recursos y se sale.
-        return EXIT_FAILURE; 
-    }
-
-    inicializar_estructura(data);
-    
-    free(data);
-    return EXIT_SUCCESS;
-}
-      </code></pre>
-            </section>
-
-            <section>
-                <h4 style="color: #2196F3;">Ejemplo Manejo de Errores con Códigos de Retorno</h4>
-                <p class="r-fit-text">El estándar de la programación en C para manejar errores de E/S o de función
-                    (simula la lógica de
-                    `try-catch`).</p>
-                <pre><code data-trim data-noescape>
-#include &lt;stdio.h&gt;
-
-// Definición de códigos de error
-#define ERR_DIV_CERO -1
-#define EXITO 0
-
-int dividir(int a, int b) {
-    if (b == 0) {
-        return ERR_DIV_CERO; // Retorna el código de error en lugar del resultado
-    }
-    return a / b;
-}
-
-int main() {
-    int resultado = dividir(10, 0);
-
-    // Simulación de 'catch': Comprobar el código devuelto
-    if (resultado == ERR_DIV_CERO) {
-        printf("¡ERROR! (Catch): Se intentó una división por cero.\n");
-    } else {
-        printf("Resultado (Try): %d\n", resultado);
-    }
-    
+    int a;
+    float d;
+    int b = 5, c = 6;
+    printf("%d\n", b+c);
     return 0;
 }
-      </code></pre>
+        </code></pre>
+				</div>
+				<ul>
+					<li class="fragment">En Python, los tipos de datos se infieren de la asignación (tipificación
+						implícita).</li>
+				</ul>
+			</section>
 
-            </section>
+			<section>
+				<h4>Tipos de datos primitivos en C</h4>
+				<div class="row r-fit-text ">
+					<table style="width:94%; " border="1">
+						<tr>
+							<th>Descripción</th>
+							<th>C</th>
+							<th>Python</th>
+						</tr>
+						<tr>
+							<td>Booleano</td>
+							<td>bool</td>
+							<td>bool</td>
+						</tr>
+						<tr>
+							<td>Byte</td>
+							<td>char</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Caracter</td>
+							<td>char</td>
+							<td>str</td>
+						</tr>
+						<tr>
+							<td>Entero corto</td>
+							<td>short</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Entero</td>
+							<td>int</td>
+							<td>int</td>
+						</tr>
+						<tr>
+							<td>Entero largo</td>
+							<td>long</td>
+							<td>long</td>
+						</tr>
+						<tr>
+							<td>Punto flotante</td>
+							<td>float</td>
+							<td>float</td>
+						</tr>
+						<tr>
+							<td>Pto. flotante largo</td>
+							<td>double</td>
+							<td>float</td>
+						</tr>
+						<tr>
+							<td>String</td>
+							<td>-</td>
+							<td>str</td>
+						</tr>
+						<tr>
+							<td>Complejos</td>
+							<td>-</td>
+							<td>complex</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 
-            <!-- SLIDE 4: PILAR III - OPTIMIZACIÓN (45-60 min) -->
-            <section data-state="optimization">
-                <h4 style="color: #27AE60;">PILAR III: Optimización y Código Limpio</h4>
+			<section>
+				<h4>Tipos de datos primitivos en C</h4>
+				<div class="row r-fit-text">
+					<table style="width:94%; font-size:2.5vw;" border="1">
+						<tr>
+							<th>tipo</th>
+							<th>bytes</th>
+							<th>Rango</th>
+						</tr>
+						<tr>
+							<td>char</td>
+							<td>1</td>
+							<td>-127 to 127 or 0 to 255</td>
+						</tr>
+						<tr>
+							<td>unsigned char</td>
+							<td>1</td>
+							<td>0 to 255</td>
+						</tr>
+						<tr>
+							<td>signed char</td>
+							<td>1</td>
+							<td>-127 to 127</td>
+						</tr>
+						<tr>
+							<td>int</td>
+							<td>4</td>
+							<td>-2147483648 to 2147483647</td>
+						</tr>
+						<tr>
+							<td>unsigned int</td>
+							<td>4</td>
+							<td>0 to 4294967295</td>
+						</tr>
+						<tr>
+							<td>signed int</td>
+							<td>4</td>
+							<td>-2147483648 to 2147483647</td>
+						</tr>
+						<tr>
+							<td>short int</td>
+							<td>2</td>
+							<td>-32768 to 32767</td>
+						</tr>
+						<tr>
+							<td>unsigned short int</td>
+							<td>2</td>
+							<td>0 to 65,535</td>
+						</tr>
+						<tr>
+							<td>signed short int</td>
+							<td>2</td>
+							<td>-32768 to 32767</td>
+						</tr>
+						<tr>
+							<td>long int</td>
+							<td>4</td>
+							<td>-2,147,483,647 to 2,147,483,647</td>
+						</tr>
+						<tr>
+							<td>signed long int</td>
+							<td>4</td>
+							<td>same as long int</td>
+						</tr>
+						<tr>
+							<td>unsigned long int</td>
+							<td>4</td>
+							<td>0 to 4,294,967,295</td>
+						</tr>
+						<tr>
+							<td>float</td>
+							<td>4</td>
+							<td>+/- 3.4e +/- 38 (~7 digits)</td>
+						</tr>
+						<tr>
+							<td>double</td>
+							<td>8</td>
+							<td>+/- 1.7e +/- 308 (~15 digits)</td>
+						</tr>
+						<tr>
+							<td>long double</td>
+							<td>8</td>
+							<td>+/- 1.7e +/- 308 (~15 digits)</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 
-                <p><strong>Máxima: "Primero ajusta el Algoritmo, luego ajusta el Código."</strong></p>
+			<section>
+				<h2>Entrada Estándar: scanf</h2>
+				<p class="fragment">Función de entrada estándar, compuesta de una sección de especificadores y otra
+					sección de variables, a la que se les asignará un valor obtenido desde pantalla.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+int a;
+char c;
+char nom[10];
+double prec;
 
-                <div class="r-fit-text">
+scanf("%d", &a); //lee un entero
+scanf("%c", &c); //lee un char
+scanf("%s", nom); //lee un string
 
-                    <!-- Prioridad Algorítmica -->
-                    <p><strong>A. Prioridad: Algoritmos y Estructuras (El Gran Impacto)</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>La eficiencia se basa en buenos algoritmos y organización de la información (Estructuras
-                            de Datos).</li>
-                        <li>Compensación (Trade-off): A menudo se reduce el tiempo aumentando el espacio</li>
-                        <li>Eliminar Recursión: Las llamadas recursivas son costosas. Sustituir por iteración o una
-                            pila explícita puede ser más rápido.</li>
-                    </ul>
+//lee un double, un string y un entero.
+scanf("%lf %s %d", &prec, nom, &a); 
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Salida Estándar: printf</h2>
+				<p class="fragment">Función de salida estándar, compuesta de una sección de especificadores y otra de
+					variables, cuyos valores se mostrarán por pantalla.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+printf("%d", a); //imprime un int
+printf("%c", c); //imprime un char
+printf("%s", nom); //imprime un string
+
+//imprime un double de 3 decimales, un string y un entero.
+printf("%.3lf %s %d", prec, nom, a); 
+        </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Especificadores</h2>
+				<p class="fragment">Las funciones de I/O de C utilizan especificadores para identificar el tipo de dato
+					a leer o imprimir:</p>
+				<div class="row r-fit-text">
+					<table style="width:60%; font-size:2.5vw;" border="1">
+						<tr>
+							<th>Tipo</th>
+							<th>Especificador</th>
+						</tr>
+						<tr>
+							<td>char</td>
+							<td>%c</td>
+						</tr>
+						<tr>
+							<td>int</td>
+							<td>%d &nbsp; %i</td>
+						</tr>
+						<tr>
+							<td>unsigned int</td>
+							<td>%u</td>
+						</tr>
+						<tr>
+							<td>float</td>
+							<td>%f &nbsp; %.3f</td>
+						</tr>
+						<tr>
+							<td>string</td>
+							<td>%s</td>
+						</tr>
+						<tr>
+							<td>double</td>
+							<td>%lf</td>
+						</tr>
+						<tr>
+							<td>long int</td>
+							<td>%ld</td>
+						</tr>
+						<tr>
+							<td>long long unsigned int</td>
+							<td>%Lu</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 
 
-                    <!-- Ajuste Fino del Código -->
-                    <p><strong>B. Ajuste Fino del Código (Code Tuning)</strong></p>
-                    <ul class="fragment fade-in">
-                        <li>Evitar Trabajo, No Acelerar: Es más eficiente no hacer un cálculo costoso que hacerlo
-                            rápido (ej. usar `bounding box` en gráficos 3D).</li>
-                        <li>Recolección de Estadísticas: Usar Profilers para saber dónde invertir el
-                            esfuerzo.</li>
-                        <li>Legibilidad: La mayoría de los "ajustes finos" son simplemente limpiar un código
-                            descuidado, no aplicar trucos ilegibles.</li>
-                        <li>Confía en el Compilador: Los compiladores modernos optimizan las expresiones.</li>
-                    </ul>
+			<!-- 
+			<section>
+				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
+int main(){
+    int a; //Define a la variable a como tipo entero
+    a = 3 + 2; //Evalúa 3+2 que es 5 y se asigna a 'a'. 
+    printf("%d\n", a);
+    return 0;
+}
+        </code></pre>
+				</div>
+			</section>
 
-                </div>
-                <aside class="notes">
-                    Optimización (15 min): La eficiencia viene del diseño, no de los trucos. Programación dinámica vs.
-                    Greedy. Hablar de la idea de "evitar trabajo" y de la importancia de los profilers para saber dónde
-                    está el problema real.
-                </aside>
-            </section>
+			<section>
+				<h2>Definir ≠ Asignar ≠ Inicializar</h2>
+				<p class="fragment">C soporta el uso de ambos conceptos (definición y asignación) en conjunto, llamado
+					inicialización.</p>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+#include<stdio.h>
+int main(){
+    int a = 3 + 2; 
+    printf("%d\n", a); // Inicializa con resultado 3+2
+    return 0;
+}
+        </code></pre>
+				</div>
+			</section>
 
-            <!--  SLIDE 5: TÉCNICAS ALGORÍTMICAS AVANZADAS -->
-            <!-- <section data-state="advanced_techniques">
-                <h3 style="color: #8E44AD;">Técnicas Algorítmicas Clave</h3>
-                <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 40px;">
+			<section>
+				<h2>Enumeración</h2>
+				<div class="fragment">
+					<pre><code class="language-c" data-trim>
+enum color {
+    rojo, 
+    amarillo, 
+    verde=20, 
+    azul};
 
-                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
-                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Programación Dinámica</p>
-                        <small>Resuelve subproblemas que se solapan una sola vez (Memoization). Transforma soluciones
-                            Exponenciales en Polinomiales.</small>
-                    </div>
+int col = rojo;
 
-                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
-                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Algoritmos Voraces (Greedy)</p>
-                        <small>Toma la decisión localmente óptima en cada paso. Funciona para muchos problemas de
-                            optimización, buscando la solución global a través de decisiones locales.</small>
-                    </div>
-
-                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
-                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Backtracking & Branch-and-Bounds
-                        </p>
-                        <small>Búsqueda exhaustiva organizada. Branch-and-Bounds poda ramas de búsqueda si encuentra una
-                            solución mejor antes, evitando cálculos innecesarios.</small>
-                    </div>
-                </div>
-                <aside class="notes">
-                    Sección de transición. Recordar que estas técnicas son los ejemplos de cómo una mejor estructura
-                    puede dar el mayor salto en eficiencia (Algoritmo &gt; Código).
-                </aside>
-            </section>
- -->
+if (col != azul){ 
+    printf("No es azul\n");}
+        </code></pre>
+				</div>
+				<div class="fragment">
+					<p><b>Python (clases)</b></p>
+					<pre><code class="language-python" data-trim>
+class Colors(Enum):
+    red = 1
+    yellow = 2
+    green = 3
+        </code></pre>
+				</div>
+			</section> -->
 
 
-            <!-- SLIDE 6: TALLER PRÁCTICO (60-70 min) -->
-            <section data-state="action_plan">
-                <h4>Actividad 21: Diseño de plan de ataque</h4>
-                <p style="font-size: 1.1em; margin-top: 30px;">En grupos de proyecto, apliquen los 3 Pilares a su
-                    proyecto.</p>
+			<section>
+				<h4>Actividad 1.3: Uso de tipos básicos</h4>
+				<p>Objetivo: Utilizar tipos básicos de C</p>
+				<p>En parejas, escriban un programa en C que pida datos en consola y los imprima. Deben modificar el
+					código de ejemplo.</p>
+				<p>Utiliza el código de la actividad en Github Classroom:
+					<a href="https://classroom.github.com/a/nD7Lyzao" target="_blank">
+						https://classroom.github.com/a/nD7Lyzao
+					</a>
+			</section>
 
-                <div style="display: flex; text-align: left; margin-top: 40px;">
+			<section>
+				<h2>Operadores Unarios</h2>
+				<table style="font-size:1em;">
+					<tr>
+						<th>Operador</th>
+						<th>C</th>
+						<th>Python</th>
+					</tr>
+					<tr>
+						<td>Negación lógica</td>
+						<td>!</td>
+						<td>not</td>
+					</tr>
+					<tr>
+						<td>Dirección</td>
+						<td>&amp;</td>
+						<td>No existe</td>
+					</tr>
+					<tr>
+						<td>Derreferencia</td>
+						<td>*</td>
+						<td>No existe</td>
+					</tr>
+					<tr>
+						<td>Incremento</td>
+						<td>++</td>
+						<td>No existe</td>
+					</tr>
+					<tr>
+						<td>Decremento</td>
+						<td>--</td>
+						<td>No existe</td>
+					</tr>
+					<tr>
+						<td>Signo más</td>
+						<td>+</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>Negativo</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Casting</td>
+						<td>(tipo)</td>
+						<td>No existe</td>
+					</tr>
+				</table>
+				<p>Los operadores unarios agrupan de derecha a izquierda.<br>
+					Ejemplo: <span style="color:blue;">-+ x</span> equivale a <span style="color:blue;">-(+ x)</span>.
+				</p>
+			</section>
 
-                    <div class="fragment fade-in-up"
-                        style="flex: 1; padding: 15px; border-right: 2px dashed #95A5A6; font-size:60%;">
+			<section>
+				<h2>Operadores Binarios</h2>
+				<table style="font-size:1em;">
+					<tr>
+						<th>Operador</th>
+						<th>C</th>
+						<th>Python</th>
+					</tr>
+					<tr>
+						<td>Suma</td>
+						<td>+</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>Resta</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>Multiplicación</td>
+						<td>*</td>
+						<td>*</td>
+					</tr>
+					<tr>
+						<td>División</td>
+						<td>/</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>División entera</td>
+						<td>/</td>
+						<td>//</td>
+					</tr>
+					<tr>
+						<td>Módulo</td>
+						<td>%</td>
+						<td>%</td>
+					</tr>
+					<tr>
+						<td>Exponenciación</td>
+						<td>No existe</td>
+						<td>**</td>
+					</tr>
+				</table>
+				<p style="font-size:0.9em;">División entera en C según tipo de dato.<br>
+					Si tipo entero para numerador y denominador: división entera.</p>
+			</section>
 
-                        <p><strong> 1. Plan de Verificación</strong></p>
-                        <p>Define 1 Caso de Prueba Crítico (Peor Caso):</p>
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li>Entrada: (Ej. 0, el valor máximo, un texto malformado)</li>
-                            <li>Resultado Esperado: (Ej. Mensaje de error, no falla, devuelve `null`)</li>
-                        </ul>
-                    </div>
+			<section>
+				<h2>Orden de Evaluación de Operadores</h2>
+				<div class="row r-fit-text">
+					<ul style="font-size:0.9em;">
+						<li><b>Precedencia:</b> Orden de evaluación de operadores adyacentes, estableciendo prioridades.
+						</li>
+						<li><b>Asociatividad:</b> A igual precedencia, define orden de evaluación.</li>
+						<li><b>Paréntesis:</b> Altera y fuerza orden de evaluación.</li>
+					</ul>
+				</div>
+				<div class="row r-fit-text">
+					<table style="font-size:0.8em;">
+						<tr>
+							<th>Precedencia</th>
+							<th>Descripción</th>
+							<th>C</th>
+							<th>Python</th>
+							<th>Asociatividad</th>
+						</tr>
+						<tr>
+							<td>alta</td>
+							<td>exponente</td>
+							<td></td>
+							<td>**</td>
+							<td>&larr;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>unarios (postfijos)</td>
+							<td>++ --</td>
+							<td></td>
+							<td>&rarr;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>unarios (prefijos)</td>
+							<td>++ -- ~ ! * &amp; + -</td>
+							<td>~ + -</td>
+							<td>&larr;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>casting de tipo</td>
+							<td>(type)</td>
+							<td></td>
+							<td>&larr;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>multiplicativos</td>
+							<td>* / %</td>
+							<td>* / // %</td>
+							<td>&rarr;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>aditivos</td>
+							<td>+ -</td>
+							<td>+ -</td>
+							<td>&rarr;</td>
+						</tr>
+						<tr>
+							<td>baja</td>
+							<td>NOT lógico</td>
+							<td></td>
+							<td>not</td>
+							<td>&larr;</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 
-                    <div class="fragment fade-in-up"
-                        style="flex: 1; padding: 15px; border-right: 2px dashed #95A5A6; font-size:60%;">
+			<section>
+				<h2>Ojo con conversiones!</h2>
+				<ul style="font-size:0.9em;">
+					<li>Expresión puede tener muchos tipos distintos.</li>
+					<li>Entonces, el lenguaje hace conversión implícita (coerción), para usar el operador adecuado.</li>
+					<li>Control <b>implícito</b> de conversión mediante <em>coerción</em>:</li>
+				</ul>
+				<pre><code class="language-c" data-trim>
+float   fVal;
+double  dVal;
+int   iVal;
+unsigned long ulVal;
 
-                        <p><strong> 2. Plan de Depuración</strong></p>
-                        <p>Identifica 1 Problema a Manejar:</p>
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li>Problema: (Ej. Lectura de archivo inexistente, intento de división por cero, objeto `null`
-                                inesperado).</li>
-                            <li>Acción: (Ej. Implementar `try-catch`, mostrar mensaje de error amigable al usuario).
-                            </li>
-                        </ul>
-                    </div>
+dVal = iVal * ulVal; //iVal es convertido a unsigned long.
+// El resultado es convertido a double 
 
-                    <div class="fragment fade-in-up" style="flex: 1; padding: 15px;font-size:60%;">
-                        <p><strong> 3. Plan de Optimización</strong></p>
-                        <p>Identifica 1 Mejora de Algoritmo o Código:</p>
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li>Sección: (Ej. El bucle de búsqueda de datos, la gestión de memoria de una estructura).
-                            </li>
-                            <li>Acción: (Ej. Reemplazar una lista por un *hash map*, refactorizar una función con más de
-                                20 líneas).</li>
-                        </ul>
-                    </div>
+dVal = ulVal + fVal; //ulVal convertido a float.
+//El resultado es convertido a double            
+                </code></pre>
+			</section>
 
-                </div>
-                <aside class="notes">
-                    Plan de Ataque (10 min): Este es el momento de aplicación. Los estudiantes deben anotar sus 3 puntos
-                    débiles y cómo los atacarán. Esto asegura que la lección se aplique inmediatamente a su trabajo.
-                </aside>
-            </section>
+			<section>
+				<h2>Sentencias de asignación</h2>
+				<ul>
+					<li>Cambian dinámicamente el valor de una variable.</li>
+					<li>C permite <b>incrustar una asignación en una expresión</b>.</li>
 
-            <!-- SLIDE 7: CIERRE Y PRÓXIMOS PASOS -->
-            <!-- <section data-state="conclusion">
-                <h2 style="color: #34495E;">Resumen Final: La Calidad es Sistemática</h2>
-                <div style="margin-top: 50px;">
-                    <p class="fragment fade-in" style="font-size: 1.3em;">1. Corrección > Eficiencia: Primero el
-                        programa debe ser comprensible y correcto.</p>
-                    <p class="fragment fade-in" style="font-size: 1.3em;">2. Algoritmo > Trucos: La eficiencia es un
-                        problema de diseño, no de *code tuning*.</p>
-                    <p class="fragment fade-in" style="font-size: 1.3em;">3. La mejor optimización es EVITAR trabajo
-                        (Evitar cálculos, evitar código sucio).</p>
-                </div>
+				</ul>
+				<pre><code class="language-c" data-trim>
+a *= 5;
+//Equivalente a:
+a = a * 5;
+                </code></pre>
+			</section>
 
-                <div class="fragment fade-in" style="margin-top: 50px;">
-                    <h4 style="color: #9B59B6;">Próximos Pasos:</h4>
-                    <p>Aplica tu Plan de Ataque Final a tu proyecto. ¡El objetivo es la robustez!</p>
-                </div>
+			<section>
+				<h2>Sentencias de Asignación</h2>
+				<table style="font-size:1em;">
+					<tr>
+						<th>Operador</th>
+						<th>C</th>
+						<th>Python</th>
+					</tr>
+					<tr>
+						<td>Asignación</td>
+						<td>=</td>
+						<td>=</td>
+					</tr>
+					<tr>
+						<td>Suma y asignación</td>
+						<td>+=</td>
+						<td>+=</td>
+					</tr>
+					<tr>
+						<td>Resta y asignación</td>
+						<td>-=</td>
+						<td>-=</td>
+					</tr>
+					<tr>
+						<td>Multiplicación y asignación</td>
+						<td>*=</td>
+						<td>*=</td>
+					</tr>
+					<tr>
+						<td>División y asignación</td>
+						<td>/=</td>
+						<td>/=</td>
+					</tr>
+					<tr>
+						<td>Módulo y asignación</td>
+						<td>%=</td>
+						<td>%=</td>
+					</tr>
+					<tr>
+						<td>Incremento</td>
+						<td>++</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Decremento</td>
+						<td>--</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>División entera y asignación</td>
+						<td></td>
+						<td>//=</td>
+					</tr>
+					<tr>
+						<td>Exponente y asignación</td>
+						<td></td>
+						<td>**=</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h4>Sentencias de Asignación</h4>
+				<div class="row">
+					<div class="col">
+						<!-- <b>Unarios de Asignación:</b> -->
+						<pre><code class="language-c" data-trim>
+                        //pre-incremental
+                        sum = ++contador; 
+
+                        //equivale a:
+
+                        contador = contador + 1;
+                        sum = contador;
+                        </code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+                        //post-incremental
+                        sum = contador++;
+                        
+                        //equivale a:
+                        aux = contador;
+                        contador = contador + 1;
+                        sum = aux;
+                        </code></pre>
+					</div>
+				</div>
+
+				<div class="row">
+					<!-- <b>Operadores Compuestos:</b> -->
+					<pre><code class="language-c" data-trim>
+                sum += a;
+
+                //equivale a:
+                sum = sum + a;
+                </code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h2>Sentencias de Asignación</h2>
+				<h3>Asignación Múltiple</h3>
+				<div class="row fragment">
+					<div class="col">
+						<b>C:</b>
+						<pre><code class="language-c" data-trim>
+int a, b, c, d;
+a = b = c = d = 5;
+                        </code></pre>
+					</div>
+					<div class="col">
+						<b>Python:</b>
+						<pre><code class="language-python" data-trim>
+a = b = c = d = 5
+                        </code></pre>
+					</div>
+				</div>
+				<div class="row fragment">
+					<div class="col">
+						<pre><code class="language-c" data-trim>
+int a = 10, b, c = 15;
+a += b = c -= 5;
+                </code></pre>
+					</div>
+					<div class="col">
+						<pre><code class="language-python" data-trim>
+x, y, z = 20, 30, 40
+                </code></pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Sentencias de Asignación</h2>
+				<h3>Operador Ternario</h3>
+				<b>C: Único operador ternario.</b>
+				<pre><code class="language-c" data-trim>
+retorno = op1 ? op2 : op3;  
+                        </code></pre>
+				<span style="font-size:0.9em;">Si op1 es verdadero, asigna op2; sino, asigna op3.</span>
+				<pre><code class="language-c" data-trim>
+cuenta = (a > 0) ? 0 : 1;
+
+//Equivale a:
+if (a > 0)
+    cuenta = 0;
+else cuenta = 1;
+                        </code></pre>
+				</li>
+
+			</section>
+
+			<!-- <section>
+                <h2>Asignación en expresiones</h2>
+                <ul>
+                    <li>C considera la asignación como un operador más.</li>
+                    <li>Permite incrustar asignación en cualquier expresión.</li>
+                    <li><b>C</b> Permitido.</li>
+                </ul>
+                <pre><code class="language-c" data-trim>
+while ( (c = getchar()) != EOF) {}
+                </code></pre>
+                <ul>
+                    <li><b>Python:</b> Sintaxis no lo permite.</li>
+                </ul>
+                <pre><code class="language-python" data-trim>
+if (d = 5 + c) > 6:
+                </code></pre>
+                <b>Error: Invalid syntax.</b>
+                <ul>
+                    <li><span style="color:green;">Pro:</span> Programación más compacta.</li>
+                    <li><span style="color:red;">Contra:</span> Fuente de error en la programación. Es fácil equivocarse
+                        confundiendo <b>==</b> e <b>=</b>.</li>
+                </ul>
             </section> -->
 
-        </div>
-    </div>
+			<!-- <section>
+                <h2>Expresiones Relacionales y Lógicas</h2>
+                <ul>
+                    <li><b>Expresión Relacional:</b>
+                        <ul>
+                            <li>Usan operador relacional (binario) para comparar los valores de dos operandos.</li>
+                            <li>Cada operando puede ser una <b>expresión aritmética</b>.</li>
+                            <li>El <b>valor resultante</b> de la expresión es <b>booleano</b>.</li>
+                            <li>Incluye: ==, !=, &lt;, &lt;=, &gt;, &gt;=</li>
+                        </ul>
+                    </li>
+                    <li><b>Expresión Booleana:</b>
+                        <ul>
+                            <li>Consiste en variables, constantes y operadores booleanos.</li>
+                            <li>Se puede combinar con expresiones relacionales.</li>
+                            <li>Incluye: AND, OR, NOT y, a veces, XOR.</li>
+                        </ul>
+                    </li>
+                    <li><b>El único valor falso en C es el 0 (cero).</b></li>
+                </ul>
+            </section> -->
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/countdown/countdown.js"></script>
-    <script src="plugin/animate/plugin.js"></script>
-    <script src="plugin/animate/svg.min.js"></script>
-    <script src="plugin/math/math.js"></script>
-    <script>
-        // More info about initialization & config:
-        // - https://revealjs.com/initialization/
-        // - https://revealjs.com/config/
-        Reveal.initialize({
-            slideNumber: true,
-            autoAnimateEasing: 'ease-out',
-            autoAnimateDuration: 0.8,
-            hash: true,
-            slideNumber: true,
-            dependencies: [
+			<section>
+				<h2>Expresiones Relacionales y Lógicas</h2>
+				<div class="row ">
+					<div class="col">
+						<table style="font-size:1em;">
+							<tr>
+								<th colspan="3">Operadores Relacionales</th>
+							</tr>
+							<tr>
+								<th>Operador</th>
+								<th>C</th>
+								<th>Python</th>
+							</tr>
+							<tr>
+								<td>Igual</td>
+								<td>==</td>
+								<td>==</td>
+							</tr>
+							<tr>
+								<td>Distinto</td>
+								<td>!=</td>
+								<td>!= &lt;&gt;</td>
+							</tr>
+							<tr>
+								<td>Mayor</td>
+								<td>&gt;</td>
+								<td>&gt;</td>
+							</tr>
+							<tr>
+								<td>Menor</td>
+								<td>&lt;</td>
+								<td>&lt;</td>
+							</tr>
+							<tr>
+								<td>Mayor o igual</td>
+								<td>&gt;=</td>
+								<td>&gt;=</td>
+							</tr>
+							<tr>
+								<td>Menor o igual</td>
+								<td>&lt;=</td>
+								<td>&lt;=</td>
+							</tr>
+							<tr>
+						</table>
+					</div>
+					<div class="col">
+						<table style="font-size:1em;">
+							<th colspan="3">Operadores Booleanos</th>
+							</tr>
+							<tr>
+								<th>Operador</th>
+								<th>C</th>
+								<th>Python</th>
+							</tr>
+							<tr>
+								<td>NOT</td>
+								<td>!</td>
+								<td>not</td>
+							</tr>
+							<tr>
+								<td>AND</td>
+								<td>&amp;&amp;</td>
+								<td>and</td>
+							</tr>
+							<tr>
+								<td>OR</td>
+								<td>||</td>
+								<td>or</td>
+							</tr>
+						</table>
+					</div>
 
-                { src: "plugin/countdown/countdown.js" },
+				</div>
+			</section>
 
-            ],
-            animate: {
-                autoplay: true
-            },
+			<!-- <section>
+                <h2>Estructuras de control</h2>
+                <ul>
+                    <li>C/Python la ejecución es típicamente secuencial.</li>
+                    <li>Dos tipos básicos de estructuras control:
+                        <ul>
+                            <li><b>Condicional:</b> múltiples alternativas de ejecución, controladas por una condición.
+                            </li>
+                            <li><b>Iterativa:</b> Ejecución repetitiva de un grupo de sentencias, también controladas
+                                por una condición.</li>
+                        </ul>
+                    </li>
+                    <li>Se requiere mecanismo de agrupación de sentencias sobre las cuales se ejerce el control:
+                        <b>composición de sentencias</b>.
+                    </li>
+                    <li>En <b>C</b> se usa <em>{ }</em></li>
+                    <li><b>Python</b> compone por indentación.</li>
+                </ul>
+            </section> -->
 
-            // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
-            countdown: { defaultTime: 300, autostart: true },
+			<section>
+				<h3>Estructuras de control - Sentencias de selección</h3>
+				<b>if - else if - else</b>
+				<div class="row">
+					<div class="col">
+						<b>C:</b>
+						<pre><code class="language-c" data-trim>
+if(condición_1) {
+    //....
+} else if(condición_k) {
+    //....
+} else {
+    //....
+}
+                        </code></pre>
+					</div>
+					<div class="col">
+						<b>Python:</b>
+						<pre><code class="language-python" data-trim>
+if condición_1:
+    #....
+elif condición_k:
+    #....
+else:
+    #....
+                        </code></pre>
+					</div>
+				</div>
+				<p>En C las agrupaciones de sentencias se realizan con llaves {}</p>
+			</section>
+
+			<section>
+				<h3>Estructuras de control - Sentencias de selección</h3>
+				<b>switch</b>
+				<pre><code class="language-c" data-trim>
+switch(x){ //Debe ser una variable
+case x1:                                     
+    //.... 
+    break; 
+case x2: 
+    //.... 
+    break; 
+//.... 
+case xN: 
+    //.... 
+    break;  
+default: //opcional
+    //....
+} 
+                </code></pre>
+				<p>No existe en Python.</p>
+			</section>
+
+			<section>
+				<h3>Estructuras de control - Sentencias de iteración</h3>
+				<b>Ciclos controlados por condición: <em>while, do-while</em></b>
+				<div class="row">
+					<div class="col">
+						<b>C:</b>
+						<pre><code class="language-c" data-trim>
+while(condición) { 
+    //...
+}
+
+do {
+    //...
+} while(condición);
+                        </code></pre>
+					</div>
+					<div class="col">
+						<b>Python:</b>
+						<pre><code class="language-python" data-trim>
+while condición: 
+    #...
+                        </code></pre>
+					</div>
+				</div>
+			</section>
 
 
-            autoAnimateUnmatched: true
+			<section>
+				<h2>Corto Circuito o Término anticipado de evaluación</h2>
 
-        });
+				<pre><code class="language-c" data-trim>
+                    //Si primera condición se cumple, la expresion es true
+                    if((a >= 0) || (b < 10))
 
-        Reveal.configure({ pdfSeparateFragments: false });
-    </script>
+                    //Si primera condición no se cumple, la expresion es false
+                    while ( (c = getchar()) != EOF && c != '\n' )
+                    </code></pre>
+
+			</section>
+
+			<section>
+				<h2>Saltos incondicionales</h2>
+				<ul>
+					<li><b>C/Python:</b>
+						<ul>
+							<li><b>break:</b> Permite salir del ciclo más cercano.</li>
+							<li><b>continue:</b> Permite pasar al ciclo siguiente.</li>
+							<li>Se recomienda usarlos con precaución y criterio.</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Saltos incondicionales - Ejemplo</h2>
+				<pre><code class="language-c" data-trim>
+int main() {
+  int n;
+  do {
+    printf("Ingrese numero: ");
+    scanf("%d", &n);
+    if (n < 0)
+      break;
+    if (n >10) {
+      printf("Saltarse el valor.\n");
+      continue;
+    }
+    printf("El numero es: %d\n",  n);
+  } while (n != 0);
+
+  return 0;
+}
+                </code></pre>
+			</section>
+			<section>
+				<h4>Actividad 1.4: tipos básicos y ciclos en C</h4>
+				<p>A partir de su código de la Actividad 1.3, valide que los datos ingresados sean válidos, de no ser
+					así, pida al usuario que los ingrese nuevamente.</p>
+				<p>Utiliza el código de la actividad en Github Classroom:
+					<a href="https://classroom.github.com/a/nD7Lyzao" target="_blank">
+						https://classroom.github.com/a/nD7Lyzao
+					</a>
+				</p>
+			</section>
+
+
+			<!-- Clase Activa -->
+			<!-- <section>
+                <h2>Clase Activa: Módulo 1</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 1.1</b><br>
+                    Cree un programa que solicite por pantalla una temperatura en grados Fahrenheit y arroje como
+                    resultado su transformación a Grados Celsius.
+                    <br><br>
+                    <span style="font-size:1.5em;">\( ^\circ C = \frac{5}{9} \times (^\circ F - 32) \)</span>
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Entrada y Salida, Tipos de Datos, Conversiones, Operadores
+                    Aritméticos.</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 1</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 1.2</b><br>
+                    Cree un programa que solicite por pantalla una temperatura en grados Celsius y pregunte si quiere
+                    como resultado su transformación a Grados Fahrenheit o Kelvin.
+                    <br><br>
+                    <span style="font-size:1.5em;">\( ^\circ K = ^\circ C + 273.15 \)</span>
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: control condicional, if, u opciones, switch.</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 1</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 1.3</b><br>
+                    Cree un programa que pregunte por pantalla un tipo de temperatura y un valor, y luego pregunte en
+                    que otra unidad quiere transformarlo. (por ejemplo, inicia como Kelvin, y se entrega Celsius o
+                    Fahrenheit).
+                    <br><br>
+                    <span style="font-size:1.5em;">\( ^\circ F = \frac{9}{5} \times (^\circ K - 273.15) + 32 \)</span>
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: control condicional, if, u opciones, switch.</p>
+            </section>
+
+
+
+            <section>
+                <h2>Clase Activa: Módulo 1</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio Desafío</b><br>
+                    Cree un programa que pregunte un día de la semana y luego una cantidad X de días. El programa debe
+                    retornar el día de la semana que será en X días.
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Aritmética Modular, control de condición u opción.</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 2</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 2.1</b><br>
+                    Cree un programa que solicite un número positivo entero y verifique si éste es primo o compuesto. No
+                    puede utilizar <b>break</b>.
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Ciclos, Aritmética Modular.</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 2</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 2.2</b><br>
+                    Cree un programa que solicite un número positivo entero y verifique si éste es primo o compuesto.
+                    Debe utilizar <b>break</b>.
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Ciclos, Aritmética Modular. Comandos especiales</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 3</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio 3.1</b><br>
+                    Cree un programa que solicite un número entero largo, y luego calcule cuántas veces aparece cada
+                    dígito en él. Si posee todos los dígitos pares se debe decir por pantalla que es un parista, y si
+                    posee todos los números impares, debe decir que es un imparista.
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Ciclos, Corto Circuito</p>
+            </section>
+
+            <section>
+                <h2>Clase Activa: Módulo 3</h2>
+                <div class="exampleblock">
+                    <b>Ejercicio Desafío</b><br>
+                    Cree un programa que solicite una palabra, y calcule cuántas veces aparece cada letra del abecedario
+                    en ella. Luego, si posee todas las vocales debe decir que es una palabra <b>vocal total</b>.
+                </div>
+                <p style="font-size:0.8em;">Aprendemos: Ciclos, Corto Circuito</p>
+            </section> -->
+
+
+			<section>
+				<h4>Actividad 1.5: tipos básicos y ciclos en C</h4>
+				<p> Cree un programa que solicite una palabra, y calcule cuántas veces aparece cada letra del abecedario
+					en ella. Luego, si posee todas las vocales debe decir que es una palabra <b>vocal total</b>.</p>
+			</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/countdown/countdown.js"></script>
+	<script src="plugin/animate/plugin.js"></script>
+	<script src="plugin/animate/svg.min.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: true,
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 0.8,
+			hash: true,
+			slideNumber: true,
+			dependencies: [
+
+				{ src: "plugin/countdown/countdown.js" },
+
+			],
+			animate: {
+				autoplay: true
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+			countdown: { defaultTime: 300, autostart: true },
+
+			autoAnimateEasing: 'ease-out',
+			autoAnimateDuration: 10,
+			autoAnimateUnmatched: false
+
+		});
+
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
 </body>
 
 </html>

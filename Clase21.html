@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Testeo y mejoras de algoritmos</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            <!-- SLIDE 1: INTRODUCCIÓN Y CONTEXTO (0-10 min) -->
+            <section data-state="intro">
+
+                <h3>Pruebas y mejoras de un algoritmo</h3>
+                <div class="fragment fade-in-then-semi-out">
+                    <p style="font-size: 1.5em;">Verificación</p>
+                    <small>¿Hace lo que debe?</small>
+                </div>
+                <div class="fragment fade-in-then-semi-out">
+                    <p style="font-size: 1.5em;">Depuración</p>
+                    <small>¿Maneja lo que no debe?</small>
+                </div>
+                <div class="fragment fade-in-then-semi-out">
+                    <p style="font-size: 1.5em;">Optimización</p>
+                    <small>¿Lo hace de forma eficiente?</small>
+                </div>
+                <!-- <aside class="notes">
+        Motivación (8 min): La calidad es el 70% del tiempo de desarrollo. Sin estas fases, el proyecto es frágil. Hoy transformaremos nuestros proyectos en soluciones robustas.
+      </aside> -->
+            </section>
+
+            <!-- SLIDE 2: PILAR I - VERIFICACIÓN Y PRUEBAS (10-25 min) -->
+            <section data-state="verification">
+                <h4>PILAR I: Diseño de Casos de Prueba</h4>
+                <div class="r-fit-text" style="text-align: center;">
+                    <p><strong>1. Prioridad: Comprensibilidad</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>Un programa fácil de entender es más fácil de codificar y depurar.</li>
+                        <li>Si no es comprensible, es difícil corregir.</li>
+                    </ul>
+                    <p class="fragment fade-in" style="margin-top: 20px;"><strong>2. Pruebas Empíricas
+                            Metódicas</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>Benchmark: Conjunto de datos de referencia para medir las
+                            optimizaciones.</li>
+                        <li>No confiar en la primera prueba.</li>
+                    </ul>
+                    <p class="fragment fade-in"><strong>3. Análisis de Rendimiento (Casos de Entrada)</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>La eficiencia depende de la entrada.</li>
+                        <li>Analizar: Mejor Caso, Peor Caso y Caso Promedio.</li>
+                        <li>Diseñar pruebas que reflejen la distribución real de los datos.</li>
+                    </ul>
+
+
+                </div>
+                <aside class="notes">
+                    1. Comprensibilidad (5 min): El código limpio es el primer paso. 2. Empíricas (5 min): No es "lo que
+                    funcione", es "lo que demuestro que funciona" con benchmarks. 3. Casos (5 min): La eficiencia del
+                    algoritmo varía. Debemos probar los límites (Peor Caso) que romperían nuestro proyecto.
+                </aside>
+            </section>
+
+            <!-- SLIDE 3: PILAR II - MANEJO DE ERRORES Y DEPURACIÓN (25-45 min) -->
+            <section data-state="debugging">
+                <h4>PILAR II: Depuración y Robustez</h4>
+
+
+                <div class="r-fit-text">
+
+                    <div class="fragment fade-in">
+                        <p>Buscamos abordar los Race Conditions (condiciones de
+                            carrera) que hacen fallar algoritmos.</p>
+                    </div>
+
+                    <p class="fragment fade-in"><strong>1. Programación Sólida</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>Comprobación de Parámetros: Verificar al inicio de la función (ej. ¿el contenedor está
+                            vacío antes de eliminar?).</li>
+                        <li>Assert: Usarlos para clarificar cómo debe operar el código internamente,
+                            pero no como manejo de errores para el usuario final.</li>
+                        <li>Evitar `null`: Usar operadores de cortocircuito (`&&` o `||`) para evitar evaluar
+                            atributos de objetos que podrían ser `null`.</li>
+                    </ul>
+                    <p class="fragment fade-in"><strong>2. Manejo de Excepciones (`try-catch`)</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>En programas reales, es la mejor práctica para tratar errores de datos de entrada o
+                            fallos externos.</li>
+                        <li>Es vital detectar overflows y underflows en estructuras (ej. colas).</li>
+                    </ul>
+
+                </div>
+                <aside class="notes">
+                    Depuración y Excepciones (20 min): No solo corregir, sino hacer el código defensivo. Mostrar ejemplo
+                    rápido de try-catch en el lenguaje del proyecto. Enfatizar la diferencia entre un Assert (que mata
+                    el programa si se viola) y un try-catch (que recupera el flujo).
+                </aside>
+            </section>
+
+
+            <section>
+                <h4 style="color: #4CAF50;">Ejemplo: Uso de `assert()`</h4>
+                <p class="r-fit-text">Utilizado para comprobar precondiciones internas. Si la condición falla,
+                    el programa termina.</p>
+                <pre><code data-trim data-noescape>
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+
+// Función que calcula el factorial
+int factorial(int n) {
+    // n debe ser positivo o cero. Si no, hay un error de lógica.
+    assert(n >= 0 && "El factorial no puede ser 
+    calculado para números negativos."); 
+    
+    if (n == 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+int main() {
+    printf("Factorial de 5: %d\n", factorial(5));
+    // El siguiente caso fallaría si se ejecuta en modo DEBUG:
+    // factorial(-1); 
+    return 0;
+}
+      </code></pre>
+
+            </section>
+
+            <section>
+                <h4>Ejemplo Manejo de nulls</h4>
+                <p class="r-fit-text">Evitar los "Segmentation Faults" comprobando si la asignación de memoria o la
+                    entrada de puntero ha
+                    fallado.</p>
+                <pre><code data-trim data-noescape>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int inicializar_estructura(void *ptr) {
+    // COMPROBACIÓN: Si el puntero de entrada es NULL, devuelve un error.
+    if (ptr == NULL) {
+        fprintf(stderr, "Error: Puntero de entrada NULL.\n");
+        return -1; // Usar código de error
+    }
+    // ... Lógica de inicialización ...
+    return 0; // Éxito
+}
+
+int main() {
+    int *data = (int *)malloc(sizeof(int) * 10);
+    
+    // COMPROBACIÓN: malloc puede fallar si no hay memoria disponible.
+    if (data == NULL) {
+        fprintf(stderr, "Error fatal: Fallo al asignar memoria.\n");
+        // En un programa real, aquí se liberan recursos y se sale.
+        return EXIT_FAILURE; 
+    }
+
+    inicializar_estructura(data);
+    
+    free(data);
+    return EXIT_SUCCESS;
+}
+      </code></pre>
+            </section>
+
+            <section>
+                <h4 style="color: #2196F3;">Ejemplo Manejo de Errores con Códigos de Retorno</h4>
+                <p class="r-fit-text">El estándar de la programación en C para manejar errores de E/S o de función
+                    (simula la lógica de
+                    `try-catch`).</p>
+                <pre><code data-trim data-noescape>
+#include &lt;stdio.h&gt;
+
+// Definición de códigos de error
+#define ERR_DIV_CERO -1
+#define EXITO 0
+
+int dividir(int a, int b) {
+    if (b == 0) {
+        return ERR_DIV_CERO; // Retorna el código de error en lugar del resultado
+    }
+    return a / b;
+}
+
+int main() {
+    int resultado = dividir(10, 0);
+
+    // Simulación de 'catch': Comprobar el código devuelto
+    if (resultado == ERR_DIV_CERO) {
+        printf("¡ERROR! (Catch): Se intentó una división por cero.\n");
+    } else {
+        printf("Resultado (Try): %d\n", resultado);
+    }
+    
+    return 0;
+}
+      </code></pre>
+
+            </section>
+
+            <!-- SLIDE 4: PILAR III - OPTIMIZACIÓN (45-60 min) -->
+            <section data-state="optimization">
+                <h4 style="color: #27AE60;">PILAR III: Optimización y Código Limpio</h4>
+
+                <p><strong>Máxima: "Primero ajusta el Algoritmo, luego ajusta el Código."</strong></p>
+
+                <div class="r-fit-text">
+
+                    <!-- Prioridad Algorítmica -->
+                    <p><strong>A. Prioridad: Algoritmos y Estructuras (El Gran Impacto)</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>La eficiencia se basa en buenos algoritmos y organización de la información (Estructuras
+                            de Datos).</li>
+                        <li>Compensación (Trade-off): A menudo se reduce el tiempo aumentando el espacio</li>
+                        <li>Eliminar Recursión: Las llamadas recursivas son costosas. Sustituir por iteración o una
+                            pila explícita puede ser más rápido.</li>
+                    </ul>
+
+
+                    <!-- Ajuste Fino del Código -->
+                    <p><strong>B. Ajuste Fino del Código (Code Tuning)</strong></p>
+                    <ul class="fragment fade-in">
+                        <li>Evitar Trabajo, No Acelerar: Es más eficiente no hacer un cálculo costoso que hacerlo
+                            rápido (ej. usar `bounding box` en gráficos 3D).</li>
+                        <li>Recolección de Estadísticas: Usar Profilers para saber dónde invertir el
+                            esfuerzo.</li>
+                        <li>Legibilidad: La mayoría de los "ajustes finos" son simplemente limpiar un código
+                            descuidado, no aplicar trucos ilegibles.</li>
+                        <li>Confía en el Compilador: Los compiladores modernos optimizan las expresiones.</li>
+                    </ul>
+
+                </div>
+                <aside class="notes">
+                    Optimización (15 min): La eficiencia viene del diseño, no de los trucos. Programación dinámica vs.
+                    Greedy. Hablar de la idea de "evitar trabajo" y de la importancia de los profilers para saber dónde
+                    está el problema real.
+                </aside>
+            </section>
+
+            <!--  SLIDE 5: TÉCNICAS ALGORÍTMICAS AVANZADAS -->
+            <!-- <section data-state="advanced_techniques">
+                <h3 style="color: #8E44AD;">Técnicas Algorítmicas Clave</h3>
+                <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 40px;">
+
+                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
+                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Programación Dinámica</p>
+                        <small>Resuelve subproblemas que se solapan una sola vez (Memoization). Transforma soluciones
+                            Exponenciales en Polinomiales.</small>
+                    </div>
+
+                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
+                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Algoritmos Voraces (Greedy)</p>
+                        <small>Toma la decisión localmente óptima en cada paso. Funciona para muchos problemas de
+                            optimización, buscando la solución global a través de decisiones locales.</small>
+                    </div>
+
+                    <div class="fragment grow" style="flex: 1; margin: 0 10px;">
+                        <p style="font-size: 1.2em; color: #8E44AD; font-weight: 600;">Backtracking & Branch-and-Bounds
+                        </p>
+                        <small>Búsqueda exhaustiva organizada. Branch-and-Bounds poda ramas de búsqueda si encuentra una
+                            solución mejor antes, evitando cálculos innecesarios.</small>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Sección de transición. Recordar que estas técnicas son los ejemplos de cómo una mejor estructura
+                    puede dar el mayor salto en eficiencia (Algoritmo &gt; Código).
+                </aside>
+            </section>
+ -->
+
+
+            <!-- SLIDE 6: TALLER PRÁCTICO (60-70 min) -->
+            <section data-state="action_plan">
+                <h4>Actividad 21: Diseño de plan de ataque</h4>
+                <p style="font-size: 1.1em; margin-top: 30px;">En grupos de proyecto, apliquen los 3 Pilares a su
+                    proyecto.</p>
+
+                <div style="display: flex; text-align: left; margin-top: 40px;">
+
+                    <div class="fragment fade-in-up"
+                        style="flex: 1; padding: 15px; border-right: 2px dashed #95A5A6; font-size:60%;">
+
+                        <p><strong> 1. Plan de Verificación</strong></p>
+                        <p>Define 1 Caso de Prueba Crítico (Peor Caso):</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>Entrada: (Ej. 0, el valor máximo, un texto malformado)</li>
+                            <li>Resultado Esperado: (Ej. Mensaje de error, no falla, devuelve `null`)</li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment fade-in-up"
+                        style="flex: 1; padding: 15px; border-right: 2px dashed #95A5A6; font-size:60%;">
+
+                        <p><strong> 2. Plan de Depuración</strong></p>
+                        <p>Identifica 1 Problema a Manejar:</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>Problema: (Ej. Lectura de archivo inexistente, intento de división por cero, objeto `null`
+                                inesperado).</li>
+                            <li>Acción: (Ej. Implementar `try-catch`, mostrar mensaje de error amigable al usuario).
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fragment fade-in-up" style="flex: 1; padding: 15px;font-size:60%;">
+                        <p><strong> 3. Plan de Optimización</strong></p>
+                        <p>Identifica 1 Mejora de Algoritmo o Código:</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>Sección: (Ej. El bucle de búsqueda de datos, la gestión de memoria de una estructura).
+                            </li>
+                            <li>Acción: (Ej. Reemplazar una lista por un *hash map*, refactorizar una función con más de
+                                20 líneas).</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <aside class="notes">
+                    Plan de Ataque (10 min): Este es el momento de aplicación. Los estudiantes deben anotar sus 3 puntos
+                    débiles y cómo los atacarán. Esto asegura que la lección se aplique inmediatamente a su trabajo.
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: CIERRE Y PRÓXIMOS PASOS -->
+            <!-- <section data-state="conclusion">
+                <h2 style="color: #34495E;">Resumen Final: La Calidad es Sistemática</h2>
+                <div style="margin-top: 50px;">
+                    <p class="fragment fade-in" style="font-size: 1.3em;">1. Corrección > Eficiencia: Primero el
+                        programa debe ser comprensible y correcto.</p>
+                    <p class="fragment fade-in" style="font-size: 1.3em;">2. Algoritmo > Trucos: La eficiencia es un
+                        problema de diseño, no de *code tuning*.</p>
+                    <p class="fragment fade-in" style="font-size: 1.3em;">3. La mejor optimización es EVITAR trabajo
+                        (Evitar cálculos, evitar código sucio).</p>
+                </div>
+
+                <div class="fragment fade-in" style="margin-top: 50px;">
+                    <h4 style="color: #9B59B6;">Próximos Pasos:</h4>
+                    <p>Aplica tu Plan de Ataque Final a tu proyecto. ¡El objetivo es la robustez!</p>
+                </div>
+            </section> -->
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>
