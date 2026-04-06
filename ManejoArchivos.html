@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/elo320.css">
+    <link rel="stylesheet" href="css/animRestricciones.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <style>
+        .fragment.bold {
+            font-weight: normal;
+        }
+
+        .fragment.bold.visible {
+            font-weight: bold;
+        }
+
+        .reveal td {
+            font-size: 60%;
+        }
+
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0lax {
+            text-align: center;
+            vertical-align: center;
+            font-size: 3vw;
+            border-width: 2px
+        }
+
+        .tg .tg-small {
+            text-align: center;
+            vertical-align: center;
+            font-size: 2vw
+        }
+
+        .smalltab {
+            font-size: 2vw
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section class="Title" data-include>
+                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
+                <h2>Manejo de archivos</h2>
+                <p>Marie González-Inostroza</p>
+
+            </section>
+
+
+            
+
+            <section>
+                <h4>Streams: Archivos</h4>
+                <ul class="r-fit-text">
+                    <li>C trabaja con streams para interactuar con dispositivos físicos o virtuales.</li>
+                    <li>Este puntero se mueve a través del stream.</li>
+                    <!-- <li><code>stdin</code>, <code>stdout</code>: streams de funciones básicas (<code>scanf()</code>,
+                        <code>printf()</code>).
+                    </li>
+                    <li><code>stderr</code>: salida sin buffer.</li> -->
+                    <li>Se crean streams a archivos con punteros <code>FILE</code>.</li>
+                </ul>
+                <pre><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+    FILE *arch; // puntero
+    arch = fopen("hola.txt","r"); // apertura stream
+    fclose(arch); // cerrar stream
+    return 0;}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: modos</h4>
+                <ul>
+                    <li>"r": Lectura (archivo debe existir)</li>
+                    <li>"w": Escritura (sobrescribe)</li>
+                    <li>"a": Anexar (crea si no existe)</li>
+                    <li>"r+": Lectura y escritura (inicio)</li>
+                    <li>"w+": Lectura y escritura</li>
+                    <li>"a+": Lectura y escritura (apéndice)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Archivos - Escritura</h4>
+                <ul>
+                    <li><code>fprintf()</code>: como printf, pero con archivo.</li>
+                    <li><code>fputs()</code>: escribe string.</li>
+                    <li><code>fputc()</code>: escribe caracter.</li>
+                </ul>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char *saludo = "Hola Mundo";
+
+    arch = fopen("test.txt","w");
+    fprintf(arch, "%s\n", saludo);
+    fputs("I'll be back", arch);
+    fputc('X', arch);
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Archivos - Lectura</h4>
+                <ul>
+                    <li><code>fscanf()</code>: como scanf, pero con archivo.</li>
+                    <li><code>fgets()</code>: lee string hasta <code>\n</code> o EOF.</li>
+                    <li><code>fgetc()</code>: lee un caracter.</li>
+                </ul>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+    FILE *arch;
+    char saludo[20];
+    arch = fopen("test.txt","r");
+
+    while(!feof(arch)){
+        fscanf(arch,"%s", saludo);
+        fprintf(stderr,"linea: %s\n", saludo);    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Archivos - Lectura</h4>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char saludo[5];
+
+    arch = fopen("test.txt","r");
+
+    while(fgets(saludo, 5, arch) != NULL){
+        fprintf(stderr,"linea: %s\n", saludo);
+    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: Lectura</h4>
+                <pre class="r-stretch"><code class="language-c">
+#include&lt;stdio.h&gt;
+
+int main(int argc, char **argv){
+
+    FILE *arch;
+    char saludo;
+
+    arch = fopen("test.txt","r");
+
+    while((saludo=fgetc(arch)) != EOF){
+        fprintf(stderr,"linea: %c\n", saludo);
+    }
+
+    fclose(arch);
+    return 0;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                <h4>Streams: Manejo del puntero</h4>
+                <p>A diferencia de Python, en C se puede manejar el puntero del archivo:</p>
+                <ul>
+                    <li><code>rewind()</code>: inicio</li>
+                    <li><code>fseek()</code>: mueve n bytes</li>
+                    <li><code>ftell()</code>: posición actual</li>
+                    <li><code>fgetpos()</code>: guarda posición en <code>fpos_t</code></li>
+                    <li><code>fsetpos()</code>: mueve a posición guardada</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Otros Streams</h4>
+                <p>Existen variados streams en C:</p>
+                <ul>
+                    <li>Standard I/O: <code>scanf()</code>, <code>printf()</code></li>
+                    <li>Strings: <code>sscanf()</code>, <code>sprintf()</code></li>
+                    <li>Archivos: <code>fscanf()</code>, <code>fprintf()</code></li>
+                </ul>
+            </section>
+
+
+<section>
+    <h4>Actividad 3.5: Manejo de archivos, argumentos y structs</h4>
+    <p>Completa el código base en que se lee un archivo con los datos de distintos estudiantes y se calculan las estadísticas respectivas al curso.</p>
+    <p>El código base está en Classroom:
+        <a href="https://classroom.github.com/a/YgCkx--g" target="_blank">
+            https://classroom.github.com/a/YgCkx--g</a>
+</section>
+
+
+        </div>
+
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/countdown/countdown.js"></script>
+    <script src="plugin/animate/plugin.js"></script>
+    <script src="plugin/animate/svg.min.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            slideNumber: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            hash: true,
+            slideNumber: true,
+            dependencies: [
+
+                { src: "plugin/countdown/countdown.js" },
+
+            ],
+            animate: {
+                autoplay: true
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes, RevealAnimate],
+            countdown: { defaultTime: 300, autostart: true },
+
+
+            autoAnimateUnmatched: true
+
+        });
+
+        Reveal.configure({ pdfSeparateFragments: false });
+    </script>
+</body>
+
+</html>

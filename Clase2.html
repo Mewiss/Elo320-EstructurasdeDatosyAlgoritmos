@@ -123,7 +123,7 @@ calculo = x * potencia(y, 2.5);
             <section>
                 <h2>Funciones en C</h2>
                 <ul>
-                    <li><b>Implementación:</b> Define implementación de código de función.</li>
+                    <li><b>Implementación:</b> Define la implementación del código de la función.</li>
                 </ul>
                 <div class="exampleblock">
 
@@ -146,29 +146,12 @@ float potencia(float a, float b) {
                         <b>antes</b> de la
                         función que la utiliza.
                     </li>
-                    <li class="fragment">Si se utiliza el prototipo, este debe estar defindo <b>antes</b> de
+                    <li class="fragment">Si se utiliza el prototipo, este debe estar definido <b>antes</b> de
                         la función que la usa.</li>
-                    <li class="fragment">Prototipo + Implementación: libertad de ubicación de la implementación
-                        diferentes
-                        archivos.</li>
+                    <li class="fragment">Prototipo + Implementación: libertad de ubicación de la implementación en
+                        diferentes archivos.</li>
                 </ul>
             </section>
-
-            <!-- <section>
-                <h2>Funciones en Python</h2>
-                <ul>
-                    <li><b>Python</b> sólo permite implementación, sin prototipos.</li>
-                </ul>
-                <div class="exampleblock">
-                    <b>Python</b>
-                    <pre><code class="language-python">
-def nombre_funcion(parametros):
-    #...Implementacion
-    return &lt;expresion&gt;
-    </code></pre>
-                    <img src="images/funcion-python.png" style="width:65%;">
-                </div>
-            </section> -->
 
 
 
@@ -197,7 +180,7 @@ int main(){// var a sirve sólo dentro de función main.
             </section>
 
             <section>
-                <h4>Variable local</h4>
+                <h4>Variable Local</h4>
                 <p>Definida dentro de un ámbito determinado, entre
                     llaves { y }.</p>
 
@@ -205,20 +188,21 @@ int main(){// var a sirve sólo dentro de función main.
                 <div class="exampleblock">
 
                     <pre><code class="language-c">
-                        #include&lt;stdio.h&gt;
-                        int main(){// var a sirve sólo dentro de función main. 
+#include&lt;stdio.h&gt;
+int main(){// var a sirve sólo dentro de función main. 
 
-                            int a = 10;
-                            if(a==10){
-                                int b = 1;
-                                printf("%d %d\n", a, b);
-                            }
-                        
-                            printf("%d %d\n", a, b); // ¿Qué pasa con la variable b?
+    int a = 10;
+    if(a==10){
+        int b = 1;
+        printf("%d %d\n", a, b);
+    }
 
-                            return 0;}
+    printf("%d %d\n", a, b); // ¿Qué pasa con la variable b?
+
+    return 0;}
                             </code></pre>
                     <p>Aplica para todo elemento que contenga llaves.</p>
+                    </div>
 
             </section>
 
@@ -242,14 +226,14 @@ int main(){
 }
     </code></pre>
                 </div>
-                Puede ser llamada, modificada y utilizada desde cualquier ámbito, siempre y cuando <b>no exista
+                <p>Puede ser llamada, modificada y utilizada desde cualquier ámbito, siempre y cuando <b>no exista
                     una
                     variable local</b> con el mismo nombre.</p>
             </section>
 
             <section>
                 <h4>Macro</h4>
-                <p>Valor o conjuntos de instrucciones constantes que se definen a nivel de
+                <p>Valor o conjunto de instrucciones constantes que se definen a nivel de
                     preprocesamiento. No es una variable y no puede ser modificada.</p>
                 <div class="exampleblock">
 
@@ -284,16 +268,224 @@ int main(){
             </section>
 
             <section>
-                <h4>Actividad 3.3: Funciones en C</h4>
+                <h4>Actividad 2.1: Funciones en C</h4>
                 <p>Completa un programa que representa una calculadora. Este código usa macros, variables globales
                     y locales, funciones y estructuras de control (for, switch).</p>
                 <p>
 
                     El código base está en Classroom. Completa las funciones vacías y prueba diferentes escenarios.
-                    <a href="https://classroom.github.com/a/qF_waakB" target="_blank">
-                        https://classroom.github.com/a/qF_waakB
+                    <a href="https://classroom.github.com/a/PWnAx8YH" target="_blank">
+                        https://classroom.github.com/a/PWnAx8YH</a>
                 </p>
             </section>
+
+
+
+
+             <section>
+                <h2>Arreglos en C</h2>
+                
+            </section>
+<!--
+            <section>
+                <h4>Diferencia entre %d y %i</h4>
+                <p>En C, <b>%d</b> y <b>%i</b> son especificadores de formato utilizados en funciones como
+                    <code>printf</code>
+                    y <code>scanf</code>.
+                </p>
+                <ul>
+                    <li><b>%d</b> se utiliza para imprimir o leer un número entero en formato decimal.</li>
+                    <li><b>%i</b> también se utiliza para imprimir o leer un número entero, pero puede aceptar
+                        números en diferentes bases (decimal, octal y hexadecimal) dependiendo del prefijo del número.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Diferencia entre %d y %i</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+#include <stdio.h>  
+int main() {
+    int num1 = 10, num2 = 010, num3 = 0x10; // 010 es octal, 0x10 es hexadecimal
+    printf("Decimal: %d\n", num1); // Imprime 10
+    printf("Octal: %i\n", num2); // Imprime 8
+    printf("Hexadecimal: %i\n", num3); // Imprime 16
+    return 0;
+}    </code></pre>
+                </div>
+            </section>
+
+-->
+
+
+            <!--  <section>
+                <h4>Enumeración</h4>
+                <div class="fragment">
+                    <pre><code class="language-c" data-trim>
+enum color {
+    rojo, 
+    amarillo, 
+    verde=20, 
+    azul};
+
+int col = rojo;
+
+if (col != azul){ 
+    printf("No es azul\n");}
+        </code></pre>
+                </div>
+                <div class="fragment">
+                    <p><b>Python (clases)</b></p>
+                    <pre><code class="language-python" data-trim>
+class Colors(Enum):
+    red = 1
+    yellow = 2
+    green = 3
+        </code></pre>
+                </div>
+            </section> -->
+
+
+
+            <section>
+                <h4>Arreglos</h4>
+                <div class="fragment">
+                    <ul>
+                        <li>Conjunto homogéneo y ordenado de un tipo de datos.</li>
+                        <li>Se identifican por su posición relativa mediante un <em>índice</em> encerrado con
+                            <code>[]</code>
+                        </li>
+                        <li>Parten en el índice 0.</li>
+                    </ul>
+                    <pre><code class="language-c" data-trim>
+int arr[6]; //6 enteros creados en arr.
+arr[3] = 222; //Al cuarto elemento de arr se le asigna un 222.
+        </code></pre>
+                    <div style="text-align:center;">
+                        <img src="images/array.png" style="width:75%;" alt="array">
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Recorrer un arreglo</h4>
+                <div class="fragment">
+                    <p>Podemos utilizar cualquiera de las estructuras de control iterativas para recorrerlos.</p>
+                    <pre><code class="language-c" data-trim>
+#include<stdio.h>
+
+int main(){
+    int i;
+    float a[5];
+    
+    for(i=0;i<5;i++){
+        float val; //¿Cuántas veces nace y muere val?
+        scanf("%f", &val);
+        a[i]=val;
+    } //¿Cómo reducir este código?
+
+}
+        </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>Strings</h4>
+                <div class="fragment">
+                    <ul>
+                        <li><b>String:</b> Estructura de datos para representar palabras.</li>
+                        <li>Arreglo de <code>char</code> y el carácter <code>'\0'</code>.</li>
+                    </ul>
+                    <pre><code class="language-c" data-trim>
+// Los strings terminan con '\0' (fin de string) 
+// '\0' ocupa 1 char en el string.
+char str[6] = "hola"; //String de largo máximo 5. 
+str[3] = 'i'; // ¿Qué hace? 
+printf("%s\n", str);
+        </code></pre>
+                    <div style="text-align:center;">
+                        <img src="images/string.png" style="width:75%;" alt="string">
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <h4>Arreglos Multidimensionales e Inicialización</h4>
+                <div>
+                    <pre><code class="language-c" data-trim>
+#include<stdio.h>
+
+int main(){
+    char nom[10] = "Camilo";
+    char a[5][20] = {"Juan", "Francisco", "Pedro"};	
+    int b[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}}, i, j;
+
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++) //¿Qué pasó con las llaves? 
+            printf("%d ", b[i][j]);
+        printf("\n");
+    }
+}
+        </code></pre>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Funciones con Strings</h4>
+                <ul>
+                    <li><b>strlen(s):</b> Retorna el largo de un string <code>s</code>.</li>
+                    <li><b>strcpy(destino, origen):</b> Copia el string <code>origen</code> al string
+                        <code>destino</code>.
+                    </li>
+                    <li><b>strcmp(s1, s2):</b> Compara los strings <code>s1</code> y <code>s2</code>. Retorna 0 si son
+                        iguales.</li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h4>Actividad 2.2: Arreglos en C</h4>
+                <p>A partir del siguiente código base, realiza una implementación del algoritmo para repartir las cuentas entre amigos.</p>
+                
+                <p>
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/MYR4fiJ2" target="_blank">
+                        https://classroom.github.com/a/MYR4fiJ2</a>
+                </p>
+            </section>
+
+            <!--
+            <section>
+                <h4>Actividad 4.1: Arreglos en C</h4>
+                <p>Completa las funciones para obtener el promedio y varianza de los números guardados en un arreglo.
+                </p>
+                <p>
+
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/MYR4fiJ2" target="_blank">
+                        https://classroom.github.com/a/MYR4fiJ2</a>
+                </p>
+            </section>
+
+            <section>
+                <h4>Actividad 4.2: Strings y Structs en C</h4>
+                <p>Completa las funciones para buscar en un arreglo de Structs.</p>
+                <p>
+
+                    El código base está en Classroom. Completa las funciones vacías y realiza pruebas con distintos
+                    valores.
+                    <a href="https://classroom.github.com/a/OQ7AZUuO" target="_blank">
+                        https://classroom.github.com/a/OQ7AZUuO</a>
+                </p>
+            </section> -->
+
+
 
 		</div>
 	</div>
