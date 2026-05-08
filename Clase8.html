@@ -84,349 +84,809 @@
 
             <section class="Title" data-include>
                 <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h1>Unidad 2: Estructuras de datos</h1>
+                <h2>Árboles binarios</h2>
                 <p>Marie González-Inostroza</p>
 
             </section>
 
-            
-            <section class="Title" data-include>
-                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h2>Tipos de Datos Abstractos TDA</h2>
-                <p>Marie González-Inostroza</p>
+
+
+            <!--
+            <section>
+                <section data-state="recursion-intro">
+                    <h2>Recursividad</h2>
+                    <p>Un proceso recursivo es un ciclo autorreferente cuya definición depende, en parte, de su propia
+                        ejecución </p>
+                    <div style="text-align: center;">
+                        <img class="r-stretch" src="images/obs-recursion.png"
+                            alt="Diagrama de un ciclo de recursión auto-referente" class="r-stretch">
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Recursividad</h2>
+                    <p>Una definición recursiva se compone de dos elementos básicos:</p>
+                    <ol>
+                        <li>Un caso base que detiene el ciclo.</li>
+                        <li>Una llamada autorreferente con un elemento. </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h4>Ejemplo de Recursividad</h4>
+                    <div class="r-stack">
+                        <div class="fragment fade-in-then-semi-out" data-fragment-index="1">
+                            <div class="r-frame"
+                                style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                                <h3>Factorial</h3>
+                                <p>$ f(0) = 1 $ (caso base)</p>
+                                <p>$ f(n) = n \times f(n-1)$ (llamada autorreferente)</p>
+                            </div>
+                        </div>
+                        <div class="fragment fade-in" data-fragment-index="2">
+                            <div class="r-frame"
+                                style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-bottom: 20px;">
+                                <h3>Factorial en C</h3>
+                                <pre><code class="c" data-trim data-noescape>
+int factorial(int n){
+    if (n<0)
+        return -1; //Valor de Error
+    // caso base, sin condicion -> loop infinito
+    
+    else if(n==0) 
+        return 1; 
+    return n * factorial(n-1); // llamado a un elemento parcial del caso
+}
+                        </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="fragment fade-in" data-fragment-index="3">Entenderemos por recursividad como la
+                        técnica en la cual alguna función depende de su propia definición, vale decir, <strong>se
+                            llama a sí misma</strong> para formar un ciclo.</p>
+                </section>
+
+                <section>
+                    <h2>Recursividad: Ejemplos</h2>
+                    <ul>
+                        <li class="fragment">Secuencia de Fibonacci.</li>
+                        <li class="fragment">Polinomio de Hermite.</li>
+                        <li class="fragment">Triángulo de Pascal.</li>
+                        <li class="fragment">Fractales.</li>
+                        <li class="fragment"><strong class="fragment">Árboles</strong>.</li>
+                    </ul>
+                </section>
+            </section>
+
+-->
+            <section data-state="trees-intro">
+                <h2>Árboles</h2>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/arbol1.png"
+                        alt="Diagrama de estructura de datos de árbol jerárquico">
+                </div>
+
+                <p>Estructura de datos no-lineal, jerárquica y enlazada, que permite el acceso
+                    eficiente a sus elementos.</p>
 
             </section>
 
             <section>
-                <h4>Tipo de Datos </h4>
+                <h2>Árboles: Aplicaciones</h2>
+
                 <ul>
-                    <li> Colección de valores y las operaciones que se pueden realizar con éstos.
-                        <br>Ejemplo: enteros (<code>int</code>) con operadores aritméticos.
-                    </li>
-
-                </ul>
-            </section>
-
-
-
-            <section>
-                <h4>TDA: Tipos de Datos Abstractos</h4>
-                <p class="fragment">Modelo que define un <b>conjunto de datos</b> y las <b>operaciones</b> posibles, sin
-                    importar la implementación.</p>
-                <ul>
-                    <li class="fragment">Interfaz: operaciones disponibles.</li>
-                    <li class="fragment">Implementación interna oculta.</li>
-                    <li class="fragment">Acceso solo mediante la interfaz.</li>
-                </ul>
-            </section>
-
-
-
-
-            <section>
-                <h4>Ejemplos de TDA</h4>
-                <ul>
-                    <li class="fragment"><b>Pila (Stack):</b> Inserción y eliminación por un único extremo (LIFO).</li>
-                    <li class="fragment"><b>Cola (Queue):</b> Inserción por un extremo y eliminación por el otro (FIFO).
-                    </li>
-                    <li class="fragment"><b>Lista:</b> Conjunto ordenado de elementos, con acceso a posiciones
-                        específicas.</li>
+                    <li class="fragment">Compilación e interpretación sintáctica.</li>
+                    <li class="fragment">Expresiones aritméticas y lógicas.</li>
+                    <li class="fragment">Estructuras de búsqueda de datos.</li>
+                    <li class="fragment">Archivos y directorios.</li>
+                    <li class="fragment">Clases y herencia en POO.</li>
+                    <li class="fragment">Compresión de datos.</li>
+                    <li class="fragment">Computación Evolutiva.</li>
                 </ul>
             </section>
 
             <section>
-                <h4>Ejemplo: Lista como TDA</h4>
-                <p>Interfaz de operaciones de una lista:</p>
-                <ul>
-                    <li><code>crear_lista()</code></li>
-                    <li><code>insertar(lista, pos, valor)</code></li>
-                    <li><code>eliminar(lista, pos)</code></li>
-                    <li><code>buscar(lista, valor)</code></li>
-                    <li><code>imprimir(lista)</code></li>
-                </ul>
-                <p>La implementación puede variar (arreglos, listas enlazadas, etc.).</p>
+                <h4>Árboles: Conceptos</h4>
+                <p>Un árbol se forma por un conjunto finito de nodos
+                    enlazados entre sí según jerarquía padre-hijo.</p>
+
+                <div>
+                    <img class="r-stretch" src="images/example1.png" alt="Diagrama simple de la estructura de un árbol"
+                        style="width: 60%;">
+                </div>
             </section>
 
             <section>
-                <h4>Motivación del TDA</h4>
-                <p>Permiten:</p>
-                <ul>
-                    <li class="fragment">Diseñar programas más <b>modulares</b> y <b>reutilizables</b>.</li>
-                    <li class="fragment">Separar el <b>qué hace</b> un tipo de dato del <b>cómo lo hace</b>.</li>
-                    <li class="fragment">Facilitar la <b>abstracción</b> y el trabajo en equipo.</li>
-                </ul>
-            </section>
+                <h4>Árboles: Conceptos</h4>
+                <div class="row" style="display: flex; align-items: center;">
+                    <div class="col">
 
-            <section>
-                <h4>Problemas con Arreglos</h4>
-                <ul>
-                    <li>Eficientes y útiles, pero poco flexibles al cambiar tamaño.</li>
-                    <li>Eliminar o insertar requiere mover elementos → <b>O(n)</b>.</li>
-                    <li>Listas enlazadas ofrecen una alternativa más eficiente.</li>
-                </ul>
-            </section>
+                        <img class="r-stretch" src="images/concepto.png"
+                            alt="Diagrama de árbol con la terminología: raíz, padre, hijo, hoja" style="width: 100%;">
 
-            
-            <section class="Title" data-include>
-                <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h2>Lista enlazada simple</h2>
-                <p>Marie González-Inostroza</p>
+                    </div>
 
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada</h4>
-                <p>Es un TDA que enlaza nodos a través de punteros.</p>
-                <ul class="fragment">
-                    <li>No deben estar ordenados en memoria.</li>
-                    <li>No es necesario desplazar elementos: solo cambiar punteros.</li>
-                </ul>
-                <img class="fragment" src="images/linkedlist1.png" style="width:90%">
-
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Nodos</h4>
-                <div class="row">
-                    <div class="col fragment">
-
-                        <ul>
-                            <li>La lista se compone por nodos</li>
-                            <li>Los nodos se componen por dato y puntero</li>
+                    <div class="col">
+                        <ul style="font-size: 0.8em;">
+                            <li class="fragment">Primer nodo &rarr; raíz del árbol.</li>
+                            <li class="fragment">Nodo con sucesores &rarr; padre.</li>
+                            <li class="fragment">Sucesor de un nodo &rarr; hijo.</li>
+                            <li class="fragment">Nodos con padre e hijos &rarr; nodo intermedio.</li>
+                            <li class="fragment">Nodo sin hijos &rarr; hoja (nodo terminal).</li>
                         </ul>
-                        <img src="images/node.png" class="r-stretch">
+                    </div>
+
+                </div>
+            </section>
+
+
+
+            <section data-auto-animate>
+                <h4>Árboles: Conceptos</h4>
+                <div class="col" style="display: flex; align-items: center;">
+                    <div data-id="im" class="row">
+                        <div>
+                            <img class="r-stretch" src="images/concepto2.png"
+                                alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="r-fit-text">
+                            <li class="fragment">Camino: Secuencia entre dos nodos siguiendo relación jerárquica
+                                padre hijo.
+                                $$\text{camino}(4,47)=\{4,12,61,47\}$$
+                            </li>
+
+                            <li class="fragment">Rama: Camino de la raíz a una hoja.
+                                $$\text{rama}_1 = \text{camino}(4,2)$$
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section data-auto-animate>
+                <h4>Árboles: Conceptos</h4>
+                <div class="col" style="display: flex; align-items: center;">
+                    <div data-id="im" class="row">
+                        <div>
+                            <img class="r-stretch" src="images/concepto2.png"
+                                alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="r-fit-text">
+
+                            <li>Largo del Camino: Número de enlaces (nodos-1) entre dos nodos en
+                                relación jerárquica.
+                                $$\text{largo}(4,47)=3$$
+                            </li>
+
+                            <li>Profundidad: Cantidad de predecesores del nodo.
+                                $$\text{profundidad}(2) = 2$$
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section data-auto-animate>
+                <h4>Árboles: Conceptos</h4>
+                <div class="col" style="display: flex; align-items: center;">
+                    <div data-id="im" class="row">
+                        <div>
+                            <img class="r-stretch" src="images/concepto2.png"
+                                alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="r-fit-text">
+                            <li>Grado de Nodo: Cantidad de hijos.
+                                $$\text{grado}(47)=0$$
+                            </li>
+                            <li>Grado del árbol: Máximo número de hijos para cada nodo.
+                                $$\text{grado}(A)=3$$
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section data-auto-animate>
+                <h4>Árboles: Conceptos</h4>
+                <div class="col" style="display: flex; align-items: center;">
+                    <div data-id="im" class="row">
+                        <div>
+                            <img class="r-stretch" src="images/concepto2.png"
+                                alt="Diagrama de árbol que muestra los conceptos de altura y nivel" style="width: 67%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="r-fit-text">
+                            <li>Altura: Profundidad máxima de los nodos o largo del camino más grande:
+                                $$\text{altura}(A)=3$$
+                            </li>
+                            <li>Nivel: Número de enlaces del camino de la raíz al nodo (parte en 0).
+                                $$\text{nivel}(4)=3$$
+                            </li>
+                            <li>Bosque: Colección o conjunto de árboles.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Árboles: Recursividad</h4>
+                <p class="r-fit-text">Los árboles son estructuras recursivas: cada hijo es raíz de un sub-árbol,
+                    permitiendo aplicar técnicas recursivas fácilmente.</p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/arbolrecursivo.png"
+                        alt="Diagrama de árbol que resalta los subárboles como estructuras recursivas"
+                        style="width: 60%;">
+                </div>
+            </section>
+
+
+            <section>
+                <h2>Árboles binarios</h2>
+                <p style="font-size: 0.8em;">En este curso nos concentraremos en árboles binarios, i.e.,
+                    árboles cuyo grado es 2. </p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/binarytree.png" alt="Diagrama de un árbol binario"
+                        style="width: 40%;">
+                </div>
+            </section>
+
+
+            <section>
+                <h4>Árboles binarios: Aplicaciones:</h4>
+                <ul>
+                    <li>Gramática de lenguajes, i.e. matemáticas.</li>
+                    <li>Árboles de Decisión.</li>
+                    <li><strong>Árbol Binario de Búsqueda.</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Implementación</h4>
+                <p style="font-size: 0.8em;">Un árbol binario tiene a lo más dos hijos, y se implementa muy
+                    similar a las listas enlazadas.</p>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/binarytree2.png"
+                        alt="Diagrama de la implementación de un nodo binario con punteros izquierdo y derecho"
+                        style="width: 60%;">
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Árboles binarios: Implementación</h4>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <img class="r-stretch" src="images/binarytree2.png"
+                                alt="Diagrama de la implementación de un nodo binario con punteros izquierdo y derecho"
+                                style="width: 80%;">
+                        </div>
+
+                        <div class="row">
+
+                            <pre><code class="c" data-trim data-noescape>
+typedef struct nodo{
+    int dato;
+    struct nodo *hijo_izq;
+    struct nodo *hijo_der;
+} nodo_t;
+
+int main(int argc, char **argv){
+    nodo_t *raiz; // árbol vacío
+    return 0;
+}
+                    </code></pre>
+                        </div>
                     </div>
                     <div class="col">
 
-                        <pre class="fragment"><code class="language-c">
-struct nodo {
-    int dato; // dato
-    struct nodo *sgte; // puntero a un nodo
-};
 
-typedef struct le_nodo {
-    float datos[20];
-    struct le_nodo *sgte;
-} nodo_t;
-  </code></pre>
+                        <ul>
+                            <li>El puntero de control se encuentra siempre en la raíz. </li>
+                            <li>Los nodos cuyos hijos apunten a <code>NULL</code>, son hojas.</li>
+                            <!-- <li><strong>¿Cómo podemos recorrer un árbol (binario)?</strong> - En seguida.</li>
+                            <li><strong>¿Cómo agregar, buscar, eliminar elementos de un árbol binario?</strong></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Árboles binarios: Recorrido en Anchura</h4>
+                <p style="font-size: 0.8em;">Tiene como criterio visitar todos los nodos de un nivel antes
+                    de pasar al siguiente.</p>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/breadthsearch.png"
+                            alt="Diagrama que muestra el recorrido en anchura (Breadth-First Search)"
+                            style="width: 80%;">
+                    </div>
+
+                    <div class="col ">
+                        <ul style="font-size: 0.8em;">
+                            <!-- <li>No puede realizarse directamente por recursividad.</li> -->
+                            <!-- <li>Se utiliza una <strong>Queue/Cola</strong> como estructura auxiliar.</li> -->
+                            <li>Recorre todos los nodos de un nivel, antes de pasar al siguiente. </li>
+                            <li>Se realiza dequeue y enqueues hasta pasar por todos lo niveles.</li>
+                        </ul>
                     </div>
                 </div>
 
             </section>
 
-
-
-
             <section>
-                <h4>Lista Simple Enlazada: Inicializar</h4>
-                <pre><code class="language-c">
-#include<stdio.h>
-
-typedef struct nodo {
-    int dato;
-    struct nodo *sgte;
-} nodo_t;
-
-int main() {
-    nodo_t *inicio = NULL; 
-    // Lista vacía []
-    return 0;
-}
-  </code></pre>
-                <img src="images/init1.png" style="width:30%">
-            </section>
-
-            <section>
-                <h4>Actividad 8: Implementación de una lista enlazada</h4>
-                <p class="r-fit-text"><b>En grupos de a 3 personas,</b> deberán identificar
-                    a qué corresponde cada función en el código y
-                    cada diagrama para la interfaz de una lista enlazada.
-                    El código y los diagramas están desordenados.
-                    Las funciones disponibles son:
-                <ul>
-                    <li>first_node</li>
-                    <li>add_first</li>
-                    <li>add_middle</li>
-                    <li>append</li>
-                    <li>list_len</li>
-                    <li>print_list</li>
-                    <li>free_list</li>
-                </ul>
-                </p>
-
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Primer nodo</h4>
-                <pre><code class="language-c light-code">
-void first_node(nodo_t **cabeza, int dato){ 
-    nodo_t *nuevo = malloc(sizeof(nodo_t));
-    nuevo->dato = dato;
-    nuevo->sgte = NULL;
-    *cabeza = nuevo;
-}
-  </code></pre>
-                <img src="images/firstadd4.png" style="width:45%">
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Añadir al inicio</h4>
-                <pre><code class="language-c">
-void add_first(nodo_t **cabeza, int dato){          
-    nodo_t *nuevo = malloc(sizeof(nodo_t));
-    nuevo->dato = dato;
-    nuevo->sgte = *cabeza;
-    *cabeza = nuevo; 
-}
-  </code></pre>
-                <img src="images/addheader4.png" style="width:90%">
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Añadir entre nodos</h4>
-                <pre><code class="language-c">
-// no se modifica inicio, no es necesario **
-void add_middle(nodo_t *cabeza, int dato, int pos){ 	          
-    nodo_t *nuevo = malloc(sizeof(nodo_t));
-    nuevo->dato = dato;
-
-    nodo_t *recorredor = cabeza;
-    for(int cont=0; cont<pos-1; cont++)
-        recorredor = recorredor->sgte;
-
-    nuevo->sgte = recorredor->sgte;
-    recorredor->sgte = nuevo;
-}
-  </code></pre>
-                <img src="images/addmiddle6.png" style="width:50%">
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Añadir al final</h4>
-                <pre><code class="language-c">
-void append(nodo_t *cabeza, int dato){ 	          
-    nodo_t *nuevo = malloc(sizeof(nodo_t));
-    nuevo->dato = dato;
-
-    nodo_t *rec = cabeza;
-    while(rec->sgte!=NULL)
-        rec = rec->sgte;
-
-    nuevo->sgte = rec->sgte;
-    rec->sgte = nuevo;
-}
-  </code></pre>
-                <img src="images/append7.png" style="width:50%">
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Largo</h4>
-                <pre><code class="language-c">
-int list_len(nodo_t *cabeza){ 	          
-    int cont;
-    nodo_t *rec = cabeza;
-    for(cont=0; rec!=NULL; cont++)
-        rec = rec->sgte;
-    return cont;
-}
-  </code></pre>
-                <img src="images/length.png" style="width:90%">
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Imprimir</h4>
-                <pre><code class="language-c">
-void print_list(nodo_t *cabeza){ 	          
-    nodo_t *rec = cabeza;
-    int cont=0;
-    printf("--- Print Lista ---\n");
-    for(; rec!=NULL; cont++){
-        printf("Lista pos %d, valor: %d\n", cont, rec->dato);
-        rec = rec->sgte;
-    }
-    printf("--- Fin Lista ---\n\n");
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Lista Simple Enlazada: Liberar</h4>
-                <pre><code class="language-c">
-void free_list(nodo_t *cabeza){ 	          
-    nodo_t *rec = cabeza;
-    while(rec!=NULL){
-        cabeza = rec->sgte;
-        free(rec);
-        rec = cabeza;
-    }
-}
-  </code></pre>
-            </section>
-
-
-            <section>
-                <h3>Problemas con punteros</h3>
-            </section>
-
-            <section>
-                <h4>Dangling con lista enlazada</h4>
-                <img src="images/listdangling.png" style="width:85%;">
-
-            </section>
-            <section>
-                <h4>Memory Leak con lista enlazada</h4>
-                <img src="images/listmemoryleak.png" style="width:85%;">
-
-            </section>
-
-            <section>
-                <h4>Mejoras</h4>
-            </section>
-
-            <section>
-                <h4>Lista Enlazada DLC 1</h4>
-                <p>Existen otras implementaciones de listas enlazadas simples, donde se incluyen más punteros y
-                    variables de control.</p>
-                <pre><code class="language-c">
-#include<stdio.h>
-
-typedef struct nodo{
-    int dato; //dato, puede ser lo que uds. necesiten
-    struct nodo *sgte; // puntero a un nodo enlace.
-} nodo_t;
-
-typedef struct list{
-    nodo_t * inicio;
-    nodo_t * final;
-    int largo;
-} lista;
-
-int main(int argc, char **argv){
-    lista *L = malloc(sizeof(lista));
-    L->inicio = NULL;
-    L->final = NULL;
-    L->largo = 0;
-    // Equivalente a lista vacía []
-    // ¿Para que sirve esta nueva forma?
-    // Implemente las funciones de ésta clase considerando esta forma.
-
-    free(L);
-    return 0;
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Lista Enlazada DLC 1</h4>
-                <div style="text-align:center;">
-                    <img src="images/linkedlist2.png" style="width:90%;">
-                    <br><br>
-                    <img src="images/init2.png" style="width:25%;">
+                <h4>Árboles binarios: Recorrido en Profundidad</h4>
+                <p style="font-size: 0.8em;">Tiene como criterio visitar los nodos por profundidad hasta
+                    llegar una hoja, luego retrocede y continúa.</p>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/dfs1.png"
+                            alt="Diagrama que muestra el recorrido en profundidad (Depth-First Search)"
+                            style="width: 100%;">
+                    </div>
+                    <div class="col">
+                        <p>Tres de los tipos de recorrido en profundidad más utilizados son: Pre-orden, In-orden,
+                            Post-orden.</p>
+                    </div>
                 </div>
             </section>
 
-            
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Pre-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar nodo actual.</li>
+                    <li>Visitar hijo izquierdo en pre-orden.</li>
+                    <li>Visitar hijo derecho en pre-orden.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs1.png"
+                        alt="Diagrama que ilustra el recorrido Pre-orden (Nodo, Izq, Der)" style="width: 40%;">
+                </div>
+            </section>
 
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Pre-orden</h4>
+                <div class="row">
+                    <div style="col text-align: center;">
+                        <img class="r-stretch" src="images/dfs1.png"
+                            alt="Diagrama que ilustra el recorrido Pre-orden (Nodo, Izq, Der)" style="width: 40%;">
+                    </div>
+                    <div class="col">
+
+                        <pre><code class="c" data-trim data-noescape>
+void print_preorden(node_t *root){
+    printf("Dato: %d\n", root->dato);
+    
+    if(root->hijo_izq != NULL)
+        print_preorden(root->hijo_izq);
+
+    if(root->hijo_der != NULL)
+        print_preorden(root->hijo_der);
+}
+                    </code></pre>
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. In-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar hijo izquierdo en in-orden.</li>
+                    <li>Visitar nodo actual.</li>
+                    <li>Visitar hijo derecho en in-orden.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs2.png"
+                        alt="Diagrama que ilustra el recorrido In-orden (Izq, Nodo, Der)">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. In-orden</h4>
+                <div class="row">
+                    <div class="col">
+                        <img class="r-stretch" src="images/dfs2.png"
+                            alt="Diagrama que ilustra el recorrido In-orden (Izq, Nodo, Der)" style="width: 80%;">
+                    </div>
+                    <div class="col">
+                        <pre><code class="c" data-trim data-noescape>
+void print_inorden(node_t *root){
+
+    if(root->hijo_izq != NULL)
+        print_inorden(root->hijo_izq);
+
+    printf("Dato: %d\n", root->dato);
+    
+    if(root->hijo_der != NULL)
+        print_inorden(root->hijo_der);
+}
+                    </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Post-orden</h4>
+                <p style="font-size: 0.8em;">Recorrido recursivo que sigue la siguiente orden de visitas:
+                </p>
+                <ol>
+                    <li>Visitar hijo izquierdo en post-orden.</li>
+                    <li>Visitar hijo derecho en post-orden.</li>
+                    <li>Visitar nodo actual.</li>
+                </ol>
+                <div style="text-align: center;">
+                    <img class="r-stretch" src="images/dfs3.png"
+                        alt="Diagrama que ilustra el recorrido Post-orden (Izq, Der, Nodo)">
+                </div>
+            </section>
+
+            <section>
+                <h4>Árboles binarios: Rec. Prof. Post-orden</h4>
+                <div class="row">
+                    <div class="col">
+                        <img class="r-stretch" src="images/dfs3.png"
+                            alt="Diagrama que ilustra el recorrido Post-orden (Izq, Der, Nodo)" style="width: 70%;">
+                    </div>
+                    <div class="col">
+                        <pre><code class="c" data-trim data-noescape>
+void print_postorden(node_t *root){
+
+    if(root->hijo_izq != NULL)
+    print_postorden(root->hijo_izq);
+
+    if(root->hijo_der != NULL)
+    print_postorden(root->hijo_der);
+
+    printf("Dato: %d\n", root->dato);
+}
+                    </code></pre>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section>
+                <h4>Actividad 8.1: Construcción y recorridos de un árbol</h4>
+                <p><a href="https://classroom.github.com/a/YGeGK89c">https://classroom.github.com/a/YGeGK89c</a> Utiliza el código proporcionado para implementar en C la estructura de un árbol binario:</p>
+                <ul>
+                    <li>Crea un nodo con valor entero.</li>
+                    <li>Construye manualmente un árbol de 5 nodos.</li>
+                    <li>Implementa funciones recursivas para:</li>
+                    <ul>
+                        <li>Recorrido en Pre-Orden</li>
+                        <li>Recorrido en In-Orden</li>
+                        <li>Recorrido en Post-Orden</li>
+                    </ul>
+                </ul>
+                <p><strong>Pregunta:</strong> ¿Qué diferencias observas entre los tres recorridos?</p>
+            </section>
+
+            <!--
+            <section>
+                <h4>Actividad 12.2: Árbol de Expresiones</h4>
+                <p>Representa en C la expresión <code>(3 + 5) * 2</code> como un árbol binario.</p>
+                <ul>
+                    <li>Cada nodo interno debe ser un operador (+, *, etc.).</li>
+                    <li>Cada hoja debe ser un número.</li>
+                    <li>Recorre el árbol en post-orden para obtener la notación postfija.</li>
+                    <li>Implementa una función recursiva que <strong>evalúe</strong> la expresión.</li>
+                </ul>
+                <p><strong>Pregunta:</strong> ¿Qué ventajas tiene representar expresiones como árboles?</p>
+            </section>
+
+        -->
+
+
+            <!-- c -->
+
+
+
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Es un árbol binario
+                    que permite guardar y buscar eficientemente datos </p>
+                <div style="text-align: center;">
+                    <img src="images/abb1.png" alt="Diagrama de un Árbol Binario de Búsqueda" style="width: 45%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Los hijos izquierdos guardan
+                    información menor (o igual), y los hijos derechos guardan información mayor, con respecto a la
+                    de su padre.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb2.png"
+                        alt="Diagrama de ABB mostrando la regla: Menor a la izquierda, Mayor a la derecha"
+                        style="width: 40%;">
+                </div>
+           
+                <p style="font-size: 0.8em;">Esto facilita la búsqueda, inserción, y eliminación de elementos.
+                    Además, los recorridos
+                    son más efectivos.</p>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+                <p style="font-size: 0.8em;">Por ejemplo, es fácil determinar el lugar y posición de los valores en
+                    un intervalo. </p>
+
+
+
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="images/abb3.png" alt="Diagrama de ABB que ilustra el sucesor y antecesor"
+                        class="r-stretch">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Árbol binario de búsqueda</h4>
+
+
+                <ul class="r-fit-text">
+                    <p><strong>¿Cómo determinan el sucesor y predecesor de un padre?</strong></p>
+                    <ul>
+                        <li class="fragment"><span style="color: red;">Sucesor: buscar en la derecha, todo hacia la
+                            izquierda.</span></li>
+                        <li class="fragment"><span style="color: blue;">Antecesor: buscar en la izquierda, todo
+                            hacia la
+                            derecha.</span></li>
+                    </ul>
+
+                </ul>
+
+
+                <img src="images/abb3.png" alt="Diagrama de ABB que ilustra el sucesor y antecesor" class="r-stretch">
+
+            </section>
+
+            <section>
+                <h4>ABB: Operaciones</h4>
+                <p style="font-size: 0.8em;">Las operaciones más comunes de los ABB son:</p>
+                <ul>
+                    <li><code>init()</code>: Inicializar el árbol (root == NULL).</li>
+                    <li><code>size()</code>: Cantidad de elementos en el árbol.</li>
+                    <li><code>x_preorden()</code>: Operación x en pre-orden.</li>
+                    <li><code>x_inorden()</code>: Operación x en in-orden. </li>
+                    <li><code>x_postorden()</code>: Operación x en post-orden. </li>
+                    <li><code>search()</code>: Buscar un elemento en el árbol.</li>
+                    <li><code>insert()</code>: Insertar un elemento en el árbol.</li>
+                    <li><code>delete()</code>: Eliminar un elemento en el árbol.</li>
+                    <li><code>clear()</code>: Limpiar el árbol.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Recorrer</h4>
+                <p class="r-fit-text">¿Cómo se imprimirían los datos del siguiente árbol con recorrido
+                    pre-orden, in-orden y post-orden?</p>
+
+                <img src="images/abb1.png" alt="Diagrama de un Árbol Binario de Búsqueda" class="r-stretch">
+                <ul class="r-fit-text">
+                    <li class="fragment" data-fragment-index="1">Pre-orden: 19 - 6 - 2 - 15 - 7 - 17 - 30 - 21 - 27
+                        - 36 </li>
+                    <li class="fragment" data-fragment-index="2">In-orden: 2 - 6 - 7 - 15 - 17 - 19 - 21 - 27 - 30 -
+                        36 </li>
+                    <li class="fragment" data-fragment-index="3">Post-orden: 2 - 7 - 17 - 15 - 6 - 27 - 21 - 36 - 30
+                        - 19 </li>
+                </ul>
+
+
+            </section>
+
+            <section>
+                <h4>ABB: Buscar</h4>
+                <div style="text-align: center;">
+                    <img src="images/abb-search.png" alt="Diagrama que muestra la búsqueda en un ABB"
+                        style="width: 35%;">
+                </div>
+                <p>Se puede hacer de dos formas:</p>
+                <ul>
+                    <li class="fragment">Usando un puntero para recorrer el árbol.</li>
+                    <li class="fragment"><strong>Recursivamente</strong>.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Búsqueda recursiva</h4>
+                <div class="r-frame"
+                    style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-top: 15px;">
+
+                    <pre><code class="c" data-trim data-noescape>
+nodo_t * search_recursiva(nodo_t * raiz, int value) {
+    // Caso base
+    if (raiz == NULL || raiz->dato == value) 
+        return raiz;
+    
+    if (value < raiz->dato) 
+        return search_recursiva(raiz->hijo_izq, value);
+    
+    return search_recursiva(raiz->hijo_der, value);
+}
+                </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Búsqueda con puntero</h4>
+                <pre><code class="c" data-trim data-noescape>
+nodo_t * search_puntero(nodo_t * raiz, int value) {
+    nodo_t *actual = raiz;
+
+    while (actual != NULL) {       
+        if (actual->dato == value)  // Caso base
+            return actual;
+        
+        else if (value < actual->dato) 
+            actual = actual->hijo_izq;
+        
+        else 
+            actual = actual->hijo_der; }    
+    return NULL; // Si el bucle termina sin encontrar el valor
+}
+                </code></pre>
+
+            </section>
+
+            <section>
+                <h4>ABB: Insertar</h4>
+                <p style="font-size: 0.8em;">Debemos buscar el lugar donde insertar, de modo de
+                    <strong>mantener</strong> el orden de nuestro ABB.
+                </p>
+                <div style="text-align: center;">
+                    <img src="images/abb-insert.png" alt="Diagrama que ilustra el proceso de inserción en un ABB"
+                        style="width: 45%;">
+                </div>
+                <p style="font-size: 0.8em;">Nota: Si nuestro árbol no acepta elementos repetidos, al encontrar el
+                    valor se detiene.</p>
+            </section>
+
+            <section>
+                <h4>ABB: Insertar</h4>
+                <div class="r-frame"
+                    style="background-color: #e6f7ff; border: 1px solid #00aaff; padding: 10px; margin-top: 15px;">
+                    <h3>Recursivamente</h3>
+                    <pre><code class="c" data-trim data-noescape>
+void insert(nodo_t ** raiz, int value){ 
+}
+                </code></pre>
+                </div>
+            </section>
+
+            <!--  <section>
+                    <h4>ABB: Insertar</h4>
+                    <p>Cree el árbol binario que represente la siguiente secuencia de enteros: </p>
+                    $$\mathbf{10 - 5 - 7 - 14 - 12 - 18 - 15}$$
+                    <div class="fragment" data-fragment-index="1">
+                        <div class="r-frame"
+                            style="background-color: #fff3cd; border: 1px solid #ffc300; padding: 15px; margin-top: 20px;">
+                            <h3>Spoiler</h3>
+                            <div style="text-align: center;">
+                                <img src="images/abb-insert-example.png"
+                                    alt="Diagrama del ABB resultante de la secuencia 10, 5, 7, 14, 12, 18, 15"
+                                    style="width: 35%;">
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+
+
+
+            <!-- <section>
+                    <h4>Ejercicios</h4>
+                    <ul>
+                        <li>Para el siguiente conjunto $\{1, 4, 5, 10, 16, 17, 21\}$, dibuje árboles binarios de
+                            búsqueda con altura 2, 3, 4, 5, y 6.</li>
+                        <li>Escriba funciones recursivas para recorrer un árbol binario de búsqueda en pre-orden y
+                            post-orden.</li>
+                        <li>Asuma que tiene números entre 1 y 1000 en un árbol binario de búsqueda y quiere buscar el
+                            nodo 363. ¿Cuál de las siguientes secuencias de nodos NO podría ser una secuencia de nodos
+                            examinados en el árbol para llegar al nodo 363?
+                            <ol>
+                                <li>2, 252, 401, 398, 330, 344, 397, 363.</li>
+                                <li>924, 220, 911, 244, 898, 258, 362, 363.</li>
+                                <li>925, 202, 911, 240, 912, 245, 363.</li>
+                                <li>2, 399, 387, 219, 266, 382, 381, 278, 363.</li>
+                                <li>935, 278, 347, 621, 299, 392, 358, 363.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </section> -->
+
+
+
+
+
+
+
+            <section>
+                <h4>Actividad 8.2: Árbol Binario de Búsqueda con Mascotas</h4>
+                <div class="r-fit-text">
+                    <p>Implementa las funciones <code>insertar</code> y <code>buscar</code> en un ABB que almacene
+                        estructuras de tipo <code>Mascota</code> (con <strong>tipo</strong> y <strong>nombre</strong>).
+                    </p>
+                    <ul>
+                        <li>Completa el código base con los <code>TODOs</code>: <a
+                                href="https://classroom.github.com/a/Zkj4CzO_">https://classroom.github.com/a/Zkj4CzO_s</a>
+                        </li>
+                        <li>Recuerda que el criterio de orden es el <strong>nombre</strong> de la mascota.</li>
+                        <li>Usa la función <code>strcmp(a, b)</code> para comparar cadenas:</li>
+                        <ul>
+                            <li><code>&lt; 0</code> si <code>a &lt; b</code></li>
+                            <li><code>= 0</code> si <code>a == b</code></li>
+                            <li><code>&gt; 0</code> si <code>a &gt; b</code></li>
+                        </ul>
+                        <li>Inserta al menos <strong>15 mascotas</strong> y prueba buscar por nombre.</li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar</h4>
+                <p style="font-size: 0.8em;">Al igual que en insertar, deberemos buscar el nodo a eliminar. Pero
+                    para poder eliminarlo, tendremos que considerar los siguientes casos:</p>
+                <ul>
+                    <li>Nodo objetivo es una hoja (no tiene hijos).</li>
+                    <li>Nodo objetivo tiene un sólo hijo.</li>
+                    <li>Nodo objetivo tiene dos hijos.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar hoja.</h4>
+                <p style="font-size: 0.8em;">Es el caso más sencillo, solo corresponde a liberar el nodo desde el
+                    puntero del padre.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-nochild.png" alt="Diagrama del caso de eliminación de un nodo hoja"
+                        style="width: 90%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar nodo con 1 hijo.</h4>
+                <p style="font-size: 0.8em;">Caso intermedio. Aquí se elimina el nodo encontrado, pero su posición es
+                    ocupada por su único hijo. Se eleva ese sub-árbol, un nivel.</p>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-onechild.png"
+                        alt="Diagrama del caso de eliminación de un nodo con un hijo" style="width: 90%;">
+                </div>
+            </section>
+
+            <section>
+                <h4>ABB: Eliminar nodo con 2 hijos.</h4>
+                <p style="font-size: 0.8em;">Caso recursivo o iterativo. Consta de dos pasos:</p>
+                <ul>
+                    <li>Reemplazar el nodo objetivo por una copia de su sucesor o antecesor (uds. eligen).</li>
+                    <li>Borrar el sucesor o antecesor original.</li>
+                </ul>
+                <div style="text-align: center;">
+                    <img src="images/abb-delete-twochild.png"
+                        alt="Diagrama del caso de eliminación de un nodo con dos hijos, usando el sucesor"
+                        style="width: 100%;">
+                </div>
+            </section>
 
 
 

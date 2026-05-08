@@ -58,6 +58,11 @@
             word-break: normal;
         }
 
+        /* Asegura que la última fila de cualquier tabla .tg tenga borde inferior visible */
+        .tg tbody {
+            border: 2px solid black;
+        }
+
         .tg .tg-0lax {
             text-align: center;
             vertical-align: center;
@@ -80,433 +85,611 @@
 <body>
 
     <div class="reveal">
-        <div class="slides">
 
-            <!-- Title Slide -->
+        <div class="slides">
             <section class="Title" data-include>
                 <p class="r-fit-text">ELO320 - Estructuras de Datos y Algoritmos</p>
-                <h2>Memoria Dinámica con Structs</h2>
+                <h2>Tablas Hash</h2>
                 <p>Marie González-Inostroza</p>
 
             </section>
-
-
-
-
-            <!--  <section>
-                <h4>Enumeración</h4>
-                <div class="fragment">
-                    <pre><code class="language-c" data-trim>
-enum color {
-    rojo, 
-    amarillo, 
-    verde=20, 
-    azul};
-
-int col = rojo;
-
-if (col != azul){ 
-    printf("No es azul\n");}
-        </code></pre>
-                </div>
-                <div class="fragment">
-                    <p><b>Python (clases)</b></p>
-                    <pre><code class="language-python" data-trim>
-class Colors(Enum):
-    red = 1
-    yellow = 2
-    green = 3
-        </code></pre>
-                </div>
-            </section> -->
-
-
+    
 
             <section>
-                <h4>Ejemplo memoria dinámica</h4>
-                <pre><code class="language-c">
-                #include&lt;stdio.h&gt
-                #include&lt;stdlib.h&gt
+                <h4>Tablas Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Estructura de datos en la que las operaciones de inserción, búsqueda y eliminación son muy rápidas,
+                    independientemente del tamaño de los datos.
+                </p>
+                <ul style="font-size: 0.9em; text-align: left; margin-top: 20px;">
+                    <li class="fragment fade-up">Arreglo Asociativo.</li>
+                    <li class="fragment fade-up">Pares llave-valor.</li>
+                    <li class="fragment fade-up">Llaves únicas.</li>
+                    <li class="fragment fade-up">Función hash.</li>
+                </ul>
 
-                int main(int argc, char **argv){
-                    int *arreglo=NULL, i;
+                <div class="fragment fade-up" style="margin-top: 30px;">
 
-                    arreglo = malloc(10 * sizeof *arreglo);
+                </div>
+            </section>
 
-                    if(arreglo==NULL){
-                        printf("Error al reservar memoria...\n");
-                        return -1;
-                    }
+            <section>
+                <h4>Tablas Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Diseñadas originalmente para resolver el <strong>problema de búsqueda</strong> $\rightarrow$ basada
+                    en arreglos, pero sin trabajar con el índice.
+                </p>
+                <p class="fragment" style="font-size: 0.9em; margin-top: 20px;">
+                    Hoy en día, las tablas hash son usadas en múltiples aplicaciones:</p>
+                <ul style="font-size: 0.9em; text-align: left; margin-top: 20px;">
+                    <li class="fragment fade-up">Diccionarios en Python.</li>
+                    <li class="fragment fade-up">Map en C++.</li>
+                    <li class="fragment fade-up">Sistemas de contraseñas (encriptación).</li>
+                    <li class="fragment fade-up">Memoria Caché.</li>
+                </ul>
 
-                    for(i=0;i<5;i++){
-                        arreglo[i]=i+1;
-                    }
+                <div style="margin-top: 30px;">
 
-                    arreglo = realloc(arreglo, 5 * sizeof(int));
+                </div>
 
-                    for(i=0;i<5;i++){
-                        printf("%d ", arreglo[i]);
-                    }
-                    free(arreglo);  
-                    return 0;
-                }
+                <!-- <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+            En <strong>promedio</strong>, la complejidad de los métodos de Tablas Hash es <strong>$\mathcal{O}(1)$</strong>. Lo veremos en la próxima clase.
+        </p> -->
+            </section>
+
+            <section>
+                <h4>Tablas Hash: componentes</h4>
+                <div class="fragment fade-up r-fit-text">
+                    <p style="font-size: 0.9em;">
+                        El conjunto $D$ formado por tuplas llave-valor $(k.v)$, se almacena en
+                        un arreglo $A$.
+                    </p>
+
+                    <p style="font-size: 1.1em; margin-top: 10px;" class="fragment fade-up">
+                        $$ D = \{(k_1,v_1), (k_2,v_2), \dots (k_n, v_n) \} $$
+                    </p>
+                    <div class="fragment fade-up " style="margin-top: 30px;">
+                        <p style="font-size: 0.9em; margin-top: 20px;">
+                            El índice del arreglo asociado a un par se obtiene aplicando una función de transformación
+                            $H(k)$, llamada <strong>función hash</strong>.
+                        </p>
+
+                        <p style="font-size: 1.1em; margin-top: 10px;">
+                            $$ H: D_k \rightarrow \{1, 2, 3, \dots, m\}$$
+                            $$ A[H(k_i)] = v_i;\ \forall i \in \{1,2,3,\dots,n\} $$
+                        </p>
+
+
+                    </div>
+            </section>
+
+            <section>
+                <h4>Tablas Hash: componentes</h4>
+                <img src="images/Introduction-to-Hashing.webp" alt="hash" style="width: 90%; margin-top: 20px;">
+                <p style="font-size:small;">Fuente: <url>https://www.geeksforgeeks.org/dsa/hashing-data-structure/</url>
+                </p>
+            </section>
+
+            <section>
+                <h4>Tabla Hash: Métodos</h4>
+                <div class="r-stack" style="width: 90%; margin: 0 auto; text-align: left;">
+                    <div style="padding: 13px; border: 1px solid #ff9900; background-color: #333;">
+                        <pre><code class="c" >
+int search(int array[10], char *key){
+    return array[hash(key)];
+}
+
+void insert(int array[10], char *key, int value){
+    array[hash(key)] = value;    
+}
+
+void remove(int array[10], char *key){
+    array[hash(key)] = NULL; 
+    //NOTA: Esto es conceptual, 
+    //C no permite NULL en int arrays directamente
+}
                 </code></pre>
-
-
+                    </div>
+                </div>
             </section>
 
 
 
-
-            <!-- Slide: Introducción a struct -->
             <section>
-                <h4>Struct en C</h4>
-                <ul class="r-fit-text">
-                    <li>Un <code>struct</code> permite agrupar variables bajo un mismo nombre.</li>
-                    <li>Se accede a los miembros usando el operador <code>.</code> (para variables) o <code>-></code>
-                        (para punteros).</li>
+                <h4>Tablas Hash: Funciones Hash</h4>
+                <p style="font-size: 0.9em;">
+                    Debe mapear las llaves $k$ a índices del arreglo $A$ de tamaño $m$.
+                </p>
+
+                <p class="fragment" style="color: #ff9900; margin-top: 20px;">Se busca que sea:</p>
+                <ul style="font-size: 0.9em; text-align: left;">
+                    <li class="fragment fade-up"><strong>Simple</strong> $\rightarrow$ fácil implementación y bajo costo
+                        computacional.</li>
+                    <li class="fragment fade-up"><strong>Uniforme</strong> $\rightarrow$ que las claves tengan la misma
+                        chance de ser mapeadas a cualquier índice (minimizar conflictos).</li>
                 </ul>
 
-                <pre><code class="language-c">#include &lt;stdio.h&gt
-#include &lt;string.h&gt
-
-struct Estudiante {
-    char nombre[50];
-    char apellido[50];
-    float nota;};
-
-int main() {
-    struct Estudiante e1;
-    strcpy(e1.nombre, "Maria");
-    strcpy(e1.apellido, "Gonzalez");
-    e1.nota = 7.0;
-    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
-    return 0;}                </code></pre>
-
-
+                <p class="fragment" style="color: #ff9900; margin-top: 20px;">Técnicas heurísticas comunes:</p>
+                <ul style="font-size: 0.9em; text-align: left;" class="fragment fade-up">
+                    <li>Método de la División.</li>
+                    <li>Método de la Multiplicación.</li>
+                </ul>
             </section>
 
-
-            <!-- Slide: typedef struct -->
             <section>
-                <h4>typedef struct</h4>
-                <p class="r-fit-text">
-                    Con <code>typedef</code> creamos un alias y evitamos escribir <code>struct</code> al declarar
-                    variables.
+                <h4>Tablas Hash: Método de la División</h4>
+                <p style="font-size: 0.9em;">
+                    Las llaves (keys) son transformadas en índices del arreglo mediante el módulo sobre el largo del arreglo $m$:
                 </p>
-                <pre><code class="language-c">#include &lt;stdio.h&gt
-#include &lt;string.h&gt
 
-typedef struct {
-    char nombre[50];
-    char apellido[50];
-    float nota;
-} Estudiante;
+                <p style="font-size: 1.5em; margin-top: 20px;" class="fragment fade-up">
+                    $$ h(k) = k\ \mathrm{mod}\ m$$
+                </p>
 
-int main() {
-    Estudiante e1; // no necesitamos escribir 'struct'
-    strcpy(e1.nombre, "Pedro");
-    strcpy(e1.apellido, "Perez");
-    e1.nota = 8.5;
-    printf("%s %s - %.2f\n", e1.nombre, e1.apellido, e1.nota);
-    return 0;}  </code></pre>
+                
             </section>
 
+             
+                   
 
-            <!-- Slide: Ejemplo práctico con punteros -->
             <section>
-                <h4>Struct y punteros</h4>
-                <pre><code class="language-c">
-Estudiante *ptr = malloc(sizeof(Estudiante));
-strcpy(ptr->nombre, "Ana");
-ptr->nota = 9.0;
-
-printf("%s - %.2f\n", ptr->nombre, ptr->nota);
-free(ptr);
-  </code></pre>
-                <p>Con typedef, el uso de punteros es más legible y no necesitamos escribir <code>struct</code>.</p>
+                        <h4>Método de la División como Hash: Ejemplo</h4>
+                        <p class="r-fit-text">Arreglo de tamaño <b>5</b>. Usamos $h(k) = k \mod 5$.
+                        Insertamos las llaves: <b>12, 13, 88, 94, 44</b> </p>
+                        <table class="tg r-fit-text" style="margin: 0 auto; width: 40%; font-size: 1.2em;">
+                            <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Key</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td><span class="fragment" data-fragment-index="4">94</span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><span class="fragment" data-fragment-index="1">12</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <span class="fragment" data-fragment-index="2">13</span>
+                                        <span class="fragment" data-fragment-index="3">88</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><span class="fragment" data-fragment-index="5">44</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                
             </section>
-
-
-
-            <!-- Slide con código -->
             <section>
-                <h4>Paso por valor vs paso por referencia con structs</h4>
-                <pre><code class="language-c">
-typedef struct {
-    char nombre[50];
-    char apellido[50];
-    float nota;
-} Estudiante;
+                <h4>Tablas Hash: Método de la Multiplicación</h4>
+                <p style="font-size: 0.8em;">
+                    Este método minimiza la dependencia del tamaño $m$ y tiene los siguientes pasos:
+                </p>
+                <ol style="font-size: 0.8em; text-align: left;" class="fragment fade-up">
+                    <li>Multiplicar la llave $k$ por una constante $\alpha \in [0,1]$.</li>
+                    <li>Obtener la parte fraccional del resultado.</li>
+                    <li>Multiplicar dicha parte por el tamaño del arreglo $m$.</li>
+                    <li>Truncar (parte entera) el resultado final.</li>
+                </ol>
 
-void modificar_por_valor(Estudiante e) {
-    e.nota = 7.0; // solo copia
-}
+                <p style="font-size: 1em; margin-top: 20px;" class="fragment fade-up">
+                    $$ h(k) = \lfloor m \times  ((k\times \alpha)\ \mathrm{mod}\ 1) \rfloor $$
+                </p>
 
-void modificar_por_referencia(Estudiante *e) {
-    e->nota = 7.0; // modifica original
-}
-        </code></pre>
-            </section>
-
-
-            <section>
-                <h4>Actividad 6.2: Paso por valor y por referencia</h4>
-                <p>Completa el código base.</p>
-                <p>
-
-                    El código base está en Classroom:
-                    <a href="https://classroom.github.com/a/4KzgJgON" target="_blank">
-                        https://classroom.github.com/a/4KzgJgON</a>
+                <p class="fragment fade-up" style="font-size: 0.7em; margin-top: 20px;">
+                    En este caso, el tamaño de $m$ no es crítico. Esto permite que comúnmente se use una potencia de dos
+                    para el tamaño del arreglo: $m = 2^p$.
                 </p>
             </section>
 
+             <section>
+                        <h4>Método de la Multiplicación como Hash: Ejemplo</h4>
+                        <p class="r-fit-text">Arreglo de tamaño <b>m=5</b>.
+                            usando $h(k) = \lfloor m \times ((k \times A) \mod 1) \rfloor$ con $A = \frac{\sqrt{5}-1}{2} \approx 0.618034$ (constante de Knuth).
+                        Insertamos las llaves: <b>12, 13, 88, 94, 44</b> </p>
+                        <table class="tg r-fit-text" style="margin: 0 auto; width: 60%; font-size: 1.2em;">
+                            <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Key</th>
+                                    <th>Función Hash</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td><span class="fragment" data-fragment-index="4">94</span></td>
+                                    <td><span class="fragment" data-fragment-index="4">$\lfloor 5 \times ((94 \times 0.618034) \mod 1) \rfloor = 0$</span></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><span class="fragment" data-fragment-index="1">12</span></td>
+                                    <td><span class="fragment" data-fragment-index="1">$\lfloor 5 \times ((12 \times 0.618034) \mod 1) \rfloor = 2$</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <span class="fragment" data-fragment-index="2">13</span>
+                                        <span class="fragment" data-fragment-index="3">88</span>
+                                    </td>
+                                    <td>
+                                        <span class="fragment" data-fragment-index="2">$\lfloor 5 \times ((13 \times 0.618034) \mod 1) \rfloor = 3$</span><br>
+                                        <span class="fragment" data-fragment-index="3">$\lfloor 5 \times ((88 \times 0.618034) \mod 1) \rfloor = 3$</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><span class="fragment" data-fragment-index="5">44</span></td>
+                                    <td><span class="fragment" data-fragment-index="5">$\lfloor 5 \times ((44 \times 0.618034) \mod 1) \rfloor = 4$</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">La función de la multiplicación distribuye las llaves de manera diferente y también puede generar colisiones.</p>
+            </section>
+             
+
+                
+
             <section>
-                <h2>Argumentos por línea de comandos</h2>
-                <h4>CLI Arguments: argv y argc</h4>
+                <h4>Tablas Hash: Uso de Strings</h4>
+                <p style="font-size: 0.9em;">
+                    Utilizamos los valores ASCII de los caracteres para generar un valor numérico.
+                </p>
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    Por ejemplo, para la palabra "cat", se suman los valores ASCII de 'c', 'a' y 't' para obtener una key.
+                </p>
+                <table class="tg r-fit-text fragment" style="margin: 0 auto; width: 40%; font-size: 1.1em;">
+                    <thead>
+                        <tr>
+                            <th>c</th>
+                            <th>a</th>
+                            <th>t</th>
+                            <th class="fragment">Key (suma)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>99</td>
+                            <td>97</td>
+                            <td>116</td>
+                            <td class="fragment" style="font-weight: bold;">312</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </p>
+
             </section>
 
             <section>
-                <h4>argc y argv: parámetros de ejecución</h4>
-                <ul class="r-fit-text">
-                    <li>En C, podemos entregar argumentos a los ejecutables mediante la línea de comando.</li>
-                    <li>Esta función <code>main</code> contiene dos argumentos: <b>argc</b> y <b>argv</b>.</li>
-                </ul>
-                <pre><code class="language-c">
-#include&lt;stdio.h&gt;
 
-int main(int argc, char **argv){ //o *argv[]
-    return 0;
-}
-  </code></pre>
-                <ul>
-                    <li><b>argc</b>: Argument Count → cantidad de parámetros.</li>
-                    <li><b>argv</b>: Argument Vector → los parámetros (strings).</li>
-                </ul>
+                <h4>Actividad 7.1: Tabla hash para perfiles de usuario</h4>
+
+                <div class="r-fit-text">
+                    <p>Implementa las funciones necesarias para guardar una base de datos de <b>perfiles de usuario</b> usando una tabla hash.</p>
+                    <ul>
+                        <li>Cada perfil debe tener <b>nombre</b>, <b>email</b> y <b>contraseña</b>.</li>
+                        <li>El <b>email</b> será la clave para la función hash y las búsquedas.</li>
+                        <li>Completa todos los <code>ToDo</code> del código base <b>TablasHash-parte1.c</b>.</li>
+                        <li>Prueba la inserción y búsqueda de usuarios por email.</li>
+                    </ul>
+
+                    <p><a href="https://classroom.github.com/a/PYv8C2gT">https://classroom.github.com/a/PYv8C2gT</a></p>
+
+                    
+                </div>
+
             </section>
 
             <section>
-                <h4>argc y argv: parámetros de ejecución</h4>
-                <pre class="r-stretch"><code class="language-c">#include&lt;stdio.h&gt;
+                <h4>Solución de conflictos: Hashing Abierto</h4>
+                <p style="font-size: 0.9em;">
+                    El arreglo fijo, pasa a ser un arreglo de punteros, los cuales establecen una <strong>lista
+                        enlazada</strong>
+                    para almacenar los nodos en conflicto.
+                </p>
 
-int main(int argc, char **argv){ //o *argv[]
 
-    if(argc!=3){
-        printf("Debe ingresar 3 parámetros, intentelo nuevamente");
-        return -1; // exit(-1) si terminar proceso.
-    }
 
-    printf("Argumento 0: %s\n", argv[0]);
-    printf("Argumento 1: %s\n", argv[1]);
-    printf("Argumento 2: %s\n", argv[2]);
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda entonces es doble: en el arreglo y en la lista. Para evitar confusiones, en los nodos de
+                    la lista se guarda el par (llave, valor).
+                </p>
+            </section>
 
-    return 0;
-}
-  </code></pre>
+            
+            <section>
+                    <h4>Método de la División con Hashing Abierto</h4>
+                    <p class="r-fit-text">Ahora resolvemos los conflictos usando <b>listas enlazadas</b> (hashing abierto).<br>
+                    Insertamos las llaves: <b>12, 13, 88, 94, 44</b> en una tabla de tamaño <b>m=5</b> usando $h(k) = k \mod 5$.</p>
+                    <table class="tg r-fit-text" style="margin: 0 auto; width: 60%; font-size: 1.2em;">
+                        <thead>
+                            <tr>
+                                <th>Índice</th>
+                                <th>Lista (llaves)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td><span class="fragment" data-fragment-index="4">94</span></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><span class="fragment" data-fragment-index="1">12</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <span class="fragment" data-fragment-index="2">13</span>
+                                    <span class="fragment" data-fragment-index="3">→ 88</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><span class="fragment" data-fragment-index="5">44</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 0.9em; margin-bottom: 10px;">Cada casilla del arreglo apunta a una lista enlazada con las llaves que caen en ese índice.</p>
+                    
+                </section>
+
+            
+
+            <section>
+                <h4>Solución de conflictos: Hashing Cerrado</h4>
+                <p style="font-size: 0.9em;">
+                    Aquí, se realizan <strong>corrimientos</strong> de la posición de inserción si hay un conflicto.
+                    Esto evita el uso de estructuras de datos adicionales, pero habrá que tener cuidado con el
+                    overflow de memoria.
+                </p>
+
+
             </section>
 
             <section>
-                <h4>argc y argv: transformando tipos</h4>
-                <ul>
-                    <li>atoi() transforma string a int </li>
-                    <li>atol() transforma string a long</li>
-                    <li>atoll() transforma string a long long </li>
-                    <li>atof() transforma string a float. </li>
-                    <li>sscanf() lee un string y lo usa como scanf().</li>
-                    <li>strtol(): string a long con base (10, 16, 2, ...)</li>
-                    <li>strtod(): string a double</li>
-                    <li>⚠️ deben verificar el string!</li>
-                </ul>
+                <h4>Solución de conflictos: Hashing Cerrado con Sondeo Lineal</h4>
+                <p style="font-size: 0.9em;">
+                    Busca insertar el dato en el casillero
+                    disponible <strong>más cercano</strong> ($\text{posición} + 1, \text{posición} + 2, \dots$).
+                </p>
 
-            </section>
-            <section>
-                <h4>argc y argv: transformando tipos</h4>
-                <pre class="r-stretch"><code class="language-c">
-#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
+                <div class="fragment fade-up" style="margin-top: 30px;">
 
-int main(int argc, char **argv){ //o *argv[]
+                </div>
 
-    if(argc!=4){
-        printf("Debe ingresar 4 parámetros, intentelo nuevamente");
-        return -1;
-    }
-
-    int a;
-    sscanf(argv[2], "%d", &a);
-
-    printf("%d %d %ld\n", atoi(argv[1]), a, strtol(argv[3], NULL, 10));
-
-    return 0;
-}
-  </code></pre>
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda, por lo tanto, sigue un proceso similar: parte de la posición entregada por la función
+                    hash, avanzando de forma lineal hasta encontrar el dato correcto.
+                </p>
             </section>
 
             <section>
-                <h2>Streams</h2>
-            </section>
+                    <h4>Método de la División con Hashing Cerrado (Sondeo Lineal)</h4>
+                    <p class="r-fit-text">Ahora resolvemos los conflictos usando <b>sondeo lineal</b> (hashing cerrado).<br>
+                    Insertamos las llaves: <b>12, 13, 88, 94, 44</b> en una tabla de tamaño <b>m=5</b> usando $h(k) = k \mod 5$.</p>
+                                        <table class="tg r-fit-text" style="margin: 0 auto; width: 60%; font-size: 1.2em;">
+                                                <thead>
+                                                        <tr>
+                                                                <th>Índice</th>
+                                                                <th>Valor</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                                <td>0</td>
+                                                                <td>
+                                                                        <!-- 94 llega aquí tras fallar en 4 -->
+                                                                        <span class="fragment" data-fragment-index="8">94</span>
+                                                                        <!-- 44 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="12">
+                                                                            <span class="fragment highlight-red" data-fragment-index="13">
+                                                                                <span class="fragment fade-out" data-fragment-index="14">44</span>
+                                                                            </span>
+                                                                        </span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td>1</td>
+                                                                <td>
+                                                                        <!-- 44 finalmente se inserta aquí -->
+                                                                        <span class="fragment" data-fragment-index="15">44</span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td>2</td>
+                                                                <td>
+                                                                        <span class="fragment" data-fragment-index="1">12</span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td>3</td>
+                                                                <td>
+                                                                        <span class="fragment" data-fragment-index="2">13</span>
+                                                                        <!-- 88 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="3">
+                                                                            <span class="fragment highlight-red" data-fragment-index="4">
+                                                                                <span class="fragment fade-out" data-fragment-index="5">88</span>
+                                                                            </span>
+                                                                        </span>
+                                                                </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td>4</td>
+                                                                <td>
+                                                                        <!-- 88 llega aquí tras fallar en 3 -->
+                                                                        <span class="fragment" data-fragment-index="5">88</span>
+                                                                        <!-- 94 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="6">
+                                                                            <span class="fragment highlight-red" data-fragment-index="7">
+                                                                                <span class="fragment fade-out" data-fragment-index="8">94</span>
+                                                                            </span>
+                                                                        </span>
+                                                                        <!-- 44 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="9">
+                                                                            <span class="fragment highlight-red" data-fragment-index="10">
+                                                                                <span class="fragment fade-out" data-fragment-index="11">44</span>
+                                                                            </span>
+                                                                        </span>
+                                                                </td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                    <p style="font-size: 0.9em; margin-bottom: 10px;">Si la posición calculada está ocupada, se busca la siguiente disponible de forma lineal (hacia adelante, con wrap-around).</p>
+                    
+                    
+                </section>
 
             <section>
-                <h4>Streams: Archivos</h4>
-                <ul class="r-fit-text">
-                    <li>C trabaja con streams para interactuar con dispositivos físicos o virtuales.</li>
-                    <li>Este puntero se mueve a través del stream.</li>
-                    <!-- <li><code>stdin</code>, <code>stdout</code>: streams de funciones básicas (<code>scanf()</code>,
-                        <code>printf()</code>).
-                    </li>
-                    <li><code>stderr</code>: salida sin buffer.</li> -->
-                    <li>Se crean streams a archivos con punteros <code>FILE</code>.</li>
-                </ul>
-                <pre><code class="language-c">
-#include&lt;stdio.h&gt;
+                <h4>Solución de conflictos: Hashing Cerrado con Sondeo Cuadrático</h4>
+                <p style="font-size: 0.9em;">
+                    Un problema del sondeo lineal es que los datos tienden a agruparse ("clustering"). Para evitar esto,
+                    la misma técnica se aplica pero buscando en saltos cuadráticos (e.g., $1^2, 2^2, 3^2$) o cada $C$
+                    casilleros (Sondeo Doble).
+                </p>
 
-int main(int argc, char **argv){
-    FILE *arch; // puntero
-    arch = fopen("hola.txt","r"); // apertura stream
-    fclose(arch); // cerrar stream
-    return 0;}
-  </code></pre>
+                <div class="fragment fade-up" style="margin-top: 30px;">
+
+                </div>
+
+                <p class="fragment fade-up" style="font-size: 0.9em; margin-top: 20px;">
+                    La búsqueda, por lo tanto, sigue un proceso similar: parte de la posición entregada por la función
+                    hash, avanzando según la secuencia de saltos hasta encontrar el dato correcto.
+                </p>
             </section>
+
+                <section>
+            <h4>H.Cerrado con Sondeo Cuadrático</h4>
+            <!--
+            <p class="r-fit-text">Insertamos las llaves: <b>12, 13, 20, 32, 4</b> en una tabla de tamaño <b>m=8</b> usando $h(k) = k \mod 8$ y $h_i(k) = (h(k) + i^2) \mod 8$.</p>
+            
+            -->
+            <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; justify-content: center;">
+                <div style="flex: 1 1 320px; min-width: 260px; max-width: 350px;">
+                    <table class="tg r-fit-text" style="width: 100%; font-size: 1.2em;">
+                        <thead>
+                            <tr>
+                                <th>Índice</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td><span class="fragment" data-fragment-index="8">20</span>
+                            <!-- 32 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="9">
+                                                                            <span class="fragment highlight-red" data-fragment-index="10">
+                                                                                <span class="fragment fade-out" data-fragment-index="11">32</span>
+                                                                            </span>
+
+                                                                             <!-- 4 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="19">
+                                                                            <span class="fragment highlight-red" data-fragment-index="20">
+                                                                                <span class="fragment fade-out" data-fragment-index="21">4</span>
+                                                                            </span>
+                                                                        </span>
+
+                                                                        </td></tr>
+                            <tr><td>1</td><td><span class="fragment" data-fragment-index="12">32</span></td></tr>
+                            <tr><td>2</td><td></tr>
+                            <tr><td>3</td><td></td></tr>
+                            <tr><td>4</td><td><span class="fragment" data-fragment-index="1">12</span>
+                                                                        <!-- 20 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="3">
+                                                                            <span class="fragment highlight-red" data-fragment-index="4">
+                                                                                <span class="fragment fade-out" data-fragment-index="5">20</span>
+                                                                            </span>
+                                                                        </span>
+
+
+                                                                        <!-- 4 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="13">
+                                                                            <span class="fragment highlight-red" data-fragment-index="14">
+                                                                                <span class="fragment fade-out" data-fragment-index="15">4</span>
+                                                                            </span>
+                                                                        </span>
+                                                                    
+                                                                    </td></tr>
+                            <tr><td>5</td><td><span class="fragment" data-fragment-index="2">13</span>
+                                <!-- 20 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="5">
+                                                                            <span class="fragment highlight-red" data-fragment-index="6">
+                                                                                <span class="fragment fade-out" data-fragment-index="7">20</span>
+                                                                            </span>
+                                                                             <!-- 4 intenta aquí, está ocupado -->
+                                                                        <span class="fragment fade-in" data-fragment-index="16">
+                                                                            <span class="fragment highlight-red" data-fragment-index="17">
+                                                                                <span class="fragment fade-out" data-fragment-index="18">4</span>
+                                                                            </span>
+                                                                        </span>
+                            </td></tr>
+                            <tr><td>6</td><td></td></tr>
+                            <tr><td>7</td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="r-fit-text" style="flex: 1 1 320px; min-width: 260px; max-width: 500px;">
+                    <ul style="margin-bottom: 10px; margin-top: 0;">
+                        <li class="fragment" data-fragment-index="1">12: $h(12)=4$ (libre, va a 4)</li>
+                        <li class="fragment" data-fragment-index="2">13: $h(13)=5$ (libre, va a 5)</li>
+                        <li class="fragment" data-fragment-index="3">20: $h(20)=4$ (ocupado)</li>
+                        <li class="fragment" data-fragment-index="5"> $i=1\to(4+1^2)\mod8=5$ (ocupado)</li>
+                        <li class="fragment" data-fragment-index="8"> $i=2\to(4+2^2)\mod8=0$ (libre, va a 0)</li>
+                        <li class="fragment" data-fragment-index="9">32: $h(32)=0$ (ocupado)</li>
+                        <li class="fragment" data-fragment-index="12">$i=1\to(0+1)\mod8=1$ (libre, va a 1)</li>
+                        <li class="fragment" data-fragment-index="13">4: $h(4)=4$ (ocupado), $i=1\to(4+1)\mod8=5$ (ocupado), $i=2\to(4+4)\mod8=0$ (ocupado), $i=3\to(4+9)\mod8=5$ (ocupado), $i=4\to(4+16)\mod8=4$ (ocupado), $i=5\to(4+25)\mod8=5$ (ocupado), $i=6\to(4+36)\mod8=0$ (ocupado), $i=7\to(4+49)\mod8=5$ (ocupado) <span style='color:red;'>No hay espacio</span></li>
+                    </ul>
+                    <p style="font-size: 0.9em; margin-top: 0;">En este ejemplo, la llave 4 no puede insertarse porque todas las posiciones calculadas por el sondeo cuadrático están ocupadas.</p>
+                </div>
+            </div>
+        </section>
+
+
+        
 
             <section>
-                <h4>Streams: modos</h4>
-                <ul>
-                    <li>"r": Lectura (archivo debe existir)</li>
-                    <li>"w": Escritura (sobrescribe)</li>
-                    <li>"a": Anexar (crea si no existe)</li>
-                    <li>"r+": Lectura y escritura (inicio)</li>
-                    <li>"w+": Lectura y escritura</li>
-                    <li>"a+": Lectura y escritura (apéndice)</li>
-                </ul>
+                <h4>Actividad 7.2: Resolución de conflictos en Tabla hash </h4>
+
+
+                <div class="r-fit-text">
+                    <p>Implementa las distintas funciones que permitan guardar una base de datos de mascotas donde podrían existir conflictos al utilizar la tabla hash que se proponec.</p>
+                    <p>Completa todos los <code>ToDo</code> del código base act7-2.c: <a
+                            href="https://classroom.github.com/a/PYv8C2gT">https://classroom.github.com/a/PYv8C2gT</a>
+                        
+
+                    </p>
+                </div>
+
             </section>
-
-            <section>
-                <h4>Archivos - Escritura</h4>
-                <ul>
-                    <li><code>fprintf()</code>: como printf, pero con archivo.</li>
-                    <li><code>fputs()</code>: escribe string.</li>
-                    <li><code>fputc()</code>: escribe caracter.</li>
-                </ul>
-                <pre class="r-stretch"><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int main(int argc, char **argv){
-
-    FILE *arch;
-    char *saludo = "Hola Mundo";
-
-    arch = fopen("test.txt","w");
-    fprintf(arch, "%s\n", saludo);
-    fputs("I'll be back", arch);
-    fputc('X', arch);
-    fclose(arch);
-    return 0;
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Archivos - Lectura</h4>
-                <ul>
-                    <li><code>fscanf()</code>: como scanf, pero con archivo.</li>
-                    <li><code>fgets()</code>: lee string hasta <code>\n</code> o EOF.</li>
-                    <li><code>fgetc()</code>: lee un caracter.</li>
-                </ul>
-                <pre class="r-stretch"><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int main(int argc, char **argv){
-    FILE *arch;
-    char saludo[20];
-    arch = fopen("test.txt","r");
-
-    while(!feof(arch)){
-        fscanf(arch,"%s", saludo);
-        fprintf(stderr,"linea: %s\n", saludo);    }
-
-    fclose(arch);
-    return 0;
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Archivos - Lectura</h4>
-                <pre class="r-stretch"><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int main(int argc, char **argv){
-
-    FILE *arch;
-    char saludo[5];
-
-    arch = fopen("test.txt","r");
-
-    while(fgets(saludo, 5, arch) != NULL){
-        fprintf(stderr,"linea: %s\n", saludo);
-    }
-
-    fclose(arch);
-    return 0;
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Streams: Lectura</h4>
-                <pre class="r-stretch"><code class="language-c">
-#include&lt;stdio.h&gt;
-
-int main(int argc, char **argv){
-
-    FILE *arch;
-    char saludo;
-
-    arch = fopen("test.txt","r");
-
-    while((saludo=fgetc(arch)) != EOF){
-        fprintf(stderr,"linea: %c\n", saludo);
-    }
-
-    fclose(arch);
-    return 0;
-}
-  </code></pre>
-            </section>
-
-            <section>
-                <h4>Streams: Manejo del puntero</h4>
-                <p>A diferencia de Python, en C se puede manejar el puntero del archivo:</p>
-                <ul>
-                    <li><code>rewind()</code>: inicio</li>
-                    <li><code>fseek()</code>: mueve n bytes</li>
-                    <li><code>ftell()</code>: posición actual</li>
-                    <li><code>fgetpos()</code>: guarda posición en <code>fpos_t</code></li>
-                    <li><code>fsetpos()</code>: mueve a posición guardada</li>
-                </ul>
-            </section>
-
-            <section>
-                <h4>Otros Streams</h4>
-                <p>Existen variados streams en C:</p>
-                <ul>
-                    <li>Standard I/O: <code>scanf()</code>, <code>printf()</code></li>
-                    <li>Strings: <code>sscanf()</code>, <code>sprintf()</code></li>
-                    <li>Archivos: <code>fscanf()</code>, <code>fprintf()</code></li>
-                </ul>
-            </section>
-
-
-<section>
-    <h4>Actividad 7: Manejo de archivos, argumentos y structs</h4>
-    <p>Completa el código base en que se lee un archivo con los datos de distintos estudiantes y se calculan las estadísticas respectivas al curso.</p>
-    <p>El código base está en Classroom:
-        <a href="https://classroom.github.com/a/-TItUy0-" target="_blank">
-            https://classroom.github.com/a/-TItUy0-</a>
-</section>
-
 
         </div>
+
+
+
+
+
 
     </div>
 
